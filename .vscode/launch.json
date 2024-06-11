@@ -21,8 +21,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/italo/Documents/Leetcodes/66. Plus One",
-      "program": "/home/italo/Documents/Leetcodes/66. Plus One/build/Debug/outDebug",
+      "cwd": "/home/italo/Documents/Leetcodes/69. Sqrt(x)",
+      "program": "/home/italo/Documents/Leetcodes/69. Sqrt(x)/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
