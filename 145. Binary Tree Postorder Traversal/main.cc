@@ -15,40 +15,34 @@ struct TreeNode {
 class Solution {
 public:
   vector<int> postorderTraversal(TreeNode *root) {
-    stack<TreeNode *> s;
-    vector<int> post;
-    unordered_map<TreeNode *, int> vis;
+    vector<int> ans;
+    stack<TreeNode *> st;
+    TreeNode *lastVisited = nullptr;
 
-    s.push(root);
-
-    while (!s.empty()) {
-      vis[s.top()] = 1;
-
-      if (s.top()->left != 0) {
-        if (!vis[s.top()->left]) {
-          s.push(s.top()->left);
-          continue;
-        }
+    while (root || !st.empty()) {
+      while (root) {
+        st.push(root);
+        root = root->left;
       }
+      TreeNode *node = st.top();
 
-      if (s.top()->right != 0) {
-        if (!vis[s.top()->right]) {
-          s.push(s.top()->right);
-          continue;
-        }
+      if (!node->right || node->right == lastVisited) {
+        ans.push_back(node->val);
+        st.pop();
+        lastVisited = node;
+      } else {
+        root = node->right;
       }
-
-      post.push_back(s.top()->val);
-
-      s.pop();
     }
 
-    return post;
+    return ans;
   }
 };
 
 int main() {
   TreeNode *root = new TreeNode(1);
+  root->right = new TreeNode(2);
+  root->right->left = new TreeNode(3);
 
   Solution solution;
   vector<int> result = solution.postorderTraversal(root);
