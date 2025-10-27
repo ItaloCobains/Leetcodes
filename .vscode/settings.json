@@ -57,7 +57,25 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
+    ".sequelizerc": "javascript",
+    ".stylelintrc": "json",
+    "*.tsx": "typescriptreact",
+    ".env.*": "dotenv",
+    ".prettierrc": "json",
     "ostream": "cpp",
-    "stdc++.h": "c"
+    "stdc++.h": "c",
+    "__bit_reference": "cpp",
+    "__node_handle": "cpp",
+    "array": "cpp",
+    "ios": "cpp",
+    "istream": "cpp",
+    "optional": "cpp",
+    "streambuf": "cpp",
+    "string_view": "cpp",
+    "tuple": "cpp",
+    "variant": "cpp",
+    "vector": "cpp",
+    "memory": "cpp",
+    "sstream": "cpp"
   }
 }
