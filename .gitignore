@@ -1,0 +1,17 @@
+.env
+.env.*
+
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.pdf
+*.out
+*.toc
+*.nav
+*.snm
+
+.DS_Store
+*.o
+a.out

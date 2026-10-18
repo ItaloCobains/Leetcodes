@@ -1,0 +1,89 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian,shorthands=off]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+
+\title{Estudo: redes neurais recorrentes}
+\author{Italo Brito Brandão}
+\date{18/10/2026}
+
+\begin{document}
+\maketitle
+
+\section{A ideia}
+
+Uma rede feedforward trata cada entrada como um evento isolado. Uma RNN (rede neural recorrente) lê uma sequência e carrega um estado \(h_t\) de um passo para o próximo. Esse estado é a memória do que já foi visto.
+
+O uso típico é texto, áudio e série temporal: a ordem dos elementos importa, e o comprimento da sequência não é fixo.
+
+\section{A recorrência}
+
+No passo \(t\) a rede recebe o vetor \(x_t\) e o estado anterior \(h_{t-1}\):
+
+\begin{equation}
+  h_t = \tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h)
+  \label{eq:rnn}
+\end{equation}
+
+\begin{equation}
+  y_t = W_{hy} h_t + b_y
+\end{equation}
+
+\(W_{xh}\) mistura a entrada nova. \(W_{hh}\) mistura a memória. A mesma matriz \(W_{hh}\) é usada em todos os passos: a rede não ganha um peso novo para cada posição da sequência.
+
+\(h_0\) costuma ser o vetor zero. A saída \(y_t\) pode ser usada em todo passo (etiquetar cada token) ou só no último (classificar a sequência inteira).
+
+\section{Exemplo numérico}
+
+Uma RNN minúscula, com estado e entrada escalares. Pesos \(W_{xh} = 1\), \(W_{hh} = 0{,}5\), vieses zero, e a sequência \(x = (1, 0, 1)\).
+
+\begin{center}
+\begin{tabular}{cccc}
+  \toprule
+  \(t\) & \(x_t\) & conta interna & \(h_t = \tanh(\cdot)\) \\
+  \midrule
+  1 & 1 & \(1\cdot 1 + 0{,}5\cdot 0 = 1\) & \(\tanh 1 \approx 0{,}76\) \\
+  2 & 0 & \(0 + 0{,}5\cdot 0{,}76 = 0{,}38\) & \(\tanh 0{,}38 \approx 0{,}36\) \\
+  3 & 1 & \(1 + 0{,}5\cdot 0{,}36 = 1{,}18\) & \(\tanh 1{,}18 \approx 0{,}83\) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+No passo 2 a entrada é zero, mas \(h_2\) não é zero: o \(1\) do primeiro passo ainda está na memória, atenuado por \(0{,}5\). No passo 3 os dois sinais se somam.
+
+\section{Treino}
+
+O treino desenrola a recorrência no tempo e aplica backpropagation através desses passos (BPTT). O gradiente de \(W_{hh}\) é um produto de matrizes, um fator por passo. Se os valores singulares de \(W_{hh}\) ficam menores que 1, o produto vai a zero: a rede esquece o começo da sequência. Se ficam maiores que 1, o gradiente explode.
+
+Por isso uma RNN simples, a da equação~\eqref{eq:rnn}, aprende dependências curtas e falha em dependências longas.
+
+\section{LSTM e GRU}
+
+LSTM e GRU trocam o \(\tanh\) puro por portões que decidem o que guardar e o que descartar. O estado deixa de ser multiplicado por \(W_{hh}\) em todo passo, e o gradiente consegue atravessar muitos timesteps.
+
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  modelo & o que muda \\
+  \midrule
+  RNN & um estado, atualizado sempre \\
+  GRU & portões de atualização e de esquecimento, um estado \\
+  LSTM & portões de entrada, esquecimento e saída, mais uma célula \(c_t\) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Na prática, texto longo hoje usa Transformer. RNN, LSTM e GRU continuam úteis quando a sequência chega um elemento por vez e o estado precisa ser pequeno: áudio em tempo real, séries, e modelos embarcados.
+
+\section{O que observar ao implementar}
+
+\begin{itemize}
+  \item O batch é uma matriz de sequências. Passos de tempo andam no eixo da sequência, e \(h\) anda junto.
+  \item Sequências do mesmo batch têm comprimentos diferentes. O padding não pode entrar na perda nem no estado.
+  \item Explosão de gradiente aparece como loss virando \texttt{nan}. O primeiro controle é cortar a norma do gradiente.
+  \item Desaparecimento de gradiente aparece como a rede ignorando o início da frase. Aí o modelo simples já não basta: GRU ou LSTM.
+\end{itemize}
+
+\end{document}
