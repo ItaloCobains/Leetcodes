@@ -103,6 +103,22 @@ A RNN lê \(x_{t-N+1},\ldots,x_t\) e produz \(h_t\) com a mesma recorrência do 
 
 Só o último estado vira probabilidade de alta. A perda é entropia cruzada binária entre \(\hat{y}_t\) e \(y_t\).
 
+No caderno, \(\hat{y}\) é o vetor \texttt{ys} (uma probabilidade por janela) e o rótulo verdadeiro é \texttt{y\_train} (0 ou 1, o mesmo \texttt{label} do CSV). A entropia cruzada binária mede o desacordo entre essa probabilidade e o rótulo:
+
+\begin{equation}
+  \mathrm{BCE}
+  =
+  -\frac{1}{M}
+  \sum_{i=1}^{M}
+  \bigl(
+    y_i \log \hat{y}_i
+    +
+    (1-y_i)\log(1-\hat{y}_i)
+  \bigr).
+\end{equation}
+
+\(M\) é o número de janelas de treino. Se \(\hat{y}_i\) acerta com confiança, o termo vai a zero; se erra com confiança, a perda cresce. No código: média de \(-(y_{\mathrm{true}}\log y_{\mathrm{pred}}+(1-y_{\mathrm{true}})\log(1-y_{\mathrm{pred}}))\), com \(y_{\mathrm{pred}}\) cortada para não tomar \(\log 0\).
+
 \section{Corte treino / teste}
 
 A série é temporal: não embaralhar dias. Um corte simples é os primeiros 80\% dos exemplos rotulados para treino (ordem cronológica) e o resto para teste. Qualquer vazamento de \(C_{t+1}\) para dentro de \(x_t\) invalida o número.
