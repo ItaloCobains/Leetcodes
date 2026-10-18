@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>189A · DP table n=5</title>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#06060a;--surface:#0e0e14;--border:#1e1e2e;--border-strong:#2a2a40;
+  --text:#e8e8f0;--text-dim:#7a7a8c;--text-faint:#62627a;
+  --accent:#00d9ff;--accent-dim:#00d9ff33;--success:#00e676;--success-dim:#00e67622;
+  --error:#ff5252;--error-dim:#ff525222;--warning:#ffd740;--warning-dim:#ffd74022;
+  --mono:"SF Mono","Fira Code",ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+}
+[data-theme="light"]{
+  color-scheme:light;
+  --bg:#faf9f7;--surface:#ffffff;--border:#e8e6e3;--border-strong:#d4d0ca;
+  --text:#0a0a0f;--text-dim:#6b6b7b;--text-faint:#8e8e9a;
+  --accent:#0066ff;--accent-dim:#0066ff18;--success:#00c853;--success-dim:#00c85318;
+  --error:#d50000;--error-dim:#d5000018;--warning:#ffab00;--warning-dim:#ffab0018;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;min-height:100vh}
+.theme-toggle{position:fixed;top:24px;right:24px;z-index:10;width:44px;height:44px;border:1px solid var(--border);border-radius:50%;background:var(--surface);color:var(--text-dim);cursor:pointer;display:grid;place-items:center;font-size:18px}
+.shell{max-width:920px;margin:0 auto;padding:72px clamp(24px,5vw,64px) 80px}
+.kicker{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px}
+.kicker::before{content:'';width:32px;height:1px;background:var(--accent)}
+h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;letter-spacing:-0.03em;margin-bottom:10px}
+.lede{color:var(--text-dim);max-width:62ch;margin-bottom:40px}
+.lede code{font-family:var(--mono);font-size:.88em;color:var(--accent)}
+.board{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:28px 22px 22px}
+.stage{position:relative}
+.cells{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;position:relative;z-index:1}
+.cell{appearance:none;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px 8px 10px;text-align:left;color:inherit;cursor:pointer;min-width:0}
+.cell:disabled{cursor:default;opacity:1}
+.cell .ix{display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-faint)}
+.cell .val{display:block;font-family:var(--mono);font-size:1.25rem;margin-top:6px}
+.cell.src{border-color:var(--warning);border-style:dashed}
+.cell.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-dim)}
+.cell.win-src{border-color:var(--success)}
+.arrows{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+.arrows path{fill:none;stroke:var(--border-strong);stroke-width:1.25}
+.arrows path.win{stroke:var(--success)}
+.arrows text{font-family:var(--mono);font-size:10px;fill:var(--text-faint)}
+.arrows text.win{fill:var(--success)}
+.cuts{margin-top:28px;display:grid;gap:0}
+.cut{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:11px 2px;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--text-dim)}
+.cut b{font-family:var(--mono);font-size:.78rem;color:var(--text)}
+.cut.win b,.cut.win .eq{color:var(--success)}
+.cut.skip{opacity:.45}
+.eq{font-family:var(--mono);font-size:.78rem;color:var(--text)}
+.note{margin-top:18px;font-size:.9rem;color:var(--text-dim);min-height:2.8em}
+.rail{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 18px;font-family:var(--mono);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase}
+.rail button{appearance:none;background:none;border:0;padding:0 0 5px;font:inherit;color:var(--text-dim);cursor:pointer;border-bottom:1px solid transparent}
+.rail button.active{color:var(--accent);border-bottom-color:var(--accent)}
+.muted{margin-top:14px;font-size:.8rem;color:var(--text-faint)}
+@media(max-width:640px){
+  .cut{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<button class="theme-toggle" type="button" id="theme" title="Theme">◐</button>
+<div class="shell">
+  <div class="kicker">189A · Cut Ribbon</div>
+  <h1>n = 5 · cuts 2, 3, 5</h1>
+  <p class="lede"><code>dp[i]</code> is the most pieces that sum to length <code>i</code>, or <code>-1</code> if impossible. Click a cell. The dashed cell is <code>i − cut</code>. Green is a cut that produces the stored max.</p>
+  <div class="board">
+    <div class="rail" id="rail"></div>
+    <div class="stage" id="stage">
+      <svg class="arrows" id="svg"></svg>
+      <div class="cells" id="cells"></div>
+    </div>
+    <div class="cuts" id="cuts"></div>
+    <p class="note" id="note"></p>
+    <p class="muted">dp[i] = max(dp[i], dp[i − cut] + 1) when dp[i − cut] ≠ −1</p>
+  </div>
+</div>
+<script>
+var DP = [0, -1, 1, 1, 2, 2];
+var CUTS = [2, 3, 5];
+var cur = 2;
+
+function tries(i){
+  return CUTS.map(function(cut){
+    var src = i - cut;
+    var ok = src >= 0 && DP[src] !== -1;
+    var got = ok ? DP[src] + 1 : null;
+    return {cut: cut, src: src, ok: ok, got: got, win: ok && got === DP[i]};
+  });
+}
+
+function renderCells(){
+  var wrap = document.getElementById('cells');
+  wrap.innerHTML = '';
+  var t = tries(cur);
+  var srcs = {};
+  t.forEach(function(x){ if(x.src >= 0) srcs[x.src] = x; });
+  for(var i = 0; i <= 5; i++){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cell';
+    b.dataset.i = String(i);
+    if(i === 0) b.disabled = true;
+    if(i === cur) b.classList.add('on');
+    if(srcs[i] && i !== cur){
+      b.classList.add('src');
+      if(srcs[i].win) b.classList.add('win-src');
+    }
+    b.innerHTML = '<span class="ix">i = '+i+'</span><span class="val">'+DP[i]+'</span>';
+    if(i > 0) b.addEventListener('click', function(){ show(+this.dataset.i); });
+    wrap.appendChild(b);
+  }
+}
+
+function drawArrows(){
+  var svg = document.getElementById('svg');
+  var stage = document.getElementById('stage');
+  var sr = stage.getBoundingClientRect();
+  svg.setAttribute('viewBox', '0 0 '+sr.width+' '+sr.height);
+  svg.innerHTML = '';
+  var t = tries(cur);
+  var dest = document.querySelector('.cell.on');
+  if(!dest) return;
+  var dr = dest.getBoundingClientRect();
+  var x2 = dr.left - sr.left + dr.width/2;
+  var y2 = dr.top - sr.top + 8;
+  t.forEach(function(x, k){
+    if(x.src < 0) return;
+    var srcEl = document.querySelector('.cell[data-i="'+x.src+'"]');
+    if(!srcEl) return;
+    var r = srcEl.getBoundingClientRect();
+    var x1 = r.left - sr.left + r.width/2;
+    var y1 = r.top - sr.top + r.height - 4;
+    var lift = 18 + k * 10;
+    var d = 'M '+x1+' '+y1+' C '+x1+' '+(y1-lift)+', '+x2+' '+(y2-lift)+', '+x2+' '+y2;
+    var p = document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d', d);
+    if(x.win) p.classList.add('win');
+    svg.appendChild(p);
+    var lab = document.createElementNS('http://www.w3.org/2000/svg','text');
+    lab.setAttribute('x', String((x1+x2)/2));
+    lab.setAttribute('y', String(Math.min(y1,y2) - lift + 10));
+    lab.setAttribute('text-anchor', 'middle');
+    lab.textContent = 'cut '+x.cut;
+    if(x.win) lab.classList.add('win');
+    svg.appendChild(lab);
+  });
+}
+
+function renderCuts(){
+  var box = document.getElementById('cuts');
+  box.innerHTML = '';
+  tries(cur).forEach(function(x){
+    var row = document.createElement('div');
+    var skip = x.src < 0 || !x.ok;
+    row.className = 'cut'+(x.win?' win':'')+(skip?' skip':'');
+    var eq;
+    if(x.src < 0) eq = 'i < cut · skip';
+    else if(!x.ok) eq = 'dp['+x.src+'] = −1 · skip';
+    else eq = 'max(dp['+cur+'], dp['+x.src+'] + 1) = max('+(x.win?x.got:'…')+', '+DP[x.src]+' + 1) → '+x.got;
+    row.innerHTML = '<b>cut '+x.cut+'</b><span>'+eq+'</span><span class="eq">'+(x.win?'wins':'')+'</span>';
+    box.appendChild(row);
+  });
+  var wins = tries(cur).filter(function(x){ return x.win; }).map(function(x){ return x.cut; });
+  var n = document.getElementById('note');
+  if(DP[cur] === -1) n.textContent = 'No legal cut. dp[1] stays −1 so it cannot seed later cells.';
+  else n.textContent = 'Stored dp['+cur+'] = '+DP[cur]+'. Winning cut'+(wins.length>1?'s':'')+': '+wins.join(' and ')+'.';
+}
+
+function show(i){
+  cur = i;
+  document.querySelectorAll('#rail button').forEach(function(b){ b.classList.toggle('active', +b.dataset.i === i); });
+  renderCells();
+  renderCuts();
+  requestAnimationFrame(drawArrows);
+}
+
+document.getElementById('theme').addEventListener('click', function(){
+  document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  drawArrows();
+});
+var rail = document.getElementById('rail');
+for(var i = 1; i <= 5; i++){
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.dataset.i = String(i);
+  b.textContent = 'i = '+i;
+  b.addEventListener('click', function(){ show(+this.dataset.i); });
+  rail.appendChild(b);
+}
+window.addEventListener('resize', drawArrows);
+show(5);
+</script>
+</body>
+</html>

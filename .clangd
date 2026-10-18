@@ -1,16 +1,6 @@
 CompileFlags:
-  Compiler: /opt/homebrew/bin/g++-16
+  Compiler: /usr/bin/clang++
   Add:
     - -std=c++17
-    - -O2
     - -Wall
-    - -isystem
-    - /opt/homebrew/opt/gcc/include/c++/16
-    - -isystem
-    - /opt/homebrew/opt/gcc/include/c++/16/aarch64-apple-darwin25
-    - -isystem
-    - /opt/homebrew/opt/gcc/include/c++/16/backward
-    - -isystem
-    - /opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16/include
-    - -isystem
-    - /opt/homebrew/opt/gcc/lib/gcc/current/gcc/aarch64-apple-darwin25/16/include-fixed
+    - -stdlib=libc++
