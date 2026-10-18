@@ -1,0 +1,127 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian,shorthands=off]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{url}
+
+\title{Experimento: RNN em VALE3 (estudo)}
+\author{Italo Brito Brandão}
+\date{18/10/2026}
+
+\begin{document}
+\maketitle
+
+\noindent
+Isto é um caderno de estudo. Não é recomendação de compra ou venda.
+
+\section{Pergunta}
+
+Dada uma janela dos últimos \(N\) pregões de VALE3, a rede deve dizer se o \emph{fechamento do dia seguinte} sobe ou desce.
+
+\section{Dados}
+
+Fonte: API pública \href{https://brapi.dev}{brapi.dev}, ticker \texttt{VALE3}, intervalo diário, \texttt{range=1y}.
+
+Arquivos nesta pasta:
+
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  arquivo & papel \\
+  \midrule
+  \texttt{fetch\_vale3.py} & baixa a série e grava o CSV \\
+  \texttt{vale3\_1y.csv} & 247 pregões, 20/10/2025 a 16/10/2026 \\
+  \texttt{experimento.tex} & este texto \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Para atualizar:
+
+\begin{verbatim}
+python3 vale3/fetch_vale3.py
+\end{verbatim}
+
+\subsection{Colunas}
+
+\begin{center}
+\begin{tabular}{ll}
+  \toprule
+  coluna & significado \\
+  \midrule
+  \texttt{date} & data do pregão (UTC convertida) \\
+  \texttt{open, high, low, close} & preços do dia \\
+  \texttt{adj\_close} & fechamento ajustado \\
+  \texttt{volume} & negócios \\
+  \texttt{next\_close} & fechamento do pregão seguinte \\
+  \texttt{label} & \(1\) se \texttt{next\_close} \(>\) \texttt{close}, senão \(0\) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+A última linha não tem \texttt{next\_close} nem \texttt{label}: não existe o dia seguinte na amostra. Restam 246 exemplos rotulados: 130 altas, 116 baixas. Fechamento no primeiro dia \(60{,}90\); no último \(66{,}21\).
+
+\section{Rótulo}
+
+No pregão \(t\),
+
+\begin{equation}
+  y_t =
+  \begin{cases}
+    1 & \text{se } C_{t+1} > C_t \quad \text{(sobe)} \\
+    0 & \text{caso contrário} \quad \text{(não sobe).}
+  \end{cases}
+\end{equation}
+
+\(C_t\) é o \texttt{close} do dia \(t\). Isso é classificação de um passo, não um backtest com corretagem, slip ou posição.
+
+\section{Entrada da RNN}
+
+Cada exemplo é uma sequência de \(N\) vetores, um por dia. Um vetor mínimo:
+
+\begin{equation}
+  x_t =
+  \bigl(
+    \log C_t - \log C_{t-1},\;
+    \tfrac{H_t - L_t}{C_t},\;
+    \log(1+V_t)
+  \bigr)
+\end{equation}
+
+Preço cru não entra: a rede memorizaria o nível (R\$~60 vs R\$~66), não o movimento. \(N\) pequeno (5 a 20) cabe em 246 pontos; \(N=60\) deixa poucos trechos.
+
+A RNN lê \(x_{t-N+1},\ldots,x_t\) e produz \(h_t\) com a mesma recorrência do caderno \texttt{RNN.tex}:
+
+\begin{equation}
+  h_k = \tanh(W_{xh} x_k + W_{hh} h_{k-1} + b_h),
+  \qquad
+  \hat{y}_t = \sigma(W_{hy} h_t + b_y).
+\end{equation}
+
+Só o último estado vira probabilidade de alta. A perda é entropia cruzada binária entre \(\hat{y}_t\) e \(y_t\).
+
+\section{Corte treino / teste}
+
+A série é temporal: não embaralhar dias. Um corte simples é os primeiros 80\% dos exemplos rotulados para treino (ordem cronológica) e o resto para teste. Qualquer vazamento de \(C_{t+1}\) para dentro de \(x_t\) invalida o número.
+
+\section{O que este experimento \emph{não} mostra}
+
+\begin{itemize}
+  \item 246 pontos é pouco para uma RNN. Um baseline (sempre prever a classe majoritária, ou ``sobe se ontem subiu'') precisa aparecer na mesma tabela.
+  \item Mercado muda de regime. Acurácia no último trimestre de 2026 não se transfere para 2027.
+  \item Sem custo de operação, ``comprar todo dia que a rede diz 1'' não é PnL.
+  \item brapi agrega fonte pública. Para estudo serve; não é feed da B3 em tempo real.
+\end{itemize}
+
+\section{Próximo passo de implementação}
+
+\begin{enumerate}
+  \item Carregar \texttt{vale3\_1y.csv}, montar janelas de tamanho \(N\), descartar a última linha.
+  \item Treinar uma RNN (ou GRU) de estado pequeno, um passo de classificação no fim.
+  \item Reportar acurácia e matriz \(2\times 2\) no bloco de teste, ao lado do baseline.
+\end{enumerate}
+
+\end{document}
