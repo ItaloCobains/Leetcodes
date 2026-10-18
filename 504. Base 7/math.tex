@@ -1,0 +1,80 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage[brazil]{babel}
+
+\title{LeetCode 504 --- Base 7}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Representação posicional}
+
+Para $n \ge 0$, existe uma sequência única de dígitos $d_i \in \{0,1,2,3,4,5,6\}$ tal que
+\[
+  n = \sum_{i=0}^{k} d_i \, 7^{i},
+\]
+com $d_k \neq 0$ quando $n > 0$. Caso especial: $n = 0 \Leftrightarrow d_0 = 0$ (string \texttt{"0"}).
+
+O índice $i = 0$ é o dígito das unidades ($7^0$), ou seja, o caractere mais à \textbf{direita} na string.
+
+\section{Extração dos dígitos (restos)}
+
+\[
+\begin{aligned}
+  r_0 &= n \bmod 7, & q_0 &= \left\lfloor \frac{n}{7} \right\rfloor, \\
+  r_1 &= q_0 \bmod 7, & q_1 &= \left\lfloor \frac{q_0}{7} \right\rfloor, \\
+  r_2 &= q_1 \bmod 7, & q_2 &= \left\lfloor \frac{q_1}{7} \right\rfloor, \\
+  &\vdots & &
+\end{aligned}
+\]
+
+Defina $d_i = r_i$. Pare quando $q_j = 0$. A string é $d_k d_{k-1} \cdots d_0$ ($d_k$ à esquerda).
+
+No loop, $d_0$ sai primeiro; concatenar na ordem do loop deixa a string \textbf{invertida} em relação ao resultado final.
+
+\section{Exemplo $n = 100$}
+
+\[
+\begin{aligned}
+  100 &= 14 \cdot 7 + 2 &&\Rightarrow d_0 = 2, \\
+  14 &= 2 \cdot 7 + 0 &&\Rightarrow d_1 = 0, \\
+  2 &= 0 \cdot 7 + 2 &&\Rightarrow d_2 = 2.
+\end{aligned}
+\]
+
+Verificação:
+\[
+  100 = 2 \cdot 7^{2} + 0 \cdot 7^{1} + 2 \cdot 7^{0} = 98 + 0 + 2.
+\]
+String: \texttt{"202"}.
+
+\section{Inteiros negativos}
+
+\[
+  n < 0 \quad \Rightarrow \quad \text{resposta} = \texttt{"-"} \mathbin{\|} \text{base}_7(|n|).
+\]
+Exemplo: $-7 \mapsto \texttt{"-10"}$.
+
+\section{Contagem decimal $1$--$10$}
+
+\begin{center}
+\begin{tabular}{r|l}
+  Decimal & Base 7 \\ \hline
+  1  & 1 \\
+  2  & 2 \\
+  3  & 3 \\
+  4  & 4 \\
+  5  & 5 \\
+  6  & 6 \\
+  7  & 10 \\
+  8  & 11 \\
+  9  & 12 \\
+  10 & 13 \\
+\end{tabular}
+\end{center}
+
+\end{document}
