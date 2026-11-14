@@ -1,0 +1,82 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian,shorthands=off]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+
+\title{Estudo: redes neurais recorrentes}
+\author{Italo Brito Brandão}
+\date{18/10/2026}
+
+\begin{document}
+\maketitle
+
+\section{Introdução}
+
+O segredo por trás dessas capacidades está nas \textbf{Redes Neurais Recorrentes (RNNs)}, modelos projetados para trabalhar com dados sequenciais e temporais. Contudo, treinar essas redes esbarra em desafios matemáticos profundos, como o desapacimento do gradiente, e em custo computacional elevado.
+Para superar esse obstáculo, cientistas criaram desde mecanismos de portas elegantes (como LSTMs e GRUs) até abordagens inovadoras de computação por reservátorio (Echo State Network) com loops de feedback externos.
+
+Ao final desta aula, você será capaz de:
+
+\begin{itemize}
+  \item \textbf{Explicar} a mecânica matemática dos problemas de gradiente evanescente e explosivo no treinamento de RNNs via BPTT
+  \item \textbf{Analisar} a estrutura de LSTMs e avaliar como as variantes de GRU com parâmetros reduzidos mantêm alto desempenho com menor custo computacional.
+  \item \textbf{Compreender} o funcionamento das Redes de Estado Eco (ESNs) e a prova matemática de como feedback de estado aprimora a precisão do sistema.
+  \item \textbf{Comparar} resultados empíricos dessas arquiteturas em tarefas reais, incluido visão computacional (MNIST), processamento de linguagem (IMDB) e modelagem de séries temporais.
+\end{itemize}
+
+\section{O Desafio dos Gradientes: Por que RNNs Simples Falham?}
+
+Para entender a evolução das arquiteturas recorrentes, precisamos começar pela RNN simples. Em uma RNN tradicional, a rede mantém um estado oculto \(x_t\) que é atualizado a cada passo \(t\) com base na entrada atual \(u_t\) e no estado anterior \(x_{t-1}\):
+
+\begin{equation}
+  x_t = \sigma(W_{rec} x_{t-1} + W_{in} u_t + b)
+\end{equation}
+
+Onde \(W{rec}\) é a matriz de pesos recorrentes, \(W{in}\) é a matriz de pesos de entrada, \(b\) é o vetor de viés e \(\sigma\) é uma função de ativação não linear, como a tangente hiperbólica (tanh) ou a sigmoide.
+
+\section{O Algoritmo BPTT e a Multiplicação de Jacobianas}
+
+Para treinar essa rede, utiliza-se o algoritmo de Retropropagação no Tempo (Backpropagation Through Time - BPTT), no qual a rede recorrente é "desdobrada" ao longo dos passos temporais. O erro total \(E\) é a soma dos errors em cada passo \(E_t\). Ao calcular a a derivada de erro \(E_t\) em relação aos parâmentros no passos \(k\) (onde \(k < t\)), surge uma cadeia de multiplicações de matrizes Jacobianas:
+
+\begin{equation}
+  \frac{\partial x_t}{\partial x_k} = \prod_{i=k+1}^{t} \frac{\partial x_t}{\partial x_{i-1}} = \prod_{i=k+1}^{t} W_{rec}^T \text{diag}(\sigma'(x_{i-1}))
+\end{equation}
+
+\section{Gradientes Evanescentes e Explosivos}
+
+Confirme analisado por Pascunu et al., esse produto de matrizes comporta-se como a potência de um número real. Se a sequência for longa (t-k grande):
+
+\begin{itemize}
+  \item \textbf{Grandientes Evanescentes(Vanishing Gradientes)}: Se o maior autovalor (eigenvalue) \(\lambda_1\) de \(W_{rec}\) satisfazer a condição \(\lambda_1 < \frac{1}{\gamma}\) (onde \(\gamma\) é o limite superior da derivada \(\sigma'\)), o produto tende exponencialmente a zero. A rede simplesmente "esquece" as dependências de longo prazo, tornando impossível aprender relações entre eventos distantes.
+  \item \textbf{Gradiente Explosivo(Exploding Gradient)}: Se \(\lambda_1 > \frac{1}{\gamma}\), os gradientes podem crescer exponencialmente, tornando as atualizações de pesos instáveis e fazendo o treinamento divergir. Uma solução prática e amplamente adotada para conter a explosão é o cortamento de norma do gradiente (gradient norm clipping).
+\end{itemize}
+
+\section{Arquiteturas com Portas: LSTMs e Variantes Otimizadas de GRU}
+
+Para superar o desaparecimento do gradiente, Hochreiter e Schmidhuber introduziram a \textbf{Long Short-Term Memory (LSTM)}. A LSTM introduz uma célula de memoria \(C_t\) controlada, por três portas ativas (entrada, esquecimento e saída), garantindo um caminho linear para o fluxo de gradiente através do chamado \emph{Constant Error Carousel}.
+Contudo, a LSTM quadruplica o número de parâmentros em relação à RNN simples: para um estado \(n\)-dimensional e entrada \(m\)-dimensional, o total de parâmentro s é \(4  \times (n^2 + nm + n)\).
+
+\section{O Gated Recurrent Unit (GRU) Padrão (GRU0)}
+
+Proposto por Cho et al. O \textbf{GRU} simplifica a LSTM reduzindo as portas para apenas duas: a porta de atualização (update gate \(z_t\)) e a porta de redefinição (reset gate \(r_t\)). O modelo GRU tem a seguinte dinâmica:
+
+
+\begin{equation}
+\begin{aligned}
+h_t &= (1-z_t)\odot h_{t-1} + z_t\odot\tilde{h}_t \\[6pt]
+\tilde{h}_t &= \operatorname{ReLU}\bigl(W_d u_t + U_d(r_t\odot h_{t-1}) + b_d\bigr) \\[6pt]
+z_t &= \sigma(W_z u_t + U_z h_{t-1} + b_z) \\[6pt]
+r_t &= \sigma(W_r u_t + U_r h_{t-1} + b_r)
+\end{aligned}
+\end{equation}
+
+
+
+
+
+
+
+\end{document}
+
