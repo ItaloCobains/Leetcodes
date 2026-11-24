@@ -10,6 +10,11 @@ weak.linter.mathlibStandardSet = true
 maxSynthPendingDepth = 3
 
 [[require]]
+name = "LeanPlot"
+git = "https://github.com/alok/LeanPlot"
+rev = "bdacc90fe0479ed75216d5b18cecdaa2c81d52d8"
+
+[[require]]
 name = "mathlib"
 scope = "leanprover-community"
 rev = "v4.36.0"
