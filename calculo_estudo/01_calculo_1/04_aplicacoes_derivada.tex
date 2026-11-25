@@ -1,0 +1,776 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Aplicações da derivada}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{A derivada de $f$ em $c$ é o limite, quando existe e é finito, do quociente $(f(x)-f(c))/(x-c)$ com $x\to c$ e $x\neq c$. Derivável implica contínua no ponto. A regra da cadeia, a do produto, a do quociente e as derivadas de polinômios, de $\sin$, de $\cos$, de $\exp$ e de $\ln$ são as do módulo de derivadas: $(\sin)'=\cos$, $(\cos)'=-\sin$, $(\exp)'=\exp$, $(\ln)'(x)=1/x$ para $x>0$, e $(\sqrt{x})'=1/(2\sqrt{x})$ para $x>0$. Do módulo de continuidade usamos o teorema de Weierstrass, enunciado abaixo e não reprovado aqui. Do módulo de trigonometria usamos $\sin^2\theta+\cos^2\theta=1$, $\cos(0)=1$, $\cos(\pi)=-1$, $\sin(0)=\sin(\pi)=0$, $\cos(\pi/2)=0$ e $\cos(\theta+2\pi n)=\cos\theta$ para $n\in\Z$. A propriedade arquimediana de $\R$ é admitida: para todo real há um natural maior.}
+
+\begin{intuicao}
+Num extremo local interior em que a reta tangente existe, essa reta não pode subir nem descer: a secante à esquerda e a secante à direita apontam sentidos opostos, e a derivada, sendo o limite comum, só pode ser zero. O teorema do valor médio compara o deslocamento de $f$ entre dois pontos com a inclinação da tangente em algum ponto intermediário. Quase todo o capítulo é essa comparação, aplicada a uma função auxiliar escolhida para zerar nos extremos.
+\end{intuicao}
+
+\section{Extremos locais e absolutos}
+
+\begin{definicao}
+Seja $D\subseteq\R$ e $f\colon D\to\R$. Um ponto $c\in D$ é \emph{interior} a $D$ quando existe $\delta>0$ tal que $(c-\delta,c+\delta)\subseteq D$.
+
+Diz-se que $f$ tem
+\begin{enumerate}
+\item \emph{máximo local} em $c$ quando existe $\delta>0$ tal que, para todo $x\in D$ com $\abs{x-c}<\delta$, vale $f(x)\le f(c)$;
+\item \emph{mínimo local} em $c$ quando existe $\delta>0$ tal que, para todo $x\in D$ com $\abs{x-c}<\delta$, vale $f(x)\ge f(c)$;
+\item \emph{extremo local} em $c$ quando tem máximo local ou mínimo local em $c$;
+\item \emph{máximo absoluto} em $c$ quando $f(x)\le f(c)$ para todo $x\in D$;
+\item \emph{mínimo absoluto} em $c$ quando $f(x)\ge f(c)$ para todo $x\in D$;
+\item \emph{extremo absoluto} em $c$ quando tem máximo absoluto ou mínimo absoluto em $c$.
+\end{enumerate}
+O máximo local é \emph{estrito} quando, na vizinhança furada, vale $f(x)<f(c)$. O mínimo local estrito é análogo, com $f(x)>f(c)$.
+\end{definicao}
+
+\begin{teorema}[Weierstrass, módulo de continuidade]\label{teo:weierstrass}
+Se $f$ é contínua em $[a,b]$, então $f$ é limitada e existem $x_m,x_M\in[a,b]$ tais que
+\[
+f(x_m)\le f(x)\le f(x_M)\qquad\text{para todo }x\in[a,b].
+\]
+Os valores $f(x_m)$ e $f(x_M)$ são, respectivamente, o mínimo e o máximo absolutos de $f$ em $[a,b]$.
+\end{teorema}
+
+O enunciado acima é fato já demonstrado. Neste módulo ele entra como ferramenta: num intervalo fechado e limitado, continuidade basta para garantir extremo absoluto, sem qualquer hipótese sobre a derivada.
+
+\section{O teorema de Fermat}
+
+\begin{teorema}[Fermat, caso interior]\label{teo:fermat}
+Seja $f\colon D\to\R$ e seja $c$ ponto interior de $D$. Se $f$ tem um extremo local em $c$ e $f$ é derivável em $c$, então $f'(c)=0$.
+\end{teorema}
+
+\begin{proof}
+Como $c$ é interior, existe $\delta_0>0$ com $(c-\delta_0,c+\delta_0)\subseteq D$. Como há extremo local, existe $\delta_1>0$ tal que a desigualdade do extremo vale para todo $x\in D$ com $\abs{x-c}<\delta_1$. Tome $\delta=\min\{\delta_0,\delta_1\}>0$. Então $(c-\delta,c+\delta)\subseteq D$ e a desigualdade do extremo vale em todo esse intervalo.
+
+Trata-se primeiro do máximo local: $f(x)\le f(c)$ sempre que $0<\abs{x-c}<\delta$.
+
+Se $c<x<c+\delta$, o numerador $f(x)-f(c)$ é menor ou igual a zero e o denominador $x-c$ é positivo, logo
+\[
+\frac{f(x)-f(c)}{x-c}\le 0.
+\]
+A derivada existe, então o limite lateral direito do quociente existe e coincide com $f'(c)$. Esse limite é menor ou igual a zero. Se fosse $\ell=f'(c)>0$, a definição de limite com $\eps=\ell/2$ daria um intervalo $(c,c+\delta')$ no qual o quociente seria maior do que $\ell/2>0$, contradizendo o quociente menor ou igual a zero. Logo
+\[
+f'(c)=\lim_{x\to c^+}\frac{f(x)-f(c)}{x-c}\le 0.
+\]
+
+Se $c-\delta<x<c$, o numerador continua menor ou igual a zero, mas o denominador $x-c$ é negativo. O quociente de um número não positivo por um número negativo é maior ou igual a zero:
+\[
+\frac{f(x)-f(c)}{x-c}\ge 0.
+\]
+O limite lateral esquerdo coincide com $f'(c)$. Se esse limite fosse negativo, o quociente ficaria negativo numa vizinhança esquerda, contra o quociente maior ou igual a zero. Logo $f'(c)\ge 0$.
+
+De $f'(c)\le 0$ e $f'(c)\ge 0$ segue $f'(c)=0$.
+
+Resta o mínimo local: $f(x)\ge f(c)$ quando $0<\abs{x-c}<\delta$. À direita de $c$ o numerador é maior ou igual a zero e o denominador é positivo, então o quociente é maior ou igual a zero. O limite direito, que é $f'(c)$, não pode ser negativo: senão o quociente ficaria negativo numa vizinhança direita. Logo $f'(c)\ge 0$. À esquerda o numerador é maior ou igual a zero e o denominador é negativo, então o quociente é menor ou igual a zero, e o mesmo argumento impede que o limite esquerdo seja positivo. Logo $f'(c)\le 0$. De novo $f'(c)=0$.
+\end{proof}
+
+\begin{definicao}
+Se $f$ é derivável num ponto interior $c$ e $f'(c)=0$, diz-se que $c$ é \emph{ponto crítico} de $f$. Também se chama crítico um ponto interior em que $f$ não é derivável. Os candidatos a extremo local interior estão nessa lista; o teorema de Fermat não diz que todo crítico é extremo.
+\end{definicao}
+
+\begin{contraexemplo}[Mínimo sem derivada]
+A função $f(x)=\abs{x}$ em $\R$ tem mínimo absoluto em $0$, porque $\abs{x}\ge 0=f(0)$ para todo $x$. O ponto $0$ é interior. Mesmo assim $f'(0)$ não existe. Para $h>0$,
+\[
+\frac{f(h)-f(0)}{h}=\frac{h}{h}=1.
+\]
+Para $h<0$, $\abs{h}=-h$, logo
+\[
+\frac{f(h)-f(0)}{h}=\frac{-h}{h}=-1.
+\]
+O limite lateral direito é $1$ e o esquerdo é $-1$. Não há limite, e a hipótese ``derivável em $c$'' do Teorema~\ref{teo:fermat} falha. A conclusão $f'(c)=0$ não faz sentido porque o número $f'(c)$ não existe.
+\end{contraexemplo}
+
+\begin{contraexemplo}[Extremo na borda]
+Seja $f(x)=x$ em $[0,1]$. Então $f$ é contínua, $f(0)=0$ é mínimo absoluto e $f(1)=1$ é máximo absoluto. Em todo ponto de $(0,1)$ tem-se $f'(x)=1\neq 0$. O máximo ocorre em $1$, que não é interior a $[0,1]$: nenhuma vizinhança aberta de $1$ está contida em $[0,1]$. Fermat não se aplica ao extremo da borda, e de fato a derivada lateral $f'_-(1)=1$ não é zero.
+\end{contraexemplo}
+
+\begin{contraexemplo}[Derivada nula sem extremo]
+Seja $f(x)=x^3$ em $\R$. Então $f'(x)=3x^2$ e $f'(0)=0$, de modo que $0$ é crítico e interior. Não há extremo local. Se $x>0$, então $x^3>0=f(0)$. Se $x<0$, então $x^3<0$. Em toda vizinhança de $0$ há pontos com valor estritamente maior e pontos com valor estritamente menor do que $f(0)$. A recíproca de Fermat é falsa.
+\end{contraexemplo}
+
+\cuidado{As três hipóteses são independentes. Sem derivada, $\abs{x}$ tem mínimo em $0$ e o quociente lateral vale $-1$ à esquerda e $1$ à direita. Sem ponto interior, $f(x)=x$ em $[0,1]$ tem máximo em $1$ com derivada $1$. Com derivada nula, $x^3$ em $0$ não tem extremo local: o cubo é positivo à direita e negativo à esquerda.}
+
+\section{O teorema de Rolle}
+
+\begin{teorema}[Rolle]\label{teo:rolle}
+Seja $f$ contínua em $[a,b]$ e derivável em $(a,b)$, com $a<b$ e $f(a)=f(b)$. Então existe $c\in(a,b)$ tal que $f'(c)=0$.
+\end{teorema}
+
+\begin{proof}
+Pelo Teorema~\ref{teo:weierstrass} existem $x_m,x_M\in[a,b]$ com $f(x_m)\le f(x)\le f(x_M)$ para todo $x\in[a,b]$.
+
+Primeiro caso: $x_m$ e $x_M$ estão ambos em $\{a,b\}$. Como $f(a)=f(b)$, os dois extremos do intervalo têm o mesmo valor. O máximo absoluto e o mínimo absoluto são, portanto, iguais a $f(a)$. Para todo $x\in[a,b]$,
+\[
+f(a)=f(x_m)\le f(x)\le f(x_M)=f(a),
+\]
+logo $f(x)=f(a)$. A função é constante. Para qualquer $c\in(a,b)$ e qualquer $h$ com $c+h\in(a,b)$ e $h\neq 0$, o quociente $(f(c+h)-f(c))/h$ é zero. Assim $f'(c)=0$. Qualquer $c$ do intervalo aberto serve.
+
+Segundo caso: nem todo par formado por um ponto de mínimo absoluto e um ponto de máximo absoluto cabe em $\{a,b\}$. Então pelo menos um dos pontos $x_m$ e $x_M$ está em $(a,b)$. Esse ponto é interior a $[a,b]$, a função tem nele um extremo absoluto e, em particular, um extremo local, e $f$ é derivável nesse ponto. O Teorema~\ref{teo:fermat} dá $f'(x_m)=0$ ou $f'(x_M)=0$, conforme qual dos dois esteja no interior. Em qualquer dos dois subcasos existe $c\in(a,b)$ com $f'(c)=0$.
+\end{proof}
+
+\begin{contraexemplo}[Sem continuidade]
+Seja $f\colon[0,1]\to\R$ dada por $f(x)=x$ se $0\le x<1$ e $f(1)=0$. Então $f(0)=f(1)=0$, e $f$ é derivável em $(0,1)$ com $f'(x)=1\neq 0$. Não existe $c\in(0,1)$ com $f'(c)=0$. A continuidade em $[0,1]$ falha em $1$: o limite de $f(x)$ quando $x\to 1^-$ é $1\neq 0=f(1)$.
+\end{contraexemplo}
+
+\begin{contraexemplo}[Sem derivada no aberto]
+Seja $f(x)=\abs{x}$ em $[-1,1]$. Então $f$ é contínua, $f(-1)=f(1)=1$, mas não existe $c\in(-1,1)$ com $f'(c)=0$. Em $(-1,0)$ tem-se $f(x)=-x$ e $f'(x)=-1$. Em $(0,1)$ tem-se $f(x)=x$ e $f'(x)=1$. Em $0$ a derivada não existe, pelo cálculo já feito no contraexemplo do módulo. A hipótese de derivabilidade em todo o aberto é necessária, e não basta que a derivada exista fora de um ponto.
+\end{contraexemplo}
+
+\cuidado{Rolle pede as três condições ao mesmo tempo: continuidade no fechado, derivada no aberto e valores iguais nos extremos. A função que vale $x$ em $[0,1)$ e $0$ em $1$ zera nos extremos e tem derivada $1$ no aberto. O módulo em $[-1,1]$ zera a diferença dos extremos e é contínuo, mas a derivada, onde existe, vale $\pm 1$.}
+
+\section{O teorema do valor médio de Lagrange}
+
+\begin{teorema}[Valor médio de Lagrange]\label{teo:lagrange}
+Seja $f$ contínua em $[a,b]$ e derivável em $(a,b)$, com $a<b$. Então existe $c\in(a,b)$ tal que
+\[
+f'(c)=\frac{f(b)-f(a)}{b-a}.
+\]
+\end{teorema}
+
+\begin{proof}
+Defina $g\colon[a,b]\to\R$ por
+\begin{equation}
+\label{eq:auxiliar-lagrange}
+g(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a).
+\end{equation}
+A função $f$ é contínua em $[a,b]$, e o termo subtraído é um polinômio em $x$. Logo $g$ é contínua em $[a,b]$. No aberto $(a,b)$, $f$ é derivável e o termo subtraído tem derivada constante, logo $g$ é derivável em $(a,b)$ e
+\[
+g'(x)=f'(x)-\frac{f(b)-f(a)}{b-a}.
+\]
+
+Calcule os extremos:
+\begin{align*}
+g(a)
+&=f(a)-f(a)-\frac{f(b)-f(a)}{b-a}(a-a)
+=0,\\[0.4em]
+g(b)
+&=f(b)-f(a)-\frac{f(b)-f(a)}{b-a}(b-a)
+=f(b)-f(a)-\bigl(f(b)-f(a)\bigr)
+=0.
+\end{align*}
+Assim $g(a)=g(b)=0$. O Teorema~\ref{teo:rolle} fornece $c\in(a,b)$ com $g'(c)=0$. Portanto
+\[
+f'(c)-\frac{f(b)-f(a)}{b-a}=0,
+\]
+que é a igualdade do enunciado.
+\end{proof}
+
+\begin{observacao}
+Se $f(a)=f(b)$, a fração do enunciado é zero e Lagrange devolve Rolle. A demonstração acima usa Rolle, então a ordem lógica é a que foi escrita: primeiro Rolle, depois a redução. Depois que os dois teoremas estão provados, Rolle é o caso particular de Lagrange em que os valores nos extremos coincidem.
+
+O ponto $c$ não é único em geral. Para $f(x)=x^3$ em $[-1,1]$,
+\[
+\frac{f(1)-f(-1)}{1-(-1)}=\frac{1-(-1)}{2}=1,
+\]
+e $f'(x)=3x^2$. A equação $3x^2=1$ tem soluções $x=\pm 1/\sqrt{3}$, ambas em $(-1,1)$, porque $(1/\sqrt{3})^2=1/3<1$.
+\end{observacao}
+
+\cuidado{A função do contraexemplo de continuidade de Rolle também derruba Lagrange: $f(x)=x$ em $[0,1)$ e $f(1)=0$. A razão $(f(1)-f(0))/(1-0)$ é $0$, mas $f'(x)=1$ em todo ponto de $(0,1)$. Sem continuidade no fechado, a igualdade pode falhar em todos os pontos do aberto.}
+
+\section{O teorema do valor médio de Cauchy}
+
+\begin{teorema}[Valor médio de Cauchy]\label{teo:cauchy}
+Sejam $f$ e $g$ contínuas em $[a,b]$ e deriváveis em $(a,b)$, com $a<b$. Então existe $c\in(a,b)$ tal que
+\begin{equation}
+\label{eq:cauchy}
+\bigl(f(b)-f(a)\bigr)\,g'(c)=\bigl(g(b)-g(a)\bigr)\,f'(c).
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Defina $h\colon[a,b]\to\R$ por
+\[
+h(x)=\bigl(f(b)-f(a)\bigr)\bigl(g(x)-g(a)\bigr)-\bigl(g(b)-g(a)\bigr)\bigl(f(x)-f(a)\bigr).
+\]
+Continuidade de $f$ e de $g$ no fechado implica continuidade de $h$. Derivabilidade no aberto implica
+\[
+h'(x)=\bigl(f(b)-f(a)\bigr)\,g'(x)-\bigl(g(b)-g(a)\bigr)\,f'(x).
+\]
+Nos extremos,
+\begin{align*}
+h(a)
+&=\bigl(f(b)-f(a)\bigr)\cdot 0-\bigl(g(b)-g(a)\bigr)\cdot 0
+=0,\\[0.4em]
+h(b)
+&=\bigl(f(b)-f(a)\bigr)\bigl(g(b)-g(a)\bigr)-\bigl(g(b)-g(a)\bigr)\bigl(f(b)-f(a)\bigr)
+=0.
+\end{align*}
+O Teorema~\ref{teo:rolle} dá $c\in(a,b)$ com $h'(c)=0$, que é exatamente \eqref{eq:cauchy}.
+\end{proof}
+
+\begin{corolario}[Forma de quociente]\label{cor:cauchy-quociente}
+Nas hipóteses do Teorema~\ref{teo:cauchy}, suponha ainda $g'(x)\neq 0$ para todo $x\in(a,b)$. Então $g(b)\neq g(a)$ e existe $c\in(a,b)$ tal que
+\[
+\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)}.
+\]
+\end{corolario}
+
+\begin{proof}
+Se fosse $g(a)=g(b)$, o Teorema~\ref{teo:rolle} aplicado a $g$ daria um ponto de $(a,b)$ em que $g'$ se anula, contra a hipótese. Logo $g(b)\neq g(a)$. O Teorema~\ref{teo:cauchy} dá $c$ satisfazendo \eqref{eq:cauchy}. Nesse ponto $g'(c)\neq 0$ pela hipótese sobre todo o aberto. Divida os dois lados por $(g(b)-g(a))g'(c)$, que é diferente de zero.
+\end{proof}
+
+\begin{observacao}
+A forma \eqref{eq:cauchy} não pede divisão. Ela continua válida quando $g(b)=g(a)$ ou quando $g'(c)=0$. A forma de quociente exige as duas condições extras do corolário. Tomando $g(x)=x$, tem-se $g'(x)=1\neq 0$ e $g(b)-g(a)=b-a\neq 0$, e o corolário devolve o Teorema~\ref{teo:lagrange}.
+\end{observacao}
+
+\begin{contraexemplo}[Divisão ilegítima]
+Em $[-1,1]$, sejam $f(x)=x$ e $g(x)=x^2$. As duas funções são contínuas no fechado e deriváveis no aberto. A forma produto é legítima: existe $c$ com
+\[
+\bigl(f(1)-f(-1)\bigr)g'(c)=\bigl(g(1)-g(-1)\bigr)f'(c).
+\]
+O lado direito tem $g(1)-g(-1)=0$. O lado esquerdo tem $f(1)-f(-1)=2$ e $g'(x)=2x$, então $2\cdot 2c=0$, logo $c=0$, e de fato $g'(0)=0$. A forma de quociente pediria dividir por $g(1)-g(-1)=0$. Essa divisão não está autorizada, embora Cauchy na forma produto valha.
+\end{contraexemplo}
+
+\cuidado{De \eqref{eq:cauchy} só se passa ao quociente das diferenças quando $g(b)\neq g(a)$ e $g'(c)\neq 0$. A hipótese $g'\neq 0$ em todo o aberto garante as duas coisas, via Rolle. Sem ela, como em $g(x)=x^2$ em $[-1,1]$, o denominador $g(b)-g(a)$ pode ser zero.}
+
+\section{Derivada nula e monotonicidade}
+
+\begin{definicao}
+Um conjunto $I\subseteq\R$ é um \emph{intervalo} quando, para todos $x,y\in I$ e todo $z\in\R$ com $x<z<y$, tem-se $z\in I$. O interior de $I$, denotado $I^\circ$, é o conjunto dos pontos interiores de $I$.
+
+Seja $f\colon I\to\R$. Diz-se que $f$ é
+\begin{enumerate}
+\item \emph{não decrescente} quando $x_1<x_2$ em $I$ implica $f(x_1)\le f(x_2)$;
+\item \emph{estritamente crescente} quando $x_1<x_2$ em $I$ implica $f(x_1)<f(x_2)$;
+\item \emph{não crescente} quando $x_1<x_2$ em $I$ implica $f(x_1)\ge f(x_2)$;
+\item \emph{estritamente decrescente} quando $x_1<x_2$ em $I$ implica $f(x_1)>f(x_2)$.
+\end{enumerate}
+Nesta nota a palavra ``crescente'', sozinha, não é usada. O critério de uso diário está no corolário seguinte: derivada não negativa dá função não decrescente; derivada positiva em todo ponto dá função estritamente crescente.
+\end{definicao}
+
+\begin{corolario}[Derivada nula]\label{cor:derivada-nula}
+Seja $I$ um intervalo e seja $f\colon I\to\R$ contínua em $I$ e derivável em $I^\circ$, com $f'(x)=0$ para todo $x\in I^\circ$. Então $f$ é constante em $I$: existe $k\in\R$ tal que $f(x)=k$ para todo $x\in I$.
+\end{corolario}
+
+\begin{proof}
+Se $I$ tem menos de dois pontos, não há o que comparar. Sejam $x_1,x_2\in I$ com $x_1<x_2$. Como $I$ é intervalo, $[x_1,x_2]\subseteq I$. A restrição de $f$ é contínua em $[x_1,x_2]$ e derivável em $(x_1,x_2)$, com derivada zero. O Teorema~\ref{teo:lagrange} fornece $c\in(x_1,x_2)$ tal que
+\[
+f(x_2)-f(x_1)=f'(c)\,(x_2-x_1)=0.
+\]
+Logo $f(x_1)=f(x_2)$. O par era arbitrário, então $f$ é constante.
+\end{proof}
+
+\begin{corolario}[Sinal da derivada]\label{cor:sinal}
+Seja $I$ um intervalo e seja $f\colon I\to\R$ contínua em $I$ e derivável em $I^\circ$.
+\begin{enumerate}
+\item Se $f'(x)\ge 0$ para todo $x\in I^\circ$, então $f$ é não decrescente em $I$.
+\item Se $f'(x)>0$ para todo $x\in I^\circ$, então $f$ é estritamente crescente em $I$.
+\item Se $f'(x)\le 0$ para todo $x\in I^\circ$, então $f$ é não crescente em $I$.
+\item Se $f'(x)<0$ para todo $x\in I^\circ$, então $f$ é estritamente decrescente em $I$.
+\end{enumerate}
+\end{corolario}
+
+\begin{proof}
+Sejam $x_1<x_2$ em $I$. De novo $[x_1,x_2]\subseteq I$, e o Teorema~\ref{teo:lagrange} dá $c\in(x_1,x_2)\subseteq I^\circ$ com
+\[
+f(x_2)-f(x_1)=f'(c)\,(x_2-x_1).
+\]
+O fator $x_2-x_1$ é positivo.
+
+(1) Se $f'(c)\ge 0$, o produto é maior ou igual a zero, logo $f(x_2)\ge f(x_1)$.
+
+(2) Se $f'(c)>0$, o produto é positivo, logo $f(x_2)>f(x_1)$.
+
+(3) Se $f'(c)\le 0$, o produto de $f'(c)$ pelo fator positivo $x_2-x_1$ é menor ou igual a zero, logo $f(x_2)\le f(x_1)$.
+
+(4) Se $f'(c)<0$, esse produto é negativo, logo $f(x_2)<f(x_1)$.
+\end{proof}
+
+\begin{proposicao}[Critério fino de crescimento estrito]\label{prop:criterio-fino}
+Seja $I$ um intervalo e seja $f\colon I\to\R$ contínua em $I$ e derivável em $I^\circ$, com $f'(x)\ge 0$ para todo $x\in I^\circ$. As três afirmações são equivalentes:
+\begin{enumerate}
+\item $f$ é estritamente crescente em $I$.
+\item $f$ não é constante em nenhum subintervalo de $I$ que contenha dois pontos distintos.
+\item Não existe intervalo aberto não vazio $J\subseteq I^\circ$ no qual $f'$ seja identicamente nula.
+\end{enumerate}
+Em particular, $f'\ge 0$ e ``$f'$ não é identicamente nula em nenhum subintervalo aberto'' implicam que $f$ é estritamente crescente. A hipótese $f'\ge 0$ não pode sair.
+\end{proposicao}
+
+\begin{proof}
+(1) implica (2). Se $f$ fosse constante num subconjunto com dois pontos $x_1<x_2$, então $f(x_1)=f(x_2)$, contra o crescimento estrito.
+
+(2) implica (3). Se $f'$ fosse identicamente nula num intervalo aberto não vazio $J\subseteq I^\circ$, o Corolário~\ref{cor:derivada-nula} daria $f$ constante em $J$. Um intervalo aberto não vazio contém dois pontos distintos.
+
+(3) implica (1). O Corolário~\ref{cor:sinal}(1) já dá que $f$ é não decrescente. Suponha $x_1<x_2$ e, por absurdo, $f(x_1)=f(x_2)$. Para $x\in[x_1,x_2]$ a monotonia não estrita dá $f(x_1)\le f(x)\le f(x_2)=f(x_1)$, logo $f(x)=f(x_1)$. A função é constante em $[x_1,x_2]$, e o quociente de diferenças em $(x_1,x_2)$ é zero. Assim $f'$ é identicamente nula no intervalo aberto $(x_1,x_2)\subseteq I^\circ$, contra (3). Portanto $f(x_1)<f(x_2)$.
+
+A última frase do enunciado é o caminho (3) implica (1). Se retirarmos $f'\ge 0$, a equivalência cai: $f(x)=-x$ em $\R$ tem $f'(x)=-1$, que não se anula em intervalo algum, e $f$ é estritamente decrescente, não crescente.
+\end{proof}
+
+\begin{contraexemplo}[Derivada não negativa sem crescimento estrito]
+A função constante $f(x)=7$ tem $f'(x)=0\ge 0$ e não é estritamente crescente: $f(0)=f(1)$. O item (1) do Corolário~\ref{cor:sinal} não pode ter a conclusão trocada por crescimento estrito.
+\end{contraexemplo}
+
+\begin{contraexemplo}[Zero isolado da derivada]
+A função $f(x)=x^3$ satisfaz $f'(x)=3x^2\ge 0$ e $f'(0)=0$. Ainda assim $f$ é estritamente crescente. Se $x_1<x_2$, a fatoração
+\[
+x_2^3-x_1^3=(x_2-x_1)\bigl(x_1^2+x_1x_2+x_2^2\bigr)
+\]
+tem primeiro fator positivo. O segundo é
+\[
+x_1^2+x_1x_2+x_2^2=\frac12\Bigl(x_1^2+x_2^2+(x_1+x_2)^2\Bigr).
+\]
+Cada quadrado é maior ou igual a zero. A soma é zero se e somente se $x_1=x_2=0$, porque $x_1^2=x_2^2=(x_1+x_2)^2=0$ força $x_1=x_2=0$. Isso contradiz $x_1<x_2$. Logo o segundo fator é positivo e $x_2^3>x_1^3$.
+
+O zero de $f'$ é isolado: $3x^2=0$ se e somente se $x=0$, pois $x^2=0$ se e somente se $x=0$. Nenhum intervalo aberto está contido em $\{0\}$. A Proposição~\ref{prop:criterio-fino} também conclui o crescimento estrito, e a fatoração acima não depende dela: é uma conta direta. O que o exemplo impede é a leitura errada ``$f'(c)=0$ num único ponto já destrói o crescimento estrito''.
+\end{contraexemplo}
+
+\begin{contraexemplo}[Domínio desconexo]
+Seja $D=(0,1)\cup(2,3)$ e seja $f\colon D\to\R$ dada por $f(x)=0$ se $x\in(0,1)$ e $f(x)=1$ se $x\in(2,3)$. Em cada componente, o quociente de diferenças é zero, logo $f'(x)=0$ para todo $x\in D$. A função não é constante. O Corolário~\ref{cor:derivada-nula} não se aplica porque $D$ não é intervalo: $1/2$ e $5/2$ estão em $D$, mas $1$ está entre eles e não está em $D$. O teorema do valor médio não pode ser chamado no segmento $[1/2,5/2]$, que não cabe no domínio.
+\end{contraexemplo}
+
+\cuidado{Derivada zero força função constante somente num intervalo, isto é, num domínio convexo. Em $(0,1)\cup(2,3)$ a função que vale $0$ na primeira componente e $1$ na segunda tem derivada zero e não é constante. Derivada não negativa força função não decrescente, não estritamente crescente: as constantes são o exemplo. Zero isolado de $f'$ não impede crescimento estrito, como em $x^3$. O critério fino da Proposição~\ref{prop:criterio-fino} é verdadeiro e explica $x^3$; o teste que se aplica sem inspeção extra do conjunto dos zeros é o Corolário~\ref{cor:sinal}: $f'\ge 0$ dá não decrescente, e $f'>0$ em todo ponto dá estritamente crescente.}
+
+\section{Concavidade e inflexão}
+
+A definição seguinte é a única usada daqui em diante. Ela pede derivada, porque é formulada pela reta tangente.
+
+\begin{definicao}
+Seja $I$ um intervalo e seja $f\colon I\to\R$ derivável em $I$. Diz-se que $f$ é \emph{convexa} em $I$ quando, para todos $a,x\in I$,
+\begin{equation}
+\label{eq:convexa}
+f(x)\ge f(a)+f'(a)\,(x-a).
+\end{equation}
+A reta tangente no ponto $a$ fica abaixo do gráfico, ou coincide com ele. Diz-se que $f$ é \emph{estritamente convexa} quando a desigualdade é estrita para todo $x\neq a$.
+
+Diz-se que $f$ é \emph{côncava} em $I$ quando, para todos $a,x\in I$,
+\[
+f(x)\le f(a)+f'(a)\,(x-a),
+\]
+isto é, a tangente fica acima do gráfico. A concavidade estrita pede desigualdade estrita para $x\neq a$.
+\end{definicao}
+
+\begin{observacao}
+Em vários livros de cálculo, o que aqui se chama convexa aparece como ``concavidade para cima'', e o que aqui se chama côncava aparece como ``concavidade para baixo''. A convenção desta nota fica fixa pela desigualdade \eqref{eq:convexa}: $f''>0$ empurrará a função para o lado convexo.
+\end{observacao}
+
+\begin{proposicao}[Derivada monótona e tangente]\label{prop:tangente}
+Seja $f$ derivável num intervalo $I$.
+\begin{enumerate}
+\item Se $f'$ é não decrescente em $I$, então $f$ é convexa em $I$. Se $f'$ é estritamente crescente, a desigualdade \eqref{eq:convexa} é estrita para $x\neq a$.
+\item Se $f'$ é não crescente em $I$, então $f$ é côncava em $I$. Se $f'$ é estritamente decrescente, a desigualdade da tangente é estrita para $x\neq a$.
+\end{enumerate}
+\end{proposicao}
+
+\begin{proof}
+Fixe $a,x\in I$ com $x\neq a$. O Teorema~\ref{teo:lagrange}, no intervalo de extremos $a$ e $x$, dá um ponto $c$ estritamente entre eles tal que $f(x)-f(a)=f'(c)\,(x-a)$. Logo
+\[
+f(x)-f(a)-f'(a)\,(x-a)=\bigl(f'(c)-f'(a)\bigr)\,(x-a).
+\]
+
+(1) Suponha $f'$ não decrescente. Se $x>a$, então $c>a$, logo $f'(c)\ge f'(a)$, e o fator $x-a$ é positivo. O produto é maior ou igual a zero. Se $x<a$, então $c<a$, logo $f'(c)\le f'(a)$, e o fator $x-a$ é negativo: multiplicar a desigualdade $f'(c)-f'(a)\le 0$ por um número negativo inverte o sentido, e o produto é de novo maior ou igual a zero. Nos dois casos vale \eqref{eq:convexa}.
+
+Se $f'$ é estritamente crescente, as comparações $f'(c)\ge f'(a)$ e $f'(c)\le f'(a)$ passam a ser estritas, porque $c\neq a$. O produto, de um fator diferente de zero por $x-a\neq 0$ do sinal adequado, é positivo.
+
+(2) Os sinais de $f'(c)-f'(a)$ trocam, e o mesmo produto fica menor ou igual a zero, estrito quando $f'$ é estritamente decrescente.
+\end{proof}
+
+\begin{corolario}[Sinal da segunda derivada]\label{cor:segunda}
+Seja $J$ um intervalo aberto e seja $f\colon J\to\R$ duas vezes derivável.
+\begin{enumerate}
+\item Se $f''(x)>0$ para todo $x\in J$, então $f'$ é estritamente crescente e $f$ é estritamente convexa em $J$.
+\item Se $f''(x)<0$ para todo $x\in J$, então $f'$ é estritamente decrescente e $f$ é estritamente côncava em $J$.
+\end{enumerate}
+\end{corolario}
+
+\begin{proof}
+A segunda derivada é a derivada de $f'$. Como $f'$ é derivável em $J$, é contínua em $J$. O Corolário~\ref{cor:sinal}, aplicado a $f'$ no intervalo $J$, dá o crescimento estrito de $f'$ no item (1) e o decrescimento estrito no item (2). A Proposição~\ref{prop:tangente} converte isso na desigualdade estrita da tangente.
+\end{proof}
+
+\begin{exemplo}[Exponencial acima da tangente]
+Como $(\exp)'=\exp$ e $(\exp)''=\exp$, e $\exp(t)>0$ para todo $t$, o Corolário~\ref{cor:segunda} diz que $\exp$ é estritamente convexa em $\R$. A tangente em $0$ é $\exp(0)+\exp'(0)\,t=1+t$. Portanto, para todo $t\in\R$,
+\begin{equation}
+\label{eq:exp-tangente}
+\exp(t)\ge 1+t,
+\end{equation}
+com desigualdade estrita se $t\neq 0$.
+\end{exemplo}
+
+\begin{definicao}
+Seja $f$ derivável num intervalo aberto que contém $c$. O ponto $c$ é \emph{ponto de inflexão} de $f$ quando existe $\delta>0$ tal que uma das duas situações ocorre:
+\begin{enumerate}
+\item $f$ é côncava em $(c-\delta,c]$ e convexa em $[c,c+\delta)$;
+\item $f$ é convexa em $(c-\delta,c]$ e côncava em $[c,c+\delta)$.
+\end{enumerate}
+A concavidade muda de um lado para o outro. A condição $f''(c)=0$, sozinha, não entra na definição.
+\end{definicao}
+
+\begin{exemplo}[Inflexão de $x^3$]
+Seja $f(x)=x^3$. A tangente em $a$ é $T_a(x)=a^3+3a^2(x-a)$. A diferença fatora-se assim:
+\begin{align*}
+x^3-a^3
+&=(x-a)\bigl(x^2+ax+a^2\bigr),\\
+x^3-T_a(x)
+&=(x-a)\bigl(x^2+ax+a^2-3a^2\bigr)
+=(x-a)\bigl(x^2+ax-2a^2\bigr).
+\end{align*}
+O segundo fator é $(x+2a)(x-a)$, porque
+\[
+(x+2a)(x-a)=x^2+ax-2a^2.
+\]
+Logo
+\[
+x^3-T_a(x)=(x-a)^2(x+2a).
+\]
+O fator $(x-a)^2$ é sempre maior ou igual a zero.
+
+Se $a\ge 0$ e $x\ge 0$, então $x+2a\ge 0$, logo $x^3-T_a(x)\ge 0$. A função é convexa em $[0,\infty)$. Se $a\le 0$ e $x\le 0$, então $x+2a\le 0$, logo $x^3-T_a(x)\le 0$. A função é côncava em $(-\infty,0]$. As duas situações da definição de inflexão estão realizadas em $c=0$, com qualquer $\delta>0$: côncava à esquerda, inclusive em $0$, e convexa à direita, inclusive em $0$. Assim $0$ é ponto de inflexão. A conta da segunda derivada apenas localiza o candidato: $f''(x)=6x$ e $f''(0)=0$. Quem prova a mudança de concavidade é a fatoração.
+\end{exemplo}
+
+\begin{contraexemplo}[$f''(0)=0$ sem inflexão]
+Seja $f(x)=x^4$. Então $f'(x)=4x^3$ e $f''(x)=12x^2$, de modo que $f''(0)=0$. A função $x\mapsto x^3$ é estritamente crescente, pela fatoração do contraexemplo anterior. Multiplicar por $4>0$ preserva o crescimento estrito, logo $f'(x)=4x^3$ é estritamente crescente em $\R$. A Proposição~\ref{prop:tangente} diz que $f$ é estritamente convexa em $\R$: para $x\neq a$,
+\[
+x^4>a^4+4a^3(x-a).
+\]
+Em particular $f$ é convexa em $(-\delta,0]$ e convexa em $[0,\delta)$, para qualquer $\delta>0$. Não há troca de concavidade. O ponto $0$ não é inflexão, embora a segunda derivada se anule. O mesmo exemplo mostra que $f''>0$ em todo ponto é suficiente para convexidade estrita, não necessária: aqui a desigualdade da tangente é estrita e $f''(0)=0$.
+\end{contraexemplo}
+
+\cuidado{Anular a segunda derivada não é definição de inflexão. Em $x^4$ tem-se $f''(0)=12\cdot 0^2=0$, mas $f'(x)=4x^3$ é estritamente crescente, a tangente fica estritamente abaixo do gráfico fora do ponto de tangência, e os dois lados de $0$ são convexos. Inflexão é mudança do tipo de concavidade, no sentido da definição por tangentes.}
+
+\section{A regra de L'Hôpital}
+
+O caso $0/0$ num ponto finito é provado estendendo $f$ e $g$ pelo valor zero e aplicando Cauchy. O caso em que $g$ tende a infinito usa outra redução: um ponto auxiliar fixo, a identidade de Cauchy longe do ponto $a$, e só depois o limite. Não é a mesma conta de três linhas.
+
+\begin{teorema}[L'Hôpital, forma $0/0$]\label{teo:lhopital-zero}
+Sejam $a\in\R$ e $\delta>0$. Sejam $f$ e $g$ deriváveis em $(a-\delta,a+\delta)\setminus\{a\}$, com $g'(x)\neq 0$ nesse conjunto. Suponha
+\[
+\lim_{x\to a}f(x)=0,\qquad \lim_{x\to a}g(x)=0,\qquad \lim_{x\to a}\frac{f'(x)}{g'(x)}=L,
+\]
+com $L\in\R$. Então
+\[
+\lim_{x\to a}\frac{f(x)}{g(x)}=L.
+\]
+A mesma conclusão vale para limites laterais, com as hipóteses restritas ao lado correspondente.
+\end{teorema}
+
+\begin{proof}
+Define-se $f(a)=0$ e $g(a)=0$. Com essa extensão, $f$ e $g$ ficam contínuas em $a$, porque os limites existem e valem os valores atribuídos. Não se afirma que $f$ ou $g$ sejam deriváveis em $a$.
+
+Tome $x$ com $a<x<a+\delta$. Em $[a,x]$, $f$ e $g$ são contínuas, e em $(a,x)$ são deriváveis. O Teorema~\ref{teo:cauchy} fornece $c$ estritamente entre $a$ e $x$ tal que
+\[
+\bigl(f(x)-f(a)\bigr)\,g'(c)=\bigl(g(x)-g(a)\bigr)\,f'(c),
+\]
+isto é $f(x)\,g'(c)=g(x)\,f'(c)$.
+
+O valor $g(x)$ não é zero. Se fosse, $g(x)=g(a)=0$, e Rolle daria um ponto de $(a,x)$ em que $g'$ se anula, contra a hipótese no conjunto furado. Também $g'(c)\neq 0$. Dividindo,
+\[
+\frac{f(x)}{g(x)}=\frac{f'(c)}{g'(c)}.
+\]
+Quando $x\to a^+$, o ponto $c$ está entre $a$ e $x$, logo $c\to a^+$. Pela hipótese sobre o quociente das derivadas, o lado direito tende a $L$. Portanto $f(x)/g(x)\to L$ quando $x\to a^+$.
+
+Se $a-\delta<x<a$, aplica-se Cauchy em $[x,a]$. O mesmo argumento produz $c$ entre $x$ e $a$ com $f(x)/g(x)=f'(c)/g'(c)$, e $c\to a^-$ quando $x\to a^-$. O lado esquerdo também tende a $L$. Os dois limites laterais coincidem, e o limite bilateral é $L$.
+
+Num limite apenas lateral, usa-se somente o parágrafo do lado correspondente.
+\end{proof}
+
+\begin{teorema}[L'Hôpital, forma $\infty/\infty$]\label{teo:lhopital-inf}
+Sejam $f$ e $g$ deriváveis num intervalo, com $g'\neq 0$ nesse intervalo, e seja $L\in\R$.
+\begin{enumerate}
+\item Se o intervalo é $(a,a+\delta)$, se $\lim_{x\to a^+}g(x)=\pm\infty$ e se $\lim_{x\to a^+}f'(x)/g'(x)=L$, então $\lim_{x\to a^+}f(x)/g(x)=L$.
+\item Se o intervalo é $(A,\infty)$, se $\lim_{x\to+\infty}g(x)=\pm\infty$ e se $\lim_{x\to+\infty}f'(x)/g'(x)=L$, então $\lim_{x\to+\infty}f(x)/g(x)=L$.
+\end{enumerate}
+Os casos $x\to a^-$ e $x\to-\infty$ têm o mesmo enunciado do lado oposto e a mesma demonstração, trocando o sentido em que $x$ se aproxima do fim do intervalo. Não se pede que $f$ tenda a infinito: a hipótese de explosão é sobre $g$.
+\end{teorema}
+
+\begin{proof}
+A redução não estende $f$ e $g$ por um valor finito em $a$. Quando $\abs{g}$ tende a infinito, não há número real que torne $g$ contínua em $a$. A conta seguinte fixa um ponto auxiliar e só deixa $x$ tender ao fim do intervalo depois.
+
+Prova-se o item (2); o item (1) é a mesma álgebra num intervalo limitado, escrita no fim.
+
+Seja $\eps>0$. Existe $A_1>A$ tal que $t>A_1$ implica
+\[
+\abs{\frac{f'(t)}{g'(t)}-L}<\frac{\eps}{2}.
+\]
+Fixe $y>A_1$ e defina o número finito
+\[
+C_y=\abs{f(y)}+\Bigl(\abs{L}+\frac{\eps}{2}\Bigr)\abs{g(y)}.
+\]
+Como $\abs{g(x)}\to\infty$ quando $x\to+\infty$, existe $A_2>y$ tal que $x>A_2$ implica $g(x)\neq 0$, $g(x)\neq g(y)$ e, se $C_y>0$,
+\[
+\abs{g(x)}>\frac{2C_y}{\eps}.
+\]
+Se $C_y=0$, a última exigência é omitida.
+
+Fixe $x>A_2$. No intervalo $[y,x]$, Cauchy dá $c\in(y,x)$ com
+\[
+\bigl(f(x)-f(y)\bigr)\,g'(c)=\bigl(g(x)-g(y)\bigr)\,f'(c).
+\]
+Como $g'(c)\neq 0$ e $g(x)\neq g(y)$,
+\[
+\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(c)}{g'(c)}.
+\]
+Rearranjando,
+\begin{align*}
+f(x)
+&=f(y)+\frac{f'(c)}{g'(c)}\bigl(g(x)-g(y)\bigr)
+=\frac{f'(c)}{g'(c)}\,g(x)+f(y)-\frac{f'(c)}{g'(c)}\,g(y),
+\end{align*}
+e, dividindo por $g(x)\neq 0$,
+\begin{equation}
+\label{eq:lhopital-id}
+\frac{f(x)}{g(x)}
+=\frac{f'(c)}{g'(c)}+\frac{f(y)-\dfrac{f'(c)}{g'(c)}\,g(y)}{g(x)}.
+\end{equation}
+O ponto $c$ satisfaz $c>y>A_1$, logo $\abs{f'(c)/g'(c)-L}<\eps/2$. Além disso
+\[
+\abs{\frac{f'(c)}{g'(c)}}<\abs{L}+\frac{\eps}{2},
+\]
+e o numerador do segundo termo de \eqref{eq:lhopital-id} tem valor absoluto no máximo $C_y$. Se $C_y=0$, esse termo é zero. Se $C_y>0$, o módulo do segundo termo é no máximo $C_y/\abs{g(x)}<\eps/2$. Portanto
+\[
+\abs{\frac{f(x)}{g(x)}-L}<\frac{\eps}{2}+\frac{\eps}{2}=\eps.
+\]
+Isso vale para todo $x>A_2$, que é a definição de limite $L$ quando $x\to+\infty$.
+
+Se $g(x)\to+\infty$, então para todo $M>0$ existe uma vizinhança direita em que $g(x)>M$, logo $\abs{g(x)}>M$. Se $g(x)\to-\infty$, a mesma frase vale com $g(x)<-M$. Nos dois casos $\abs{g(x)}\to\infty$.
+
+Para o item (1), fixe $\eps>0$ e escolha $\delta_1\in(0,\delta)$ tal que $a<t<a+\delta_1$ implica $\abs{f'(t)/g'(t)-L}<\eps/2$. Fixe $y\in(a,a+\delta_1)$ e defina $C_y$ pela mesma fórmula. Como $\abs{g(x)}\to\infty$ quando $x\to a^+$, existe $\delta_2\in(0,y-a)$ tal que $a<x<a+\delta_2$ implica $g(x)\neq 0$, $g(x)\neq g(y)$ e, se $C_y>0$, $\abs{g(x)}>2C_y/\eps$. Para cada um desses $x$, Cauchy em $[x,y]$ produz $c$ entre $x$ e $y$. Então $a<c<y<a+\delta_1$, e o quociente das derivadas em $c$ está a menos de $\eps/2$ de $L$. A identidade \eqref{eq:lhopital-id} não usou qual extremo é maior, apenas $g(x)\neq g(y)$ e $g(x)\neq 0$. A mesma estimativa dá $\abs{f(x)/g(x)-L}<\eps$ para todo $x\in(a,a+\delta_2)$.
+
+Para $x\to-\infty$, fixe $y$ suficientemente negativo para que $t<y$ implique $\abs{f'(t)/g'(t)-L}<\eps/2$, e escolha $A_2<y$ de modo que $x<A_2$ force $\abs{g(x)}$ grande, $g(x)\neq 0$ e $g(x)\neq g(y)$. Cauchy no intervalo $[x,y]$ devolve a identidade \eqref{eq:lhopital-id}, e a cota do segundo termo é a já escrita. O caso $x\to a^-$ fixa $y\in(a-\delta_1,a)$ e deixa $x$ subir até $a$ pelo intervalo $(y,a)$.
+\end{proof}
+
+\begin{observacao}
+O caso em que $f'/g'$ tende a $\pm\infty$ não está incluído. A demonstração acima usa $L$ finito quando estima $\abs{f'/g'}$ por $\abs{L}+\eps/2$. Não se transfere essa cota para um limite infinito sem outra redução.
+\end{observacao}
+
+\begin{contraexemplo}[A hipótese sobre $f'/g'$ é suficiente, não necessária]
+Sejam $f(x)=x+\sin x$ e $g(x)=x$, para $x>0$. Então
+\[
+\frac{f(x)}{g(x)}=1+\frac{\sin x}{x}.
+\]
+Como $\abs{\sin x}\le 1$,
+\[
+\abs{\frac{\sin x}{x}}\le\frac{1}{x}.
+\]
+Dado $\eps>0$, se $x>1/\eps$, então $1/x<\eps$. O teorema do confronto, na forma $0\le\abs{\sin x}/x\le 1/x$, dá $\sin x/x\to 0$ quando $x\to+\infty$. Logo $f(x)/g(x)\to 1$.
+
+Por outro lado $f'(x)=1+\cos x$ e $g'(x)=1$, então $f'(x)/g'(x)=1+\cos x$. Esse quociente não tem limite quando $x\to+\infty$. A imagem de $1+\cos$ está em $[0,2]$. Suponha, por absurdo, que o limite seja um real $L$. Para $\eps=1$ existiria $M$ tal que $x>M$ implica $\abs{1+\cos x-L}<1$, isto é
+\[
+L-1<1+\cos x<L+1.
+\]
+Pela propriedade arquimediana, existe $n\in\N$ com $n>M/(2\pi)$, logo $2\pi n>M$. Nos pontos $x=2\pi n$ e $y=\pi+2\pi n$, ambos maiores do que $M$,
+\[
+\cos x=\cos(2\pi n)=\cos 0=1,\qquad \cos y=\cos(\pi+2\pi n)=\cos\pi=-1.
+\]
+Assim $1+\cos x=2$ e $1+\cos y=0$. Os dois valores teriam de estar no intervalo aberto $(L-1,L+1)$:
+\[
+0>L-1\qquad\text{e}\qquad 2<L+1,
+\]
+isto é $L<1$ e $L>1$. Contradição. O limite de $f'/g'$ não existe em $\R$. Também não tende a $\pm\infty$, porque a função volta a valer $0$ e a valer $2$ em todo intervalo $(M,\infty)$.
+
+A existência de $\lim f'/g'$ não é necessária para a existência de $\lim f/g$. Os Teoremas~\ref{teo:lhopital-zero} e~\ref{teo:lhopital-inf} dão uma condição suficiente. Neste exemplo $g(x)=x\to+\infty$ e $g'\neq 0$, mas a hipótese que falha é justamente o limite de $(1+\cos x)$.
+\end{contraexemplo}
+
+\cuidado{O contraexemplo $f(x)=x+\sin x$, $g(x)=x$, quando $x\to+\infty$, tem $(f/g)\to 1$ porque $\abs{\sin x}/x\le 1/x\to 0$, enquanto $f'/g'=1+\cos x$ oscila entre $0$ e $2$ e não tem limite. Aplicar L'Hôpital sem saber se o limite de $f'/g'$ existe pode esconder um limite que existe por outro caminho.}
+
+\section{Otimização}
+
+\begin{teorema}[Teste da segunda derivada]\label{teo:segunda}
+Seja $f$ derivável numa vizinhança de $c$, com $f'$ derivável em $c$, $f'(c)=0$ e $f''(c)>0$. Então $f$ tem mínimo local estrito em $c$. Se $f''(c)<0$, então $f$ tem máximo local estrito em $c$.
+\end{teorema}
+
+\begin{proof}
+A existência de $f''(c)$ já inclui uma vizinhança em que $f'$ existe. Suponha $f''(c)>0$. Por definição,
+\[
+f''(c)=\lim_{h\to 0}\frac{f'(c+h)-f'(c)}{h}=\lim_{h\to 0}\frac{f'(c+h)}{h}.
+\]
+Tome $\eps=f''(c)/2>0$. Existe $\delta>0$ tal que $0<\abs{h}<\delta$ implica
+\[
+\abs{\frac{f'(c+h)}{h}-f''(c)}<\frac{f''(c)}{2},
+\]
+logo $f'(c+h)/h>f''(c)/2>0$. O quociente positivo força $f'(c+h)$ e $h$ a terem o mesmo sinal.
+
+Se $c<x<c+\delta$, o Teorema~\ref{teo:lagrange} em $[c,x]$ dá $\xi\in(c,x)$ com $f(x)-f(c)=f'(\xi)\,(x-c)$. Aqui $\xi-c>0$, então $f'(\xi)>0$, e $x-c>0$. O produto é positivo: $f(x)>f(c)$.
+
+Se $c-\delta<x<c$, o mesmo teorema em $[x,c]$ dá $\xi\in(x,c)$ com $f(x)-f(c)=f'(\xi)\,(x-c)$. Agora $\xi-c<0$, então $f'(\xi)<0$, e $x-c<0$. O produto de dois negativos é positivo: $f(x)>f(c)$.
+
+Assim $f(x)>f(c)$ para todo $x\neq c$ na vizinhança, que é mínimo local estrito.
+
+Se $f''(c)<0$, aplique o caso anterior a $-f$. Tem-se $(-f)'(c)=-f'(c)=0$ e $(-f)''(c)=-f''(c)>0$, logo $-f$ tem mínimo local estrito em $c$. Multiplicar a desigualdade $-f(x)>-f(c)$ por $-1$ inverte o sentido: $f(x)<f(c)$. Isso é máximo local estrito de $f$.
+\end{proof}
+
+\begin{teorema}[Candidatos em intervalo compacto]\label{teo:candidatos}
+Seja $f$ contínua em $[a,b]$. Então o máximo absoluto e o mínimo absoluto existem. Cada um deles é atingido num ponto de uma das três classes: o extremo $a$; o extremo $b$; um ponto de $(a,b)$ em que $f'$ não existe ou em que $f'$ existe e vale zero.
+\end{teorema}
+
+\begin{proof}
+A existência é o Teorema~\ref{teo:weierstrass}. Seja $x_0$ um ponto em que o máximo absoluto é atingido. Se $x_0=a$ ou $x_0=b$, o ponto está na lista. Se $x_0\in(a,b)$ e $f'(x_0)$ não existe, o ponto está na lista. Se $x_0\in(a,b)$ e $f'(x_0)$ existe, o máximo absoluto é um máximo local num ponto interior, e o Teorema~\ref{teo:fermat} dá $f'(x_0)=0$. O mínimo absoluto passa pelo mesmo exame.
+\end{proof}
+
+O teste da segunda derivada classifica um crítico como extremo local. No intervalo compacto, o extremo absoluto sai da comparação dos valores de $f$ na lista finita de candidatos, quando essa lista é finita. Um máximo local não é, por si só, absoluto.
+
+\begin{exemplo}[Cerca ao longo de um rio]
+Dispõe-se de $L>0$ metros de cerca para fechar um pasto retangular com um lado sobre um rio reto. O lado do rio não consome cerca. Quer-se a área máxima.
+
+Sejam $x\ge 0$ a medida de cada lado perpendicular ao rio e $y\ge 0$ a medida do lado paralelo ao rio, oposto à água. A cerca usa dois lados perpendiculares e um lado paralelo:
+\[
+2x+y=L,\qquad y=L-2x.
+\]
+As condições $x\ge 0$ e $y\ge 0$ equivalem a $x\in[0,L/2]$. A área é
+\[
+A(x)=x(L-2x)=Lx-2x^2,\qquad x\in\Bigl[0,\frac{L}{2}\Bigr].
+\]
+O domínio é fechado e limitado, e $A$ é polinomial, logo contínua. O Teorema~\ref{teo:weierstrass} garante máximo e mínimo absolutos.
+
+Os extremos do domínio dão pastos degenerados: $A(0)=0$ e
+\[
+A\Bigl(\frac{L}{2}\Bigr)=\frac{L}{2}\Bigl(L-2\cdot\frac{L}{2}\Bigr)=0.
+\]
+A derivada $A'(x)=L-4x$ existe em todo o aberto. Ela se anula somente em $x=L/4$. Esse ponto está em $(0,L/2)$, porque $L>0$. O valor correspondente do lado paralelo é
+\[
+y=L-2\cdot\frac{L}{4}=\frac{L}{2},
+\]
+e a área é
+\[
+A\Bigl(\frac{L}{4}\Bigr)=\frac{L}{4}\cdot\frac{L}{2}=\frac{L^2}{8}.
+\]
+A lista de candidatos do Teorema~\ref{teo:candidatos} é $\{0,\,L/4,\,L/2\}$, com valores $0$, $L^2/8$ e $0$. Como $L^2/8>0$, o máximo absoluto é $L^2/8$, atingido em $x=L/4$ e $y=L/2$. O mínimo absoluto é $0$, atingido nos dois extremos degenerados.
+
+A segunda derivada confirma o caráter local do crítico, e não substitui a comparação. Tem-se $A''(x)=-4<0$ para todo $x$. O Teorema~\ref{teo:segunda} dá máximo local estrito em $L/4$. A conclusão de que esse máximo local é absoluto veio da comparação dos três números na lista, junto com Weierstrass, que garante que o máximo absoluto está na lista.
+\end{exemplo}
+
+\section{Linearização e diferencial}
+
+\begin{definicao}
+Seja $f$ derivável em $a$. A \emph{linearização} de $f$ em $a$ é a função afim
+\[
+L(x)=f(a)+f'(a)\,(x-a).
+\]
+O \emph{erro} da linearização é $E(x)=f(x)-L(x)$.
+
+Se $y=f(x)$ e $f$ é derivável em $x$, a \emph{diferencial} de $y$ no ponto $x$, relativa ao incremento $dx\in\R$, é o número $dy=f'(x)\,dx$. Quando $dx=\Delta x$, escreve-se $\Delta y=f(x+\Delta x)-f(x)$. Então $\Delta y-dy$ é o erro da linearização em torno de $x$, no incremento $\Delta x$.
+\end{definicao}
+
+\begin{teorema}[Resto de ordem $1$]\label{teo:resto}
+Seja $I$ um intervalo aberto, $a\in I$ e $f\colon I\to\R$ duas vezes derivável. Para cada $x\in I$ existe um ponto $d$, estritamente entre $a$ e $x$ se $x\neq a$, tal que
+\begin{equation}
+\label{eq:resto}
+f(x)=f(a)+f'(a)\,(x-a)+\frac{f''(d)}{2}(x-a)^2.
+\end{equation}
+Em particular, se $\abs{f''(t)}\le M$ para todo $t\in I$, então
+\begin{equation}
+\label{eq:erro}
+\abs{E(x)}\le\frac{M}{2}(x-a)^2.
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Se $x=a$, a igualdade \eqref{eq:resto} vale com o último termo zero, e não se escolhe $d$. Suponha $x>a$. Defina, para $t\in[a,x]$,
+\begin{align*}
+F(t)&=f(t)-f(a)-f'(a)\,(t-a),\\
+G(t)&=(t-a)^2.
+\end{align*}
+Então $F(a)=0$, $G(a)=0$, $F$ e $G$ são contínuas em $[a,x]$ e deriváveis em $(a,x)$, com
+\[
+F'(t)=f'(t)-f'(a),\qquad G'(t)=2(t-a).
+\]
+O Teorema~\ref{teo:cauchy} dá $c\in(a,x)$ tal que $F(x)\,G'(c)=G(x)\,F'(c)$, isto é
+\[
+F(x)\cdot 2(c-a)=(x-a)^2\bigl(f'(c)-f'(a)\bigr).
+\]
+A função $f'$ é derivável em $I$, logo contínua, e o Teorema~\ref{teo:lagrange} aplicado a $f'$ em $[a,c]$ dá $d\in(a,c)$ com $f'(c)-f'(a)=f''(d)\,(c-a)$. Substituindo,
+\[
+F(x)\cdot 2(c-a)=(x-a)^2\,f''(d)\,(c-a).
+\]
+Como $c\neq a$, o fator $c-a$ é diferente de zero. Os dois lados são iguais depois de cancelá-lo:
+\[
+2F(x)=f''(d)\,(x-a)^2.
+\]
+Mas $F(x)=E(x)$, e segue \eqref{eq:resto}.
+
+Se $x<a$, repetem-se as definições de $F$ e $G$ no intervalo $[x,a]$. Cauchy produz $c$ entre $x$ e $a$, e Lagrange em $f'$, entre $a$ e $c$, produz $d$ entre eles. A identidade algébrica é a mesma, porque $(x-a)^2=(a-x)^2$ e o fator $(c-a)$, diferente de zero, cancela dos dois lados exatamente como acima.
+
+Se $\abs{f''}\le M$ em $I$, o módulo de \eqref{eq:resto} dá
+\[
+\abs{E(x)}=\abs{\frac{f''(d)}{2}}\abs{x-a}^2\le\frac{M}{2}(x-a)^2.
+\]
+\end{proof}
+
+\begin{exemplo}[Seno de um décimo]
+Estima-se $\sin(1/10)$ pela linearização de $f(x)=\sin x$ em $a=0$. Tem-se $f(0)=0$, $f'(x)=\cos x$ e $f'(0)=1$, logo $L(x)=x$ e $L(1/10)=1/10$. A segunda derivada é $f''(x)=-\sin x$.
+
+Primeiro, $\abs{\cos\theta}\le 1$ para todo $\theta$. De $\sin^2\theta+\cos^2\theta=1$ e de $\sin^2\theta\ge 0$ segue $\cos^2\theta\le 1$. Se fosse $\abs{\cos\theta}>1$, o produto de dois números maiores do que $1$, sendo o segundo positivo, daria
+\[
+\cos^2\theta=\abs{\cos\theta}\cdot\abs{\cos\theta}>1\cdot\abs{\cos\theta}=\abs{\cos\theta}>1,
+\]
+contradição. Assim $\abs{\cos\theta}\le 1$.
+
+Depois, para $t>0$, o Teorema~\ref{teo:lagrange} em $[0,t]$ dá $c\in(0,t)$ com $\sin t-\sin 0=\cos(c)\,t$, logo $\abs{\sin t}\le\abs{t}$. Em particular, no intervalo $[0,1/10]$,
+\[
+\abs{f''(t)}=\abs{\sin t}\le t\le\frac{1}{10}.
+\]
+A igualdade \eqref{eq:resto} dá $d\in(0,1/10)$ com
+\[
+\sin\frac{1}{10}-\frac{1}{10}
+=\frac{f''(d)}{2}\Bigl(\frac{1}{10}\Bigr)^2
+=\frac{-\sin d}{200}.
+\]
+Como $0<d\le 1/10$, a cota já provada dá $\abs{\sin d}\le d\le 1/10$, logo
+\[
+\abs{\sin\frac{1}{10}-\frac{1}{10}}
+=\frac{\abs{\sin d}}{200}
+\le\frac{1}{2000}.
+\]
+O sinal sai da mesma cota aplicada ao cosseno. Para $0<\theta\le 1/10$, o teorema do valor médio em $[0,\theta]$ dá $\cos\theta-\cos 0=-\sin(c)\,\theta$ com $c\in(0,\theta)$, logo
+\[
+\abs{\cos\theta-1}=\abs{\sin c}\,\theta\le c\cdot\theta\le\theta\le\frac{1}{10},
+\]
+e portanto $\cos\theta\ge 1-1/10=9/10>0$. Voltando a $d$, o teorema do valor médio em $[0,d]$ escreve $\sin d=\cos(\xi)\,d$ com $\xi\in(0,d)$, e $\cos\xi>0$, $d>0$. Assim $\sin d>0$ e
+\[
+\sin\frac{1}{10}-\frac{1}{10}=\frac{-\sin d}{200}<0.
+\]
+A linearização superestima o seno, e a diferença $1/10-\sin(1/10)$ está em $(0,1/2000]$.
+
+Na linguagem da diferencial, em $x=0$ com $dx=1/10$, tem-se $dy=\cos(0)\cdot(1/10)=1/10$ e $\Delta y=\sin(1/10)$. A estimativa acima é $\abs{\Delta y-dy}\le 1/2000$.
+\end{exemplo}
+
+\section{Exercícios}
+
+As soluções comentadas estão em \texttt{04\_aplicacoes\_derivada\_gabarito.tex}.
+
+\begin{exercicio}[Básico --- pontos críticos]
+Determine os pontos críticos de $f(x)=x^3-3x+1$, classifique cada um pelo teste da segunda derivada e decida se $f$ tem máximo ou mínimo absoluto em $\R$.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- Rolle]
+Verifique as hipóteses do teorema de Rolle para $f(x)=\sin x$ em $[0,\pi]$ e encontre todos os $c\in(0,\pi)$ com $f'(c)=0$.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- Lagrange]
+Para $f(x)=x^2+x$ em $[0,2]$, calcule a razão $(f(2)-f(0))/(2-0)$ e encontre explicitamente um $c$ dado pelo teorema do valor médio de Lagrange.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- L'Hôpital $0/0$]
+Calcule $\lim_{x\to 0}(1-\cos x)/x^2$ pela regra de L'Hôpital. Em cada aplicação, registre o par de funções, o tipo $0/0$ e o motivo pelo qual a derivada do denominador não se anula na vizinhança furada.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- linearização]
+Escreva a linearização de $f(x)=\sqrt{x}$ em $a=9$, use-a para estimar $\sqrt{10}$ e, com a cota do resto de ordem $1$, prove que $\abs{\sqrt{10}-19/6}\le 1/216$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- lata cilíndrica]
+Uma lata cilíndrica fechada tem volume $V>0$ fixo. Entre todos os raios $r>0$, determine o raio e a altura que minimizam a área total da superfície, e justifique que o mínimo é absoluto.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- L'Hôpital no infinito]
+Calcule $\lim_{x\to+\infty}(\ln x)/x$. Diga qual forma da regra de L'Hôpital se aplica e verifique cada hipótese, inclusive o limite de $\ln x$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- estudo de função]
+Para $f(x)=x\exp(-x)$, determine os intervalos de monotonicidade, os extremos locais e absolutos em $\R$, os intervalos de concavidade e os pontos de inflexão.
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- derivada sem zero]
+Prove que, se $f$ é contínua em $[a,b]$, derivável em $(a,b)$ e $f'(x)\neq 0$ para todo $x\in(a,b)$, então $f$ é injetora em $[a,b]$.
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- L'Hôpital não necessário]
+Sejam $f(x)=x^2\sin(1/x)$ para $x\neq 0$, $f(0)=0$ e $g(x)=x$. Mostre que $\lim_{x\to 0}f(x)/g(x)=0$ e que $\lim_{x\to 0}f'(x)/g'(x)$ não existe.
+\end{exercicio}
+
+\end{document}

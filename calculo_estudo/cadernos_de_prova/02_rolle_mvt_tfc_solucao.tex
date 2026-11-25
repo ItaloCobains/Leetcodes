@@ -1,0 +1,134 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Solução --- Caderno 2: Rolle, valor médio e teorema fundamental}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+Cada enunciado é repetido. A prova usa só o que o caderno autoriza e os itens anteriores.
+
+\section{Fermat interior}
+
+\textbf{Enunciado.} Seja $f\colon D\to\R$ e seja $c$ ponto interior de $D$. Se $f$ tem um extremo local em $c$ e $f$ é derivável em $c$, então $f'(c)=0$.
+
+\textbf{Prova.}
+Como $c$ é interior, existe $\delta_0>0$ com $(c-\delta_0,c+\delta_0)\subseteq D$. O extremo local fornece $\delta_1>0$ tal que a desigualdade do extremo vale para todo $x\in D$ com $\abs{x-c}<\delta_1$. Seja $\delta=\min\{\delta_0,\delta_1\}>0$.
+
+Trate o máximo local: $f(x)\le f(c)$ quando $0<\abs{x-c}<\delta$. Se $c<x<c+\delta$, o numerador $f(x)-f(c)$ é menor ou igual a zero e o denominador $x-c$ é positivo, logo o quociente é menor ou igual a zero. A derivada existe, então o limite lateral direito do quociente é $f'(c)$. Esse limite não pode ser positivo: se fosse $\ell>0$, a definição de limite com $\eps=\ell/2$ poria o quociente acima de $\ell/2>0$ numa vizinhança direita, contradição. Logo $f'(c)\le 0$.
+
+Se $c-\delta<x<c$, o numerador continua menor ou igual a zero e o denominador é negativo, logo o quociente é maior ou igual a zero. O limite lateral esquerdo é $f'(c)$ e não pode ser negativo, pelo mesmo confronto com a definição. Logo $f'(c)\ge 0$. Portanto $f'(c)=0$.
+
+No mínimo local, $f(x)\ge f(c)$ na mesma vizinhança. À direita o quociente é maior ou igual a zero, e o limite direito não pode ser negativo. À esquerda o quociente é menor ou igual a zero, e o limite esquerdo não pode ser positivo. De novo $f'(c)=0$.
+
+\section{Rolle}
+
+\textbf{Enunciado.} Seja $f$ contínua em $[a,b]$ e derivável em $(a,b)$, com $a<b$ e $f(a)=f(b)$. Então existe $c\in(a,b)$ tal que $f'(c)=0$.
+
+\textbf{Prova.}
+Weierstrass fornece $x_m,x_M\in[a,b]$ com $f(x_m)\le f(x)\le f(x_M)$ para todo $x\in[a,b]$.
+
+Se $x_m$ e $x_M$ estão ambos em $\{a,b\}$, então $f(a)=f(b)$ força o máximo absoluto e o mínimo absoluto a valerem $f(a)$. Para todo $x\in[a,b]$,
+\[
+f(a)\le f(x)\le f(a),
+\]
+logo $f$ é constante. Em qualquer $c\in(a,b)$ o quociente de diferenças é zero, e $f'(c)=0$.
+
+Caso contrário, $x_m$ ou $x_M$ está em $(a,b)$. Esse ponto é interior, nele $f$ tem extremo absoluto, portanto extremo local, e $f$ é derivável. O item anterior dá derivada zero nesse ponto.
+
+\section{Valor médio de Lagrange}
+
+\textbf{Enunciado.} Seja $f$ contínua em $[a,b]$ e derivável em $(a,b)$, com $a<b$. Então existe $c\in(a,b)$ tal que $f'(c)=(f(b)-f(a))/(b-a)$. Use
+\[
+g(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)
+\]
+e o teorema de Rolle.
+
+\textbf{Prova.}
+A função $g$ é contínua em $[a,b]$, porque $f$ o é e o termo subtraído é polinomial. É derivável em $(a,b)$, com
+\[
+g'(x)=f'(x)-\frac{f(b)-f(a)}{b-a}.
+\]
+Nos extremos,
+\begin{align*}
+g(a)
+&=f(a)-f(a)-\frac{f(b)-f(a)}{b-a}\cdot 0
+=0,\\
+g(b)
+&=f(b)-f(a)-\frac{f(b)-f(a)}{b-a}\cdot(b-a)
+=0.
+\end{align*}
+Rolle fornece $c\in(a,b)$ com $g'(c)=0$, isto é
+\[
+f'(c)=\frac{f(b)-f(a)}{b-a}.
+\]
+
+\section{Derivada nula}
+
+\textbf{Enunciado.} Seja $I\subseteq\R$ um intervalo e seja $f\colon I\to\R$ contínua em $I$ e derivável no interior de $I$, com $f'(x)=0$ em todo ponto interior. Então $f$ é constante em $I$.
+
+\textbf{Prova.}
+Sejam $x_1,x_2\in I$ com $x_1<x_2$. Como $I$ é intervalo, $[x_1,x_2]\subseteq I$. A restrição é contínua no fechado e derivável no aberto, com derivada zero. O item anterior dá $c\in(x_1,x_2)$ com
+\[
+f(x_2)-f(x_1)=f'(c)\,(x_2-x_1)=0.
+\]
+Logo $f(x_1)=f(x_2)$. O par era arbitrário, e $f$ é constante.
+
+\section{Teorema fundamental, parte 1}
+
+\textbf{Enunciado.} Seja $f$ contínua em $[a,b]$ e defina $F(x)=\int_a^x f(t)\,\dif t$. Prove que $F'(c)=f(c)$ para todo $c\in(a,b)$, que a derivada lateral direita em $a$ é $f(a)$ e que a derivada lateral esquerda em $b$ é $f(b)$.
+
+\textbf{Prova.}
+A continuidade em cada compacto $[a,x]$ dá a integral, e $F(a)=0$. Sejam $c\in[a,b]$ e $h\neq 0$ com $c+h\in[a,b]$. Se $h>0$, a aditividade dá $F(c+h)-F(c)=\int_c^{c+h}f$. Se $h<0$, a aditividade entre $c+h$ e $c$ dá
+\[
+F(c+h)-F(c)=-\int_{c+h}^c f=\int_c^{c+h}f,
+\]
+com a integral da direita orientada. A integral da constante $f(c)$ de $c$ até $c+h$ vale $f(c)\,h$, também no sentido negativo: $\int_c^{c+h}f(c)=-\int_{c+h}^c f(c)=-f(c)\bigl(c-(c+h)\bigr)=f(c)\,h$. Portanto
+\[
+\frac{F(c+h)-F(c)}{h}-f(c)
+=\frac{1}{h}\int_c^{c+h}\bigl(f(t)-f(c)\bigr)\,\dif t.
+\]
+
+Seja $\eps>0$. A continuidade em $c$ fornece $\delta>0$ tal que $t\in[a,b]$ e $\abs{t-c}<\delta$ implicam $\abs{f(t)-f(c)}<\eps$.
+
+Se $0<h<\delta$, então $-\eps<f(t)-f(c)<\eps$ em $[c,c+h]$. A comparação e a integral da constante dão
+\[
+-\eps h<\int_c^{c+h}\bigl(f(t)-f(c)\bigr)\,\dif t<\eps h.
+\]
+Dividindo por $h>0$, o quociente tem módulo menor do que $\eps$.
+
+Se $-\delta<h<0$, ponha $k=-h$. Em $[c-k,c]$ vale $-\eps<f-f(c)<\eps$, e
+\[
+-\eps k<\int_{c-k}^c\bigl(f(t)-f(c)\bigr)\,\dif t<\eps k.
+\]
+Se $I$ denota essa integral, a integral orientada de $c$ até $c+h=c-k$ é $-I$, e
+\[
+\frac{-I}{h}=\frac{-I}{-k}=\frac{I}{k}
+\]
+tem módulo menor do que $\eps$.
+
+O limite do quociente é $f(c)$ quando $h\to 0$ dentro do domínio. Para $c\in(a,b)$ os dois lados existem e $F'(c)=f(c)$. Em $a$ só $h>0$ é admissível, e a derivada lateral direita é $f(a)$. Em $b$ só $h<0$ é admissível, e a derivada lateral esquerda é $f(b)$.
+
+\section{Teorema fundamental, parte 2}
+
+\textbf{Enunciado.} Seja $f$ contínua em $[a,b]$. Se $F\colon[a,b]\to\R$ satisfaz $F'=f$ em $[a,b]$, com derivada bilateral no aberto e derivadas laterais nos extremos, então $\int_a^b f(x)\,\dif x=F(b)-F(a)$.
+
+\textbf{Prova.}
+Seja $G(x)=\int_a^x f$. O item anterior dá $G'(x)=f(x)$ em $(a,b)$, com as laterais $G'_+(a)=f(a)$ e $G'_-(b)=f(b)$. A diferença $H=F-G$ tem derivada zero em $(a,b)$. Falta a continuidade de $F$ e de $G$ em $[a,b]$, para aplicar o item da derivada nula. Seja $c\in[a,b]$ e seja $L$ a derivada de $F$ em $c$: bilateral se $c$ é interior, lateral se $c$ é extremo. Dado $\eps=1$, existe $\delta>0$ tal que, para $h\neq 0$ com $c+h\in[a,b]$ e $\abs{h}<\delta$,
+\[
+\abs{\frac{F(c+h)-F(c)}{h}-L}<1,
+\]
+logo o quociente tem módulo menor do que $\abs{L}+1$ e
+\[
+\abs{F(c+h)-F(c)}\le\bigl(\abs{L}+1\bigr)\abs{h}.
+\]
+O lado direito tende a $0$ quando $h\to 0$. Assim $F$ é contínua em $c$. A mesma estimativa, com a derivada de $G$ no lugar de $L$, dá a continuidade de $G$. Portanto $H$ é contínua em $[a,b]$ e tem derivada zero no interior. O item da derivada nula diz que $H$ é constante.
+
+Em $x=a$, $G(a)=0$, então a constante é $H(a)=F(a)$. Em $x=b$,
+\[
+F(b)-G(b)=F(a).
+\]
+Como $G(b)=\int_a^b f$, segue $\int_a^b f=F(b)-F(a)$.
+
+\end{document}

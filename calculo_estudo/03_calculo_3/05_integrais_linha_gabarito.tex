@@ -1,0 +1,223 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: integrais de linha e campos conservativos}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercícios básicos}
+
+\begin{exercicio}[{[Básico --- campos e unidades]}]
+Classifique cada campo e dê a unidade.
+\begin{enumerate}
+\item $T(x,y,z)$, temperatura em kelvin.
+\item $\vet{v}(x,y,z)$, velocidade de um fluido em metro por segundo.
+\item $-\nabla T$, se $T$ é de classe $C^1$ e está em kelvin, com as coordenadas em metros.
+\end{enumerate}
+Diga, em cada caso, qual das duas integrais de linha faz sentido físico imediato: $\int f\,\dif s$ ou $\int\vet{F}\cdot\dif\vet{r}$.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+\begin{enumerate}
+\item $T$ é campo escalar. A unidade é o kelvin. A integral natural é a escalar: ao longo de um fio, $\int_C T\,\dif s$ soma temperatura vezes comprimento. Não há componente tangente para formar $\int T\,\dif\vet{r}$.
+\item $\vet{v}$ é campo vetorial. A unidade é metro por segundo. A integral natural é $\int_C\vet{v}\cdot\dif\vet{r}$, a circulação da velocidade. O produto $\vet{v}\cdot\dif\vet{r}$ tem unidade $\mathrm{m}^2/\mathrm{s}$.
+\item $-\nabla T$ é campo vetorial. Cada parcial de $T$ divide uma diferença de kelvin por um comprimento, então a unidade é kelvin por metro. A integral natural é a vetorial. No modelo em que o fluxo de calor segue $-\nabla T$, essa integral acumula a componente do fluxo tangente à curva.
+\end{enumerate}
+
+\begin{exercicio}[{[Básico --- massa de um fio]}]
+Um fio percorre $\vet{r}(t)=(t,t^2)$, $t\in[0,1]$, com densidade linear $\delta(x,y)=2x$. Calcule a massa $\int_C\delta\,\dif s$.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Tem-se $\vet{r}'(t)=(1,2t)$ e $\norm{\vet{r}'(t)}=\sqrt{1+4t^2}$. A densidade ao longo da curva é $\delta(\vet{r}(t))=2t$, logo
+\[
+\int_C\delta\,\dif s=\int_0^1 2t\sqrt{1+4t^2}\,\dif t.
+\]
+A substituição $u=1+4t^2$ dá $\dif u=8t\,\dif t$, portanto $2t\,\dif t=\dif u/4$. Em $t=0$, $u=1$; em $t=1$, $u=5$. A integral fica
+\[
+\int_1^5\frac14 u^{1/2}\,\dif u
+=\frac14\cdot\frac23\Bigl[u^{3/2}\Bigr]_1^5
+=\frac16\bigl(5^{3/2}-1\bigr)
+=\frac{5\sqrt{5}-1}{6}.
+\]
+
+\begin{exercicio}[{[Básico --- trabalho e orientação]}]
+Seja $\vet{F}=(y,x)$. Calcule $\int_C\vet{F}\cdot\dif\vet{r}$ no segmento de $(0,0)$ a $(1,1)$, parametrizado por $\vet{r}(t)=(t,t)$, $t\in[0,1]$. Calcule a integral no sentido oposto. Exiba um potencial e confira os dois valores por $\phi(B)-\phi(A)$.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+No sentido de $(0,0)$ para $(1,1)$, $\vet{F}(\vet{r}(t))=(t,t)$ e $\vet{r}'(t)=(1,1)$, então o produto escalar vale $2t$ e
+\[
+\int_0^1 2t\,\dif t=1.
+\]
+O sentido oposto troca o sinal da integral vetorial, e o valor é $-1$. Para ver isso na parametrização, tome $\vet{\sigma}(t)=(1-t,1-t)$, $t\in[0,1]$. Então $\vet{F}(\vet{\sigma}(t))=(1-t,1-t)$, $\vet{\sigma}'(t)=(-1,-1)$ e o produto escalar vale $-2(1-t)$. Integrando,
+\[
+\int_0^1 -2(1-t)\,\dif t=\bigl[(1-t)^2\bigr]_0^1=-1.
+\]
+Um potencial é $\phi(x,y)=xy$: $\partial_x\phi=y$ e $\partial_y\phi=x$. De $(0,0)$ a $(1,1)$,
+\[
+\phi(1,1)-\phi(0,0)=1.
+\]
+No sentido oposto, $\phi(0,0)-\phi(1,1)=-1$.
+
+\begin{exercicio}[{[Básico --- integral escalar e o sentido do percurso]}]
+Seja $C$ a circunferência unitária. Calcule $\int_C 1\,\dif s$ no sentido anti-horário e no sentido horário. Calcule também $\int_C x\,\dif s$ nos dois sentidos. Escreva a parametrização do sentido horário e mostre, nessa conta, o passo em que a norma absorve o sinal.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Anti-horário: $\vet{r}(t)=(\cos t,\sin t)$, $t\in[0,2\pi]$, $\vet{r}'(t)=(-\sin t,\cos t)$ e $\norm{\vet{r}'(t)}=1$. Então
+\[
+\int_C 1\,\dif s=\int_0^{2\pi}1\,\dif t=2\pi,
+\qquad
+\int_C x\,\dif s=\int_0^{2\pi}\cos t\,\dif t=0.
+\]
+O sentido horário é $\vet{r}^{-}(t)=\vet{r}(2\pi-t)=(\cos t,-\sin t)$. A regra da cadeia dá
+\[
+(\vet{r}^{-})'(t)=-\vet{r}'(2\pi-t),
+\]
+que é o sinal da orientação invertida. A norma descarta esse sinal:
+\[
+\norm{(\vet{r}^{-})'(t)}=\norm{\vet{r}'(2\pi-t)}=1.
+\]
+Por isso
+\[
+\int_{C^{-}}1\,\dif s=\int_0^{2\pi}1\,\dif t=2\pi
+\]
+e
+\[
+\int_{C^{-}}x\,\dif s=\int_0^{2\pi}\cos(2\pi-t)\,\dif t=\int_0^{2\pi}\cos t\,\dif t=0.
+\]
+Os dois sentidos produzem os mesmos números.
+
+\section{Exercícios intermediários}
+
+\begin{exercicio}[{[Intermediário --- potencial e trabalho]}]
+Seja $\vet{F}=(2xy+1,\, x^2+\cos y)$ em $\R^2$.
+\begin{enumerate}
+\item Verifique $\partial_x Q=\partial_y P$.
+\item Determine um potencial.
+\item Calcule o trabalho de $(0,0)$ até $(1,\pi/2)$.
+\end{enumerate}
+Qual hipótese do teste prático está sendo usada ao concluir que o potencial serve em todo o plano?
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Aqui $P=2xy+1$ e $Q=x^2+\cos y$. Então $\partial_x Q=2x$ e $\partial_y P=2x$.
+
+Integre $P$ em $x$:
+\[
+\phi(x,y)=x^2 y+x+g(y).
+\]
+Derive em $y$ e iguale a $Q$:
+\[
+\partial_y\phi=x^2+g'(y)=x^2+\cos y,
+\]
+logo $g'(y)=\cos y$ e $g(y)=\sin y$. Um potencial é
+\[
+\phi(x,y)=x^2 y+x+\sin y.
+\]
+O trabalho de $(0,0)$ a $(1,\pi/2)$ é
+\[
+\phi\Bigl(1,\frac\pi2\Bigr)-\phi(0,0)
+=\frac\pi2+1+\sin\frac\pi2
+=2+\frac\pi2.
+\]
+O campo é $C^1$ e o rotacional escalar é zero. O teste prático conclui que existe potencial em $\R^2$ porque todo laço do plano se contrai a um ponto dentro do plano. A construção explícita acima já exibe o potencial; ela cabe no plano inteiro porque $\R^2$ é convexo e o caminho em ``L'' de $(0,0)$ até qualquer ponto permanece no domínio.
+
+\begin{exercicio}[{[Intermediário --- o campo de rotação]}]
+Seja $\vet{F}=(-y,x)$ em $\R^2$.
+\begin{enumerate}
+\item Calcule $\partial_x Q-\partial_y P$.
+\item Calcule a circulação na circunferência unitária anti-horária.
+\item Conclua, de duas maneiras, que $\vet{F}$ não é conservativo em $\R^2$.
+\item A forma angular $\bigl(-y/(x^2+y^2),\, x/(x^2+y^2)\bigr)$ também não é conservativa no plano furado. O obstáculo é o mesmo deste item, ou é outro?
+\end{enumerate}
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Com $P=-y$ e $Q=x$,
+\[
+\partial_x Q-\partial_y P=1-(-1)=2.
+\]
+Na circunferência $\vet{r}(t)=(\cos t,\sin t)$, $t\in[0,2\pi]$,
+\[
+\vet{F}(\vet{r}(t))=(-\sin t,\cos t)=\vet{r}'(t),
+\]
+o produto escalar vale $1$ e a circulação é $\int_0^{2\pi}1\,\dif t=2\pi$.
+
+Primeira obstrução: o rotacional escalar vale $2\neq 0$, e campo $C^1$ conservativo tem rotacional zero. Segunda obstrução: a circulação numa curva fechada vale $2\pi\neq 0$, e a integral de um gradiente numa curva fechada é zero.
+
+O obstáculo da forma angular é outro. Lá $\partial_x Q-\partial_y P=0$ em $\R^2\setminus\{\vet{0}\}$, e mesmo assim a circulação na circunferência unitária é $2\pi$. O rotacional não denuncia o problema; o laço em volta da origem, que não se contrai a um ponto dentro do domínio, é que impede o potencial.
+
+\begin{exercicio}[{[Intermediário --- potencial pela receita do retângulo]}]
+Seja $\vet{F}=(e^x\sin y,\, e^x\cos y)$. Use a construção
+\[
+\phi(x,y)=\int_0^x P(t,0)\,\dif t+\int_0^y Q(x,s)\,\dif s
+\]
+a partir de $(0,0)$. Calcule $\phi$ e verifique $\nabla\phi=\vet{F}$.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+$P(t,0)=e^t\sin 0=0$, então a primeira integral é zero. A segunda usa $Q(x,s)=e^x\cos s$:
+\[
+\phi(x,y)=\int_0^y e^x\cos s\,\dif s=e^x\bigl[\sin s\bigr]_0^y=e^x\sin y.
+\]
+As parciais são $\partial_x\phi=e^x\sin y$ e $\partial_y\phi=e^x\cos y$, que são as componentes de $\vet{F}$.
+
+\section{Exercícios avançados}
+
+\begin{exercicio}[{[Avançado --- independência de caminho]}]
+Seja $U\subset\R^n$ aberto e conexo e seja $\vet{F}\colon U\to\R^n$ contínuo. Suponha que $\int_C\vet{F}\cdot\dif\vet{r}=0$ para toda curva fechada $C^1$ por pedaços em $U$. Prove a independência de caminho e, definindo $\phi$ pela integral a partir de um ponto fixo $A$, prove $\partial_x\phi=P_1$ pelo segmento horizontal.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Sejam $\gamma_1$ e $\gamma_2$ curvas $C^1$ por pedaços em $U$ de $A$ até $B$. A concatenação de $\gamma_1$ com o oposto de $\gamma_2$ é fechada, e a integral dela é
+\[
+\int_{\gamma_1}\vet{F}\cdot\dif\vet{r}-\int_{\gamma_2}\vet{F}\cdot\dif\vet{r}.
+\]
+Por hipótese essa diferença é zero, então as duas integrais coincidem.
+
+Fixe $A\in U$. Como $U$ é aberto e conexo em $\R^n$, existe uma poligonal em $U$ de $A$ até qualquer $X\in U$. Defina $\phi(X)$ como a integral de $\vet{F}$ ao longo de uma dessas poligonais. O parágrafo anterior torna a definição independente da poligonal.
+
+Seja $X=(x,y,z)$ e seja $h\neq 0$ pequeno o bastante para que o segmento horizontal $\sigma$ de $X$ até $(x+h,y,z)$ caiba em $U$. A poligonal até $X$ seguida de $\sigma$ liga $A$ a $(x+h,y,z)$, logo
+\[
+\phi(x+h,y,z)-\phi(x,y,z)=\int_\sigma\vet{F}\cdot\dif\vet{r}
+=\int_0^h P_1(x+t,y,z)\,\dif t.
+\]
+Dado $\eps>0$, a continuidade de $P_1$ fornece $\delta>0$ tal que $|t|<\delta$ implica $|P_1(x+t,y,z)-P_1(x,y,z)|<\eps$. Se $0<|h|<\delta$,
+\[
+\Biggl|\int_0^h\bigl(P_1(x+t,y,z)-P_1(x,y,z)\bigr)\,\dif t\Biggr|\le\eps\,|h|,
+\]
+porque o intervalo tem comprimento $|h|$. Dividindo por $h$, o quociente de diferença de $\phi$ dista de $P_1(x,y,z)$ menos que $\eps$. Portanto $\partial_x\phi=P_1$.
+
+\begin{exercicio}[{[Avançado --- o argumento no plano cortado]}]
+Seja $U=\R^2\setminus\{(x,0):x\le 0\}$ e seja $\theta\in(-\pi,\pi)$ o argumento. Calcule as parciais em $x>0$ e em $y>0$, e conclua onde a forma angular é conservativa.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Em $x>0$, $\theta=\arctan(y/x)$. Então
+\begin{align*}
+\partial_x\theta
+&=\frac{1}{1+(y/x)^2}\cdot\Bigl(-\frac{y}{x^2}\Bigr)
+=\frac{x^2}{x^2+y^2}\cdot\Bigl(-\frac{y}{x^2}\Bigr)
+=-\frac{y}{x^2+y^2},\\
+\partial_y\theta
+&=\frac{1}{1+(y/x)^2}\cdot\frac{1}{x}
+=\frac{x}{x^2+y^2}.
+\end{align*}
+Em $y>0$, $\theta=\pi/2-\arctan(x/y)$. Então
+\begin{align*}
+\partial_x\theta
+&=-\frac{1}{1+(x/y)^2}\cdot\frac{1}{y}
+=-\frac{y}{x^2+y^2},\\
+\partial_y\theta
+&=\frac{1}{1+(x/y)^2}\cdot\frac{x}{y^2}
+=\frac{x}{x^2+y^2}.
+\end{align*}
+Nos dois semiplanos, $\nabla\theta$ é a forma angular. Esses abertos cobrem $U$ junto com o semiplano $y<0$, onde a fórmula $-\pi/2-\arctan(x/y)$ difere da de $y>0$ por uma constante e tem as mesmas parciais. Logo a forma angular é o gradiente de $\theta$ em $U$, e é conservativa em $U$.
+
+Em $\R^2\setminus\{\vet{0}\}$ ela não é conservativa: na circunferência unitária anti-horária o integrando vale $1$ e a circulação é $2\pi\neq 0$. O laço que não se contrai a um ponto dentro desse domínio é essa circunferência, ou qualquer curva fechada simples que envolva a origem uma vez no sentido anti-horário.
+
+\end{document}

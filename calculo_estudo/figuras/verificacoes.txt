@@ -1,0 +1,13 @@
+derivada de x**2: 2*x == 2*x -> ok
+derivada de sin(x): cos(x) == cos(x) -> ok
+derivada de exp(x): exp(x) == exp(x) -> ok
+regra do produto em x**2*sin(x): x**2*cos(x) + 2*x*sin(x) == x**2*cos(x) + 2*x*sin(x) -> ok
+integral de x*exp(x) por partes: (x - 1)*exp(x) == (x - 1)*exp(x) -> ok
+derivada da antiderivada recupera x*exp(x): x*exp(x) == x*exp(x) -> ok
+soma de r**k, k=0 ate n-1: Piecewise((n, Eq(r, 1)), ((r**n - 1)/(r - 1), True)) equivale a Piecewise((n, Eq(r, 1)), ((1 - r**n)/(1 - r), True)) -> ok
+Taylor de sin(x) em 0 ate grau 9: x**9/362880 - x**7/5040 + x**5/120 - x**3/6 + x == x**9/362880 - x**7/5040 + x**5/120 - x**3/6 + x -> ok
+Taylor de exp(x) em 0 ate grau 9: x**9/362880 + x**8/40320 + x**7/5040 + x**6/720 + x**5/120 + x**4/24 + x**3/6 + x**2/2 + x + 1 == x**9/362880 + x**8/40320 + x**7/5040 + x**6/720 + x**5/120 + x**4/24 + x**3/6 + x**2/2 + x + 1 -> ok
+Jacobiano polar: r == r -> ok
+Jacobiano esférico (phi colatitude): rho**2*sin(phi) == rho**2*sin(phi) -> ok
+rotacional 2D de (-y, x): 2 == 2 -> ok
+rotacional 2D de (-y/r**2, x/r**2) fora da origem: 0 == 0 -> ok

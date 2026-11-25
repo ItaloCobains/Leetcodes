@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Caderno de prova: Green, Stokes e o campo conservativo}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\noindent
+Prove cada item desde as definições. Pode usar o teorema fundamental do cálculo, a regra da cadeia, o teorema de Clairaut, a troca da ordem de integração de uma função contínua num retângulo e a mudança polar no plano. Um item pode usar um item anterior. Não cite um teorema de cálculo vetorial que não esteja provado nesta folha.
+
+\begin{exercicio}
+Seja $U\subset\R^n$ aberto e seja $\phi\colon U\to\R$ de classe $C^1$. Seja $C$ uma curva de classe $C^1$ por pedaços contida em $U$, com extremidade inicial $A$ e extremidade final $B$. Prove que
+\[
+\int_C\nabla\phi\cdot\dif\vet{r}=\phi(B)-\phi(A).
+\]
+Em particular, a integral depende só dos extremos. Se $C$ é fechada, a integral é zero.
+\end{exercicio}
+\vspace{8cm}
+
+\begin{exercicio}
+Seja $\phi$ de classe $C^2$ num aberto de $\R^3$ e seja $\vet{F}=\nabla\phi$. Prove que $\nabla\times\vet{F}=\vet{0}$, escrevendo as três componentes. No plano, com $\vet{F}=(P,Q)=\nabla\phi$, prove que $\partial_x Q-\partial_y P=0$.
+\end{exercicio}
+\vspace{8cm}
+
+\begin{exercicio}
+Seja
+\[
+\vet{F}
+=\Biggl(-\frac{y}{x^2+y^2},\;\frac{x}{x^2+y^2}\Biggr)
+\]
+definido em $\R^2\setminus\{\vet{0}\}$. Prove que $\partial_x Q-\partial_y P=0$ em todo ponto do domínio, calculando as parciais. Prove que a circulação de $\vet{F}$ na circunferência $x^2+y^2=1$, orientada no sentido anti-horário, vale $2\pi$. Conclua que $\vet{F}$ não é conservativo em $\R^2\setminus\{\vet{0}\}$.
+\end{exercicio}
+\vspace{8cm}
+
+\begin{exercicio}
+Seja $D=[a,b]\times[c,d]$, com $a<b$ e $c<d$, e sejam $P$ e $Q$ de classe $C^1$ num aberto que contém $D$. Oriente $\partial D$ no sentido anti-horário. Prove que
+\[
+\oint_{\partial D} P\,\dif x+Q\,\dif y
+=\iint_D\bigl(\partial_x Q-\partial_y P\bigr)\,\dif A.
+\]
+\end{exercicio}
+\vspace{8cm}
+
+\begin{exercicio}
+Sejam $a>0$ e $b>0$. Usando o teorema de Green, prove que a região $x^2/a^2+y^2/b^2\le 1$ tem área $\pi ab$. A fronteira pode ser parametrizada por $x=a\cos t$, $y=b\sin t$, $t\in[0,2\pi]$.
+\end{exercicio}
+\vspace{8cm}
+
+\begin{exercicio}
+Seja $R>0$ e seja $\vet{F}=(x,y,z)$. Prove, pelo teorema da divergência, que o fluxo de $\vet{F}$ para fora da esfera $x^2+y^2+z^2=R^2$ vale $4\pi R^3$. Prove o caso do teorema da divergência que usar. O volume da bola, se entrar na conta, deve ser calculado.
+\end{exercicio}
+\vspace{8cm}
+
+\end{document}

@@ -1,0 +1,78 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Caderno de prova: séries e Taylor}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+Os enunciados não trazem roteiro. O espaço em branco é para a prova.
+
+\section{Enunciados}
+
+\begin{exercicio}
+Seja \(r\in\R\). Prove que, para todo \(N\in\N\),
+\[
+\sum_{k=0}^{N-1} r^k=
+\begin{cases}
+N, & \text{se }r=1,\\[0.4em]
+\dfrac{1-r^N}{1-r}, & \text{se }r\neq 1.
+\end{cases}
+\]
+Prove em seguida que a série \(\sum_{k=0}^\infty r^k\) converge se e somente se \(\abs{r}<1\), e que nesse caso a soma é \(1/(1-r)\).
+\end{exercicio}
+
+\vspace{7cm}
+
+\begin{exercicio}
+Prove que, se \(\sum_{n=1}^\infty a_n\) converge, então \(a_n\to 0\). Depois prove que \(\sum_{n=1}^\infty 1/n\) diverge, e conclua que a recíproca da primeira afirmação é falsa.
+\end{exercicio}
+
+\vspace{7cm}
+
+\begin{exercicio}
+Suponha que existe
+\[
+L=\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}
+\]
+e que \(L<1\). Prove que \(\sum a_n\) converge absolutamente.
+\end{exercicio}
+
+\vspace{7cm}
+
+\begin{exercicio}
+Seja \((b_n)\) uma sequência decrescente, com \(b_n\ge 0\) e \(b_n\to 0\). Prove que
+\[
+\sum_{n=1}^\infty (-1)^{n+1} b_n
+\]
+converge. Se \(S\) é a soma e \(s_N\) é a soma parcial, prove que \(\abs{S-s_N}\le b_{N+1}\).
+\end{exercicio}
+
+\vspace{7cm}
+
+\begin{exercicio}
+Suponha que \(f''\) existe num intervalo aberto que contém o segmento de extremos \(a\) e \(x\), com \(x\neq a\). Seja \(T_1(x)=f(a)+f'(a)(x-a)\). Prove que existe \(c\) estritamente entre \(a\) e \(x\) tal que
+\[
+f(x)-T_1(x)=\frac{f''(c)}{2}(x-a)^2.
+\]
+Pode usar o teorema de Rolle: se uma função é contínua no segmento fechado, derivável no aberto e toma o mesmo valor nos dois extremos, então a derivada se anula em algum ponto estritamente entre eles.
+\end{exercicio}
+
+\vspace{7cm}
+
+\begin{exercicio}
+Prove que, para todo \(x\in\R\),
+\[
+e^x=\sum_{n=0}^\infty\frac{x^n}{n!}.
+\]
+Pode usar, como teorema já demonstrado, o resto de Lagrange de ordem \(n\): se \(f^{(n+1)}\) existe num intervalo aberto que contém o segmento de extremos \(0\) e \(x\), então existe \(c\) estritamente entre \(0\) e \(x\) com
+\[
+f(x)-\sum_{k=0}^n\frac{f^{(k)}(0)}{k!}x^k=\frac{f^{(n+1)}(c)}{(n+1)!}x^{n+1},
+\]
+e o resto é zero se \(x=0\).
+\end{exercicio}
+
+\vspace{7cm}
+
+\end{document}

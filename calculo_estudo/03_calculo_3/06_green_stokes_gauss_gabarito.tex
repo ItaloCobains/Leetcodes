@@ -1,0 +1,185 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: Green, Stokes e Gauss}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercícios básicos}
+
+\begin{exercicio}[{[Básico --- Green num retângulo]}]
+Seja $D=[0,1]\times[0,2]$, com fronteira anti-horária, $P=-y$ e $Q=x$. Calcule os dois lados da fórmula de Green.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+$\partial_x Q-\partial_y P=1-(-1)=2$. A integral dupla é
+\[
+\iint_D 2\,\dif A=2\cdot 1\cdot 2=4.
+\]
+Os quatro lados:
+\begin{itemize}
+\item Base, $y=0$, $x$ de $0$ a $1$: $P=0$ e $\dif y=0$, contribuição $0$.
+\item Direita, $x=1$, $y$ de $0$ a $2$: $\dif x=0$ e $Q=1$, contribuição $\int_0^2 1\,\dif y=2$.
+\item Topo, $y=2$, $x$ de $1$ a $0$: $P=-2$ e $\dif y=0$, contribuição $\int_1^0 -2\,\dif x=2$.
+\item Esquerda, $x=0$, $y$ de $2$ a $0$: $\dif x=0$ e $Q=0$, contribuição $0$.
+\end{itemize}
+A circulação vale $4$, igual à integral dupla.
+
+\begin{exercicio}[{[Básico --- divergência e rotacional]}]
+Para $\vet{F}=(xy,\, yz,\, zx)$, calcule $\nabla\cdot\vet{F}$ e $\nabla\times\vet{F}$.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Com $P=xy$, $Q=yz$ e $R=zx$,
+\[
+\nabla\cdot\vet{F}=\partial_x(xy)+\partial_y(yz)+\partial_z(zx)=y+z+x.
+\]
+O rotacional é
+\begin{align*}
+\partial_y R-\partial_z Q&=\partial_y(zx)-\partial_z(yz)=0-y=-y,\\
+\partial_z P-\partial_x R&=\partial_z(xy)-\partial_x(zx)=0-z=-z,\\
+\partial_x Q-\partial_y P&=\partial_x(yz)-\partial_y(xy)=0-x=-x.
+\end{align*}
+Logo $\nabla\times\vet{F}=(-y,-z,-x)$.
+
+\begin{exercicio}[{[Básico --- área do círculo]}]
+Prove, por Green, que o disco de raio $R>0$ tem área $\pi R^2$.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+A fronteira $x=R\cos t$, $y=R\sin t$, $t\in[0,2\pi]$, é anti-horária. Então $\dif x=-R\sin t\,\dif t$ e $\dif y=R\cos t\,\dif t$, e
+\begin{align*}
+-y\,\dif x+x\,\dif y
+&=-(R\sin t)(-R\sin t\,\dif t)+(R\cos t)(R\cos t\,\dif t)\\
+&=R^2(\sin^2 t+\cos^2 t)\,\dif t
+=R^2\,\dif t.
+\end{align*}
+A terceira fórmula da área dá
+\[
+\frac12\int_0^{2\pi} R^2\,\dif t=\pi R^2.
+\]
+$P=-y/2$ e $Q=x/2$ são $C^1$ e o disco é região dos tipos~I e~II, então Green se aplica. De fato $\partial_x Q-\partial_y P=1/2-(-1/2)=1$.
+
+\begin{exercicio}[{[Básico --- área e fluxo de um gráfico]}]
+Seja $\vet{r}(u,v)=(u,v,u+v)$ em $[0,1]^2$ e $\vet{F}=(0,0,1)$. Calcule o produto fundamental, a área e o fluxo.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+$\vet{r}_u=(1,0,1)$ e $\vet{r}_v=(0,1,1)$. O produto vetorial é
+\begin{align*}
+\bigl(0\cdot 1-1\cdot 1,\;
+1\cdot 0-1\cdot 1,\;
+1\cdot 1-0\cdot 0\bigr)
+=(-1,-1,1).
+\end{align*}
+A norma vale $\sqrt{3}$, e a área é $\int_0^1\int_0^1\sqrt{3}\,\dif u\,\dif v=\sqrt{3}$. O campo $\vet{F}=(0,0,1)$ tem produto escalar $1$ com o produto fundamental, então o fluxo é
+\[
+\int_0^1\int_0^1 1\,\dif u\,\dif v=1.
+\]
+A componente $z$ da normal é positiva.
+
+\section{Exercícios intermediários}
+
+\begin{exercicio}[{[Intermediário --- circulação pelo Green]}]
+Calcule $\oint_C -y^2\,\dif x+x\,\dif y$ na fronteira anti-horária do quadrado $[0,1]^2$.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+$P=-y^2$ e $Q=x$ são de classe $C^1$ em $\R^2$, e o quadrado é dos tipos~I e~II. Green se aplica:
+\[
+\partial_x Q-\partial_y P=1-(-2y)=1+2y.
+\]
+A integral dupla é
+\[
+\int_0^1\int_0^1(1+2y)\,\dif x\,\dif y
+=\int_0^1(1+2y)\,\dif y
+=\bigl[y+y^2\bigr]_0^1=2.
+\]
+Conferência pelos lados. Na base $y=0$, $P=0$. Na direita $x=1$, $y$ de $0$ a $1$, $Q=1$ e $\int_0^1 1\,\dif y=1$. No topo $y=1$, $x$ de $1$ a $0$, $P=-1$ e $\int_1^0 -1\,\dif x=1$. Na esquerda $x=0$, $Q=0$. A soma é $2$.
+
+\begin{exercicio}[{[Intermediário --- Stokes no disco]}]
+Calcule a circulação de $\vet{F}=(z,x,y)$ na circunferência unitária do plano $z=0$, anti-horária, pelo teorema de Stokes, e confira pela linha.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+\[
+\nabla\times\vet{F}
+=\bigl(\partial_y y-\partial_z x,\;\partial_z z-\partial_x y,\;\partial_x x-\partial_y z\bigr)
+=(1,1,1).
+\]
+O disco $x^2+y^2\le 1$, $z=0$, tem normal $\vet{k}$ compatível com o bordo anti-horário. Stokes lê a terceira componente:
+\[
+\iint_S 1\,\dif A=\pi.
+\]
+Na linha, $\vet{r}(t)=(\cos t,\sin t,0)$, $\vet{F}(\vet{r})=(0,\cos t,\sin t)$ e $\vet{r}'=(-\sin t,\cos t,0)$. O produto escalar é $\cos^2 t$, e
+\[
+\int_0^{2\pi}\frac{1+\cos 2t}{2}\,\dif t=\pi.
+\]
+
+\begin{exercicio}[{[Intermediário --- Gauss no cubo]}]
+Fluxo de $\vet{F}=(x,y,z)$ para fora de $E=[0,1]^3$.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+$\nabla\cdot\vet{F}=3$ e o volume do cubo é $1$, então o fluxo externo é $3$.
+
+Nas faces, a normal para fora dá:
+\begin{itemize}
+\item $x=1$: $\iint_{[0,1]^2} 1\,\dif y\,\dif z=1$;
+\item $x=0$: $\iint -x\,\dif y\,\dif z=0$;
+\item $y=1$: $\iint 1\,\dif x\,\dif z=1$;
+\item $y=0$: contribuição $0$;
+\item $z=1$: $\iint 1\,\dif x\,\dif y=1$;
+\item $z=0$: contribuição $0$.
+\end{itemize}
+A soma das seis faces é $3$.
+
+\section{Exercícios avançados}
+
+\begin{exercicio}[{[Avançado --- Green em região tipo II]}]
+Prove $\oint Q\,\dif y=\iint\partial_x Q$ numa região do tipo~II, com a fronteira anti-horária.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Seja $D=\{(x,y):c\le y\le d,\; h_1(y)\le x\le h_2(y)\}$, com $h_1\le h_2$ de classe $C^1$ e $Q$ de classe $C^1$ num aberto que contém $D$. A fronteira anti-horária sobe em $x=h_2(y)$, com $y$ de $c$ a $d$, e desce em $x=h_1(y)$, com $y$ de $d$ a $c$. Segmentos horizontais, se existirem nos extremos, têm $\dif y=0$ e não entram nesta integral. Portanto
+\begin{align*}
+\oint_{\partial D} Q\,\dif y
+&=\int_c^d Q\bigl(h_2(y),y\bigr)\,\dif y
++\int_d^c Q\bigl(h_1(y),y\bigr)\,\dif y\\
+&=\int_c^d\Bigl(Q\bigl(h_2(y),y\bigr)-Q\bigl(h_1(y),y\bigr)\Bigr)\dif y.
+\end{align*}
+Para cada $y$, o teorema fundamental do cálculo na variável $x$ produz
+\[
+Q\bigl(h_2(y),y\bigr)-Q\bigl(h_1(y),y\bigr)
+=\int_{h_1(y)}^{h_2(y)}\partial_x Q(x,y)\,\dif x,
+\]
+porque $\partial_x Q$ é contínua. Logo
+\[
+\oint_{\partial D} Q\,\dif y
+=\int_c^d\int_{h_1(y)}^{h_2(y)}\partial_x Q\,\dif x\,\dif y
+=\iint_D\partial_x Q\,\dif A.
+\]
+
+\begin{exercicio}[{[Avançado --- Green não vê o furo]}]
+Para a forma angular no plano furado, calcule o rotacional escalar, a circulação na circunferência unitária, e diga qual hipótese de Green falha no disco.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Sejam $P=-y(x^2+y^2)^{-1}$ e $Q=x(x^2+y^2)^{-1}$ em $\R^2\setminus\{\vet{0}\}$.
+\begin{align*}
+\partial_x Q
+&=\frac{x^2+y^2-2x^2}{(x^2+y^2)^2}
+=\frac{y^2-x^2}{(x^2+y^2)^2},\\
+\partial_y P
+&=\frac{-(x^2+y^2)+2y^2}{(x^2+y^2)^2}
+=\frac{y^2-x^2}{(x^2+y^2)^2}.
+\end{align*}
+A diferença é zero em todo o domínio.
+
+Na circunferência $\vet{r}(t)=(\cos t,\sin t)$, $t\in[0,2\pi]$, o denominador vale $1$ e $\vet{F}(\vet{r})=(-\sin t,\cos t)=\vet{r}'$. A circulação é $\int_0^{2\pi}1\,\dif t=2\pi$.
+
+Green no disco unitário pediria $P$ e $Q$ de classe $C^1$ num aberto que contém o disco fechado. Todo aberto que contém o disco contém a origem, e na origem a fórmula não está definida: o denominador se anula e o campo não admite extensão contínua, porque $\norm{\vet{F}}=1/\sqrt{x^2+y^2}$ explode. A integral dupla formal de $0$ no disco vale $0$, que não é a circulação $2\pi$. Os números divergem porque a hipótese de regularidade até dentro do furo não se cumpre.
+
+\end{document}

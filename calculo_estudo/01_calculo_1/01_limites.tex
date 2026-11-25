@@ -1,0 +1,619 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Limites}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Valor absoluto e vizinhan\c{c}as}
+\label{sec:abs}
+
+\base{O valor absoluto mede dist\^ancia na reta. Tudo o que vem depois, a faixa de altura $2\eps$ e a escolha de $\delta$, apoia-se nas equival\^encias desta se\c{c}\~ao. O axioma da completude de $\R$ n\~ao entra ainda; ele aparece no teorema do valor intermedi\'ario.}
+
+\begin{definicao}
+Para $x\in\R$,
+\[
+\abs{x}=
+\begin{cases}
+x, & \text{se }x\ge 0,\\
+-x, & \text{se }x<0.
+\end{cases}
+\]
+\end{definicao}
+
+\begin{proposicao}
+\label{prop:abs}
+Sejam $x,y\in\R$ e $c\ge 0$.
+\begin{enumerate}
+\item $\abs{x}\ge 0$, e $\abs{x}=0$ se, e somente se, $x=0$.
+\item $\abs{-x}=\abs{x}$.
+\item $\abs{xy}=\abs{x}\abs{y}$.
+\item $-\abs{x}\le x\le \abs{x}$.
+\item $\abs{x}\le c$ se, e somente se, $-c\le x\le c$.
+\item $\abs{x+y}\le \abs{x}+\abs{y}$.
+\item $\abs{\abs{x}-\abs{y}}\le \abs{x-y}$.
+\end{enumerate}
+\end{proposicao}
+
+\begin{proof}
+(1) Se $x\ge 0$, ent\~ao $\abs{x}=x\ge 0$. Se $x<0$, ent\~ao $\abs{x}=-x>0$. Se $\abs{x}=0$ e $x\ge 0$, ent\~ao $x=0$. Se $\abs{x}=0$ e $x<0$, ent\~ao $-x=0$, logo $x=0$. A rec\'iproca \'e $\abs{0}=0$.
+
+(2) Se $x\ge 0$, ent\~ao $-x\le 0$, logo $\abs{-x}=-(-x)=x=\abs{x}$. Se $x<0$, ent\~ao $-x>0$, logo $\abs{-x}=-x=\abs{x}$.
+
+(3) Quatro casos. Se $x\ge 0$ e $y\ge 0$, ent\~ao $xy\ge 0$ e $\abs{xy}=xy=\abs{x}\abs{y}$. Se $x\ge 0$ e $y<0$, ent\~ao $xy\le 0$ e $\abs{xy}=-xy=x(-y)=\abs{x}\abs{y}$. Se $x<0$ e $y\ge 0$, ent\~ao $xy\le 0$ e $\abs{xy}=-xy=(-x)y=\abs{x}\abs{y}$. Se $x<0$ e $y<0$, ent\~ao $xy>0$ e $\abs{xy}=xy=(-x)(-y)=\abs{x}\abs{y}$.
+
+(4) Se $x\ge 0$, ent\~ao $\abs{x}=x$, logo $-\abs{x}=-x\le 0\le x=\abs{x}$. Se $x<0$, ent\~ao $\abs{x}=-x$, logo $-\abs{x}=x$ e $x<0<-x=\abs{x}$, portanto $-\abs{x}\le x\le \abs{x}$.
+
+(5) Suponha $\abs{x}\le c$. Por (4), $-c\le -\abs{x}\le x\le \abs{x}\le c$. Reciprocamente, suponha $-c\le x\le c$. Se $x\ge 0$, ent\~ao $\abs{x}=x\le c$. Se $x<0$, ent\~ao $\abs{x}=-x$; de $x\ge -c$ segue $-x\le c$, isto \'e, $\abs{x}\le c$.
+
+(6) Por (4), $-\abs{x}\le x\le \abs{x}$ e $-\abs{y}\le y\le \abs{y}$. Somando, $-(\abs{x}+\abs{y})\le x+y\le \abs{x}+\abs{y}$. O item (5), com a constante $\abs{x}+\abs{y}\ge 0$, d\'a $\abs{x+y}\le \abs{x}+\abs{y}$.
+
+(7) Pelo item (6), $\abs{x}=\abs{(x-y)+y}\le \abs{x-y}+\abs{y}$, logo $\abs{x}-\abs{y}\le \abs{x-y}$. Trocando $x$ com $y$, $\abs{y}-\abs{x}\le \abs{y-x}=\abs{x-y}$. Assim $-\abs{x-y}\le \abs{x}-\abs{y}\le \abs{x-y}$. O item (5) d\'a $\abs{\abs{x}-\abs{y}}\le \abs{x-y}$.
+\end{proof}
+
+\begin{proposicao}
+\label{prop:viz}
+Sejam $a\in\R$ e $\delta>0$. Ent\~ao
+\[
+\abs{x-a}<\delta \quad\Longleftrightarrow\quad x\in(a-\delta,a+\delta),
+\]
+e, no contexto do limite,
+\[
+0<\abs{x-a}<\delta \quad\Longleftrightarrow\quad x\in(a-\delta,a+\delta)\setminus\{a\}.
+\]
+\end{proposicao}
+
+\begin{proof}
+Pelo item (5) da Proposi\c{c}\~ao~\ref{prop:abs}, aplicado a $x-a$ e \`a constante $\delta$, a desigualdade estrita pede o mesmo argumento com $<$ no lugar de $\le$. Escrevemos os dois lados. Se $\abs{x-a}<\delta$, ent\~ao n\~ao pode ocorrer $x-a\ge \delta$, nem $x-a\le -\delta$: no primeiro caso $\abs{x-a}=x-a\ge \delta$; no segundo, $\abs{x-a}=-(x-a)\ge \delta$. Logo $-\delta<x-a<\delta$, isto \'e, $a-\delta<x<a+\delta$. Reciprocamente, se $a-\delta<x<a+\delta$, ent\~ao $-\delta<x-a<\delta$. Se $x-a\ge 0$, $\abs{x-a}=x-a<\delta$. Se $x-a<0$, $\abs{x-a}=-(x-a)$ e $x-a>-\delta$ implica $-(x-a)<\delta$. Portanto $\abs{x-a}<\delta$.
+
+A segunda equival\^encia acrescenta $\abs{x-a}>0$. Pelo item (1), isso \'e $x-a\neq 0$, isto \'e, $x\neq a$.
+\end{proof}
+
+A condi\c{c}\~ao $0<\abs{x-a}<\delta$ \'e uma vizinhan\c{c}a furada de $a$: o ponto $a$ fica de fora de prop\'osito. O valor $f(a)$, exista ou n\~ao, n\~ao entra na defini\c{c}\~ao de limite.
+
+\section{A faixa de altura $2\eps$}
+\label{sec:intuicao}
+
+\begin{intuicao}
+Fixe um candidato $L$ para o limite de $f$ em $a$. O n\'umero $\eps>0$ desenha a faixa horizontal $(L-\eps,L+\eps)$, de altura $2\eps$. Pedir $\abs{f(x)-L}<\eps$ \'e pedir que o gr\'afico, na altura, caia dentro dessa faixa. O n\'umero $\delta>0$ \'e a resposta horizontal: se $x$ est\'a na vizinhan\c{c}a furada $(a-\delta,a+\delta)\setminus\{a\}$, ent\~ao $f(x)$ cai na faixa. O $\delta$ pode depender de $\eps$, de $a$, de $f$ e de $L$. N\~ao pode depender de $x$: a mesma folga horizontal tem de servir para todos os $x$ daquela vizinhan\c{c}a.
+\end{intuicao}
+
+\begin{exemplo}
+\label{ex:2x}
+Seja $f(x)=2x$. Afirmamos que $\lim_{x\to 1}f(x)=2$. Dado $\eps>0$, a faixa \'e $(2-\eps,2+\eps)$. A conta
+\[
+\abs{2x-2}=\abs{2}\abs{x-1}=2\abs{x-1}
+\]
+mostra que $2\abs{x-1}<\eps$ assim que $\abs{x-1}<\eps/2$. Escolhemos $\delta=\eps/2>0$. Se $0<\abs{x-1}<\delta$, ent\~ao
+\[
+\abs{f(x)-2}=2\abs{x-1}<2\cdot\frac{\eps}{2}=\eps.
+\]
+Quanto mais baixa a faixa, menor a vizinhan\c{c}a: $\delta$ \'e proporcional a $\eps$.
+\end{exemplo}
+
+\figura{../figuras/epsilon_delta.png}{Faixa $\eps$ e vizinhan\c{c}a $\delta$ para $f(x)=2x$ perto de $x=1$.}
+
+\section{Defini\c{c}\~ao e unicidade}
+\label{sec:def}
+
+Nesta nota, salvo men\c{c}\~ao expl\'icita, $a$ \'e ponto de acumula\c{c}\~ao do dom\'inio: existe $r>0$ tal que $f$ est\'a definida em $(a-r,a+r)\setminus\{a\}$. Todo $\delta$ que aparecer ser\'a tomado menor ou igual a $r$, de modo que $f(x)$ esteja definido sempre que $0<\abs{x-a}<\delta$.
+
+\begin{definicao}
+\label{def:limite}
+Seja $L\in\R$. Escrevemos $\lim_{x\to a}f(x)=L$ quando
+\[
+\forall\eps>0\ \exists\delta>0\ \forall x\bigl(0<\abs{x-a}<\delta \Rightarrow \abs{f(x)-L}<\eps\bigr).
+\]
+\end{definicao}
+
+A ordem dos quantificadores \'e a defini\c{c}\~ao. Primeiro vem o desafiante $\eps$, depois a resposta $\delta$, e s\'o ent\~ao o $x$. Trocar $\forall\eps$ com $\exists\delta$ diria outra coisa: um $\delta$ fixo que servisse a todo $\eps$, o que as fun\c{c}\~oes n\~ao constantes n\~ao oferecem. No Exemplo~\ref{ex:2x}, $\delta=\eps/2$ muda quando $\eps$ muda.
+
+\begin{teorema}[Unicidade]
+\label{teo:unicidade}
+Se $\lim_{x\to a}f(x)=L$ e $\lim_{x\to a}f(x)=M$, ent\~ao $L=M$.
+\end{teorema}
+
+\begin{proof}
+Suponha $L\neq M$. Seja $\eps=\abs{L-M}/2$. Como $\abs{L-M}>0$, tem-se $\eps>0$. Pela defini\c{c}\~ao aplicada a $L$, existe $\delta_1>0$ tal que
+\[
+0<\abs{x-a}<\delta_1 \Rightarrow \abs{f(x)-L}<\eps.
+\]
+Pela defini\c{c}\~ao aplicada a $M$, existe $\delta_2>0$ tal que
+\[
+0<\abs{x-a}<\delta_2 \Rightarrow \abs{f(x)-M}<\eps.
+\]
+Seja $\delta=\min(\delta_1,\delta_2,r)$, onde $r>0$ \'e o raio da vizinhan\c{c}a furada em que $f$ est\'a definida. Ent\~ao $\delta>0$ e existe $x$ com $0<\abs{x-a}<\delta$: por exemplo, $x=a+\delta/2$ pertence ao dom\'inio. Para esse $x$,
+\begin{align*}
+\abs{L-M}
+&=\abs{L-f(x)+f(x)-M}\\
+&\le \abs{f(x)-L}+\abs{f(x)-M}\\
+&<\eps+\eps
+=\abs{L-M}.
+\end{align*}
+A desigualdade $\abs{L-M}<\abs{L-M}$ \'e falsa. Logo $L=M$.
+\end{proof}
+
+\begin{observacao}
+O valor $f(a)$ n\~ao aparece na Defini\c{c}\~ao~\ref{def:limite}. Se $g$ coincide com $f$ em $(a-r,a+r)\setminus\{a\}$ e discorda em $a$, ou nem est\'a definida em $a$, ent\~ao $\lim_{x\to a}g(x)=\lim_{x\to a}f(x)$, quando um dos dois existe: a mesma escolha de $\delta$ serve, porque a implica\c{c}\~ao s\'o olha para $x\neq a$.
+\end{observacao}
+
+\section{\'Algebra dos limites}
+\label{sec:algebra}
+
+\begin{teorema}[Constante]
+\label{teo:const}
+Se $f(x)=c$ para todo $x$ numa vizinhan\c{c}a furada de $a$, ent\~ao $\lim_{x\to a}f(x)=c$.
+\end{teorema}
+
+\begin{proof}
+Dado $\eps>0$, escolha $\delta=1$. Se $0<\abs{x-a}<\delta$, ent\~ao $\abs{f(x)-c}=\abs{c-c}=0<\eps$.
+\end{proof}
+
+\begin{teorema}[Identidade]
+\label{teo:id}
+$\lim_{x\to a}x=a$.
+\end{teorema}
+
+\begin{proof}
+Dado $\eps>0$, escolha $\delta=\eps$. Se $0<\abs{x-a}<\delta$, ent\~ao $\abs{x-a}<\eps$.
+\end{proof}
+
+\begin{teorema}[Produto por constante]
+\label{teo:escalar}
+Se $\lim_{x\to a}f(x)=L$ e $c\in\R$, ent\~ao $\lim_{x\to a}cf(x)=cL$.
+\end{teorema}
+
+\begin{proof}
+Se $c=0$, ent\~ao $cf(x)=0$ e $cL=0$, e o Teorema~\ref{teo:const} d\'a o limite $0$. Suponha $c\neq 0$. Dado $\eps>0$, a hip\'otese fornece $\delta>0$ tal que
+\[
+0<\abs{x-a}<\delta \Rightarrow \abs{f(x)-L}<\frac{\eps}{\abs{c}}.
+\]
+Para esse mesmo $\delta$, se $0<\abs{x-a}<\delta$, ent\~ao
+\[
+\abs{cf(x)-cL}=\abs{c}\abs{f(x)-L}<\abs{c}\cdot\frac{\eps}{\abs{c}}=\eps.
+\]
+\end{proof}
+
+\begin{teorema}[Soma]
+\label{teo:soma}
+Se $\lim_{x\to a}f(x)=L$ e $\lim_{x\to a}g(x)=M$, ent\~ao $\lim_{x\to a}\bigl(f(x)+g(x)\bigr)=L+M$.
+\end{teorema}
+
+\begin{proof}
+A desigualdade triangular d\'a
+\[
+\abs{f(x)+g(x)-(L+M)}\le \abs{f(x)-L}+\abs{g(x)-M}.
+\]
+Dado $\eps>0$, existe $\delta_1>0$ tal que $0<\abs{x-a}<\delta_1$ implica $\abs{f(x)-L}<\eps/2$, e existe $\delta_2>0$ tal que $0<\abs{x-a}<\delta_2$ implica $\abs{g(x)-M}<\eps/2$. Seja $\delta=\min(\delta_1,\delta_2)$. Se $0<\abs{x-a}<\delta$, ent\~ao
+\[
+\abs{f(x)+g(x)-(L+M)}<\frac{\eps}{2}+\frac{\eps}{2}=\eps.
+\]
+\end{proof}
+
+\begin{teorema}[Produto]
+\label{teo:produto}
+Se $\lim_{x\to a}f(x)=L$ e $\lim_{x\to a}g(x)=M$, ent\~ao $\lim_{x\to a}f(x)g(x)=LM$.
+\end{teorema}
+
+\begin{proof}
+Separe o erro em dois peda\c{c}os:
+\begin{align*}
+\abs{f(x)g(x)-LM}
+&=\abs{f(x)g(x)-f(x)M+f(x)M-LM}\\
+&=\abs{f(x)\bigl(g(x)-M\bigr)+M\bigl(f(x)-L\bigr)}\\
+&\le \abs{f(x)}\abs{g(x)-M}+\abs{M}\abs{f(x)-L}.
+\end{align*}
+O fator $\abs{f(x)}$ ainda depende de $x$. Primeiro n\'os o limitamos. Como $\lim f=L$, tomando o desafio $1>0$ existe $\delta_1>0$ tal que
+\[
+0<\abs{x-a}<\delta_1 \Rightarrow \abs{f(x)-L}<1,
+\]
+e portanto
+\[
+\abs{f(x)}\le \abs{f(x)-L}+\abs{L}<1+\abs{L}.
+\]
+Seja $K=1+\abs{L}$. Ent\~ao $K\ge 1>0$ e, na vizinhan\c{c}a de raio $\delta_1$, vale $\abs{f(x)}<K$.
+
+Agora o $\eps>0$ arbitr\'ario. Existe $\delta_2>0$ tal que
+\[
+0<\abs{x-a}<\delta_2 \Rightarrow \abs{f(x)-L}<\frac{\eps}{2(\abs{M}+1)},
+\]
+e existe $\delta_3>0$ tal que
+\[
+0<\abs{x-a}<\delta_3 \Rightarrow \abs{g(x)-M}<\frac{\eps}{2K}.
+\]
+O denominador $\abs{M}+1$ evita divis\~ao por zero quando $M=0$. Seja $\delta=\min(\delta_1,\delta_2,\delta_3)$. Se $0<\abs{x-a}<\delta$, ent\~ao $\abs{f(x)}<K$ e
+\begin{align*}
+\abs{f(x)g(x)-LM}
+&< K\cdot\frac{\eps}{2K}+\abs{M}\cdot\frac{\eps}{2(\abs{M}+1)}\\
+&=\frac{\eps}{2}+\frac{\eps}{2}\cdot\frac{\abs{M}}{\abs{M}+1}.
+\end{align*}
+Como $\abs{M}/(\abs{M}+1)<1$, o segundo termo \'e estritamente menor que $\eps/2$. Logo a soma \'e estritamente menor que $\eps$.
+\end{proof}
+
+\begin{teorema}[Quociente]
+\label{teo:quociente}
+Se $\lim_{x\to a}f(x)=L$, $\lim_{x\to a}g(x)=M$ e $M\neq 0$, ent\~ao existe $\delta_*>0$ tal que $g(x)\neq 0$ sempre que $0<\abs{x-a}<\delta_*$, e
+\[
+\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{L}{M}.
+\]
+\end{teorema}
+
+\begin{proof}
+Primeiro afastamos $g$ de zero. Existe $\delta_1>0$ tal que
+\[
+0<\abs{x-a}<\delta_1 \Rightarrow \abs{g(x)-M}<\frac{\abs{M}}{2}.
+\]
+A desigualdade reversa da Proposi\c{c}\~ao~\ref{prop:abs} d\'a $\abs{g(x)}\ge \abs{M}-\abs{g(x)-M}$. Na vizinhan\c{c}a de raio $\delta_1$,
+\[
+\abs{g(x)}\ge \abs{M}-\abs{g(x)-M}>\abs{M}-\frac{\abs{M}}{2}=\frac{\abs{M}}{2}>0.
+\]
+Assim $g(x)\neq 0$ e $1/\abs{g(x)}<2/\abs{M}$ sempre que $0<\abs{x-a}<\delta_1$. Este $\delta_1$ \'e o $\delta_*$ do enunciado. Toda estimativa abaixo vale somente para esses $x$.
+
+A identidade alg\'ebrica, para $0<\abs{x-a}<\delta_1$, \'e
+\begin{align*}
+\abs{\frac{f(x)}{g(x)}-\frac{L}{M}}
+&=\frac{\abs{Mf(x)-Lg(x)}}{\abs{M}\abs{g(x)}}
+=\frac{\abs{M\bigl(f(x)-L\bigr)-L\bigl(g(x)-M\bigr)}}{\abs{M}\abs{g(x)}}\\
+&\le \frac{\abs{M}\abs{f(x)-L}+\abs{L}\abs{g(x)-M}}{\abs{M}\abs{g(x)}}.
+\end{align*}
+Como $1/\abs{g(x)}<2/\abs{M}$,
+\begin{align*}
+\abs{\frac{f(x)}{g(x)}-\frac{L}{M}}
+&< \bigl(\abs{M}\abs{f(x)-L}+\abs{L}\abs{g(x)-M}\bigr)\cdot\frac{2}{\abs{M}^2}\\
+&=\frac{2}{\abs{M}}\abs{f(x)-L}+\frac{2\abs{L}}{\abs{M}^2}\abs{g(x)-M}.
+\end{align*}
+Dado $\eps>0$, existe $\delta_2>0$ tal que $0<\abs{x-a}<\delta_2$ implica
+\[
+\abs{f(x)-L}<\frac{\eps\abs{M}}{4},
+\]
+e o primeiro termo fica menor que $(2/\abs{M})\cdot(\eps\abs{M}/4)=\eps/2$. Existe $\delta_3>0$ tal que $0<\abs{x-a}<\delta_3$ implica
+\[
+\abs{g(x)-M}<\frac{\eps\abs{M}^2}{4(\abs{L}+1)}.
+\]
+O segundo termo fica menor que
+\[
+\frac{2\abs{L}}{\abs{M}^2}\cdot\frac{\eps\abs{M}^2}{4(\abs{L}+1)}=\frac{\eps}{2}\cdot\frac{\abs{L}}{\abs{L}+1}<\frac{\eps}{2},
+\]
+e o caso $L=0$ deixa o segundo termo igual a zero. Al\'em disso impomos $\abs{g(x)-M}<\abs{M}/2$, j\'a garantido por $\delta_1$. Seja $\delta=\min(\delta_1,\delta_2,\delta_3)$. Se $0<\abs{x-a}<\delta$, a soma dos dois termos \'e menor que $\eps$.
+\end{proof}
+
+\cuidado{Se $M=0$, a prova para no passo em que se divide por $\abs{M}$ e no passo em que se exige $\abs{g}>\abs{M}/2$. O quociente pode deixar de ter limite finito. Exemplo: $f(x)=1$, $g(x)=x$, $a=0$. Ent\~ao $\lim f=1$, $\lim g=0$, e $\abs{1/x}$ fica maior que qualquer cota quando $x$ se aproxima de $0$, de modo que $1/x$ n\~ao tende a nenhum $L\in\R$.}
+
+\begin{corolario}
+\label{cor:polinomio}
+Polin\'omios admitem limite em qualquer ponto, obtido por substitui\c{c}\~ao: se $p(x)=c_n x^n+\cdots+c_1 x+c_0$, ent\~ao $\lim_{x\to a}p(x)=p(a)$. Fun\c{c}\~oes racionais $p/q$ admitem limite em todo $a$ com $q(a)\neq 0$, e o limite \'e $p(a)/q(a)$.
+\end{corolario}
+
+\begin{proof}
+A identidade e a constante t\^em limite, pelo que j\'a foi provado. O produto de $x$ por si mesmo, $n$ vezes, d\'a $\lim_{x\to a}x^n=a^n$ por indu\c{c}\~ao: o caso $n=1$ \'e a identidade, e $x^{n+1}=x\cdot x^n$ usa o teorema do produto. Multiplicar por $c_k$ usa o produto por constante. Somar os termos usa o teorema da soma, de novo por indu\c{c}\~ao no n\'umero de parcelas. O quociente de polin\'omios, quando o limite do denominador \'e $q(a)\neq 0$, usa o teorema do quociente.
+\end{proof}
+
+A indu\c{c}\~ao acima j\'a prova $\lim_{x\to a}x^2=a^2$. A se\c{c}\~ao seguinte refaz esse caso com $\delta$ expl\'icito, porque o formato $\delta=\min(1,\eps/M)$ \'e o modelo para estimativas em que o fator extra ainda depende de $x$.
+
+\section{O modelo $\lim_{x\to a}x^2=a^2$}
+\label{sec:quadrado}
+
+\begin{teorema}
+\label{teo:quadrado}
+Para todo $a\in\R$, $\lim_{x\to a}x^2=a^2$. De modo expl\'icito: se $\abs{x-a}<1$, ent\~ao $\abs{x+a}<2\abs{a}+1$. Tomando $M=2\abs{a}+1$ e $\delta=\min(1,\eps/M)$, vale $\abs{x^2-a^2}<\eps$ sempre que $0<\abs{x-a}<\delta$.
+\end{teorema}
+
+\begin{proof}
+Fatore $\abs{x^2-a^2}=\abs{x-a}\abs{x+a}$. Se $\abs{x-a}<1$,
+\[
+\abs{x+a}=\abs{(x-a)+2a}\le \abs{x-a}+2\abs{a}<1+2\abs{a}.
+\]
+Seja $M=2\abs{a}+1$. Ent\~ao $M\ge 1>0$ e $\abs{x+a}<M$, logo $\abs{x^2-a^2}<M\abs{x-a}$.
+
+Dado $\eps>0$, escolha $\delta=\min(1,\eps/M)$. Se $0<\abs{x-a}<\delta$, valem ao mesmo tempo $\abs{x-a}<1$ e $\abs{x-a}<\eps/M$. Portanto
+\[
+\abs{x^2-a^2}=\abs{x-a}\abs{x+a}<M\abs{x-a}<M\cdot\frac{\eps}{M}=\eps.
+\]
+A primeira desigualdade \'e estrita porque $\abs{x-a}>0$ e $\abs{x+a}<M$; a segunda, porque $\abs{x-a}<\eps/M$.
+\end{proof}
+
+\section{Limites laterais}
+\label{sec:laterais}
+
+\begin{definicao}
+$\lim_{x\to a^+}f(x)=L$ significa
+\[
+\forall\eps>0\ \exists\delta>0\ \forall x\bigl(a<x<a+\delta \Rightarrow \abs{f(x)-L}<\eps\bigr).
+\]
+$\lim_{x\to a^-}f(x)=L$ significa
+\[
+\forall\eps>0\ \exists\delta>0\ \forall x\bigl(a-\delta<x<a \Rightarrow \abs{f(x)-L}<\eps\bigr).
+\]
+A fun\c{c}\~ao precisa estar definida num intervalo $(a,a+r)$ ou $(a-r,a)$, respectivamente.
+\end{definicao}
+
+\begin{teorema}
+\label{teo:laterais}
+O limite $\lim_{x\to a}f(x)$ existe e vale $L$ se, e somente se, os dois limites laterais existem e s\~ao iguais a $L$.
+\end{teorema}
+
+\begin{proof}
+Suponha $\lim_{x\to a}f(x)=L$, com um $\delta>0$ associado a um $\eps>0$ dado. Se $a<x<a+\delta$, ent\~ao $0<\abs{x-a}<\delta$, logo $\abs{f(x)-L}<\eps$. O mesmo $\delta$ serve para a esquerda. Assim os dois laterais existem e valem $L$.
+
+Reciprocamente, suponha que os dois laterais valem $L$. Dado $\eps>0$, existem $\delta_+>0$ e $\delta_->0$ para a direita e para a esquerda. Seja $\delta=\min(\delta_+,\delta_-)$. Se $0<\abs{x-a}<\delta$, ou $a<x<a+\delta$, e nesse caso $a<x<a+\delta_+$, ou $a-\delta<x<a$, e nesse caso $a-\delta_-<x<a$. Nos dois ramos, $\abs{f(x)-L}<\eps$.
+\end{proof}
+
+\begin{corolario}
+\label{cor:laterais-distintos}
+Se os dois limites laterais existem e s\~ao n\'umeros diferentes, o limite bilateral n\~ao existe.
+\end{corolario}
+
+\begin{proof}
+Se o bilateral existisse e valesse algum $L$, o Teorema~\ref{teo:laterais} for\c{c}aria os dois laterais a valer $L$, logo a serem iguais.
+\end{proof}
+
+\section{Infinito}
+\label{sec:infinito}
+
+\begin{definicao}
+\label{def:infinito}
+$\lim_{x\to +\infty}f(x)=L$ significa
+\[
+\forall\eps>0\ \exists M\in\R\ \forall x\bigl(x>M \Rightarrow \abs{f(x)-L}<\eps\bigr).
+\]
+$\lim_{x\to -\infty}f(x)=L$ troca a condi\c{c}\~ao $x>M$ por $x<M$.
+
+$\lim_{x\to a}f(x)=+\infty$ significa
+\[
+\forall B\in\R\ \exists\delta>0\ \forall x\bigl(0<\abs{x-a}<\delta \Rightarrow f(x)>B\bigr).
+\]
+$\lim_{x\to a}f(x)=-\infty$ troca $f(x)>B$ por $f(x)<B$. As vers\~oes laterais substituem a vizinhan\c{c}a furada por $a<x<a+\delta$ ou $a-\delta<x<a$.
+\end{definicao}
+
+Nenhum desses quatro enunciados \'e um limite finito no sentido da Defini\c{c}\~ao~\ref{def:limite}. S\~ao defini\c{c}\~oes novas. Em particular, $+\infty$ n\~ao \'e um n\'umero real, e a unicidade do Teorema~\ref{teo:unicidade} n\~ao se aplica a ele.
+
+\begin{exemplo}
+\label{ex:um-sobre-x}
+$\lim_{x\to +\infty}(1/x)=0$. Dado $\eps>0$, escolha $M=1/\eps$. Se $x>M$, ent\~ao $x>0$ e
+\[
+\abs{\frac{1}{x}-0}=\frac{1}{x}<\frac{1}{M}=\eps.
+\]
+$\lim_{x\to -\infty}(1/x)=0$. Dado $\eps>0$, escolha $M=-1/\eps$. Se $x<M$, ent\~ao $x<0$ e $\abs{x}=-x>1/\eps$, logo $\abs{1/x}=1/\abs{x}<\eps$.
+\end{exemplo}
+
+\begin{exemplo}
+\label{ex:infinito-lateral}
+$\lim_{x\to 0^+}(1/x)=+\infty$. Dado $B\in\R$, se $B\le 0$ escolha $\delta=1$: para $0<x<1$ tem-se $1/x>0\ge B$ quando $B<0$, e $1/x>0=B$ quando $B=0$. Se $B>0$, escolha $\delta=1/B$. Ent\~ao $0<x<\delta$ implica $1/x>B$.
+
+$\lim_{x\to 0^-}(1/x)=-\infty$. Dado $B\in\R$, se $B\ge 0$ escolha $\delta=1$: para $-1<x<0$ tem-se $1/x<0\le B$. Se $B<0$, escolha $\delta=-1/B>0$. Ent\~ao $-\delta<x<0$ implica $\abs{x}<1/\abs{B}$, logo $1/x$ \'e negativo e $\abs{1/x}>\abs{B}$, portanto $1/x<B$.
+\end{exemplo}
+
+\begin{definicao}
+A reta $y=L$ \'e ass\'intota horizontal do gr\'afico de $f$ quando $\lim_{x\to +\infty}f(x)=L$ ou $\lim_{x\to -\infty}f(x)=L$. A reta $x=a$ \'e ass\'intota vertical quando pelo menos um dos limites laterais de $f$ em $a$ \'e $+\infty$ ou $-\infty$.
+\end{definicao}
+
+Pelos dois exemplos, $y=0$ \'e ass\'intota horizontal de $1/x$ dos dois lados, e $x=0$ \'e ass\'intota vertical de $1/x$.
+
+\section{Teorema do confronto}
+\label{sec:confronto}
+
+\begin{teorema}
+\label{teo:confronto}
+Suponha que exista $\delta_0>0$ tal que
+\[
+0<\abs{x-a}<\delta_0 \Rightarrow f(x)\le g(x)\le h(x),
+\]
+e que $\lim_{x\to a}f(x)=\lim_{x\to a}h(x)=L$. Ent\~ao $\lim_{x\to a}g(x)=L$.
+\end{teorema}
+
+\begin{proof}
+Dado $\eps>0$, existe $\delta_1>0$ tal que $0<\abs{x-a}<\delta_1$ implica $\abs{f(x)-L}<\eps$, isto \'e, $L-\eps<f(x)<L+\eps$. Existe $\delta_2>0$ tal que $0<\abs{x-a}<\delta_2$ implica $L-\eps<h(x)<L+\eps$. Seja $\delta=\min(\delta_0,\delta_1,\delta_2)$. Se $0<\abs{x-a}<\delta$, ent\~ao
+\[
+L-\eps<f(x)\le g(x)\le h(x)<L+\eps,
+\]
+logo $L-\eps<g(x)<L+\eps$, isto \'e, $\abs{g(x)-L}<\eps$.
+\end{proof}
+
+\begin{corolario}
+\label{cor:confronto-lateral}
+O mesmo enunciado vale para limites \`a direita, trocando $0<\abs{x-a}<\delta$ por $a<x<a+\delta$ em todas as hip\'oteses e na tese, e vale para limites \`a esquerda com $a-\delta<x<a$.
+\end{corolario}
+
+\begin{proof}
+Na demonstra\c{c}\~ao acima, o \'unico uso da vizinhan\c{c}a furada \'e este: os pontos selecionados por $\delta=\min(\delta_0,\delta_1,\delta_2)$ satisfazem as tr\^es hip\'oteses ao mesmo tempo. Se cada hip\'otese for dada com o quantificador $a<x<a+\delta_i$, o m\'inimo ainda for\c{c}a $a<x<a+\delta$, e a cadeia $L-\eps<f(x)\le g(x)\le h(x)<L+\eps$ permanece intacta. O lado esquerdo \'e id\^entico.
+\end{proof}
+
+\section{Limites fundamentais}
+\label{sec:fundamentais}
+
+O que se admite, e s\'o isto, vem da revis\~ao trigonom\'etrica, sem derivada e sem integral:
+\begin{itemize}
+\item no c\'irculo unit\'ario, $\sin^2\theta+\cos^2\theta=1$;
+\item $\sin$ \'e \'impar, $\cos$ \'e par, $\sin\theta>0$ e $\cos\theta>0$ para $\theta\in(0,\pi/2)$, e $\cos\theta>0$ para $\abs{\theta}<\pi/2$;
+\item o setor circular de \^angulo $\theta$ radianos no c\'irculo unit\'ario tem \'area $\theta/2$.
+\end{itemize}
+A desigualdade $\sin\theta<\theta<\tan\theta$ n\~ao \'e admitida: ela \'e a compara\c{c}\~ao de \'areas abaixo. O limite $\lim_{\theta\to 0}(\sin\theta)/\theta=1$ tamb\'em n\~ao \'e admitido; ele sai do confronto.
+
+\begin{lema}
+\label{lem:areas}
+Se $\theta\in(0,\pi/2)$, ent\~ao $\sin\theta<\theta<\tan\theta$.
+\end{lema}
+
+\begin{proof}
+Sejam $O=(0,0)$, $A=(1,0)$, $P=(\cos\theta,\sin\theta)$ e $T=(1,\tan\theta)$. O ponto $T$ est\'a na reta vertical tangente ao c\'irculo em $A$.
+
+A \'area do tri\^angulo $OAP$ \'e $\tfrac12\abs{\sin\theta}=\tfrac12\sin\theta$, pois $\sin\theta>0$. A \'area do setor $OAP$, raio $1$ e \^angulo $\theta$, \'e $\theta/2$, pelo fato admitido acima. A \'area do tri\^angulo $OAT$, de catetos $1$ e $\tan\theta$, \'e $\tfrac12\tan\theta$.
+
+Para $\theta\in(0,\pi/2)$ o tri\^angulo $OAP$ est\'a contido no setor, e o setor est\'a contido no tri\^angulo $OAT$. As inclus\~oes s\~ao estritas: o arco $AP$ n\~ao coincide com o segmento $AP$, e a tangente em $A$ deixa uma regi\~ao entre o arco e o segmento $AT$. Comparando as \'areas,
+\[
+\frac12\sin\theta<\frac12\theta<\frac12\tan\theta,
+\]
+logo $\sin\theta<\theta<\tan\theta$.
+\end{proof}
+
+\begin{lema}
+\label{lem:sen-zero}
+$\lim_{\theta\to 0}\sin\theta=0$ e $\lim_{\theta\to 0}\cos\theta=1$. Al\'em disso, $\abs{\sin\theta}\le 1$ e $\abs{\cos\theta}\le 1$ para todo $\theta$, e $\abs{\sin\theta}<\abs{\theta}$ sempre que $0<\abs{\theta}<\pi/2$.
+\end{lema}
+
+\begin{proof}
+De $\sin^2\theta+\cos^2\theta=1$ segue $\sin^2\theta\le 1$, logo $\abs{\sin\theta}\le 1$. O mesmo vale para o cosseno.
+
+Se $0<\theta<\pi/2$, o Lema~\ref{lem:areas} d\'a $0<\sin\theta<\theta$. Se $-\pi/2<\theta<0$, seja $\varphi=-\theta\in(0,\pi/2)$. Como o seno \'e \'impar, $\abs{\sin\theta}=\sin\varphi<\varphi=\abs{\theta}$. Assim, $0<\abs{\theta}<\pi/2$ implica $\abs{\sin\theta}<\abs{\theta}$.
+
+Dado $\eps>0$, escolha $\delta=\min(\eps,\pi/2)$. Se $0<\abs{\theta}<\delta$, ent\~ao $\abs{\sin\theta}<\abs{\theta}<\eps$. Portanto $\lim_{\theta\to 0}\sin\theta=0$.
+
+Para o cosseno, restrinja a $0<\abs{\theta}<\pi/2$, onde $\cos\theta>0$ e $\cos\theta\neq -1$. A fatora\c{c}\~ao
+\[
+1-\cos\theta=\frac{1-\cos^2\theta}{1+\cos\theta}=\frac{\sin^2\theta}{1+\cos\theta}
+\]
+e a desigualdade $1+\cos\theta>1$ d\~ao $0\le 1-\cos\theta<\sin^2\theta$. Como $\abs{\sin\theta}<\abs{\theta}$, segue $1-\cos\theta<\theta^2$. Al\'em disso $\cos\theta\le 1$, porque $\cos^2\theta\le 1$ e $\cos\theta>0$, de modo que $\abs{\cos\theta-1}=1-\cos\theta<\theta^2$. Dado $\eps>0$, escolha $\delta=\min(\pi/2,\sqrt{\eps})$. Se $0<\abs{\theta}<\delta$ e $\sqrt{\eps}\le \pi/2$, ent\~ao $\theta^2<\eps$. Se $\sqrt{\eps}>\pi/2$, ent\~ao $\delta=\pi/2$ e $\eps>\pi^2/4$, logo $\theta^2<(\pi/2)^2<\eps$. Nos dois casos, $\abs{\cos\theta-1}<\theta^2<\eps$.
+\end{proof}
+
+\begin{teorema}
+\label{teo:sen-sobre}
+$\lim_{\theta\to 0}\dfrac{\sin\theta}{\theta}=1$.
+\end{teorema}
+
+\begin{proof}
+Primeiro o lado direito. Se $\theta\in(0,\pi/2)$, o Lema~\ref{lem:areas} d\'a $\sin\theta<\theta$, e como $\theta>0$ e $\sin\theta>0$ segue $\sin\theta/\theta<1$. A outra metade, $\theta<\tan\theta=\sin\theta/\cos\theta$, multiplicada por $\cos\theta>0$, d\'a $\theta\cos\theta<\sin\theta$, e dividir por $\theta>0$ d\'a $\cos\theta<\sin\theta/\theta$. Portanto
+\[
+\cos\theta<\frac{\sin\theta}{\theta}<1.
+\]
+Dado $\eps>0$, o Lema~\ref{lem:sen-zero} fornece $\delta_1>0$ tal que $0<\theta<\delta_1$ implica $\abs{\cos\theta-1}<\eps$, isto \'e, $1-\eps<\cos\theta$. Seja $\delta=\min(\delta_1,\pi/2)$. Se $0<\theta<\delta$, ent\~ao
+\[
+1-\eps<\cos\theta<\frac{\sin\theta}{\theta}<1<1+\eps,
+\]
+logo $\abs{\sin\theta/\theta-1}<\eps$. Pelo Corol\'ario~\ref{cor:confronto-lateral}, este \'e o confronto \`a direita entre $\cos\theta$, $\sin\theta/\theta$ e a constante $1$, ambos com limite $1$.
+
+No lado esquerdo, dado $\eps>0$, o par\'agrafo anterior fornece $\delta>0$ tal que $0<\varphi<\delta$ implica $\abs{\sin\varphi/\varphi-1}<\eps$. Se $-\delta<\theta<0$, ponha $\varphi=-\theta$. Ent\~ao $0<\varphi<\delta$ e, como o seno \'e \'impar,
+\[
+\frac{\sin\theta}{\theta}=\frac{\sin(-\varphi)}{-\varphi}=\frac{\sin\varphi}{\varphi},
+\]
+logo $\abs{\sin\theta/\theta-1}<\eps$. Os dois laterais valem $1$, e o Teorema~\ref{teo:laterais} conclui o limite bilateral.
+\end{proof}
+
+\begin{teorema}
+\label{teo:1-cos}
+\[
+\lim_{\theta\to 0}\frac{1-\cos\theta}{\theta^2}=\frac12,
+\qquad
+\lim_{\theta\to 0}\frac{1-\cos\theta}{\theta}=0.
+\]
+\end{teorema}
+
+\begin{proof}
+Para $0<\abs{\theta}<\pi/2$ tem-se $\cos\theta\neq -1$ e $\theta\neq 0$, logo
+\begin{align*}
+\frac{1-\cos\theta}{\theta^2}
+&=\frac{(1-\cos\theta)(1+\cos\theta)}{\theta^2(1+\cos\theta)}
+=\frac{\sin^2\theta}{\theta^2(1+\cos\theta)}
+=\left(\frac{\sin\theta}{\theta}\right)^2\cdot\frac{1}{1+\cos\theta}.
+\end{align*}
+Pelo Teorema~\ref{teo:sen-sobre} e pelo produto, o quadrado tende a $1^2=1$. Pelo Lema~\ref{lem:sen-zero} e pela soma, $1+\cos\theta$ tende a $2\neq 0$. O teorema do quociente d\'a limite $1/2$ para o segundo fator. O teorema do produto d\'a limite $1\cdot(1/2)=1/2$.
+
+Para o segundo limite, ainda com $\theta\neq 0$,
+\[
+\frac{1-\cos\theta}{\theta}=\theta\cdot\frac{1-\cos\theta}{\theta^2}.
+\]
+A identidade d\'a $\lim_{\theta\to 0}\theta=0$, o par\'agrafo anterior d\'a limite $1/2$, e o teorema do produto d\'a $0\cdot(1/2)=0$.
+\end{proof}
+
+\section{Indetermina\c{c}\~oes}
+\label{sec:indet}
+
+A express\~ao ``$0/0$'' n\~ao \'e um n\'umero e n\~ao \'e uma regra. Ela s\'o registra que numerador e denominador t\^em limite $0$. O limite do quociente pode existir, pode n\~ao existir, ou pode ser infinito. O mesmo vale para ``$\infty-\infty$'': dois termos que crescem sem cota podem ter diferen\c{c}a com qualquer comportamento.
+
+\begin{exemplo}[$0/0$ com limite]
+\label{ex:zero-existe}
+$\lim_{x\to 2}(x^2-4)/(x-2)=4$. Para $x\neq 2$,
+\[
+\frac{x^2-4}{x-2}=\frac{(x-2)(x+2)}{x-2}=x+2,
+\]
+logo $\abs{(x^2-4)/(x-2)-4}=\abs{x-2}$. Dado $\eps>0$, o $\delta=\eps$ funciona. Por outro lado $\lim_{x\to 2}(x^2-4)=0$ pelo Corol\'ario~\ref{cor:polinomio}, e $\lim_{x\to 2}(x-2)=0$. A forma \'e $0/0$, e o limite existe e vale $4$.
+\end{exemplo}
+
+\begin{exemplo}[$0/0$ sem limite]
+\label{ex:zero-nao}
+Seja $f(x)=\abs{x}/x$ para $x\neq 0$. Ent\~ao $\lim_{x\to 0}\abs{x}=0$, porque $\abs{\abs{x}-0}=\abs{x}$ e $\delta=\eps$ serve, e $\lim_{x\to 0}x=0$. A forma \'e $0/0$. Para $x>0$, $f(x)=1$; para $x<0$, $f(x)=-1$. O limite \`a direita \'e $1$ e o limite \`a esquerda \'e $-1$: em cada lado o quociente \'e constante, e a constante tem aquele limite. Pelo Corol\'ario~\ref{cor:laterais-distintos}, $\lim_{x\to 0}f(x)$ n\~ao existe.
+\end{exemplo}
+
+\begin{exemplo}[$\infty-\infty$]
+\label{ex:inf-inf}
+Para $x>0$,
+\begin{align*}
+\sqrt{x^2+x}-x
+&=\frac{(x^2+x)-x^2}{\sqrt{x^2+x}+x}
+=\frac{x}{\sqrt{x^2+x}+x}.
+\end{align*}
+Como $x>0$, $\sqrt{x^2+x}=\sqrt{x^2(1+1/x)}=x\sqrt{1+1/x}$, e portanto
+\[
+\sqrt{x^2+x}-x=\frac{1}{\sqrt{1+1/x}+1}.
+\]
+Seja $t=1/x>0$ e $g(t)=1/(\sqrt{1+t}+1)$. Ent\~ao
+\begin{align*}
+\abs{g(t)-\frac12}
+&=\frac{\abs{2-\sqrt{1+t}-1}}{2(\sqrt{1+t}+1)}
+=\frac{\sqrt{1+t}-1}{2(\sqrt{1+t}+1)}
+=\frac{t}{2(\sqrt{1+t}+1)^2},
+\end{align*}
+onde a \'ultima igualdade racionaliza $\sqrt{1+t}-1=t/(\sqrt{1+t}+1)$. Como $\sqrt{1+t}>1$, o denominador \'e maior que $2\cdot 2^2=8$, e $\abs{g(t)-1/2}<t/8$. Voltando a $x$,
+\[
+\abs{\sqrt{x^2+x}-x-\frac12}<\frac{1}{8x}, \qquad x>0.
+\]
+Dado $\eps>0$, escolha $M=1/(8\eps)$. Se $x>M$, a diferen\c{c}a \'e menor que $\eps$. Logo o limite quando $x\to +\infty$ \'e $1/2$.
+
+Os dois termos v\~ao a $+\infty$. Dado $B\in\R$, se $B<0$ tome $M=1$: para $x>1$ valem $x>B$ e $\sqrt{x^2+x}>x>B$. Se $B\ge 0$, tome $M=B$: para $x>M$ vale $x>B$ e $\sqrt{x^2+x}>x>B$. A forma \'e $\infty-\infty$, e o limite da diferen\c{c}a \'e o n\'umero finito $1/2$.
+
+A mesma forma com outro coeficiente d\'a outro n\'umero. Para $x>0$,
+\[
+\sqrt{x^2+2x}-x=\frac{2x}{\sqrt{x^2+2x}+x}=\frac{2}{\sqrt{1+2/x}+1}.
+\]
+Com $s=2/x>0$,
+\[
+\abs{\frac{2}{\sqrt{1+s}+1}-1}=\frac{s}{(\sqrt{1+s}+1)^2}<\frac{s}{4}=\frac{1}{2x},
+\]
+porque $\sqrt{1+s}+1>2$. Dado $\eps>0$, escolha $M=1/(2\eps)$. Se $x>M$, a diferen\c{c}a \'e menor que $\eps$. O limite \'e $1$, n\~ao $1/2$. A escrita $\infty-\infty$ n\~ao determina o valor.
+\end{exemplo}
+
+\section{Exerc\'icios}
+\label{sec:ex-lim}
+
+\begin{exercicio}[B\'asico --- Constante]
+Prove, pela defini\c{c}\~ao, que $\lim_{x\to -3}2=2$, exibindo um $\delta$.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- Linear]
+Prove que $\lim_{x\to 2}(3x-1)=5$, exibindo $\delta$ em fun\c{c}\~ao de $\eps$.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- Identidade]
+Prove que $\lim_{x\to 4}x=4$, exibindo $\delta$.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- M\'ultiplo negativo]
+Prove que $\lim_{x\to 1}(-5x)=-5$, exibindo $\delta$. Trate o sinal dentro do valor absoluto.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Quadrado]
+Prove que $\lim_{x\to 3}x^2=9$ pelo modelo da Se\c{c}\~ao~\ref{sec:quadrado}, com $M$ e $\delta=\min(1,\eps/M)$ num\'ericos.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Racional]
+Prove que $\lim_{x\to 1}\dfrac{2x}{x+1}=1$, exibindo $\delta$. O ponto $x=-1$, onde a express\~ao n\~ao est\'a definida, precisa ficar fora da vizinhan\c{c}a.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Confronto]
+Prove que $\lim_{x\to 0}x^2\sin(1/x)=0$ para $x\neq 0$. A fun\c{c}\~ao n\~ao precisa estar definida em $0$. Exiba $\delta$ e registre de onde sai $\abs{\sin}\le 1$.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- No infinito]
+Prove que $\lim_{x\to +\infty}\dfrac{2x+3}{x+1}=2$, exibindo $M$ em fun\c{c}\~ao de $\eps$.
+\end{exercicio}
+
+\begin{exercicio}[Avan\c{c}ado --- Unicidade]
+Enuncie e prove a unicidade do limite finito, sem citar a prova da nota: reconstrua o $\eps$ e o ponto $x$ da vizinhan\c{c}a furada.
+\end{exercicio}
+
+\begin{exercicio}[Avan\c{c}ado --- Cubo]
+Prove que $\lim_{x\to a}x^3=a^3$. Se $\abs{x-a}<1$, exiba uma constante $M$, dependendo s\'o de $a$, tal que $\abs{x^2+ax+a^2}<M$, e tome $\delta=\min(1,\eps/M)$.
+\end{exercicio}
+
+\end{document}

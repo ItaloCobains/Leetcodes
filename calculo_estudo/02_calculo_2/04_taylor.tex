@@ -1,0 +1,699 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Séries de potências e polinômios de Taylor}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{O que este texto usa}
+
+\(\N=\{1,2,3,\ldots\}\). Uma série de potências pode começar em \(n=0\); o índice fica escrito. Não tratamos técnicas de integração nem coordenadas polares. Quando uma integral aparece, é a de uma soma finita, a de \(1/(1+t)\), ou o Teorema Fundamental, todos do Cálculo~I.
+
+Do Cálculo~I também usamos: continuidade de \(\exp\) e de \(\ln\); a regra da cadeia; o teorema de L'Hôpital na forma ``se \(f(t),g(t)\to+\infty\), \(g'\neq 0\) e \(\lim f'/g'\) existe, então \(\lim f/g\) existe e é igual''; e o fato de que uma função contínua estritamente menor do que outra num intervalo tem integral estritamente menor. O critério de Cauchy em \(\R\) é o mesmo admitido no estudo das séries numéricas: uma sequência converge se e somente se, para todo \(\eps>0\), existe \(N\) tal que \(m,n\ge N\) implica \(\abs{s_m-s_n}<\eps\). A direção ``convergente implica Cauchy'' tem a prova curta de sempre: se \(s_n\to L\), escolha \(N\) com \(\abs{s_n-L}<\eps/2\) e some os dois erros. A recíproca fica admitida.
+
+\begin{teorema}[Rolle e o valor médio]
+Se \(\varphi\) é contínua no segmento fechado de extremos \(p\) e \(q\) e derivável no aberto, e se \(\varphi(p)=\varphi(q)\), então existe \(c\) estritamente entre \(p\) e \(q\) com \(\varphi'(c)=0\). Consequência, o teorema do valor médio: existe \(c\) estritamente entre \(p\) e \(q\) com
+\[
+\varphi(q)-\varphi(p)=\varphi'(c)\,(q-p).
+\]
+\end{teorema}
+
+\begin{proof}
+Rolle é o teorema do Cálculo~I. Para o valor médio, suponha \(q\neq p\) e defina
+\[
+\psi(t)=\varphi(t)-\varphi(p)-\frac{\varphi(q)-\varphi(p)}{q-p}(t-p).
+\]
+Então \(\psi(p)=\psi(q)=0\). Rolle dá \(c\) com \(\psi'(c)=0\), e \(\psi'(c)=\varphi'(c)-(\varphi(q)-\varphi(p))/(q-p)\).
+\end{proof}
+
+Se \(\varphi'=0\) num intervalo aberto, o valor médio dá \(\varphi(x)-\varphi(y)=0\), logo \(\varphi\) é constante.
+
+\section{Raio de convergência}
+
+\begin{definicao}
+Uma \emph{série de potências} centrada em \(a\in\R\) é \(\sum_{n=0}^\infty c_n(x-a)^n\), com \(c_n\in\R\). No ponto \(x=a\) a série vale \(c_0\).
+\end{definicao}
+
+\begin{definicao}
+Para \(b_n\ge 0\),
+\[
+\limsup_{n\to\infty} b_n=\inf_{N\in\N}\Bigl(\sup_{n\ge N} b_n\Bigr)\in[0,+\infty].
+\]
+Se esse ínfimo é menor do que um número \(r\), alguma cauda tem supremo menor do que \(r\), e portanto \(b_n<r\) para todo \(n\) grande.
+\end{definicao}
+
+\begin{definicao}[fórmula de Hadamard]
+O \emph{raio de convergência} \(R\in[0,+\infty]\) é definido por
+\[
+\frac{1}{R}=\limsup_{n\to\infty}\abs{c_n}^{1/n},
+\]
+com as convenções \(1/0=+\infty\) e \(1/+\infty=0\).
+\end{definicao}
+
+\begin{teorema}
+\label{thm:raio}
+A série \(\sum c_n(x-a)^n\) converge absolutamente quando \(\abs{x-a}<R\) e diverge quando \(\abs{x-a}>R\). O número \(R\) é o único elemento de \([0,+\infty]\) com essa propriedade.
+\end{teorema}
+
+\begin{proof}
+Seja \(\rho=\abs{x-a}\) e \(b_n=\abs{c_n}^{1/n}\), com a convenção \(0^{1/n}=0\). Então
+\[
+\abs{c_n(x-a)^n}^{1/n}=\rho\, b_n
+\]
+para \(\rho>0\). Como o supremo de uma cauda se multiplica por \(\rho\),
+\[
+\limsup_{n\to\infty}\abs{c_n(x-a)^n}^{1/n}=\rho\limsup_{n\to\infty} b_n=\frac{\rho}{R},
+\]
+em que \(\rho/+\infty=0\) e \(\rho\cdot(+\infty)=+\infty\).
+
+Suponha \(\rho<R\). Então \(\rho/R<1\). Escolha \(r\) com \(\rho/R<r<1\). Pela propriedade do limite superior, existe \(N\) tal que, para todo \(n\ge N\),
+\[
+\abs{c_n(x-a)^n}^{1/n}<r,
+\]
+logo \(\abs{c_n(x-a)^n}<r^n\). A série \(\sum r^n\) converge porque \(0<r<1\). A comparação direta dos módulos dá a convergência absoluta. Se \(R=+\infty\), a desigualdade \(\rho<R\) vale para todo \(\rho\), e o mesmo \(r\) existe porque o limite superior dos módulos dos termos é \(0\).
+
+Suponha \(\rho>R\). Então \(\rho/R>1\). Se os termos tendessem a zero, existiria \(N\) com \(\abs{c_n(x-a)^n}<1\) para \(n\ge N\), logo a raiz \(n\)-ésima seria menor do que \(1\) e o limite superior seria no máximo \(1\), contradição. Os termos não tendem a zero, e a série diverge. Isso inclui \(R=0\): qualquer \(\rho>0\) está fora do raio, e só \(x=a\) resta.
+
+Unicidade. Suponha que \(R_1<R_2\) em \([0,+\infty]\) ambos satisfaçam a mesma dicotomia. Escolha \(\rho\) com \(R_1<\rho<R_2\), possível mesmo se \(R_2=+\infty\). No ponto com \(\abs{x-a}=\rho\), a propriedade de \(R_1\) pede divergência e a de \(R_2\) pede convergência absoluta.
+\end{proof}
+
+O teorema não diz o que ocorre em \(x=a+R\) e em \(x=a-R\), quando \(R\) é finito e positivo. Esses dois pontos são um problema à parte: a série numérica obtida ao substituir o extremo pode convergir ou divergir, e a fórmula do raio não vê a diferença.
+
+\begin{teorema}[fórmula da razão]
+Se o limite \(\lambda=\lim_{n\to\infty}\abs{c_{n+1}/c_n}\) existe em \([0,+\infty]\), então \(R=1/\lambda\), com as mesmas convenções. Em particular, a série converge absolutamente quando \(\lambda\abs{x-a}<1\) e diverge quando \(\lambda\abs{x-a}>1\).
+\end{teorema}
+
+\begin{proof}
+Seja \(u_n=c_n(x-a)^n\). Se \(\lambda=+\infty\) e \(x\neq a\), então \(\abs{u_{n+1}/u_n}\to+\infty\). Existe \(N\) tal que \(n\ge N\) implica \(\abs{u_{n+1}}>2\abs{u_n}\), logo \(\abs{u_{N+k}}\ge 2^k\abs{u_N}\). O termo não vai a zero e a série diverge. Assim \(R=0=1/\lambda\).
+
+Se \(\lambda=0\), para qualquer \(x\) fixo existe \(N\) tal que \(n\ge N\) implica \(\abs{u_{n+1}/u_n}<1/2\). A mesma indução da prova do teste da razão dá \(\abs{u_{N+k}}\le\abs{u_N}(1/2)^k\), e a cauda é dominada por uma geométrica convergente. Há convergência absoluta para todo \(x\), logo \(R=+\infty\).
+
+Se \(0<\lambda<\infty\), então \(\abs{u_{n+1}/u_n}\to\lambda\rho\), com \(\rho=\abs{x-a}\). Se \(\lambda\rho<1\), escolha \(r\) com \(\lambda\rho<r<1\). Para \(n\) grande, \(\abs{u_{n+1}}\le r\abs{u_n}\), e a cauda satisfaz \(\abs{u_{N+k}}\le\abs{u_N} r^k\). A comparação com a geométrica de razão \(r\) dá convergência absoluta. Se \(\lambda\rho>1\), para \(n\) grande \(\abs{u_{n+1}}>\abs{u_n}\), então \(\abs{u_n}\) fica maior ou igual a um termo não nulo e não tende a zero. A série diverge.
+
+Portanto a série converge absolutamente para \(\rho<1/\lambda\) e diverge para \(\rho>1/\lambda\). Pela unicidade do teorema anterior, \(R=1/\lambda\).
+\end{proof}
+
+\section{Dois intervalos com extremos diferentes}
+
+\begin{exemplo}
+\label{ex:xn-sobre-n}
+A série \(\sum_{n=1}^\infty x^n/n\) tem \(c_n=1/n\) e
+\[
+\abs{\frac{c_{n+1}}{c_n}}=\frac{n}{n+1}\to 1,
+\]
+logo \(R=1\). Para \(\abs{x}<1\) há convergência absoluta. Para \(\abs{x}>1\) há divergência.
+
+Em \(x=1\) a série é a harmônica. Ela diverge: as somas parciais até \(2^k\) satisfazem \(s_{2^k}\ge 1+k/2\), porque depois do \(1\) inicial há \(k\) blocos, o de índice \(m=0,\ldots,k-1\) indo de \(2^m+1\) até \(2^{m+1}\), com \(2^m\) termos cada um no mínimo \(1/2^{m+1}\), somando pelo menos \(1/2\).
+
+Em \(x=-1\) a série é \(\sum_{n=1}^\infty (-1)^n/n=-\sum_{n=1}^\infty (-1)^{n+1}/n\). A sequência \(b_n=1/n\) é decrescente e tende a zero. Pelo teste de Leibniz, provado para séries numéricas, a série alternada converge. O intervalo de convergência é \([-1,1)\): converge num extremo e diverge no outro.
+\end{exemplo}
+
+\begin{exemplo}
+\label{ex:xn-sobre-n2}
+A série \(\sum_{n=1}^\infty x^n/n^2\) tem
+\[
+\abs{\frac{c_{n+1}}{c_n}}=\frac{n^2}{(n+1)^2}\to 1,
+\]
+logo \(R=1\). Em \(x=1\) fica \(\sum 1/n^2\), uma \(p\)-série com \(p=2>1\), que converge. Em \(x=-1\) os módulos são de novo \(1/n^2\), então a convergência é absoluta. O intervalo de convergência é \([-1,1]\), fechado nos dois extremos.
+
+Os dois exemplos têm o mesmo raio. O intervalo não é função só de \(R\).
+\end{exemplo}
+
+\section{Derivação e integração termo a termo}
+
+\begin{lema}
+\label{lem:n-raiz}
+\(n^{1/n}\to 1\). Também \((n+1)^{1/n}\to 1\).
+\end{lema}
+
+\begin{proof}
+Para \(n\ge 1\), \(n^{1/n}\ge 1\). Escreva \(n^{1/n}=1+d_n\) com \(d_n\ge 0\). Para \(d\ge 0\) e \(n\ge 1\), \((1+d)^n\ge 1+nd+n(n-1)d^2/2\). Em \(n=1\) os dois lados são \(1+d\). Se vale para \(n\), multiplique por \(1+d\):
+\begin{align*}
+(1+d)^{n+1}
+&\ge(1+d)\Bigl(1+nd+\frac{n(n-1)}{2}d^2\Bigr)\\
+&=1+(n+1)d+\frac{n(n+1)}{2}d^2+\frac{n(n-1)}{2}d^3\\
+&\ge 1+(n+1)d+\frac{(n+1)n}{2}d^2,
+\end{align*}
+o último passo porque o termo cúbico é não negativo. Para \(n\ge 2\), \(n=(1+d_n)^n\ge n(n-1)d_n^2/2\), logo \(d_n^2\le 2/(n-1)\). Como \(d_n\ge 0\), \(d_n\to 0\) e \(n^{1/n}=1+d_n\to 1\).
+
+Para a segunda sucessão,
+\[
+(n+1)^{1/n}=(n+1)^{1/(n+1)}\cdot(n+1)^{1/(n(n+1))}.
+\]
+O primeiro fator tende a \(1\) pelo que acabou de ser provado, aplicado a \(n+1\). O segundo é
+\[
+\exp\Bigl(\frac{\ln(n+1)}{n(n+1)}\Bigr).
+\]
+O quociente \(\ln t/t\), com \(t\to+\infty\), tem forma \(\infty/\infty\), e a razão das derivadas é \((1/t)/1=1/t\to 0\). L'Hôpital dá \(\ln t/t\to 0\), logo \(\ln(n+1)/n\to 0\) e o expoente acima tende a \(0\). A exponencial tende a \(1\), e o produto tende a \(1\).
+\end{proof}
+
+\begin{lema}
+\label{lem:limsup-produto}
+Se \(\alpha_n\to 1\) com \(\alpha_n>0\) e \(\beta_n\ge 0\), então
+\[
+\limsup_{n\to\infty}(\alpha_n\beta_n)=\limsup_{n\to\infty}\beta_n.
+\]
+\end{lema}
+
+\begin{proof}
+Seja \(\lambda=\limsup\beta_n\). Se \(\lambda=+\infty\), para \(n\) grande \(\alpha_n>1/2\), logo o supremo de \(\alpha_n\beta_n\) na cauda é infinito e o limite superior também.
+
+Se \(\lambda<+\infty\), fixe \(\eps\in(0,1)\). Existe \(N\) tal que \(n\ge N\) implica \(1-\eps\le\alpha_n\le 1+\eps\). Para todo \(M\ge N\),
+\[
+(1-\eps)\sup_{n\ge M}\beta_n
+\le\sup_{n\ge M}(\alpha_n\beta_n)
+\le(1+\eps)\sup_{n\ge M}\beta_n,
+\]
+porque cada termo \(\alpha_n\beta_n\) está entre \((1-\eps)\beta_n\) e \((1+\eps)\beta_n\). Passe ao ínfimo em \(M\):
+\[
+(1-\eps)\lambda\le\limsup(\alpha_n\beta_n)\le(1+\eps)\lambda.
+\]
+Como \(\eps\) é arbitrário, os dois limites superiores coincidem.
+\end{proof}
+
+\begin{teorema}
+\label{thm:termo-a-termo}
+Seja \(\sum_{n=0}^\infty c_n(x-a)^n\) uma série de raio \(R>0\), e seja \(f(x)\) a soma no intervalo aberto \((a-R,a+R)\). A série derivada \(\sum_{n=1}^\infty n c_n(x-a)^{n-1}\) tem o mesmo raio \(R\). A função \(f\) é derivável nesse intervalo aberto, e
+\[
+f'(x)=\sum_{n=1}^\infty n c_n(x-a)^{n-1}.
+\]
+A série integrada \(\sum_{n=0}^\infty c_n(x-a)^{n+1}/(n+1)\) tem o mesmo raio, e para \(\abs{x-a}<R\)
+\[
+\int_a^x f(t)\,\dif t=\sum_{n=0}^\infty c_n\frac{(x-a)^{n+1}}{n+1}.
+\]
+Se \(R=0\), a série original só converge em \(x=a\), onde vale \(c_0\), e não há intervalo aberto em que derivar.
+\end{teorema}
+
+A prova escreve de fato a convergência uniforme nos compactos contidos em \((a-R,a+R)\) e o uso do valor médio. Não há passo deixado só com o nome.
+
+\begin{proof}
+O raio da série derivada. Para \(x\neq a\), a raiz \(n\)-ésima do termo \(n c_n(x-a)^{n-1}\) é
+\[
+\gamma_n\abs{c_n}^{1/n},
+\qquad
+\gamma_n=n^{1/n}\abs{x-a}^{(n-1)/n}.
+\]
+Se \(t>0\), então \(t^{1/n}=\exp((\ln t)/n)\). O expoente tende a \(0\), e a continuidade da exponencial dá \(t^{1/n}\to 1\). Em particular \(\abs{x-a}^{1/n}\to 1\). Junto com \(n^{1/n}\to 1\), vem \(\gamma_n\to\abs{x-a}\). Escreva \(\gamma_n=\abs{x-a}\,\alpha_n\) com \(\alpha_n\to 1\). O lema do produto, aplicado a \(\alpha_n\) e a \(\beta_n=\abs{c_n}^{1/n}\), e o fato de que um fator positivo constante sai do limite superior, dão
+\[
+\limsup_{n\to\infty}\abs{n c_n(x-a)^{n-1}}^{1/n}
+=\abs{x-a}\limsup_{n\to\infty}\abs{c_n}^{1/n}
+=\frac{\abs{x-a}}{R}.
+\]
+O critério de raiz usado na prova do raio diz então que a série derivada converge absolutamente quando \(\abs{x-a}<R\) e diverge quando \(\abs{x-a}>R\). O raio é o mesmo. Em particular, para todo \(\rho\) com \(0\le\rho<R\), a série numérica \(\sum n\abs{c_n}\rho^{n-1}\) converge, porque é a série dos módulos da série derivada no ponto \(x=a+\rho\).
+
+Convergência uniforme num compacto. Seja \(0\le\rho<R\) e \(K=[a-\rho,a+\rho]\). Se \(\abs{u_n(x)}\le M_n\) para todo \(x\in K\) e \(\sum M_n\) converge, então \(\sum u_n\) converge uniformemente em \(K\). De fato, as somas parciais \(t_N\) de \(\sum M_n\) convergem, logo são de Cauchy. Dado \(\eps>0\), existe \(N\) tal que \(q>p\ge N\) implica \(t_q-t_p<\eps\). As somas parciais \(s_p\) de \(\sum u_n\) satisfazem, para todo \(x\in K\),
+\[
+\abs{s_q(x)-s_p(x)}\le\sum_{n=p+1}^{q} M_n<\eps.
+\]
+Para cada \(x\), \((s_p(x))\) é de Cauchy em \(\R\), logo converge para algum \(f(x)\). Fazendo \(q\to\infty\), \(\abs{f(x)-s_p(x)}\le\eps\) para todo \(x\in K\) e todo \(p\ge N\). É a convergência uniforme em \(K\). A desigualdade não estrita no limite equivale à definição usual: para obter um erro menor do que \(\eps\), rode o argumento com \(\eps\) no lugar do número que se quer, ou substitua \(\eps\) por um número menor antes de escolher \(N\); aqui \(\le\eps\) para todo \(\eps>0\) já é a definição que usamos.
+
+Aplique isso a \(M_n=\abs{c_n}\rho^n\). A série desses \(M_n\) converge porque \(\rho<R\). Em \(K\), \(\abs{c_n(x-a)^n}\le M_n\). A série de potências converge uniformemente em \(K\). Para a série derivada, use \(M_n=n\abs{c_n}\rho^{n-1}\), que somam uma série convergente, e a mesma cota vale em \(K\). Esta é a convergência uniforme da série derivada em cada compacto contido em \((a-R,a+R)\).
+
+O limite uniforme de funções contínuas é contínuo. Se \(\varphi_N\to\varphi\) uniformemente em \(K\) e cada \(\varphi_N\) é contínua, então, dado \(\eps>0\), fixe \(N\) com \(\abs{\varphi(t)-\varphi_N(t)}\le\eps\) para todo \(t\in K\). A função \(\varphi_N\) é contínua em \(y\in K\), logo existe \(\delta>0\) tal que \(t\in K\) e \(\abs{t-y}<\delta\) implicam \(\abs{\varphi_N(t)-\varphi_N(y)}<\eps\). Para esses \(t\),
+\[
+\abs{\varphi(t)-\varphi(y)}
+\le\abs{\varphi(t)-\varphi_N(t)}+\abs{\varphi_N(t)-\varphi_N(y)}+\abs{\varphi_N(y)-\varphi(y)}
+<3\eps.
+\]
+
+Derivada da soma. Sejam \(s_N(x)=\sum_{n=0}^N c_n(x-a)^n\), \(\varphi_N=s_N'\) e \(\varphi\) a soma da série derivada. Em \(K\), \(\varphi_N\to\varphi\) uniformemente, e cada \(\varphi_N\) é um polinômio. Pelo parágrafo anterior, \(\varphi\) é contínua em \(K\). A soma \(f\) é o limite uniforme dos \(s_N\) em \(K\).
+
+Fixe \(y\) com \(\abs{y-a}<\rho\). Seja \(\eps>0\). Pela convergência uniforme já obtida, escolha \(N_0\) tal que \(N\ge N_0\) implica \(\abs{\varphi_N(t)-\varphi(t)}\le\eps\) para todo \(t\in K\). Por continuidade de \(\varphi\) em \(y\), existe \(\delta>0\) tal que \(t\in K\) e \(\abs{t-y}<\delta\) implicam \(\abs{\varphi(t)-\varphi(y)}\le\eps\). Diminua \(\delta\), se preciso, para que \(\abs{x-y}<\delta\) force \(x\in K\): a distância de \(y\) ao bordo de \(K\) é positiva.
+
+Seja \(x\in K\) com \(0<\abs{x-y}<\delta\). Para cada \(N\ge N_0\), o valor médio aplicado a \(s_N\) entre \(x\) e \(y\) dá um ponto \(c_N\) entre eles com
+\[
+s_N(x)-s_N(y)=\varphi_N(c_N)\,(x-y).
+\]
+Então
+\begin{align*}
+\abs{\frac{s_N(x)-s_N(y)}{x-y}-\varphi(y)}
+&=\abs{\varphi_N(c_N)-\varphi(y)}\\
+&\le\abs{\varphi_N(c_N)-\varphi(c_N)}+\abs{\varphi(c_N)-\varphi(y)}
+\le 2\eps,
+\end{align*}
+porque \(\abs{c_N-y}<\delta\). A desigualdade vale para todo \(N\ge N_0\). Faça \(N\to\infty\): \(s_N(x)\to f(x)\) e \(s_N(y)\to f(y)\), logo
+\[
+\abs{\frac{f(x)-f(y)}{x-y}-\varphi(y)}\le 2\eps.
+\]
+Todo \(\eps>0\) admite um \(\delta\) com essa conclusão. Portanto \(f'(y)=\varphi(y)\). Como \(\rho\) com \(\abs{y-a}<\rho<R\) é arbitrário, a fórmula vale em todo o intervalo aberto \((a-R,a+R)\).
+
+Integração. Para \(x\neq a\), a raiz \(n\)-ésima do termo \(c_n(x-a)^{n+1}/(n+1)\) é
+\[
+\frac{\abs{c_n}^{1/n}}{(n+1)^{1/n}}\,\abs{x-a}^{(n+1)/n}.
+\]
+O fator \((n+1)^{-1/n}\abs{x-a}^{(n+1)/n}\) tende a \(\abs{x-a}\), porque \((n+1)^{1/n}\to 1\) e \(\abs{x-a}^{1/n}\to 1\). Escreva-o como \(\abs{x-a}\,\alpha_n\) com \(\alpha_n\to 1\) e \(\alpha_n>0\). O lema do produto, aplicado a \(\alpha_n\) e a \(\abs{c_n}^{1/n}\), e a saída do fator positivo constante dão
+\[
+\limsup_{n\to\infty}\abs{c_n\frac{(x-a)^{n+1}}{n+1}}^{1/n}
+=\abs{x-a}\limsup_{n\to\infty}\abs{c_n}^{1/n}
+=\frac{\abs{x-a}}{R},
+\]
+com a convenção \(\abs{x-a}/+\infty=0\). O critério de raiz dá convergência absoluta para \(\abs{x-a}<R\) e divergência para \(\abs{x-a}>R\). A série integrada tem o mesmo raio. Seja
+\[
+g(x)=\sum_{n=0}^\infty c_n\frac{(x-a)^{n+1}}{n+1},
+\]
+para \(\abs{x-a}<R\). A parte já provada, aplicada a \(g\), dá
+\[
+g'(x)=\sum_{n=0}^\infty c_n(x-a)^n=f(x)
+\]
+nesse intervalo, e \(g(a)=0\). A soma \(f\) é contínua em \((a-R,a+R)\), porque em cada compacto interno ela é limite uniforme de polinômios. Pelo Teorema Fundamental, \(F(x)=\int_a^x f(t)\,\dif t\) satisfaz \(F'=f\) e \(F(a)=0\). Então \((g-F)'=0\) no intervalo, logo \(g-F\) é constante. O valor em \(a\) é zero, e \(g(x)=\int_a^x f\).
+\end{proof}
+
+\cuidado{Nos extremos, derivar termo a termo pode destruir a convergência. A série \(\sum_{n=1}^\infty x^n/n\) converge em \(x=-1\), pelo exemplo anterior. A derivada de \(x^n/n\) é \(x^{n-1}\), então a série derivada é \(\sum_{n=1}^\infty x^{n-1}\). Em \(x=-1\) ela vira \(\sum_{n=1}^\infty (-1)^{n-1}=1-1+1-1+\cdots\). As somas parciais alternam entre \(1\) e \(0\) e não convergem. Isto não é a harmônica alternada. A harmônica alternada é \(\sum (-1)^{n-1}/n\), que converge; o fator \(1/n\) desapareceu na derivação. O índice começa em \(n=1\) e o termo geral da derivada é \(x^{n-1}\), sem denominador.
+
+Outro extremo, no outro exemplo: \(\sum x^n/n^2\) converge em \(x=1\). A série derivada é \(\sum_{n=1}^\infty x^{n-1}/n\), que em \(x=1\) é a harmônica e diverge.}
+
+\section{Polinômio de Taylor e séries de Maclaurin}
+
+\begin{definicao}
+Sejam \(f\) derivável até a ordem \(n\) num ponto \(a\), no sentido de que \(f^{(n)}(a)\) existe. O \emph{polinômio de Taylor} de ordem \(n\) de \(f\) em \(a\) é
+\[
+T_n(x)=\sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k.
+\]
+A \emph{série de Taylor} de \(f\) em \(a\) é \(\sum_{k=0}^\infty f^{(k)}(a)(x-a)^k/k!\), quando todas as derivadas em \(a\) existem. Quando \(a=0\), a série chama-se \emph{série de Maclaurin}.
+\end{definicao}
+
+A série de Taylor é a série de potências cujos coeficientes são esses números. Ela pode ter raio zero, raio finito ou raio infinito. Mesmo quando converge, a soma pode não ser \(f\). A identificação usa o resto, mais adiante, ou uma equação que a soma satisfaz. Até lá, ``série de Maclaurin de \(f\)'' significa a série dos coeficientes \(f^{(n)}(0)/n!\), com o seu raio.
+
+\figura{../figuras/taylor_seno.png}{seno e polinômios de Taylor de ordens 1, 3, 5 e 9 em torno de 0.}
+
+A figura mostra \(\sin x\) junto dos polinômios \(T_1\), \(T_3\), \(T_5\) e \(T_9\) em torno de \(0\). A aproximação é local: perto de zero os gráficos se grudam, e ao se afastar o polinômio de ordem baixa se descola. A seção do resto transforma essa impressão numa cota.
+
+\begin{teorema}[exponencial, seno e cosseno: coeficientes e raio]
+As séries de Maclaurin e os raios são
+\begin{align*}
+e^x&\colon\sum_{n=0}^\infty\frac{x^n}{n!},& R&=+\infty,\\
+\sin x&\colon\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)!}x^{2k+1},& R&=+\infty,\\
+\cos x&\colon\sum_{k=0}^\infty\frac{(-1)^k}{(2k)!}x^{2k},& R&=+\infty.
+\end{align*}
+\end{teorema}
+
+\begin{proof}
+A derivada de \(e^x\) é \(e^x\), logo a derivada de ordem \(n\) também é, e o valor em \(0\) é \(1\). O coeficiente é \(1/n!\). A razão dos coeficientes satisfaz \(\abs{c_n/c_{n+1}}=n+1\to+\infty\), então \(\abs{c_{n+1}/c_n}\to 0\) e \(R=+\infty\).
+
+Para o seno, a derivada de ordem \(n\) é \(\sin(x+n\pi/2)\). Vale para \(n=0\). Se vale para \(n\), derivar dá \(\cos(x+n\pi/2)=\sin(x+(n+1)\pi/2)\). Em \(x=0\) o valor é \(\sin(n\pi/2)\). Se \(n=2k\) é par, \(\sin(k\pi)=0\). Se \(n=2k+1\), \(\sin((2k+1)\pi/2)=\sin(k\pi+\pi/2)=\cos(k\pi)=(-1)^k\). O coeficiente de \(x^{2k+1}\) é \((-1)^k/(2k+1)!\), e os de ordem par são zero. A razão entre coeficientes consecutivos não nulos contém um fatorial no denominador e tende a zero, logo \(R=+\infty\).
+
+Para o cosseno, a derivada de ordem \(n\) é \(\cos(x+n\pi/2)\): o passo \(n=0\) é a função, e derivar produz \(-\sin(x+n\pi/2)=\cos(x+(n+1)\pi/2)\). Em zero, \(\cos(n\pi/2)\). Para \(n=2k\), \(\cos(k\pi)=(-1)^k\). Para \(n\) ímpar, \(\cos((2k+1)\pi/2)=0\). O coeficiente de \(x^{2k}\) é \((-1)^k/(2k)!\), e \(R=+\infty\) pelo mesmo fatorial.
+\end{proof}
+
+A igualdade entre a função e a soma da série, para essas três, é o teorema da seção em que o resto de Lagrange vai a zero. Os coeficientes acima já estão justificados.
+
+\begin{teorema}[logaritmo]
+Para \(n\ge 1\), a derivada de ordem \(n\) de \(\ln(1+x)\) é \((-1)^{n+1}(n-1)!(1+x)^{-n}\), no intervalo \(x>-1\). A série de Maclaurin é
+\[
+\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}x^n,
+\]
+de raio \(1\). Ela converge se e somente se \(x\in(-1,1]\), e nesse intervalo a soma é \(\ln(1+x)\).
+\end{teorema}
+
+\begin{proof}
+A fórmula da derivada vale para \(n=1\): \(1/(1+x)\). Se vale para \(n\), derivar dá
+\[
+(-1)^{n+1}(n-1)!\cdot(-n)(1+x)^{-n-1}=(-1)^{n+2}n!(1+x)^{-(n+1)},
+\]
+que é a fórmula de ordem \(n+1\). Em \(x=0\), \(f^{(n)}(0)=(-1)^{n+1}(n-1)!\), e o coeficiente é esse número sobre \(n!\), isto é \((-1)^{n+1}/n\). A razão dos módulos dos coeficientes é \(n/(n+1)\to 1\), logo \(R=1\).
+
+Para \(x\le -1\) ou \(x>1\) a série diverge. Se \(\abs{x}>1\), a razão dos módulos dos termos tende a \(\abs{x}>1\), então o termo geral não vai a zero. Se \(x=-1\), a série é \(-\sum 1/n\), a harmônica com sinal, e diverge.
+
+Resta provar a soma em \(x\in(-1,1]\). Não se passa ao limite dentro da série geométrica em \(t=1\), porque \(\sum (-1)^k\) diverge. Integra-se a soma parcial. Para \(t\neq -1\) e \(N\in\N\),
+\[
+\sum_{k=0}^{N-1}(-1)^k t^k=\frac{1-(-1)^N t^N}{1+t}.
+\]
+Fixe \(x\in[0,1]\). Integre de \(0\) a \(x\): o lado esquerdo, termo a termo na soma finita, é
+\[
+\sum_{k=0}^{N-1}(-1)^k\frac{x^{k+1}}{k+1}=\sum_{n=1}^{N}(-1)^{n+1}\frac{x^n}{n}.
+\]
+O lado direito é
+\[
+\int_0^x\frac{1}{1+t}\,\dif t-(-1)^N\int_0^x\frac{t^N}{1+t}\,\dif t
+=\ln(1+x)-(-1)^N\int_0^x\frac{t^N}{1+t}\,\dif t.
+\]
+Como \(1+t\ge 1\) em \([0,x]\),
+\[
+\abs{\int_0^x\frac{t^N}{1+t}\,\dif t}\le\int_0^x t^N\,\dif t=\frac{x^{N+1}}{N+1}\le\frac{1}{N+1}\to 0.
+\]
+As somas parciais tendem a \(\ln(1+x)\). Em \(x=1\) isso é \(\sum_{n=1}^\infty (-1)^{n+1}/n=\ln 2\).
+
+Se \(x\in(-1,0)\), escreva \(x=-y\) com \(0<y<1\). A mesma identidade integrada de \(0\) a \(x\) deixa o resto \((-1)^N\int_0^x t^N/(1+t)\,\dif t\). Na substituição \(t=-s\),
+\[
+\int_0^{-y}\frac{t^N}{1+t}\,\dif t
+=\int_0^y\frac{(-s)^N}{1-s}(-1)\,\dif s
+=-(-1)^N\int_0^y\frac{s^N}{1-s}\,\dif s.
+\]
+O módulo é
+\[
+\int_0^y\frac{s^N}{1-s}\,\dif s
+\le\frac{1}{1-y}\int_0^y s^N\,\dif s
+=\frac{y^{N+1}}{(N+1)(1-y)}\to 0,
+\]
+porque \(y\) está fixo em \((0,1)\). O resto tende a zero e a soma é \(\ln(1+x)\).
+\end{proof}
+
+\begin{teorema}[binomial]
+Para \(\alpha\in\R\) e \(n\ge 1\),
+\[
+\binom{\alpha}{n}=\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!},
+\]
+e \(\binom{\alpha}{0}=1\). Se \(\alpha\) é inteiro não negativo, \((1+x)^\alpha=\sum_{n=0}^{\alpha}\binom{\alpha}{n}x^n\) para todo \(x\), um polinômio, e o raio é infinito. Se \(\alpha\) não é inteiro não negativo, a série de Maclaurin de \((1+x)^\alpha\) é \(\sum_{n=0}^\infty\binom{\alpha}{n}x^n\), de raio \(1\), e a soma vale \((1+x)^\alpha\) para todo \(x\in(-1,1)\).
+\end{teorema}
+
+\begin{proof}
+O caso inteiro é indução em \(\alpha=m\). Para \(m=0\), os dois lados são \(1\). Se vale para \(m\),
+\begin{align*}
+(1+x)^{m+1}
+&=(1+x)\sum_{k=0}^m\binom{m}{k}x^k
+=\sum_{k=0}^m\binom{m}{k}x^k+\sum_{k=0}^m\binom{m}{k}x^{k+1}\\
+&=\sum_{n=0}^{m+1}\Bigl(\binom{m}{n}+\binom{m}{n-1}\Bigr)x^n,
+\end{align*}
+com a convenção \(\binom{m}{-1}=\binom{m}{m+1}=0\). A identidade de Pascal \(\binom{m}{n}+\binom{m}{n-1}=\binom{m+1}{n}\) fecha a indução. Os coeficientes de ordem maior do que \(m\) são zero, e a série termina.
+
+No caso geral, a derivada de ordem \(n\) de \((1+x)^\alpha\) é
+\[
+\alpha(\alpha-1)\cdots(\alpha-n+1)(1+x)^{\alpha-n},
+\]
+para \(x>-1\), por indução a partir da regra da cadeia. Em \(x=0\) o coeficiente de Taylor é \(\binom{\alpha}{n}\). Se \(\alpha\) não é inteiro não negativo, nenhum fator \(\alpha-n\) se anula de um índice em diante, e
+\[
+\abs{\frac{c_{n+1}}{c_n}}=\frac{\abs{\alpha-n}}{n+1}\to 1.
+\]
+O raio é \(1\).
+
+Para a soma, seja \(s(x)=\sum_{n=0}^\infty\binom{\alpha}{n}x^n\) em \(\abs{x}<1\). Pelo teorema de derivação termo a termo,
+\[
+s'(x)=\sum_{n=1}^\infty n\binom{\alpha}{n}x^{n-1}.
+\]
+A conta \(n\binom{\alpha}{n}=\alpha\binom{\alpha-1}{n-1}\) é o cancelamento de \(n\) com o fatorial. Logo
+\[
+s'(x)=\alpha\sum_{m=0}^\infty\binom{\alpha-1}{m}x^m.
+\]
+A identidade de Pascal continua valendo para o símbolo com \(\alpha\) real:
+\begin{align*}
+\binom{\alpha-1}{n}+\binom{\alpha-1}{n-1}
+&=\frac{(\alpha-1)\cdots(\alpha-n)}{n!}+\frac{(\alpha-1)\cdots(\alpha-n+1)}{(n-1)!}\\
+&=\frac{(\alpha-1)\cdots(\alpha-n+1)}{(n-1)!}\left(\frac{\alpha-n}{n}+1\right)
+=\binom{\alpha}{n}.
+\end{align*}
+Como \(\alpha\) não é inteiro não negativo, \(\alpha-1\) também não é, e a série \(u(x)=\sum_{m=0}^\infty\binom{\alpha-1}{m}x^m\) tem raio \(1\) pelo mesmo cálculo da razão. A soma parcial \(u_N\) satisfaz
+\[
+(1+x)u_N(x)
+=\binom{\alpha-1}{0}+\sum_{n=1}^N\Bigl(\binom{\alpha-1}{n}+\binom{\alpha-1}{n-1}\Bigr)x^n+\binom{\alpha-1}{N}x^{N+1}.
+\]
+O último termo é \(x\) vezes o termo geral de \(u\), que tende a zero porque a série de \(u\) converge. Passando ao limite e usando Pascal,
+\[
+(1+x)u(x)=s(x).
+\]
+Portanto \((1+x)s'(x)=\alpha(1+x)u(x)=\alpha s(x)\) em \((-1,1)\).
+
+Defina \(\varphi(x)=(1+x)^{-\alpha}s(x)\) nesse intervalo. Então
+\begin{align*}
+\varphi'(x)
+&=-\alpha(1+x)^{-\alpha-1}s(x)+(1+x)^{-\alpha}s'(x)\\
+&=(1+x)^{-\alpha-1}\bigl(-\alpha s(x)+(1+x)s'(x)\bigr)
+=0.
+\end{align*}
+Logo \(\varphi\) é constante. Como \(\varphi(0)=1\), vem \(s(x)=(1+x)^\alpha\).
+\end{proof}
+
+Os extremos \(x=\pm 1\) da série binomial dependem de \(\alpha\). O raio não os decide, e a igualdade provada acima é só no intervalo aberto.
+
+\section{O resto de Lagrange}
+
+\begin{teorema}[resto de Lagrange]
+\label{thm:lagrange}
+Seja \(n\ge 0\) um inteiro. Suponha que \(f^{(n+1)}\) existe num intervalo aberto que contém o segmento de extremos \(a\) e \(x\). Então existe \(c\) estritamente entre \(a\) e \(x\), se \(x\neq a\), tal que
+\[
+R_n(x)=f(x)-T_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}.
+\]
+Se \(x=a\), os dois lados são zero.
+\end{teorema}
+
+Há duas organizações. A primeira segue a função com as derivadas no ponto variável e, depois de um cancelamento, usa Rolle uma vez: é a que está escrita por completo para \(n=1\) e, com o mesmo cancelamento, para \(n\) geral. A segunda aplica Rolle \(n+1\) vezes, mas na função que congela as derivadas em \(a\). Não se deriva \(n+1\) vezes a primeira função, porque a hipótese só dá \(f^{(n+1)}\) e uma derivada a mais de \(f^{(n+1)}\) não está garantida.
+
+\begin{proof}[Ordem \(n=1\), centro variável]
+Suponha \(x\neq a\). Defina o número \(M\) pela equação
+\[
+f(x)=f(a)+f'(a)(x-a)+M(x-a)^2,
+\]
+isto é, \(M=R_1(x)/(x-a)^2\). Para \(t\) no intervalo aberto que contém o segmento, defina
+\[
+g(t)=f(x)-f(t)-f'(t)(x-t)-M(x-t)^2.
+\]
+Então \(g(x)=0\). E
+\[
+g(a)=f(x)-f(a)-f'(a)(x-a)-M(x-a)^2=0,
+\]
+pela escolha de \(M\).
+
+A derivada de \(f'(t)(x-t)\) é \(f''(t)(x-t)-f'(t)\), pela regra do produto e pela cadeia em \(x-t\). A derivada de \((x-t)^2\) é \(2(x-t)\cdot(-1)\). Logo
+\begin{align*}
+g'(t)
+&=-f'(t)-\bigl(f''(t)(x-t)-f'(t)\bigr)-M\cdot 2(x-t)\cdot(-1)\\
+&=-f'(t)-f''(t)(x-t)+f'(t)+2M(x-t)\\
+&=(x-t)\bigl(2M-f''(t)\bigr).
+\end{align*}
+A função \(g\) é contínua no segmento e derivável no aberto, porque \(f''\) existe nesse aberto, e \(g(a)=g(x)=0\). Rolle fornece \(c\) estritamente entre \(a\) e \(x\) com \(g'(c)=0\). Como \(c\neq x\), o fator \(x-c\) não é zero, e \(2M-f''(c)=0\). Portanto \(M=f''(c)/2\), e
+\[
+f(x)-T_1(x)=\frac{f''(c)}{2}(x-a)^2.
+\]
+\end{proof}
+
+\begin{proof}[Ordem \(n\) qualquer, o mesmo cancelamento]
+Se \(x=a\), não há o que provar. Defina \(M\) por \(f(x)=T_n(x)+M(x-a)^{n+1}\). Defina
+\[
+g(t)=f(x)-\sum_{k=0}^n\frac{f^{(k)}(t)}{k!}(x-t)^k-M(x-t)^{n+1}.
+\]
+O termo \(k=0\) da soma é \(f(t)\). Então \(g(x)=0\), e \(g(a)=0\) pela definição de \(M\).
+
+Seja \(S(t)\) a soma de \(k=0\) até \(n\). Para \(k\ge 1\), a derivada de \(f^{(k)}(t)(x-t)^k/k!\) é
+\[
+\frac{f^{(k+1)}(t)}{k!}(x-t)^k-\frac{f^{(k)}(t)}{(k-1)!}(x-t)^{k-1}.
+\]
+O termo \(k=0\) contribui só \(f'(t)\). Ao somar, o pedaço negativo do termo \(k\) cancela o pedaço positivo do termo \(k-1\), para \(k=1,\ldots,n\). Sobra o pedaço positivo do último termo:
+\[
+S'(t)=\frac{f^{(n+1)}(t)}{n!}(x-t)^n.
+\]
+A derivada de \(M(x-t)^{n+1}\) é \(-(n+1)M(x-t)^n\). Portanto
+\begin{align*}
+g'(t)
+&=-S'(t)+(n+1)M(x-t)^n\\
+&=(x-t)^n\left((n+1)M-\frac{f^{(n+1)}(t)}{n!}\right).
+\end{align*}
+Rolle, aplicado a \(g(a)=g(x)=0\), dá \(c\) estritamente entre \(a\) e \(x\) com \(g'(c)=0\). O fator \((x-c)^n\) não é zero. Logo
+\[
+(n+1)M=\frac{f^{(n+1)}(c)}{n!},
+\qquad
+M=\frac{f^{(n+1)}(c)}{(n+1)!},
+\]
+que é a fórmula do resto.
+\end{proof}
+
+\begin{proof}[Rolle repetido \(n+1\) vezes, derivadas congeladas em \(a\)]
+De novo \(x\neq a\), e \(M\) definido por \(f(x)=T_n(x)+M(x-a)^{n+1}\). Desta vez as derivadas de \(f\) ficam avaliadas em \(a\):
+\[
+\psi(t)=f(t)-\sum_{k=0}^n\frac{f^{(k)}(a)}{k!}(t-a)^k-M(t-a)^{n+1}.
+\]
+Então \(\psi(x)=0\) e \(\psi(a)=0\).
+
+Afirmação: para \(0\le j\le n\),
+\begin{equation}
+\label{eq:psi-j}
+\psi^{(j)}(t)
+=f^{(j)}(t)-\sum_{k=j}^n\frac{f^{(k)}(a)}{(k-j)!}(t-a)^{k-j}
+-M\frac{(n+1)!}{(n+1-j)!}(t-a)^{n+1-j}.
+\end{equation}
+Para \(j=0\) é a definição de \(\psi\). Se a fórmula vale para algum \(j<n\), derive. A derivada de \(f^{(j)}\) é \(f^{(j+1)}\). Na soma, o termo \(k=j\) é a constante \(f^{(j)}(a)\) e desaparece; cada \(k\ge j+1\) produz
+\[
+\frac{f^{(k)}(a)}{(k-j-1)!}(t-a)^{k-j-1}.
+\]
+O termo com \(M\) produz
+\[
+M\frac{(n+1)!}{(n+1-j)!}\cdot(n+1-j)(t-a)^{n-j}
+=M\frac{(n+1)!}{(n-j)!}(t-a)^{n-j},
+\]
+que é o coeficiente de ordem \(j+1\). A fórmula fica provada até \(j=n\). Em particular, para \(j\le n\), todos os termos com potência de \(t-a\) se anulam em \(t=a\), e \(\psi^{(j)}(a)=f^{(j)}(a)-f^{(j)}(a)=0\).
+
+Derivando a fórmula com \(j=n\),
+\[
+\psi^{(n)}(t)=f^{(n)}(t)-f^{(n)}(a)-M(n+1)!(t-a),
+\]
+e portanto \(\psi^{(n+1)}(t)=f^{(n+1)}(t)-M(n+1)!\). Essa derivada existe no aberto que contém o segmento, pela hipótese do teorema.
+
+Construção dos pontos, no caso \(x>a\). O caso \(x<a\) é o mesmo teorema no segmento, com os extremos trocados na hora de aplicar Rolle. Como \(\psi(a)=\psi(x)=0\), existe \(t_1\) estritamente entre \(a\) e \(x\) com \(\psi'(t_1)=0\). Como também \(\psi'(a)=0\), existe \(t_2\) estritamente entre \(a\) e \(t_1\) com \(\psi''(t_2)=0\). Suponha escolhido \(t_j\), estritamente entre \(a\) e \(x\), com \(\psi^{(j)}(t_j)=0\) e \(1\le j\le n\). Junto com \(\psi^{(j)}(a)=0\), Rolle aplicado a \(\psi^{(j)}\) no segmento de \(a\) até \(t_j\) dá \(t_{j+1}\) estritamente entre eles com \(\psi^{(j+1)}(t_{j+1})=0\). A função \(\psi^{(j)}\) é derivável nesse aberto porque \(j\le n\) e \(\psi^{(n+1)}\) existe. No fim do processo, \(j=n\) produz \(c=t_{n+1}\) com \(\psi^{(n+1)}(c)=0\). Logo
+\[
+f^{(n+1)}(c)-M(n+1)!=0,
+\]
+e \(M=f^{(n+1)}(c)/(n+1)!\).
+
+Para \(n=1\) essa organização usa Rolle duas vezes, e só \(f''\). Explicitamente: \(\psi(t)=f(t)-f(a)-f'(a)(t-a)-M(t-a)^2\), \(\psi(a)=\psi(x)=0\), logo existe \(t_1\) com \(\psi'(t_1)=0\). E \(\psi'(t)=f'(t)-f'(a)-2M(t-a)\), de modo que \(\psi'(a)=0\). Existe \(c\) entre \(a\) e \(t_1\) com \(\psi''(c)=0\). Como \(\psi''(t)=f''(t)-2M\), vem \(M=f''(c)/2\).
+\end{proof}
+
+\section{Uma cota numérica para o seno}
+
+\begin{teorema}
+Seja \(T_5\) o polinômio de Taylor de ordem \(5\) de \(\sin x\) em \(0\),
+\[
+T_5(x)=x-\frac{x^3}{6}+\frac{x^5}{120}.
+\]
+Para todo \(x\in[0,\pi/2]\),
+\[
+\abs{\sin x-T_5(x)}<\frac{1}{25}.
+\]
+\end{teorema}
+
+\begin{proof}
+A derivada de ordem \(6\) de \(\sin\) é \(-\sin\). No intervalo aberto que contém \([0,\pi/2]\), \(\abs{f^{(6)}(c)}=\abs{\sin c}\le 1\). O resto de Lagrange de ordem \(5\) dá um \(c\) entre \(0\) e \(x\) com
+\[
+R_5(x)=\frac{f^{(6)}(c)}{6!}x^6,
+\]
+logo
+\[
+\abs{R_5(x)}\le\frac{1}{720}x^6\le\frac{1}{720}\left(\frac{\pi}{2}\right)^6.
+\]
+Falta um número. Do Cálculo~I, \(\int_0^1 (1+t^2)^{-1}\,\dif t=\arctan 1=\pi/4\). Para \(t\in[0,1]\),
+\[
+\bigl(1-t^2+t^4\bigr)(1+t^2)=1+t^6\ge 1,
+\]
+então \(1/(1+t^2)\le 1-t^2+t^4\), e a diferença é \(t^6/(1+t^2)\), estritamente positiva em \((0,1]\). Integrando,
+\[
+\frac{\pi}{4}<\int_0^1\bigl(1-t^2+t^4\bigr)\,\dif t=\Bigl[t-\frac{t^3}{3}+\frac{t^5}{5}\Bigr]_0^1=1-\frac{1}{3}+\frac{1}{5}=\frac{13}{15}.
+\]
+Logo \(\pi/2<26/15\) e \((\pi/2)^6<(26/15)^6\). Agora \(26^2=676\), \(26^4=676^2=456976\), \(26^6=456976\cdot 676\). Esse produto é \(456976\cdot 600+456976\cdot 70+456976\cdot 6=274185600+31988320+2741856=308915776\). E \(15^2=225\), \(15^4=50625\), \(15^6=50625\cdot 225=11390625\). Assim
+\[
+\frac{1}{720}\left(\frac{26}{15}\right)^6=\frac{308915776}{11390625\cdot 720}.
+\]
+O denominador é \(11390625\cdot 720=8201250000\). Compare com \(1/25\):
+\[
+308915776\cdot 25=7722894400<8201250000.
+\]
+Portanto \((\pi/2)^6/720<1/25\), e \(\abs{R_5(x)}<1/25\).
+\end{proof}
+
+A majoração usada na derivada é \(\abs{f^{(6)}}\le 1\). O número \(1/25\) é só a tradução dessa cota e de \(\pi/2<26/15\) para uma fração.
+
+\section{A exponencial, o seno e o cosseno coincidem com as séries}
+
+\begin{lema}
+\label{lem:fatorial}
+Para cada \(x\in\R\) fixo, \(\abs{x}^{n}/n!\to 0\) quando \(n\to\infty\).
+\end{lema}
+
+\begin{proof}
+Se \(x=0\), a sequência é nula a partir de \(n=1\). Se \(x\neq 0\), escolha um inteiro \(m\ge 1\) com \(m>2\abs{x}\), de modo que \(\abs{x}/m<1/2\). Para \(n\ge m\),
+\begin{align*}
+\frac{\abs{x}^{n+1}}{(n+1)!}
+&=\frac{\abs{x}^{m}}{m!}\prod_{j=1}^{n+1-m}\frac{\abs{x}}{m+j}
+\le\frac{\abs{x}^{m}}{m!}\left(\frac{\abs{x}}{m}\right)^{n+1-m}
+\le\frac{\abs{x}^{m}}{m!}\left(\frac{1}{2}\right)^{n+1-m}.
+\end{align*}
+O lado direito tende a zero quando \(n\to\infty\). A sequência \(\abs{x}^n/n!\) é o mesmo tipo de quociente, com \(n\) no lugar de \(n+1\), e também tende a zero.
+\end{proof}
+
+\begin{teorema}
+Para todo \(x\in\R\),
+\[
+e^x=\sum_{n=0}^\infty\frac{x^n}{n!}.
+\]
+\end{teorema}
+
+\begin{proof}
+A série de Maclaurin tem coeficientes \(1/n!\) e raio infinito, já calculados. O resto de Lagrange de ordem \(n\) dá \(c\) entre \(0\) e \(x\) com
+\[
+R_n(x)=\frac{e^{c}}{(n+1)!}x^{n+1}.
+\]
+Se \(x>0\), então \(0<c<x\) e \(0<e^{c}<e^{x}\), logo \(\abs{R_n(x)}\le e^{x}\abs{x}^{n+1}/(n+1)!\). Se \(x<0\), então \(x<c<0\) e \(0<e^{c}<1\), logo \(\abs{R_n(x)}\le\abs{x}^{n+1}/(n+1)!\). Se \(x=0\), o resto é zero. Nos dois casos não nulos, o lema do fatorial dá \(R_n(x)\to 0\). Portanto \(T_n(x)\to e^x\). As somas parciais de Taylor são exatamente as somas parciais da série, e a série converge para \(e^x\).
+\end{proof}
+
+\begin{teorema}
+Para todo \(x\in\R\),
+\begin{align*}
+\sin x&=\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)!}x^{2k+1},\\
+\cos x&=\sum_{k=0}^\infty\frac{(-1)^k}{(2k)!}x^{2k}.
+\end{align*}
+\end{teorema}
+
+\begin{proof}
+Qualquer derivada de \(\sin\) ou de \(\cos\) é \(\pm\sin\) ou \(\pm\cos\), logo tem módulo no máximo \(1\). O resto de Lagrange satisfaz
+\[
+\abs{R_n(x)}\le\frac{\abs{x}^{n+1}}{(n+1)!}\to 0,
+\]
+pelo lema anterior. Assim \(T_n(x)\) tende à função. Os coeficientes já foram calculados: no seno, as ordens pares em \(0\) se anulam e a ordem \(2k+1\) contribui \((-1)^k/(2k+1)!\); no cosseno, as ordens ímpares se anulam e a ordem \(2k\) contribui \((-1)^k/(2k)!\). A soma da série é o limite desses polinômios.
+\end{proof}
+
+\begin{contraexemplo}
+Convergir não obriga a série de Taylor a somar a função. Defina
+\[
+f(x)=\begin{cases}
+e^{-1/x^2},& x\neq 0,\\
+0,& x=0.
+\end{cases}
+\]
+Primeiro, \(\lim_{t\to+\infty} t^k e^{-t}=0\) para todo inteiro \(k\ge 0\). Para \(k=0\), \(e^{-t}\to 0\). Se vale para \(k\), o quociente \(t^{k+1}/e^t\) tem forma \(\infty/\infty\), e a razão das derivadas é \((k+1)t^k/e^t\), cujo limite é zero pela hipótese de indução. L'Hôpital devolve o limite zero para \(k+1\).
+
+Afirmação: para todo \(n\ge 0\), \(f^{(n)}(0)=0\), e existe um polinômio \(p_n\) tal que, para \(x\neq 0\),
+\[
+f^{(n)}(x)=p_n(1/x)\,e^{-1/x^2}.
+\]
+Para \(n=0\), \(p_0=1\). O valor \(f(0)=0\) é a definição, e \(\lim_{x\to 0}f(x)=0\) porque \(e^{-1/x^2}=e^{-t}\) com \(t=1/x^2\to+\infty\).
+
+Suponha a afirmação para algum \(n\), com \(f^{(n)}(0)=0\). Para \(x\neq 0\), seja \(u=1/x\), de modo que a função é \(p_n(u)e^{-u^2}\) e \(u'=-u^2\). Derivando,
+\begin{align*}
+f^{(n+1)}(x)
+&=e^{-u^2}\bigl(p_n'(u)u'+p_n(u)\cdot(-2u)u'\bigr)\\
+&=e^{-u^2}\bigl(2u^3 p_n(u)-u^2 p_n'(u)\bigr).
+\end{align*}
+O polinômio \(p_{n+1}(u)=2u^3 p_n(u)-u^2 p_n'(u)\) serve fora da origem. Na origem,
+\[
+f^{(n+1)}(0)=\lim_{h\to 0}\frac{f^{(n)}(h)}{h}=\lim_{h\to 0}\frac{p_n(1/h)}{h}e^{-1/h^2},
+\]
+porque \(f^{(n)}(0)=0\). Se \(p_n(u)=\sum_{j=0}^{d} a_j u^j\), cada parcela é da forma constante vezes \(\abs{h}^{-j-1}e^{-1/h^2}\). Com \(t=1/h^2\), isso é \(t^{(j+1)/2}e^{-t}\). Seja \(\ell\) um inteiro maior ou igual a \((j+1)/2\). Para \(t\ge 1\), \(t^{(j+1)/2}\le t^\ell\), e \(t^\ell e^{-t}\to 0\). Cada parcela vai a zero, e \(f^{(n+1)}(0)=0\).
+
+Por indução, todas as derivadas em \(0\) são nulas. A série de Maclaurin é \(\sum 0\cdot x^n/n!=0\), que converge para \(0\) em todo \(\R\). Para \(x\neq 0\), \(f(x)=e^{-1/x^2}>0\). A série converge, e a soma não é \(f(x)\). O resto \(R_n(x)\) é o próprio \(f(x)\), que não tende a zero. Nas funções \(e^x\), \(\sin x\) e \(\cos x\), o que fecha a identificação é precisamente \(R_n(x)\to 0\).
+\end{contraexemplo}
+
+\section{Taylor não é Fourier}
+
+A série de Taylor não é a série de Fourier: Fourier aproxima em média quadrática por senos e cossenos de frequências inteiras num intervalo; Taylor é local, num ponto, com potências.
+
+\section{Exercícios}
+
+\begin{exercicio}[Básico — raio]
+Determine o raio de convergência de \(\sum_{n=0}^\infty (x+2)^n/(n+1)\) e o de \(\sum_{n=0}^\infty n!(x-1)^n\).
+\end{exercicio}
+
+\begin{exercicio}[Básico — polinômio de Taylor]
+Calcule as derivadas no ponto e escreva o polinômio de Taylor de ordem \(4\) de \(\cos x\) em \(0\) e o de ordem \(3\) de \(\ln(1+x)\) em \(0\).
+\end{exercicio}
+
+\begin{exercicio}[Básico — intervalo]
+Determine o intervalo de convergência de \(\sum_{n=1}^\infty (x-1)^n/n\).
+\end{exercicio}
+
+\begin{exercicio}[Básico — Maclaurin]
+A partir das derivadas em \(0\), escreva a série de Maclaurin de \(e^x\) e a de \(\sin x\), e determine os raios.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — intervalo fechado]
+Determine o intervalo de convergência de \(\sum_{n=1}^\infty x^n/(n^2 3^n)\).
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — erro]
+Seja \(T_3(x)=1+x+x^2/2+x^3/6\) o polinômio de Taylor de ordem \(3\) de \(e^x\) em \(0\). Mostre que \(\abs{e^x-T_3(x)}<1/8\) para todo \(x\in[0,1]\). Na conta, prove que \(e<3\) a partir da série \(\sum 1/n!\).
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — derivada no extremo]
+Considere \(\sum_{n=1}^\infty x^n/(n\,2^n)\). Mostre que o raio é \(2\) e que a série converge em \(x=-2\). Escreva a série derivada e mostre que ela diverge em \(x=-2\).
+\end{exercicio}
+
+\begin{exercicio}[Avançado — cosseno]
+Prove que, para todo real \(x\),
+\[
+\cos x=\sum_{k=0}^\infty\frac{(-1)^k}{(2k)!}x^{2k},
+\]
+usando o resto de Lagrange e a estimativa do fatorial.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — unicidade dos coeficientes]
+Prove: se uma série de potências \(\sum_{n=0}^\infty c_n(x-a)^n\) converge e soma zero num intervalo aberto que contém \(a\), então \(c_n=0\) para todo \(n\).
+\end{exercicio}
+
+\end{document}

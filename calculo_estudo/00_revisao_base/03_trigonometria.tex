@@ -1,0 +1,557 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Trigonometria}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{A distância entre $(x_1,y_1)$ e $(x_2,y_2)$ em $\R^2$ é $\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$. A raiz quadrada é a não negativa. Dois fatos da geometria euclidiana entram só na construção dos valores notáveis e na lei dos senos, e ficam nomeados onde são usados: ângulos alternos internos de paralelas são iguais, e dois triângulos com os três lados respectivamente iguais têm os ângulos correspondentes iguais. A área de um triângulo é metade do produto de uma base pela altura correspondente.}
+
+\begin{intuicao}
+O seno e o cosseno de $\theta$ são as coordenadas do ponto da circunferência unitária atingido depois de percorrer um arco de comprimento $\abs{\theta}$, no sentido anti-horário se $\theta>0$. Somar ângulos é encadear rotações; as fórmulas de adição, admitidas abaixo, codificam essa composição. A tangente é a inclinação da reta que parte da origem e faz ângulo $\theta$ com o eixo $x$. As inversas escolhem um único ângulo em um intervalo em que a função original é bijetora.
+\end{intuicao}
+
+\section{Círculo unitário e radiano}
+
+\begin{definicao}\label{def:circulo}
+A circunferência unitária é $C=\{(x,y)\in\R^2:x^2+y^2=1\}$. Admitimos que o comprimento de $C$ é $2\pi$. O \emph{radiano} mede o ângulo pelo comprimento do arco orientado em $C$, a partir do ponto $(1,0)$, no sentido anti-horário quando o número é positivo e no sentido horário quando é negativo.
+
+Para cada $\theta\in\R$, $\cos\theta$ e $\sin\theta$ são as coordenadas do ponto assim obtido:
+\[
+(\cos\theta,\sin\theta)\in C.
+\]
+Fazem parte desta descrição geométrica, e não serão deduzidas de axiomas de corpo, as propriedades seguintes.
+\begin{enumerate}
+\item $\cos(\theta+2k\pi)=\cos\theta$ e $\sin(\theta+2k\pi)=\sin\theta$ para todo $k\in\Z$.
+\item $(\cos x,\sin x)=(\cos\alpha,\sin\alpha)$ se e somente se $x=\alpha+2k\pi$ para algum $k\in\Z$.
+\item $(\cos 0,\sin 0)=(1,0)$ e $\bigl(\cos(\pi/2),\sin(\pi/2)\bigr)=(0,1)$.
+\item Se $\theta\in(0,\pi/2)$, então $\cos\theta>0$ e $\sin\theta>0$.
+\item Quando $\theta$ percorre $[-\pi/2,\pi/2]$, o ponto percorre o semicírculo $x\ge 0$, extremos incluídos. Quando $\theta$ percorre $[0,\pi]$, o ponto percorre o semicírculo $y\ge 0$, extremos incluídos.
+\end{enumerate}
+\end{definicao}
+
+\begin{proposicao}[Equação fundamental]\label{prop:fundamental}
+Para todo $\theta\in\R$, $\sin^2\theta+\cos^2\theta=1$.
+\end{proposicao}
+
+\begin{proof}
+O ponto $(\cos\theta,\sin\theta)$ pertence a $C$, logo a soma dos quadrados das coordenadas é $1$.
+\end{proof}
+
+\figura{../figuras/circulo_trigonometrico.png}{Ângulos notáveis no círculo unitário.}
+
+\section{Valores exatos e simetrias}
+
+\begin{teorema}[Fórmulas de adição, admitidas]\label{teo:adicao}
+Para todos $a,b\in\R$,
+\begin{align*}
+\sin(a+b)&=\sin a\cos b+\cos a\sin b,\\
+\cos(a+b)&=\cos a\cos b-\sin a\sin b.
+\end{align*}
+Estas duas identidades são o ponto de partida algébrico do capítulo; não são demonstradas aqui.
+\end{teorema}
+
+\begin{proposicao}[Paridade e redução]\label{prop:paridade}
+Para todo $\theta\in\R$,
+\begin{align*}
+\cos(-\theta)&=\cos\theta,&
+\sin(-\theta)&=-\sin\theta,\\
+\sin(\pi-\theta)&=\sin\theta,&
+\cos(\pi-\theta)&=-\cos\theta,\\
+\sin(\pi+\theta)&=-\sin\theta,&
+\cos(\pi+\theta)&=-\cos\theta,\\
+\sin(\pi/2-\theta)&=\cos\theta,&
+\cos(\pi/2-\theta)&=\sin\theta.
+\end{align*}
+Além disso $\cos\pi=-1$, $\sin\pi=0$, $\cos(3\pi/2)=0$ e $\sin(3\pi/2)=-1$. Em particular $\cos(\pi/2-\theta)$ e $\sin(\pi/2-\theta)$ trocam seno e cosseno.
+\end{proposicao}
+
+\begin{proof}
+As fórmulas de subtração saem das de adição e serão obtidas depois da paridade; o primeiro passo é a paridade. Tem-se $\cos 0=1$ e $\sin 0=0$. Logo
+\begin{align*}
+\cos\bigl(\theta+(-\theta)\bigr)=1
+&=\cos\theta\cos(-\theta)-\sin\theta\sin(-\theta),\\
+\sin\bigl(\theta+(-\theta)\bigr)=0
+&=\sin\theta\cos(-\theta)+\cos\theta\sin(-\theta).
+\end{align*}
+Sejam $c=\cos(-\theta)$ e $s=\sin(-\theta)$. O par $(c,s)=(\cos\theta,-\sin\theta)$ satisfaz o sistema: 
+\[
+\cos\theta\cdot\cos\theta-\sin\theta\cdot(-\sin\theta)=\cos^2\theta+\sin^2\theta=1
+\]
+e
+\[
+\sin\theta\cdot\cos\theta+\cos\theta\cdot(-\sin\theta)=0.
+\]
+Para a unicidade, se $(d_1,d_2)$ satisfaz o sistema homogêneo
+\[
+\cos\theta\, d_1-\sin\theta\, d_2=0,\qquad \sin\theta\, d_1+\cos\theta\, d_2=0,
+\]
+multiplique a primeira equação por $\cos\theta$ e a segunda por $\sin\theta$ e some:
+\[
+(\cos^2\theta+\sin^2\theta)d_1=d_1=0.
+\]
+A primeira equação fica $-\sin\theta\, d_2=0$. Se $\sin\theta\neq 0$, então $d_2=0$. Se $\sin\theta=0$, a equação fundamental dá $\cos\theta=\pm 1\neq 0$, e a segunda equação do sistema homogêneo fica $\cos\theta\, d_2=0$, logo $d_2=0$. A solução é única, e valem $\cos(-\theta)=\cos\theta$ e $\sin(-\theta)=-\sin\theta$.
+
+Daqui,
+\begin{align*}
+\sin(a-b)&=\sin a\cos b-\cos a\sin b,\\
+\cos(a-b)&=\cos a\cos b+\sin a\sin b,
+\end{align*}
+porque $\cos(-b)=\cos b$ e $\sin(-b)=-\sin b$.
+
+Agora $\cos\pi=\cos(\pi/2+\pi/2)=\cos^2(\pi/2)-\sin^2(\pi/2)=-1$ e $\sin\pi=2\sin(\pi/2)\cos(\pi/2)=0$. Então
+\begin{align*}
+\sin(\pi-\theta)&=\sin\pi\cos\theta-\cos\pi\sin\theta=\sin\theta,\\
+\cos(\pi-\theta)&=\cos\pi\cos\theta+\sin\pi\sin\theta=-\cos\theta,\\
+\sin(\pi+\theta)&=\sin\pi\cos\theta+\cos\pi\sin\theta=-\sin\theta,\\
+\cos(\pi+\theta)&=\cos\pi\cos\theta-\sin\pi\sin\theta=-\cos\theta.
+\end{align*}
+Por fim $\cos(3\pi/2)=\cos(\pi+\pi/2)=-\cos(\pi/2)=0$ e $\sin(3\pi/2)=\sin(\pi+\pi/2)=-\sin(\pi/2)=-1$, e
+\begin{align*}
+\sin(\pi/2-\theta)&=\sin(\pi/2)\cos\theta-\cos(\pi/2)\sin\theta=\cos\theta,\\
+\cos(\pi/2-\theta)&=\cos(\pi/2)\cos\theta+\sin(\pi/2)\sin\theta=\sin\theta.
+\end{align*}
+\end{proof}
+
+\begin{proposicao}[Sinais nos quadrantes abertos]\label{prop:quadrantes}
+Se $\theta\in(\pi/2,\pi)$, então $\sin\theta>0$ e $\cos\theta<0$. Se $\theta\in(\pi,3\pi/2)$, então $\sin\theta<0$ e $\cos\theta<0$. Se $\theta\in(3\pi/2,2\pi)$, então $\sin\theta<0$ e $\cos\theta>0$. Se $\theta\in(-\pi/2,0)$, então $\sin\theta<0$ e $\cos\theta>0$. Em $(-\pi/2,\pi/2)$, $\cos\theta>0$. Em $(0,\pi)$, $\sin\theta>0$.
+\end{proposicao}
+
+\begin{proof}
+Se $\theta\in(\pi/2,\pi)$, então $\pi-\theta\in(0,\pi/2)$, logo $\sin\theta=\sin(\pi-\theta)>0$ e $\cos\theta=-\cos(\pi-\theta)<0$.
+
+Se $\theta\in(\pi,3\pi/2)$, escreva $\theta=\pi+\alpha$ com $\alpha\in(0,\pi/2)$. Então $\sin\theta=-\sin\alpha<0$ e $\cos\theta=-\cos\alpha<0$.
+
+Se $\theta\in(3\pi/2,2\pi)$, então $-\theta\in(-2\pi,-3\pi/2)$ e $\theta-2\pi\in(-\pi/2,0)$. É mais direto usar $\theta=2\pi-\beta$ com $\beta\in(0,\pi/2)$: $\sin\theta=\sin(-\beta)=-\sin\beta<0$ e $\cos\theta=\cos(-\beta)=\cos\beta>0$, pois $\sin(2\pi-\beta)=\sin(-\beta)$ pela periodicidade $\sin((-\beta)+2\pi)=\sin(-\beta)$.
+
+Se $\theta\in(-\pi/2,0)$, então $-\theta\in(0,\pi/2)$, $\sin\theta=-\sin(-\theta)<0$ e $\cos\theta=\cos(-\theta)>0$. Juntando com o primeiro quadrante e com $\cos 0=1$, obtém-se $\cos\theta>0$ em $(-\pi/2,\pi/2)$. Juntando $(0,\pi/2)$ e $(\pi/2,\pi)$ com $\sin(\pi/2)=1$, obtém-se $\sin\theta>0$ em $(0,\pi)$.
+\end{proof}
+
+\begin{teorema}[Valores notáveis]\label{teo:notaveis}
+\[
+\begin{array}{c|ccccc}
+\theta&0&\pi/6&\pi/4&\pi/3&\pi/2\\
+\hline
+\sin\theta&0&1/2&\sqrt{2}/2&\sqrt{3}/2&1\\
+\cos\theta&1&\sqrt{3}/2&\sqrt{2}/2&1/2&0
+\end{array}
+\]
+\end{teorema}
+
+\begin{proof}
+Os valores em $0$ e em $\pi/2$ estão na Definição~\ref{def:circulo}.
+
+Soma dos ângulos de um triângulo. Seja $ABC$ um triângulo. Pelo vértice $A$ trace a reta $r$ paralela ao lado $BC$. A transversal $AB$ forma com $r$ um ângulo alterno interno igual ao ângulo em $B$; a transversal $AC$ forma com $r$ um ângulo alterno interno igual ao ângulo em $C$. Estes dois ângulos e o ângulo em $A$ estão justapostos sobre a reta $r$ e compõem um ângulo raso, de medida $\pi$. Este parágrafo usa o fato euclidiano dos ângulos alternos internos.
+
+Ângulos da base. Se $AB=AC$ e $M$ é o ponto médio de $BC$, os triângulos $ABM$ e $ACM$ têm os três lados respectivamente iguais: $AB=AC$, $BM=MC$ e $AM$ comum. Pelo critério lado-lado-lado, os ângulos correspondentes são iguais. Em particular os ângulos em $B$ e em $C$ são iguais, e os ângulos em $A$ nos dois triângulos pequenos são iguais. Os ângulos em $M$ são adjacentes e formam um ângulo raso, logo cada um mede $\pi/2$.
+
+Triângulo equilátero. Tome lados iguais a $2$. Os três ângulos são iguais, porque cada um é ângulo da base de um vértice em que os dois lados adjacentes são iguais. A soma é $\pi$, logo cada um mede $\pi/3$. Seja $M$ o ponto médio da base. A altura relativa à base mede, pelo cálculo de distância, $\sqrt{2^2-1^2}=\sqrt{3}$, e os dois triângulos retângulos têm ângulo $\pi/6$ no vértice de cima, porque a congruência reparte $\pi/3$ em duas partes iguais, e ângulo $\pi/3$ na base.
+
+Num triângulo retângulo de hipotenusa $r$ e ângulo agudo $\theta$ junto à origem, com o cateto adjacente sobre o eixo $x$ positivo, o vértice oposto é $(r\cos\theta,r\sin\theta)$: o ponto da circunferência unitária naquela direção é $(\cos\theta,\sin\theta)$, e a distância $r$ multiplica as duas coordenadas. Portanto
+\[
+\sin\theta=\frac{\text{cateto oposto}}{\text{hipotenusa}},\qquad
+\cos\theta=\frac{\text{cateto adjacente}}{\text{hipotenusa}}.
+\]
+No triângulo retângulo de catetos $1$ e $\sqrt{3}$ e hipotenusa $2$, o ângulo $\pi/6$ opõe o cateto $1$ e o ângulo $\pi/3$ opõe o cateto $\sqrt{3}$. Logo
+\[
+\sin\frac{\pi}{6}=\frac12,\quad
+\cos\frac{\pi}{6}=\frac{\sqrt{3}}{2},\quad
+\sin\frac{\pi}{3}=\frac{\sqrt{3}}{2},\quad
+\cos\frac{\pi}{3}=\frac12.
+\]
+
+Para $\pi/4$, o triângulo retângulo isósceles de catetos $1$ tem hipotenusa $\sqrt{1^2+1^2}=\sqrt{2}$. Os catetos são iguais, então os ângulos agudos opostos a eles são iguais, pelo argumento da base já feito. Esses dois ângulos somam $\pi-\pi/2=\pi/2$, logo cada um mede $\pi/4$. Assim
+\[
+\sin\frac{\pi}{4}=\cos\frac{\pi}{4}=\frac{1}{\sqrt{2}}=\frac{\sqrt{2}}{2},
+\]
+em que a última igualdade vem de $\sqrt{2}/2\cdot\sqrt{2}/2=2/4=1/2$ e de $1/\sqrt{2}>0$, comparados com o quadrado $(1/\sqrt{2})^2=1/2$.
+\end{proof}
+
+\begin{exemplo}
+Pelas reduções, $\sin(5\pi/6)=\sin(\pi-\pi/6)=\sin(\pi/6)=1/2$ e $\cos(5\pi/6)=-\cos(\pi/6)=-\sqrt{3}/2$. O ponto correspondente está no segundo quadrante.
+\end{exemplo}
+
+\section{Tangente e funções recíprocas}
+
+\begin{definicao}
+Onde as expressões fazem sentido,
+\[
+\tan\theta=\frac{\sin\theta}{\cos\theta},\qquad
+\sec\theta=\frac{1}{\cos\theta},\qquad
+\csc\theta=\frac{1}{\sin\theta},\qquad
+\cot\theta=\frac{\cos\theta}{\sin\theta}.
+\]
+\end{definicao}
+
+\begin{proposicao}[Domínios]\label{prop:dominios-trig}
+A função $\sin$ é zero se e somente se $\theta=k\pi$ para algum $k\in\Z$. A função $\cos$ é zero se e somente se $\theta=\pi/2+k\pi$ para algum $k\in\Z$. Consequentemente:
+\begin{enumerate}
+\item $\tan$ e $\sec$ estão definidas exatamente quando $\theta\neq \pi/2+k\pi$;
+\item $\cot$ e $\csc$ estão definidas exatamente quando $\theta\neq k\pi$.
+\end{enumerate}
+Além disso, nesses domínios, $1+\tan^2\theta=\sec^2\theta$ e $1+\cot^2\theta=\csc^2\theta$.
+\end{proposicao}
+
+\begin{proof}
+Se $\sin\theta=0$, a equação fundamental dá $\cos\theta=\pm 1$. O ponto é $(1,0)$ ou $(-1,0)$. O primeiro é o ponto do ângulo $0$; o segundo é o ponto do ângulo $\pi$, porque $\cos\pi=-1$ e $\sin\pi=0$. Pela periodicidade e pela unicidade do ângulo módulo $2\pi$, $\theta=2k\pi$ ou $\theta=\pi+2k\pi$, isto é $\theta=m\pi$. Reciprocamente, $\sin(m\pi)=0$: vale para $m=0$ e $m=1$, e $\sin(\theta+\pi)=-\sin\theta$ reduz o passo de $m$ a $m+1$, inclusive para $m$ negativo, usando a paridade no caso $m<0$.
+
+Se $\cos\theta=0$, então $\sin\theta=\pm 1$. Os pontos são $(0,1)$ e $(0,-1)$, ângulos $\pi/2$ e $3\pi/2=\pi/2+\pi$. Logo $\theta=\pi/2+k\pi$. A recíproca usa $\cos(\pi/2)=0$ e $\cos(\theta+\pi)=-\cos\theta$. Para $k\ge 0$, indução dá $\cos(\pi/2+k\pi)=0$. Para $k<0$, seja $m=-k>0$ e $\varphi=\pi/2+k\pi$. O caso não negativo dá $\cos(\varphi+m\pi)=(-1)^m\cos\varphi$. Como $\varphi+m\pi=\pi/2$, tem-se $0=(-1)^m\cos\varphi$, logo $\cos(\pi/2+k\pi)=0$.
+
+Os domínios de $\tan$, $\sec$, $\cot$ e $\csc$ são exatamente os conjuntos em que os denominadores não se anulam.
+
+Se $\cos\theta\neq 0$, divida $\sin^2\theta+\cos^2\theta=1$ por $\cos^2\theta$:
+\[
+\tan^2\theta+1=\sec^2\theta.
+\]
+Se $\sin\theta\neq 0$, divida por $\sin^2\theta$:
+\[
+1+\cot^2\theta=\csc^2\theta.
+\]
+\end{proof}
+
+\section{Arco duplo, metade e diferença de senos}
+
+\begin{teorema}[Arco duplo]\label{teo:duplo}
+Para todo $a\in\R$,
+\begin{align*}
+\sin(2a)&=2\sin a\cos a,\\
+\cos(2a)&=\cos^2 a-\sin^2 a
+=2\cos^2 a-1
+=1-2\sin^2 a.
+\end{align*}
+\end{teorema}
+
+\begin{proof}
+O Teorema~\ref{teo:adicao} com $b=a$ dá $\sin(2a)=\sin a\cos a+\cos a\sin a=2\sin a\cos a$ e $\cos(2a)=\cos^2 a-\sin^2 a$. Substitua $\sin^2 a=1-\cos^2 a$:
+\[
+\cos(2a)=\cos^2 a-(1-\cos^2 a)=2\cos^2 a-1.
+\]
+Substitua $\cos^2 a=1-\sin^2 a$:
+\[
+\cos(2a)=(1-\sin^2 a)-\sin^2 a=1-2\sin^2 a.
+\]
+\end{proof}
+
+\begin{teorema}[Arco metade]\label{teo:metade}
+Para todo $a\in\R$,
+\[
+\cos^2\frac{a}{2}=\frac{1+\cos a}{2},\qquad
+\sin^2\frac{a}{2}=\frac{1-\cos a}{2}.
+\]
+Portanto
+\[
+\cos\frac{a}{2}=\pm\sqrt{\frac{1+\cos a}{2}},\qquad
+\sin\frac{a}{2}=\pm\sqrt{\frac{1-\cos a}{2}},
+\]
+em que o sinal de cada raiz é o sinal de $\cos(a/2)$ ou de $\sin(a/2)$, respectivamente, lido no quadrante em que $a/2$ se encontra.
+\end{teorema}
+
+\begin{proof}
+Troque $a$ por $a/2$ na identidade $\cos(2a)=2\cos^2 a-1$:
+\[
+\cos a=2\cos^2\frac{a}{2}-1,
+\]
+logo $2\cos^2(a/2)=1+\cos a$ e $\cos^2(a/2)=(1+\cos a)/2$. O numerador é não negativo porque $\cos a\ge -1$, então a divisão por $2$ está definida e a raiz quadrada está definida. De $\cos(2a)=1-2\sin^2 a$ com o mesmo troca,
+\[
+\cos a=1-2\sin^2\frac{a}{2},
+\]
+logo $\sin^2(a/2)=(1-\cos a)/2$. Se $b\ge 0$, $c\ge 0$ e $b^2=c^2$, então $b=c$, porque $(b-c)(b+c)=0$ e $b=-c$ com ambos não negativos força $b=c=0$. Assim a raiz quadrada é o único número não negativo com aquele quadrado, e $\sin(a/2)$ é essa raiz ou o seu oposto, conforme o sinal de $\sin(a/2)$. O mesmo vale para o cosseno.
+\end{proof}
+
+\begin{teorema}[Diferença de senos]\label{teo:dif-senos}
+Para todos $a,b\in\R$,
+\[
+\sin a-\sin b=2\cos\frac{a+b}{2}\sin\frac{a-b}{2}.
+\]
+\end{teorema}
+
+\begin{proof}
+As fórmulas de adição e de subtração dão
+\begin{align*}
+\sin(x+y)&=\sin x\cos y+\cos x\sin y,\\
+\sin(x-y)&=\sin x\cos y-\cos x\sin y.
+\end{align*}
+Subtraindo,
+\[
+\sin(x+y)-\sin(x-y)=2\cos x\sin y.
+\]
+Ponhamos $a=x+y$ e $b=x-y$. Então $x=(a+b)/2$ e $y=(a-b)/2$, porque a soma das duas equações é $2x=a+b$ e a diferença é $2y=a-b$. Substituindo,
+\[
+\sin a-\sin b=2\cos\frac{a+b}{2}\sin\frac{a-b}{2}.
+\]
+\end{proof}
+
+\begin{lema}[Produto seno-cosseno]\label{lem:produto}
+Para todos $a,b\in\R$,
+\[
+\sin a\cos b=\frac12\bigl(\sin(a+b)+\sin(a-b)\bigr).
+\]
+\end{lema}
+
+\begin{esqueleto}
+\item Escreva $\sin(a+b)$ e $\sin(a-b)$ pelas fórmulas de adição e de subtração.
+\item \textbf{Passo difícil.} A soma é
+\begin{align*}
+\sin(a+b)+\sin(a-b)
+&=(\sin a\cos b+\cos a\sin b)+(\sin a\cos b-\cos a\sin b)\\
+&=2\sin a\cos b.
+\end{align*}
+Os termos $\cos a\sin b$ cancelam-se, e os termos $\sin a\cos b$ somam-se.
+\item Divida por $2$.
+\end{esqueleto}
+
+\section{Lei dos cossenos e lei dos senos}
+
+\begin{teorema}[Lei dos cossenos]\label{teo:cossenos}
+Num triângulo, se os lados $a$, $b$ e $c$ opõem-se respectivamente aos ângulos $\alpha$, $\beta$ e $\gamma$, então
+\[
+c^2=a^2+b^2-2ab\cos\gamma,
+\]
+e as igualdades análogas valem para os outros lados. Cada ângulo interno está em $(0,\pi)$.
+\end{teorema}
+
+\begin{proof}
+Cada ângulo interno é positivo. Se um deles fosse maior ou igual a $\pi$, a soma dos três, com os outros dois positivos, seria maior do que $\pi$, contradizendo a soma $\pi$ já estabelecida na prova dos valores notáveis. Logo cada ângulo está em $(0,\pi)$ e o seno correspondente é positivo, pela Proposição~\ref{prop:quadrantes}.
+
+Coloque o vértice do ângulo $\gamma$ na origem, o lado de comprimento $a$ sobre o eixo $x$ positivo e o terceiro vértice no semiplano $y\ge 0$. As coordenadas ficam
+\[
+C=(0,0),\qquad B=(a,0),\qquad A=(b\cos\gamma,\ b\sin\gamma).
+\]
+A distância de $C$ a $A$ é
+\[
+\sqrt{b^2\cos^2\gamma+b^2\sin^2\gamma}=b,
+\]
+como se exigia. A distância de $A$ a $B$ é o lado $c$, oposto a $\gamma$:
+\begin{align*}
+c^2
+&=(b\cos\gamma-a)^2+(b\sin\gamma)^2\\
+&=b^2\cos^2\gamma-2ab\cos\gamma+a^2+b^2\sin^2\gamma\\
+&=a^2+b^2(\cos^2\gamma+\sin^2\gamma)-2ab\cos\gamma\\
+&=a^2+b^2-2ab\cos\gamma.
+\end{align*}
+A mesma construção, com outro vértice na origem, dá as duas fórmulas restantes. O argumento não usou $\cos\gamma>0$: se $\gamma\in(\pi/2,\pi)$, a abscissa de $A$ é negativa e a expansão permanece válida.
+\end{proof}
+
+\begin{teorema}[Lei dos senos]\label{teo:senos}
+Nas notações do Teorema~\ref{teo:cossenos},
+\[
+\frac{a}{\sin\alpha}=\frac{b}{\sin\beta}=\frac{c}{\sin\gamma}.
+\]
+\end{teorema}
+
+\begin{proof}
+Na mesma colocação de coordenadas, a base $CB$ tem comprimento $a$ e a altura relativa a essa base é a ordenada de $A$, igual a $b\sin\gamma$. Como $\gamma\in(0,\pi)$, $\sin\gamma>0$ e a altura é positiva. A área do triângulo é
+\[
+\frac12\cdot a\cdot b\sin\gamma.
+\]
+Repetindo a construção com o ângulo $\alpha$ na origem, a área também é $\frac12 bc\sin\alpha$. Com o ângulo $\beta$ na origem, é $\frac12 ac\sin\beta$. Igualando a primeira e a terceira expressões,
+\[
+\frac12 bc\sin\alpha=\frac12 ab\sin\gamma.
+\]
+Como $b>0$, podemos dividir por $b/2$: $c\sin\alpha=a\sin\gamma$. Como os senos dos ângulos internos são positivos, 
+\[
+\frac{a}{\sin\alpha}=\frac{c}{\sin\gamma}.
+\]
+A comparação com a expressão em $\beta$ completa a cadeia.
+\end{proof}
+
+\section{Inversas}
+
+\begin{teorema}[Restrições bijetoras]\label{teo:restricoes}
+A restrição de $\sin$ a $[-\pi/2,\pi/2]$ é bijetora sobre $[-1,1]$ e estritamente crescente. A restrição de $\cos$ a $[0,\pi]$ é bijetora sobre $[-1,1]$ e estritamente decrescente. A restrição de $\tan$ a $(-\pi/2,\pi/2)$ é bijetora sobre $\R$ e estritamente crescente.
+\end{teorema}
+
+\begin{proof}
+No intervalo $[-\pi/2,\pi/2]$, de comprimento $\pi<2\pi$, a condição (2) da Definição~\ref{def:circulo} torna $\theta\mapsto(\cos\theta,\sin\theta)$ injetora. A condição (5) diz que a imagem é o semicírculo $x\ge 0$. Nesse semicírculo, cada ordenada $s\in[-1,1]$ ocorre em exatamente um ponto, $( \sqrt{1-s^2},\, s)$. Logo $\sin$, lida nesse intervalo, atinge cada valor de $[-1,1]$ exatamente uma vez.
+
+Crescimento estrito: sejam $-\pi/2\le \alpha<\beta\le\pi/2$. O Teorema~\ref{teo:dif-senos} dá
+\[
+\sin\beta-\sin\alpha=2\cos\frac{\alpha+\beta}{2}\sin\frac{\beta-\alpha}{2}.
+\]
+Aqui $(\beta-\alpha)/2\in(0,\pi/2]$, e o seno é positivo nesse intervalo: em $(0,\pi/2)$ pelo primeiro quadrante, e em $\pi/2$ pelo valor $1$. A média $(\alpha+\beta)/2$ está em $(-\pi/2,\pi/2)$: não pode ser $-\pi/2$, senão $\alpha=\beta=-\pi/2$, e não pode ser $\pi/2$, senão $\alpha=\beta=\pi/2$. Pela Proposição~\ref{prop:quadrantes}, o cosseno dessa média é positivo. O produto é positivo e $\sin\beta>\sin\alpha$.
+
+Para o cosseno em $[0,\pi]$, a parametrização percorre o semicírculo $y\ge 0$, e cada abscissa $c\in[-1,1]$ ocorre uma vez, no ponto $(c,\sqrt{1-c^2})$. Isso dá a bijeção sobre $[-1,1]$. Para o decrescimento, a identidade gêmea da diferença de senos, provada pelo mesmo cancelamento, é necessária; ela é o cálculo seguinte, escrito por completo porque a monotonia depende dele. De
+\begin{align*}
+\cos(x+y)&=\cos x\cos y-\sin x\sin y,\\
+\cos(x-y)&=\cos x\cos y+\sin x\sin y
+\end{align*}
+segue, subtraindo,
+\[
+\cos(x+y)-\cos(x-y)=-2\sin x\sin y.
+\]
+Com $a=x+y$ e $b=x-y$, 
+\[
+\cos a-\cos b=-2\sin\frac{a+b}{2}\sin\frac{a-b}{2}.
+\]
+Se $0\le\alpha<\beta\le\pi$, então $(\beta-\alpha)/2\in(0,\pi/2]$ e $\sin$ é positivo aí. Além disso $\alpha+\beta\in(0,2\pi)$: é positivo porque $\beta>0$, e é estritamente menor do que $2\pi$ porque $\alpha<\pi$. Logo $(\alpha+\beta)/2\in(0,\pi)$ e o seno é positivo. Assim $\cos\beta-\cos\alpha$ é o produto de $-2$ por dois positivos, logo $\cos\beta<\cos\alpha$.
+
+Para a tangente, sejam $-\pi/2<\alpha<\beta<\pi/2$. Então $\cos\alpha>0$, $\cos\beta>0$ e $\beta-\alpha\in(0,\pi)$, de modo que $\sin(\beta-\alpha)>0$. A diferença dos senos e dos cossenos no numerador da tangente é o seno da diferença:
+\begin{align*}
+\tan\beta-\tan\alpha
+&=\frac{\sin\beta}{\cos\beta}-\frac{\sin\alpha}{\cos\alpha}
+=\frac{\sin\beta\cos\alpha-\cos\beta\sin\alpha}{\cos\alpha\cos\beta}
+=\frac{\sin(\beta-\alpha)}{\cos\alpha\cos\beta}.
+\end{align*}
+O numerador e o denominador são positivos, logo $\tan\beta>\tan\alpha$.
+
+Sobrejetividade sobre $\R$. Seja $m\in\R$. O ponto
+\[
+\Bigl(\frac{1}{\sqrt{1+m^2}},\ \frac{m}{\sqrt{1+m^2}}\Bigr)
+\]
+está na circunferência unitária e tem abscissa positiva, logo é $(\cos\theta,\sin\theta)$ para um único $\theta\in(-\pi/2,\pi/2)$. A razão das coordenadas é $m$, isto é $\tan\theta=m$.
+\end{proof}
+
+\begin{definicao}
+A inversa de $\sin\big|_{[-\pi/2,\pi/2]}$ é $\arcsin\colon[-1,1]\to[-\pi/2,\pi/2]$. A inversa de $\cos\big|_{[0,\pi]}$ é $\arccos\colon[-1,1]\to[0,\pi]$. A inversa de $\tan\big|_{(-\pi/2,\pi/2)}$ é $\arctan\colon\R\to(-\pi/2,\pi/2)$.
+\end{definicao}
+
+\begin{teorema}[Soma de arctangentes]\label{teo:arctan-soma}
+A função $\arctan$ é ímpar: $\arctan(-u)=-\arctan u$ para todo $u\in\R$. Para $x\neq 0$,
+\[
+\arctan x+\arctan\frac{1}{x}=
+\begin{cases}
+\pi/2,&\text{se }x>0,\\
+-\pi/2,&\text{se }x<0.
+\end{cases}
+\]
+\end{teorema}
+
+\begin{proof}
+Seja $\alpha=\arctan u$, de modo que $\tan\alpha=u$ e $\alpha\in(-\pi/2,\pi/2)$. Então
+\[
+\tan(-\alpha)=\frac{\sin(-\alpha)}{\cos(-\alpha)}=\frac{-\sin\alpha}{\cos\alpha}=-\tan\alpha=-u,
+\]
+e $-\alpha$ continua em $(-\pi/2,\pi/2)$. Pela unicidade da inversa, $\arctan(-u)=-\alpha$.
+
+Seja $x>0$ e $\alpha=\arctan x$. Então $\alpha\in(0,\pi/2)$ e $\tan\alpha=x$. O ângulo $\pi/2-\alpha$ também está em $(0,\pi/2)$. Pelas fórmulas de redução,
+\begin{align*}
+\sin(\pi/2-\alpha)&=\cos\alpha,&
+\cos(\pi/2-\alpha)&=\sin\alpha,
+\end{align*}
+e $\sin\alpha>0$, logo
+\[
+\tan(\pi/2-\alpha)=\frac{\cos\alpha}{\sin\alpha}=\frac{1}{\tan\alpha}=\frac{1}{x}.
+\]
+A unicidade de $\arctan$ em $(-\pi/2,\pi/2)$ dá $\arctan(1/x)=\pi/2-\alpha$. Somando, $\arctan x+\arctan(1/x)=\pi/2$.
+
+Se $x<0$, seja $t=-x>0$. A imparidade dá
+\begin{align*}
+\arctan x+\arctan\frac{1}{x}
+&=\arctan(-t)+\arctan\Bigl(-\frac{1}{t}\Bigr)
+=-\arctan t-\arctan\frac{1}{t}
+=-\frac{\pi}{2}.
+\end{align*}
+\end{proof}
+
+\begin{contraexemplo}
+A conclusão $\pi/2$ exige $x>0$. Para $x=-1$,
+\[
+\arctan(-1)+\arctan(-1)=-\frac{\pi}{4}-\frac{\pi}{4}=-\frac{\pi}{2},
+\]
+que não é $\pi/2$. O ponto $x=0$ está fora da identidade porque $1/x$ não está definido.
+\end{contraexemplo}
+
+\cuidado{O cálculo formal $(\tan\alpha+\tan\beta)/(1-\tan\alpha\tan\beta)$ não substitui a separação dos casos. Se $x>0$ e $\alpha=\arctan x$, $\beta=\arctan(1/x)$, então $\tan\alpha\tan\beta=1$ e $\alpha+\beta=\pi/2$, ângulo em que a tangente não está definida. O valor da soma é lido pela redução ao complementar, não pela fórmula da tangente da soma.}
+
+\section{Equações trigonométricas}
+
+\begin{teorema}[Solução geral das equações básicas]\label{teo:eq-gerais}
+Sejam $\alpha,x\in\R$.
+\begin{enumerate}
+\item $\sin x=\sin\alpha$ se e somente se existe $k\in\Z$ com $x=\alpha+2k\pi$ ou $x=\pi-\alpha+2k\pi$.
+\item $\cos x=\cos\alpha$ se e somente se existe $k\in\Z$ com $x=\alpha+2k\pi$ ou $x=-\alpha+2k\pi$.
+\item Se $\cos x\neq 0$ e $\cos\alpha\neq 0$, então $\tan x=\tan\alpha$ se e somente se existe $k\in\Z$ com $x=\alpha+k\pi$. Todo número dessa família tem cosseno diferente de zero quando $\cos\alpha\neq 0$.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+(1) Se $x=\alpha+2k\pi$, a periodicidade dá $\sin x=\sin\alpha$. Se $x=\pi-\alpha+2k\pi$, então $\sin x=\sin(\pi-\alpha)=\sin\alpha$.
+
+Reciprocamente, $\sin x=\sin\alpha$ implica $\cos^2 x=1-\sin^2 x=1-\sin^2\alpha=\cos^2\alpha$, logo $\cos x=\cos\alpha$ ou $\cos x=-\cos\alpha$. No primeiro caso os pontos do círculo coincidem e $x=\alpha+2k\pi$. No segundo, o ponto é $(-\cos\alpha,\sin\alpha)=(\cos(\pi-\alpha),\sin(\pi-\alpha))$, logo $x=\pi-\alpha+2k\pi$.
+
+(2) De $\cos x=\cos\alpha$ segue $\sin x=\sin\alpha$ ou $\sin x=-\sin\alpha$. No primeiro caso, $x=\alpha+2k\pi$. No segundo, o ponto é $(\cos\alpha,-\sin\alpha)=(\cos(-\alpha),\sin(-\alpha))$, logo $x=-\alpha+2k\pi$. A volta é a periodicidade e a paridade do cosseno.
+
+(3) Com os cossenos diferentes de zero,
+\[
+\tan x-\tan\alpha
+=\frac{\sin(x-\alpha)}{\cos x\cos\alpha}.
+\]
+O denominador não é zero, então o quociente é zero se e somente se $\sin(x-\alpha)=0$, isto é $x-\alpha=k\pi$.
+
+Resta ver que $\cos(\alpha+k\pi)\neq 0$. A identidade $\cos(\theta+\pi)=-\cos\theta$ já foi provada. Para $k\ge 0$, indução em $k$ dá $\cos(\theta+k\pi)=(-1)^k\cos\theta$: o passo é $\cos(\theta+(k+1)\pi)=-\cos(\theta+k\pi)$. Para $k<0$, seja $m=-k>0$ e seja $\varphi=\theta+k\pi$. A identidade já obtida para o inteiro positivo $m$ dá $\cos(\varphi+m\pi)=(-1)^m\cos\varphi$. Mas $\varphi+m\pi=\theta$, logo $\cos\theta=(-1)^m\cos(\theta+k\pi)$. Multiplicando os dois lados por $(-1)^m$, e usando $(-1)^{2m}=1$, obtém-se $\cos(\theta+k\pi)=(-1)^m\cos\theta$. Como $m=-k$ e $(-1)^{-k}=(-1)^k$, vale $\cos(\theta+k\pi)=(-1)^k\cos\theta$ também para $k<0$. Assim, para todo $k\in\Z$, $\cos(\alpha+k\pi)=(-1)^k\cos\alpha\neq 0$.
+\end{proof}
+
+\begin{exemplo}[Equação do seno]
+Resolva $\sin x=1/2$. O valor notável $\sin(\pi/6)=1/2$ e o Teorema~\ref{teo:eq-gerais} dão
+\[
+x=\frac{\pi}{6}+2k\pi\qquad\text{ou}\qquad x=\pi-\frac{\pi}{6}+2k\pi=\frac{5\pi}{6}+2k\pi,
+\]
+com $k\in\Z$.
+\end{exemplo}
+
+\begin{exemplo}[Equação do cosseno]
+Resolva $\cos x=-1/2$. Como $\cos(2\pi/3)=\cos(\pi-\pi/3)=-\cos(\pi/3)=-1/2$,
+\[
+x=\pm\frac{2\pi}{3}+2k\pi,\qquad k\in\Z.
+\]
+\end{exemplo}
+
+\begin{exemplo}[Equação da tangente]
+Resolva $\tan x=\sqrt{3}$, no domínio $\cos x\neq 0$. Como $\tan(\pi/3)=(\sqrt{3}/2)/(1/2)=\sqrt{3}$ e $\cos(\pi/3)\neq 0$,
+\[
+x=\frac{\pi}{3}+k\pi,\qquad k\in\Z.
+\]
+Cada um desses ângulos está no domínio, pelo item (3) do Teorema~\ref{teo:eq-gerais}.
+\end{exemplo}
+
+\section{Exercícios}
+
+As soluções comentadas estão em \texttt{03\_trigonometria\_gabarito.tex}.
+
+\begin{exercicio}[Básico — valores em outro quadrante]
+Calcule $\sin(5\pi/6)$, $\cos(5\pi/6)$ e $\tan(5\pi/6)$ a partir dos valores do primeiro quadrante e das simetrias.
+\end{exercicio}
+
+\begin{exercicio}[Básico — equação do cosseno]
+Resolva $\cos x=\sqrt{2}/2$, escrevendo a solução geral.
+\end{exercicio}
+
+\begin{exercicio}[Básico — arco metade]
+Calcule os valores exatos de $\sin(\pi/12)$ e de $\cos(\pi/12)$, escolhendo o sinal pelo quadrante de $\pi/12$.
+\end{exercicio}
+
+\begin{exercicio}[Básico — domínio trigonométrico]
+Determine o domínio de $f(x)=\tan x+\sec x$ e o de $g(x)=\csc(2x)$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — soma de cossenos]
+Prove que
+\[
+\cos a+\cos b=2\cos\frac{a+b}{2}\cos\frac{a-b}{2},
+\]
+partindo das fórmulas de adição.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — lei dos cossenos numérica]
+Num triângulo, dois lados medem $2$ e $3$ e o ângulo entre eles mede $\pi/3$. Calcule o terceiro lado e o cosseno do ângulo oposto ao lado de comprimento $2$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — tangente da soma]
+Prove que, quando $\cos a\cos b\neq 0$ e $\cos(a+b)\neq 0$,
+\[
+\tan(a+b)=\frac{\tan a+\tan b}{1-\tan a\tan b}.
+\]
+Diga em que passo cada hipótese é usada.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — soma de arctangentes]
+Prove que $\arctan 1+\arctan 2+\arctan 3=\pi$. No cálculo de $\arctan 2+\arctan 3$, justifique por que a soma é $3\pi/4$, e não $-\pi/4$, embora a tangente dessa soma seja $-1$.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — equação com soma para produto]
+Resolva $\sin(5x)-\sin x=0$. Escreva a solução geral como união de duas famílias e verifique que a fatoração não introduz raízes extras.
+\end{exercicio}
+
+\end{document}

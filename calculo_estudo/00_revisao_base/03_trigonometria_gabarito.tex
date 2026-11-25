@@ -1,0 +1,198 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito --- Trigonometria}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A numeração segue a ordem dos exercícios do texto.
+
+\section*{Exercício 1. [Básico --- valores em outro quadrante]}
+
+\textbf{Enunciado.} Calcule $\sin(5\pi/6)$, $\cos(5\pi/6)$ e $\tan(5\pi/6)$.
+
+\textbf{Solução.}
+O ângulo $5\pi/6$ está em $(\pi/2,\pi)$, e $5\pi/6=\pi-\pi/6$. As reduções dão
+\[
+\sin\frac{5\pi}{6}=\sin\Bigl(\pi-\frac{\pi}{6}\Bigr)=\sin\frac{\pi}{6}=\frac12,
+\]
+\[
+\cos\frac{5\pi}{6}=-\cos\frac{\pi}{6}=-\frac{\sqrt{3}}{2}.
+\]
+O cosseno não é zero, então a tangente existe:
+\[
+\tan\frac{5\pi}{6}
+=\frac{1/2}{-\sqrt{3}/2}
+=-\frac{1}{\sqrt{3}}
+=-\frac{\sqrt{3}}{3}.
+\]
+A última igualdade vale porque $\sqrt{3}/3$ e $1/\sqrt{3}$ são positivos e têm o mesmo quadrado $1/3$.
+
+\section*{Exercício 2. [Básico --- equação do cosseno]}
+
+\textbf{Enunciado.} Resolva $\cos x=\sqrt{2}/2$, com a solução geral.
+
+\textbf{Solução.}
+O valor notável $\cos(\pi/4)=\sqrt{2}/2$ fornece uma solução particular. A solução geral do cosseno é
+\[
+x=\pm\frac{\pi}{4}+2k\pi,\qquad k\in\Z.
+\]
+A ida: $\cos$ é par e tem período $2\pi$, logo $\cos(\pi/4+2k\pi)=\cos(-\pi/4+2k\pi)=\cos(\pi/4)$. A volta é o teorema geral: se $\cos x=\cos(\pi/4)$, então $x=\pi/4+2k\pi$ ou $x=-\pi/4+2k\pi$.
+
+\section*{Exercício 3. [Básico --- arco metade]}
+
+\textbf{Enunciado.} Calcule $\sin(\pi/12)$ e $\cos(\pi/12)$ com sinal pelo quadrante.
+
+\textbf{Solução.}
+Tem-se $\pi/12=(1/2)\cdot(\pi/6)$ e $\pi/12\in(0,\pi/2)$, logo seno e cosseno são positivos. As fórmulas de metade dão
+\begin{align*}
+\sin\frac{\pi}{12}
+&=\sqrt{\frac{1-\cos(\pi/6)}{2}}
+=\sqrt{\frac{1-\sqrt{3}/2}{2}}
+=\sqrt{\frac{2-\sqrt{3}}{4}}
+=\frac{\sqrt{2-\sqrt{3}}}{2},\\[0.4em]
+\cos\frac{\pi}{12}
+&=\sqrt{\frac{1+\cos(\pi/6)}{2}}
+=\sqrt{\frac{2+\sqrt{3}}{4}}
+=\frac{\sqrt{2+\sqrt{3}}}{2}.
+\end{align*}
+Esses valores coincidem com $(\sqrt{6}-\sqrt{2})/4$ e $(\sqrt{6}+\sqrt{2})/4$. De fato, ambos os candidatos a seno são positivos, e
+\begin{align*}
+\Bigl(\frac{\sqrt{6}-\sqrt{2}}{4}\Bigr)^2
+&=\frac{6+2-2\sqrt{12}}{16}
+=\frac{8-4\sqrt{3}}{16}
+=\frac{2-\sqrt{3}}{4}
+=\Bigl(\frac{\sqrt{2-\sqrt{3}}}{2}\Bigr)^2.
+\end{align*}
+A unicidade da raiz não negativa identifica os dois números. O mesmo cálculo com o sinal interno trocado identifica os cossenos:
+\[
+\Bigl(\frac{\sqrt{6}+\sqrt{2}}{4}\Bigr)^2=\frac{8+4\sqrt{3}}{16}=\frac{2+\sqrt{3}}{4}.
+\]
+
+\section*{Exercício 4. [Básico --- domínio trigonométrico]}
+
+\textbf{Enunciado.} Determine o domínio de $\tan x+\sec x$ e o de $\csc(2x)$.
+
+\textbf{Solução.}
+A soma $\tan x+\sec x$ está definida exatamente quando as duas parcelas estão definidas. As duas exigem $\cos x\neq 0$, isto é $x\neq \pi/2+k\pi$ para todo $k\in\Z$. Esse é o domínio.
+
+A função $\csc(2x)$ está definida exatamente quando $\sin(2x)\neq 0$. Isso ocorre se e somente se $2x\neq n\pi$ para todo $n\in\Z$, isto é $x\neq n\pi/2$. O domínio é $\R\setminus\{n\pi/2:n\in\Z\}$.
+
+\section*{Exercício 5. [Intermediário --- soma de cossenos]}
+
+\textbf{Enunciado.} Prove $\cos a+\cos b=2\cos\frac{a+b}{2}\cos\frac{a-b}{2}$.
+
+\textbf{Solução.}
+As fórmulas de adição e de subtração dão
+\begin{align*}
+\cos(x+y)&=\cos x\cos y-\sin x\sin y,\\
+\cos(x-y)&=\cos x\cos y+\sin x\sin y.
+\end{align*}
+Somando, os termos com seno cancelam-se e
+\[
+\cos(x+y)+\cos(x-y)=2\cos x\cos y.
+\]
+Ponhamos $a=x+y$ e $b=x-y$. Então $2x=a+b$ e $2y=a-b$, logo $x=(a+b)/2$ e $y=(a-b)/2$. Substituindo,
+\[
+\cos a+\cos b=2\cos\frac{a+b}{2}\cos\frac{a-b}{2}.
+\]
+
+\section*{Exercício 6. [Intermediário --- lei dos cossenos numérica]}
+
+\textbf{Enunciado.} Dois lados medem $2$ e $3$ e o ângulo entre eles mede $\pi/3$. Calcule o terceiro lado e o cosseno do ângulo oposto ao lado $2$.
+
+\textbf{Solução.}
+Sejam $a=2$, $b=3$ e $\gamma=\pi/3$ o ângulo entre eles. O lado $c$ oposto a $\gamma$ satisfaz
+\[
+c^2=2^2+3^2-2\cdot 2\cdot 3\cdot\cos\frac{\pi}{3}
+=4+9-12\cdot\frac12
+=13-6=7.
+\]
+Como $c>0$, $c=\sqrt{7}$.
+
+Seja $\alpha$ o ângulo oposto ao lado $2$. A lei dos cossenos, agora com o lado $2$ isolado, usa os outros dois lados $3$ e $\sqrt{7}$:
+\[
+2^2=3^2+(\sqrt{7})^2-2\cdot 3\cdot\sqrt{7}\cdot\cos\alpha,
+\]
+isto é $4=9+7-6\sqrt{7}\cos\alpha=16-6\sqrt{7}\cos\alpha$. Então
+\[
+6\sqrt{7}\cos\alpha=12,\qquad \cos\alpha=\frac{2}{\sqrt{7}}=\frac{2\sqrt{7}}{7}.
+\]
+O número é positivo e menor do que $1$, porque $2\sqrt{7}<2\cdot 3=6<7$. O ângulo $\alpha$, estando em $(0,\pi)$, fica em $(0,\pi/2)$.
+
+\section*{Exercício 7. [Intermediário --- tangente da soma]}
+
+\textbf{Enunciado.} Prove a fórmula de $\tan(a+b)$ sob as hipóteses $\cos a\cos b\neq 0$ e $\cos(a+b)\neq 0$.
+
+\textbf{Solução.}
+A hipótese $\cos(a+b)\neq 0$ é exatamente a condição para $\tan(a+b)$ estar definida, e permite escrever
+\[
+\tan(a+b)=\frac{\sin(a+b)}{\cos(a+b)}
+=\frac{\sin a\cos b+\cos a\sin b}{\cos a\cos b-\sin a\sin b}.
+\]
+A hipótese $\cos a\cos b\neq 0$ diz que $\cos a\neq 0$ e $\cos b\neq 0$, logo $\tan a$ e $\tan b$ existem, e permite dividir o numerador e o denominador por $\cos a\cos b$:
+\begin{align*}
+\frac{\sin a\cos b}{\cos a\cos b}+\frac{\cos a\sin b}{\cos a\cos b}
+&=\tan a+\tan b,\\[0.3em]
+\frac{\cos a\cos b}{\cos a\cos b}-\frac{\sin a\sin b}{\cos a\cos b}
+&=1-\tan a\tan b.
+\end{align*}
+Portanto
+\[
+\tan(a+b)=\frac{\tan a+\tan b}{1-\tan a\tan b}.
+\]
+Se $\cos a\cos b=0$, a divisão não está definida e pelo menos uma das tangentes do segundo membro não existe. Se $\cos(a+b)=0$, o primeiro membro não existe; é o que ocorre para $a=b=\pi/4$, em que $\tan a$ e $\tan b$ existem, o denominador $1-1\cdot 1$ é zero e $a+b=\pi/2$.
+
+\section*{Exercício 8. [Avançado --- soma de arctangentes]}
+
+\textbf{Enunciado.} Prove que $\arctan 1+\arctan 2+\arctan 3=\pi$, separando $\arctan 2+\arctan 3$.
+
+\textbf{Solução.}
+Sejam $\alpha=\arctan 2$ e $\beta=\arctan 3$. Ambos estão em $(0,\pi/2)$. Como $\tan$ é estritamente crescente nesse intervalo e $\tan(\pi/4)=1<2=\tan\alpha$, segue $\alpha>\pi/4$. Do mesmo modo $\beta>\pi/4$. Logo $\alpha+\beta>\pi/2$. Cada um é menor do que $\pi/2$, então $\alpha+\beta<\pi$ e $\alpha+\beta\in(\pi/2,\pi)$. Nesse intervalo o cosseno não se anula: $\cos\theta=0$ só em $\pi/2+k\pi$, e nenhum desses pontos está em $(\pi/2,\pi)$.
+
+Como $\alpha\in(0,\pi/2)$ e $\tan\alpha=2$, tem-se $\cos\alpha>0$ e $\sin\alpha=2\cos\alpha$. A equação fundamental dá $4\cos^2\alpha+\cos^2\alpha=1$, logo $\cos\alpha=1/\sqrt{5}$ e $\sin\alpha=2/\sqrt{5}$. Do mesmo modo $\cos\beta=1/\sqrt{10}$ e $\sin\beta=3/\sqrt{10}$. As fórmulas de adição produzem
+\begin{align*}
+\sin(\alpha+\beta)
+&=\frac{2}{\sqrt{5}}\cdot\frac{1}{\sqrt{10}}+\frac{1}{\sqrt{5}}\cdot\frac{3}{\sqrt{10}}
+=\frac{5}{\sqrt{50}}
+=\frac{1}{\sqrt{2}},\\
+\cos(\alpha+\beta)
+&=\frac{1}{\sqrt{5}}\cdot\frac{1}{\sqrt{10}}-\frac{2}{\sqrt{5}}\cdot\frac{3}{\sqrt{10}}
+=\frac{-5}{\sqrt{50}}
+=-\frac{1}{\sqrt{2}},
+\end{align*}
+porque $\sqrt{50}=5\sqrt{2}$ e $5/(5\sqrt{2})=1/\sqrt{2}$. Portanto $\tan(\alpha+\beta)=-1$. O ângulo $3\pi/4$ está em $(\pi/2,\pi)$ e satisfaz $\sin(3\pi/4)=\sqrt{2}/2=1/\sqrt{2}$ e $\cos(3\pi/4)=-\sqrt{2}/2$. A parametrização do círculo é injetora em intervalos de comprimento menor do que $2\pi$, e $(\pi/2,\pi)$ tem comprimento menor do que $2\pi$, então há um único ângulo nesse intervalo com esse seno e esse cosseno. Logo $\alpha+\beta=3\pi/4$.
+
+O valor $-\pi/4$ também tem tangente $-1$, mas tem seno negativo e não está em $(\pi/2,\pi)$. A soma de dois ângulos maiores do que $\pi/4$ não pode ser $-\pi/4$.
+
+Por fim $\arctan 1=\pi/4$, porque $\tan(\pi/4)=1$ e $\pi/4\in(-\pi/2,\pi/2)$. Portanto
+\[
+\arctan 1+\arctan 2+\arctan 3=\frac{\pi}{4}+\frac{3\pi}{4}=\pi.
+\]
+
+\section*{Exercício 9. [Avançado --- equação com soma para produto]}
+
+\textbf{Enunciado.} Resolva $\sin(5x)-\sin x=0$ como união de duas famílias, sem raízes extras.
+
+\textbf{Solução.}
+A identidade da diferença de senos, com $a=5x$ e $b=x$, dá
+\[
+\sin(5x)-\sin x
+=2\cos\frac{5x+x}{2}\sin\frac{5x-x}{2}
+=2\cos(3x)\sin(2x).
+\]
+A equação $2\cos(3x)\sin(2x)=0$ equivale a $\cos(3x)=0$ ou $\sin(2x)=0$, porque um produto de reais é zero se e somente se um dos fatores é zero. Não houve divisão, então nenhuma raiz foi introduzida nem perdida: os dois lados são idênticos como funções.
+
+A equação $\cos(3x)=0$ equivale a $3x=\pi/2+k\pi$ para algum $k\in\Z$, isto é
+\[
+x=\frac{\pi}{6}+\frac{k\pi}{3},\qquad k\in\Z.
+\]
+A equação $\sin(2x)=0$ equivale a $2x=n\pi$ para algum $n\in\Z$, isto é
+\[
+x=\frac{n\pi}{2},\qquad n\in\Z.
+\]
+A solução geral é a união dessas duas famílias. Há sobreposição: por exemplo $x=\pi/2$ pertence à segunda com $n=1$ e à primeira com $k=1$, pois $\pi/6+\pi/3=\pi/2$. A união não exige que as famílias sejam disjuntas. Um ângulo que anula os dois fatores continua sendo raiz da equação original, porque o produto é zero.
+
+\end{document}

@@ -1,0 +1,136 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito --- Derivadas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A ordem \'e a da se\c{c}\~ao de exerc\'icios de \texttt{03\_derivadas.tex}.
+
+\section{B\'asico --- Pela defini\c{c}\~ao}
+
+\textbf{Enunciado.} Calcule $(x^2)'$ em $x=1$ pelo quociente de Newton.
+
+\begin{proof}
+Para $h\neq 0$,
+\[
+\frac{(1+h)^2-1^2}{h}=\frac{1+2h+h^2-1}{h}=\frac{2h+h^2}{h}=2+h.
+\]
+Quando $h\to 0$, $2+h\to 2$. Logo $f'(1)=2$. Dado $\eps>0$, $\delta=\eps$ testemunha $\abs{(2+h)-2}=\abs{h}<\eps$.
+\end{proof}
+
+\section{B\'asico --- Tangente}
+
+\textbf{Enunciado.} Reta tangente a $y=x^2$ em $(1,1)$.
+
+\begin{proof}
+Pelo exerc\'icio anterior, a inclina\c{c}\~ao \'e $2$ e o ponto de tang\^encia tem ordenada $1$. A reta \'e
+\[
+y=1+2(x-1),
+\]
+isto \'e, $y=2x-1$.
+\end{proof}
+
+\section{B\'asico --- Constante}
+
+\textbf{Enunciado.} A derivada de $f(x)=7$ \'e $0$.
+
+\begin{proof}
+Para $h\neq 0$ e qualquer $a$, $(f(a+h)-f(a))/h=(7-7)/h=0$. O limite da fun\c{c}\~ao constante $0$ \'e $0$. Logo $f'(a)=0$.
+\end{proof}
+
+\section{B\'asico --- Linear}
+
+\textbf{Enunciado.} A derivada de $f(x)=5x+2$ \'e $5$.
+
+\begin{proof}
+Para $h\neq 0$,
+\[
+\frac{f(a+h)-f(a)}{h}
+=\frac{\bigl(5(a+h)+2\bigr)-(5a+2)}{h}
+=\frac{5h}{h}=5.
+\]
+O quociente \'e a constante $5$, cujo limite \'e $5$. Portanto $f'(a)=5$ em todo $a$.
+\end{proof}
+
+\section{Intermedi\'ario --- Produto}
+
+\textbf{Enunciado.} Calcule $(x^2\sin x)'$.
+
+\begin{proof}
+Sejam $u(x)=x^2$ e $v(x)=\sin x$. Sabemos $u'(x)=2x$ e $v'(x)=\cos x$. A regra do produto d\'a
+\[
+(uv)'(x)=u'(x)v(x)+u(x)v'(x)=2x\sin x+x^2\cos x.
+\]
+\end{proof}
+
+\section{Intermedi\'ario --- Cadeia}
+
+\textbf{Enunciado.} Calcule a derivada de $\cos(3x+1)$.
+
+\begin{proof}
+A fun\c{c}\~ao de fora \'e $\cos$, cuja derivada \'e $-\sin$. A fun\c{c}\~ao de dentro \'e $g(x)=3x+1$, com $g'(x)=3$. A regra da cadeia d\'a
+\[
+\frac{\dif}{\dif x}\cos(3x+1)=-\sin(3x+1)\cdot 3=-3\sin(3x+1).
+\]
+\end{proof}
+
+\section{Intermedi\'ario --- Escada}
+
+\textbf{Enunciado.} Escada de $5\,\mathrm{m}$, base a $0{,}3\,\mathrm{m/s}$, instante $x=4\,\mathrm{m}$. Calcule $y'$ e o instante em que $-x/y$ degenera.
+
+\begin{proof}
+A restri\c{c}\~ao \'e $x^2+y^2=25$. Com $y\neq 0$,
+\[
+y'=-\frac{x}{y}\,x'.
+\]
+No instante $x=4$ e $x'=3/10$, tem-se $y^2=25-16=9$. A ponta est\'a acima do ch\~ao, logo $y=3$, n\~ao $-3$. Ent\~ao
+\[
+y'=-\frac{4}{3}\cdot\frac{3}{10}=-\frac{4}{10}=-\frac{2}{5}.
+\]
+A unidade \'e $\mathrm{m/s}$: a ponta desce a $2/5\,\mathrm{m/s}$.
+
+A express\~ao $-x/y$ deixa de fazer sentido quando $y=0$. A\'i $x^2=25$; do lado positivo do muro, $x=5$. A equa\c{c}\~ao derivada $2x x'+2y y'=0$ vira $10 x'=0$, logo exige $x'=0$. Uma base que ainda se move n\~ao pode permanecer na circunfer\^encia nesse instante.
+\end{proof}
+
+\section{Avan\c{c}ado --- Continuidade}
+
+\textbf{Enunciado.} Deriv\'avel em $a$ implica cont\'inua em $a$.
+
+\begin{proof}
+Seja $f'(a)=\lim_{h\to 0}(f(a+h)-f(a))/h$. Para $h\neq 0$,
+\[
+f(a+h)-f(a)=\left(\frac{f(a+h)-f(a)}{h}\right) h.
+\]
+O primeiro fator tende a $f'(a)$ e o segundo tende a $0$. O produto dos limites \'e $f'(a)\cdot 0=0$. Logo $\lim_{h\to 0}f(a+h)=f(a)$, que \'e a continuidade de $f$ em $a$.
+\end{proof}
+
+\section{Avan\c{c}ado --- Cont\'inua e n\~ao deriv\'avel}
+
+\textbf{Enunciado.} $f(0)=0$, $f(x)=x\sin(1/x)$ para $x\neq 0$: cont\'inua em $0$, sem derivada em $0$.
+
+\begin{proof}
+De $\sin^2 t+\cos^2 t=1$ segue $\abs{\sin t}\le 1$. Para $x\neq 0$,
+\[
+\abs{f(x)-f(0)}=\abs{x\sin(1/x)}\le \abs{x}.
+\]
+Dado $\eps>0$, escolha $\delta=\eps$. Se $\abs{x}<\delta$, ent\~ao $\abs{f(x)-f(0)}<\eps$. Isso \'e a continuidade em $0$.
+
+Para $h\neq 0$,
+\[
+\frac{f(h)-f(0)}{h}=\frac{h\sin(1/h)}{h}=\sin\frac{1}{h}.
+\]
+Sejam, para cada inteiro $n\ge 1$,
+\[
+h_n=\frac{1}{\pi/2+2\pi n}, \qquad k_n=\frac{1}{3\pi/2+2\pi n}.
+\]
+Ent\~ao o quociente vale $\sin(\pi/2)=1$ em $h_n$ e $\sin(3\pi/2)=-1$ em $k_n$, e $0<h_n<1/(2\pi n)$, $0<k_n<1/(2\pi n)$. Suponha que o limite do quociente seja $L$. Para $\eps=1$ existe $\delta>0$ tal que $0<\abs{h}<\delta$ implica $\abs{\sin(1/h)-L}<1$. Escolha um inteiro $n>1/(2\pi\delta)$, o que existe porque os inteiros positivos s\~ao ilimitados. Ent\~ao $h_n$ e $k_n$ est\~ao em $(0,\delta)$, logo $\abs{1-L}<1$ e $\abs{-1-L}<1$. Portanto
+\[
+2=\abs{1-(-1)}\le \abs{1-L}+\abs{-1-L}<2.
+\]
+O quociente n\~ao tem limite, e $f'(0)$ n\~ao existe.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,172 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: otimização e multiplicadores de Lagrange}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercícios}
+
+\begin{exercicio}[{[Básico --- ponto crítico e teste]}]
+Classificar $x^2+y^2-4x+2y+5$.
+
+\textbf{Solução.}
+$f_x=2x-4$ e $f_y=2y+2$. O sistema $x=2$, $y=-1$ tem solução única $(2,-1)$. As segundas parciais são constantes, $f_{xx}=2$, $f_{yy}=2$, $f_{xy}=0$, então $D=4>0$ e $f_{xx}>0$. O teste dá mínimo local estrito. O valor é
+\[
+f(2,-1)=4+1-8-2+5=0.
+\]
+Completando quadrados, $f(x,y)=(x-2)^2+(y+1)^2$, que é $\ge 0$ em todo o plano. O mínimo local é global, e não há máximo.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- sela e mínimo local]}]
+Classificar $x^3+y^3-3xy$.
+
+\textbf{Solução.}
+$f_x=3x^2-3y$ e $f_y=3y^2-3x$. Então $y=x^2$ e $x=y^2$. Substituindo, $x=(x^2)^2=x^4$, logo $x^4-x=x(x^3-1)=0$. As raízes reais são $x=0$ e $x=1$, porque $x^3=1$ só tem a raiz real $1$. Os pontos críticos são $(0,0)$ e $(1,1)$.
+
+As segundas parciais são $f_{xx}=6x$, $f_{yy}=6y$ e $f_{xy}=-3$. Assim
+\[
+D=36xy-9.
+\]
+Em $(0,0)$, $D=-9<0$: sela. Em $(1,1)$, $D=27>0$ e $f_{xx}=6>0$: mínimo local estrito, com
+\[
+f(1,1)=1+1-3=-1.
+\]
+Esse mínimo não é global. Por exemplo $f(-2,0)=-8<-1$, e $f(x,0)=x^3\to-\infty$ quando $x\to-\infty$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- hessiana]}]
+Natureza de $x^2-4xy+y^2$ na origem.
+
+\textbf{Solução.}
+$f_x=2x-4y$ e $f_y=-4x+2y$. O sistema linear tem matriz de coeficientes com determinante $4-16=-12\neq 0$, então a única solução é $(0,0)$. A hessiana é constante,
+\[
+H=\begin{pmatrix}2&-4\\-4&2\end{pmatrix},\qquad D=4-16=-12<0.
+\]
+O teste dá sela. Ao longo de $y=0$, $f(x,0)=x^2$, positivo para $x\neq 0$. Ao longo de $y=x$, $f(x,x)=x^2-4x^2+x^2=-2x^2$, negativo para $x\neq 0$. Os dois sinais numa vizinhança qualquer da origem confirmam a sela sem depender só do nome do teste.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- uma restrição afim]}]
+Extremos de $x^2+y^2$ na reta $x+y=1$.
+
+\textbf{Solução.}
+Ponhamos $g(x,y)=x+y$. Então $\nabla g=(1,1)\neq\vet{0}$ em todo o plano, em particular na reta. O sistema é $(2x,2y)=\lambda(1,1)$ e $x+y=1$. Logo $2x=2y$, então $x=y$, e $x=y=1/2$. O valor é
+\[
+f\Bigl(\frac12,\frac12\Bigr)=\frac14+\frac14=\frac12.
+\]
+Não há outro candidato. Sobre a reta, $y=1-x$ e
+\[
+h(x)=x^2+(1-x)^2=2x^2-2x+1.
+\]
+Quando $\abs{x}\to\infty$, $h(x)\to\infty$. O conjunto $\{(x,1-x):h(x)\le 1\}$ é fechado e limitado, logo o mínimo existe e tem de ser o único ponto crítico da restrição. O mínimo é $1/2$ em $(1/2,1/2)$. Não há máximo: $h(x)$ não é limitado superiormente. Weierstrass não se aplica à reta inteira porque ela não é limitada.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- compacto com interior]}]
+Extremos de $x^2+y^2+x$ no quadrado $[-1,1]^2$.
+
+\textbf{Solução.}
+O quadrado é fechado e limitado, e $f$ é contínua, então máximo e mínimo absolutos existem. No interior, $f_x=2x+1$ e $f_y=2y$. O único ponto crítico é $(-1/2,\,0)$, que está no interior do quadrado. O valor é
+\[
+f\Bigl(-\frac12,0\Bigr)=\frac14-\frac12=-\frac14.
+\]
+A hessiana tem $D=4$ e $f_{xx}=2>0$, então esse ponto é mínimo local. Para o absoluto, comparamos com a fronteira.
+
+No lado $x=-1$, $-1\le y\le 1$: $f=1+y^2-1=y^2$, que vai de $0$ a $1$.
+No lado $x=1$: $f=1+y^2+1=2+y^2$, que vai de $2$ a $3$.
+No lado $y=1$: $g(x)=x^2+x+1$ em $[-1,1]$. Então $g'(x)=2x+1=0$ em $x=-1/2$, e $g(-1/2)=1/4-1/2+1=3/4$. Nos cantos, $g(-1)=1$ e $g(1)=3$.
+No lado $y=-1$ a função de $x$ é a mesma, $x^2+x+1$, com os mesmos valores $3/4$, $1$ e $3$.
+
+Os números que aparecem são $-1/4$, $0$, $3/4$, $1$, $2$ e $3$. O mínimo absoluto é $-1/4$, em $(-1/2,\,0)$. O máximo absoluto é $3$, em $(1,1)$ e em $(1,-1)$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- circunferência]}]
+Extremos de $x+2y$ em $x^2+y^2=4$.
+
+\textbf{Solução.}
+A circunferência é compacta e $f$ é contínua, então máximo e mínimo existem. Com $g=x^2+y^2$, tem-se $\nabla g=(2x,2y)$, que se anula só na origem, fora da circunferência. O sistema é
+\[
+(1,2)=\lambda(2x,2y),\qquad x^2+y^2=4.
+\]
+Logo $x=1/(2\lambda)$ e $y=1/\lambda$, então $y=2x$. Substituindo, $x^2+4x^2=4$, $5x^2=4$, $x=\pm 2/\sqrt{5}$ e $y=\pm 4/\sqrt{5}$, com os sinais iguais. Os valores são
+\[
+f=x+2y=x+4x=5x=\pm\frac{10}{\sqrt{5}}=\pm 2\sqrt{5}.
+\]
+O máximo é $2\sqrt{5}$, em $\bigl(2/\sqrt{5},\,4/\sqrt{5}\bigr)$. O mínimo é $-2\sqrt{5}$, no ponto oposto.
+
+Os pontos também se escrevem $\bigl(\pm 2\sqrt{5}/5,\,\pm 4\sqrt{5}/5\bigr)$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- teste inconclusivo]}]
+Pontos críticos de $x^2 y$ e a natureza de três deles.
+
+\textbf{Solução.}
+\begin{enumerate}[label=\alph*)]
+\item $f_x=2xy$ e $f_y=x^2$. A segunda equação força $x=0$, e a primeira fica automática. O conjunto crítico é o eixo $y$, isto é, todos os pontos $(0,y)$. As segundas parciais são $f_{xx}=2y$, $f_{yy}=0$ e $f_{xy}=2x$. Em $x=0$, $D=0\cdot 0-(0)^2=0$. O teste não classifica nenhum desses pontos.
+
+\item Perto de $(0,0)$, $f(0{,}1,\,0{,}1)=(0{,}1)^2(0{,}1)>0$ e $f(0{,}1,\,-0{,}1)<0$. A origem não é extremo local.
+
+Perto de $(0,1)$, escreva $x=h$ e $y=1+k$. Então $f=h^2(1+k)$. Se $\abs{k}<1/2$, tem-se $1+k>0$, logo $f\ge 0=f(0,1)$. O ponto é mínimo local, não estrito ao longo do eixo, onde $f$ continua zero.
+
+Perto de $(0,-1)$, $f=h^2(-1+k)$. Se $\abs{k}<1/2$, então $-1+k<0$ e $f\le 0=f(0,-1)$. O ponto é máximo local.
+\end{enumerate}
+O mesmo número $D=0$ cobre um ponto que não é extremo, um mínimo local e um máximo local. A hessiana não separa os três casos; o sinal de $y$ na fatoração $x^2 y$ separa.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- direções da sela]}]
+Sela de $x^2+4xy+y^2$ com vetores explícitos.
+
+\textbf{Solução.}
+\begin{enumerate}[label=\alph*)]
+\item $f_x=2x+4y$ e $f_y=4x+2y$. A matriz do sistema é $\begin{pmatrix}2&4\\4&2\end{pmatrix}$, de determinante $-12\neq 0$. A única solução é $(0,0)$. As segundas parciais são $f_{xx}=2$, $f_{yy}=2$ e $f_{xy}=4$, então
+\[
+D(0,0)=4-16=-12<0.
+\]
+A forma quadrática da hessiana é $Q(h,k)=2h^2+8hk+2k^2$, e $f=Q/2$. As segundas parciais são constantes, então no desenvolvimento de Taylor o resto além de $Q$ é zero: $f(h,k)-f(0,0)=\frac12 Q(h,k)$.
+
+\item Para $\vet{u}=(1,0)$, que é unitário, $Q(\vet{u})=2>0$ e $f(t,0)=t^2>0$ para $t\neq 0$.
+Para a direção de $(1,-1)$, o vetor unitário é $\vet{v}=(1/\sqrt{2},\,-1/\sqrt{2})$. Primeiro $Q(1,-1)=2-8+2=-4$, logo
+\[
+Q(\vet{v})=\frac{1}{2}Q(1,-1)=-2<0.
+\]
+Ao longo dessa reta, $f(t,-t)=t^2-4t^2+t^2=-2t^2<0$ para $t\neq 0$. Em toda bola há valores positivos e valores negativos. A origem é sela. O sinal de $D$ anunciou o fato; os dois vetores são a prova direta, porque o resto é zero e o sinal de $f$ é o sinal de $Q$.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- duas restrições]}]
+Ponto da reta $x+y+z=1$, $x+y-z=0$ mais próximo da origem.
+
+\textbf{Solução.}
+Os gradientes $\nabla g=(1,1,1)$ e $\nabla h=(1,1,-1)$ são linearmente independentes em todo o $\R^3$: se $a(1,1,1)+b(1,1,-1)=\vet{0}$, então $a+b=0$ e $a-b=0$, logo $a=b=0$. A hipótese do método vale em toda a reta.
+
+O sistema $\nabla f=\lambda\nabla g+\mu\nabla h$ é
+\begin{align*}
+2x&=\lambda+\mu,\\
+2y&=\lambda+\mu,\\
+2z&=\lambda-\mu,
+\end{align*}
+com $x+y+z=1$ e $x+y-z=0$. As duas primeiras equações dão $x=y$. Somando as restrições, $2(x+y)=1$; subtraindo, $2z=1$. Logo $z=1/2$ e $x+y=1/2$. Com $x=y$, vem $x=y=1/4$. O ponto é $(1/4,\,1/4,\,1/2)$. Os multiplicadores saem de $\lambda+\mu=1/2$ e $\lambda-\mu=1$: $\lambda=3/4$ e $\mu=-1/4$. O quadrado da distância é
+\[
+f=\frac{1}{16}+\frac{1}{16}+\frac14=\frac{3}{8}.
+\]
+A distância é $\sqrt{3/8}=\sqrt{6}/4$.
+
+Conferência por parametrização. Um vetor diretor é o produto vetorial
+\[
+(1,1,1)\times(1,1,-1)=(-2,2,0),
+\]
+paralelo a $(-1,1,0)$. A reta é
+\[
+\Bigl(\frac14-t,\,\frac14+t,\,\frac12\Bigr),\qquad t\in\R.
+\]
+O quadrado da distância fica
+\[
+\Bigl(\frac14-t\Bigr)^2+\Bigl(\frac14+t\Bigr)^2+\Bigl(\frac12\Bigr)^2
+=2\Bigl(\frac{1}{16}+t^2\Bigr)+\frac14
+=\frac{3}{8}+2t^2.
+\]
+O mínimo é $3/8$, em $t=0$, e não há outro. Quando $\abs{t}\to\infty$ a expressão tende a infinito, então não há máximo. A reta é fechada e não é limitada; Weierstrass não garante extremo, e de fato o máximo não existe. O mínimo existe por causa do comportamento no infinito, não por compacidade da reta.
+\end{exercicio}
+
+\end{document}

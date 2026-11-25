@@ -1,0 +1,858 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Técnicas de integração, integrais impróprias\\ e equações de primeira ordem}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{Usamos o Teorema Fundamental do Cálculo, a regra do produto, a substituição \(u=g(x)\) com \(g\) de classe \(C^1\), e o fato de que uma função contínua num intervalo fechado e limitado é integrável. A integral indefinida denota antiderivadas: escrever \(\int f=F+C\) significa \(F'=f\). Admitimos de \(\R\) que toda função crescente e limitada superiormente possui limite finito.}
+
+\section{Integração por partes}
+
+A regra do produto diz que, se \(u\) e \(v\) são deriváveis,
+\[
+(uv)'=u'v+uv'.
+\]
+Se \(u\) e \(v\) são de classe \(C^1\) num intervalo, então \(u'\), \(v'\) e \((uv)'\) são contínuas, logo integráveis em qualquer subintervalo fechado e limitado.
+
+\begin{teorema}[Integração por partes]
+Sejam \(u\) e \(v\) de classe \(C^1\) em \([a,b]\). Então
+\[
+\int_a^b u(x)v'(x)\,\dif x
+=\Bigl[u(x)v(x)\Bigr]_a^b-\int_a^b v(x)u'(x)\,\dif x.
+\]
+Na notação diferencial, com \(\dif u=u'\,\dif x\) e \(\dif v=v'\,\dif x\),
+\[
+\int u\,\dif v=uv-\int v\,\dif u,
+\]
+igualdade de antiderivadas num intervalo em que \(u\) e \(v\) são de classe \(C^1\).
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Integramos a regra do produto e aplicamos o Teorema Fundamental do Cálculo ao lado esquerdo:
+\begin{align*}
+\int_a^b (uv)'(x)\,\dif x
+&=\int_a^b u'(x)v(x)\,\dif x+\int_a^b u(x)v'(x)\,\dif x,\\
+\Bigl[u(x)v(x)\Bigr]_a^b
+&=\int_a^b v\,\dif u+\int_a^b u\,\dif v.
+\end{align*}
+Isolando a segunda integral do segundo membro,
+\[
+\int_a^b u\,\dif v
+=\Bigl[uv\Bigr]_a^b-\int_a^b v\,\dif u.
+\]
+A forma indefinida é a mesma identidade sem avaliar os extremos, acrescida da constante de integração.
+\hfill\(\square\)
+
+\begin{intuicao}
+Partes transfere a derivada de um fator para o outro. Vale a pena quando \(v=\int\dif v\) é simples e \(\int v\,\dif u\) é mais fácil do que \(\int u\,\dif v\).
+\end{intuicao}
+
+\begin{exemplo}[A antiderivada de \(x e^{x}\)]
+Seja \(u=x\) e \(\dif v=e^{x}\,\dif x\). Então \(\dif u=\dif x\) e \(v=e^{x}\). As duas funções são de classe \(C^1\) em \(\R\). Logo
+\begin{align*}
+\int x e^{x}\,\dif x
+&=x e^{x}-\int e^{x}\,\dif x
+=x e^{x}-e^{x}+C
+=e^{x}(x-1)+C.
+\end{align*}
+Derivando para conferir: \(\bigl(e^{x}(x-1)\bigr)'=e^{x}(x-1)+e^{x}=x e^{x}\).
+\end{exemplo}
+
+\begin{exemplo}[A integral definida, com os extremos]
+A mesma escolha, agora em \([0,1]\):
+\begin{align*}
+\int_0^1 x e^{x}\,\dif x
+&=\Bigl[e^{x}(x-1)\Bigr]_0^1
+=e^{1}(1-1)-e^{0}(0-1)
+=0-1\cdot(-1)
+=1.
+\end{align*}
+A constante da antiderivada desaparece na diferença \(F(1)-F(0)\). Os dois extremos entram na conta: em \(x=1\) o fator \((x-1)\) zera o termo, e em \(x=0\) sobra \(-e^{0}(0-1)=1\).
+\end{exemplo}
+
+\subsection{Fórmula de redução de \(\int\sin^{n}x\,\dif x\)}
+
+\begin{teorema}
+Seja \(n\ge 2\) um inteiro. Então, em \(\R\),
+\begin{equation}
+\int\sin^{n}x\,\dif x
+=-\frac{\sin^{n-1}x\cos x}{n}+\frac{n-1}{n}\int\sin^{n-2}x\,\dif x.
+\label{eq:reducao-seno}
+\end{equation}
+A igualdade é de antiderivadas. A potência \(n-2\) pode ser zero: \(\sin^{0}x=1\).
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+A função \(\sin^{n-1}x\) é de classe \(C^1\) em \(\R\) porque \(n-1\ge 1\) é inteiro. Tomamos
+\[
+u=\sin^{n-1}x,\qquad \dif v=\sin x\,\dif x.
+\]
+Então
+\[
+\dif u=(n-1)\sin^{n-2}x\cos x\,\dif x,\qquad v=-\cos x,
+\]
+e
+\begin{align*}
+\int\sin^{n}x\,\dif x
+&=-\sin^{n-1}x\cos x-\int(-\cos x)(n-1)\sin^{n-2}x\cos x\,\dif x\\
+&=-\sin^{n-1}x\cos x+(n-1)\int\cos^{2}x\,\sin^{n-2}x\,\dif x.
+\end{align*}
+Usamos \(\cos^{2}x=1-\sin^{2}x\):
+\begin{align*}
+\int\cos^{2}x\,\sin^{n-2}x\,\dif x
+&=\int(1-\sin^{2}x)\sin^{n-2}x\,\dif x
+=\int\sin^{n-2}x\,\dif x-\int\sin^{n}x\,\dif x.
+\end{align*}
+Substituindo,
+\[
+\int\sin^{n}x\,\dif x
+=-\sin^{n-1}x\cos x+(n-1)\int\sin^{n-2}x\,\dif x-(n-1)\int\sin^{n}x\,\dif x.
+\]
+Somamos \((n-1)\int\sin^{n}x\,\dif x\) aos dois lados:
+\[
+n\int\sin^{n}x\,\dif x
+=-\sin^{n-1}x\cos x+(n-1)\int\sin^{n-2}x\,\dif x.
+\]
+Dividimos por \(n\), que é positivo, e obtemos \eqref{eq:reducao-seno}.
+\hfill\(\square\)
+
+\begin{exemplo}[A fórmula com \(n=2\)]
+\[
+\int\sin^{2}x\,\dif x
+=-\frac{\sin x\cos x}{2}+\frac{1}{2}\int 1\,\dif x
+=\frac{x}{2}-\frac{\sin x\cos x}{2}+C.
+\]
+Pela identidade \(\sin(2x)=2\sin x\cos x\), isto é \(\frac{x}{2}-\frac{1}{4}\sin(2x)+C\), que é a antiderivada obtida pelo ângulo duplo. A fórmula não foi apenas citada: o caso \(n=2\) reproduz uma conta independente.
+\end{exemplo}
+
+\begin{corolario}
+Para \(n\ge 2\) inteiro,
+\[
+\int_0^{\pi/2}\sin^{n}x\,\dif x
+=\frac{n-1}{n}\int_0^{\pi/2}\sin^{n-2}x\,\dif x.
+\]
+\end{corolario}
+
+\noindent\textbf{Demonstração.}
+O termo de fronteira da fórmula indefinida, avaliado em \([0,\pi/2]\), é
+\[
+\Bigl[-\frac{\sin^{n-1}x\cos x}{n}\Bigr]_0^{\pi/2}
+=-\frac{\sin^{n-1}(\pi/2)\cos(\pi/2)}{n}+\frac{\sin^{n-1}(0)\cos(0)}{n}
+=0,
+\]
+porque \(\cos(\pi/2)=0\) e \(\sin 0=0\). Sobra apenas o coeficiente \(\frac{n-1}{n}\).
+\hfill\(\square\)
+
+\section{Produtos de seno e cosseno}
+
+Sejam \(m,n\) inteiros não negativos. Queremos \(\int\sin^{m}x\cos^{n}x\,\dif x\).
+
+\begin{teorema}
+\begin{enumerate}
+\item Se \(m\) é ímpar, \(m=2k+1\) com \(k\ge 0\), então
+\[
+\sin^{m}x\cos^{n}x
+=(1-\cos^{2}x)^{k}\cos^{n}x\cdot\sin x,
+\]
+e a substituição \(u=\cos x\), \(\dif u=-\sin x\,\dif x\), produz um polinômio em \(u\).
+\item Se \(n\) é ímpar, separa-se um fator \(\cos x\) e usa-se \(u=\sin x\).
+\item Se \(m\) e \(n\) são pares, as identidades
+\[
+\sin^{2}\theta=\frac{1-\cos(2\theta)}{2},\qquad
+\cos^{2}\theta=\frac{1+\cos(2\theta)}{2},\qquad
+\sin(2\theta)=2\sin\theta\cos\theta
+\]
+abaixam o grau até uma soma de cossenos de arcos múltiplos.
+\end{enumerate}
+Se \(m\) e \(n\) são ambos ímpares, os dois primeiros caminhos servem.
+\end{teorema}
+
+\begin{exemplo}[Um expoente ímpar]
+\begin{align*}
+\int\sin^{3}x\cos^{2}x\,\dif x
+&=\int\sin^{2}x\cos^{2}x\sin x\,\dif x
+=\int(1-\cos^{2}x)\cos^{2}x\sin x\,\dif x.
+\end{align*}
+Com \(u=\cos x\) e \(\dif u=-\sin x\,\dif x\),
+\begin{align*}
+\int\sin^{3}x\cos^{2}x\,\dif x
+&=-\int(1-u^{2})u^{2}\,\dif u
+=-\int(u^{2}-u^{4})\,\dif u
+=-\frac{u^{3}}{3}+\frac{u^{5}}{5}+C\\
+&=\frac{\cos^{5}x}{5}-\frac{\cos^{3}x}{3}+C.
+\end{align*}
+Conferência: a derivada é
+\[
+\cos^{4}x(-\sin x)-\cos^{2}x(-\sin x)
+=\sin x\cos^{2}x(1-\cos^{2}x)
+=\sin^{3}x\cos^{2}x.
+\]
+\end{exemplo}
+
+\begin{exemplo}[Os dois expoentes pares]
+\begin{align*}
+\sin x\cos x&=\frac12\sin(2x),\\
+\sin^{2}x\cos^{2}x
+&=\frac14\sin^{2}(2x)
+=\frac14\cdot\frac{1-\cos(4x)}{2}
+=\frac{1-\cos(4x)}{8}.
+\end{align*}
+Portanto
+\begin{align*}
+\int\sin^{2}x\cos^{2}x\,\dif x
+&=\int\frac{1-\cos(4x)}{8}\,\dif x
+=\frac{x}{8}-\frac{\sin(4x)}{32}+C.
+\end{align*}
+A derivada \(\frac18-\frac{4\cos(4x)}{32}=\frac{1-\cos(4x)}{8}\) recupera o integrando.
+\end{exemplo}
+
+\section{Substituição trigonométrica}
+
+Em todo este parágrafo, \(a>0\). O sinal da raiz é o ponto delicado: \(\sqrt{\,\cdot\,}\) denota a raiz não negativa, e \(\sqrt{w^{2}}=\abs{w}\).
+
+\begin{teorema}[Três famílias]
+Seja \(a>0\).
+\begin{enumerate}
+\item Para \(\sqrt{a^{2}-x^{2}}\) com \(x\in[-a,a]\), tome \(x=a\sin\theta\) e \(\theta\in[-\pi/2,\pi/2]\). Então \(\cos\theta\ge 0\), \(\dif x=a\cos\theta\,\dif\theta\) e
+\[
+\sqrt{a^{2}-x^{2}}=\sqrt{a^{2}\cos^{2}\theta}=a\cos\theta.
+\]
+No triângulo retângulo de hipotenusa \(a\), o cateto oposto a \(\theta\) é \(x\) e o cateto adjacente é \(\sqrt{a^{2}-x^{2}}\). Assim \(\sin\theta=x/a\) e \(\cos\theta=\sqrt{a^{2}-x^{2}}/a\).
+\item Para \(\sqrt{a^{2}+x^{2}}\) com \(x\in\R\), tome \(x=a\tan\theta\) e \(\theta\in(-\pi/2,\pi/2)\). Então \(\sec\theta>0\), \(\dif x=a\sec^{2}\theta\,\dif\theta\) e
+\[
+\sqrt{a^{2}+x^{2}}=\sqrt{a^{2}\sec^{2}\theta}=a\sec\theta.
+\]
+No triângulo, o cateto adjacente a \(\theta\) é \(a\), o cateto oposto é \(x\) e a hipotenusa é \(\sqrt{a^{2}+x^{2}}\).
+\item Para \(\sqrt{x^{2}-a^{2}}\) com \(x\ge a\), tome \(x=a\sec\theta\) e \(\theta\in[0,\pi/2)\). Então \(\tan\theta\ge 0\), \(\dif x=a\sec\theta\tan\theta\,\dif\theta\) e
+\[
+\sqrt{x^{2}-a^{2}}=\sqrt{a^{2}\tan^{2}\theta}=a\tan\theta.
+\]
+No triângulo, a hipotenusa é \(x\), o cateto adjacente a \(\theta\) é \(a\) e o cateto oposto é \(\sqrt{x^{2}-a^{2}}\).
+\end{enumerate}
+\end{teorema}
+
+\cuidado{Fora do intervalo de \(\theta\) indicado, o cosseno ou a tangente pode ser negativo, e trocar \(\sqrt{w^{2}}\) por \(w\) sem o módulo introduz um sinal errado. No terceiro caso, \(x\le -a\) pede um intervalo em que \(\sec\theta\le -1\); tratamos isso no exemplo, derivando a fórmula candidata nos dois componentes \(\abs{x}>a\).}
+
+\begin{exemplo}[Família \(\sqrt{a^{2}-x^{2}}\), com \(a=1\)]
+Calculamos \(\int\sqrt{1-x^{2}}\,\dif x\) para \(x\in(-1,1)\). Com \(x=\sin\theta\), \(\theta\in(-\pi/2,\pi/2)\) e \(\dif x=\cos\theta\,\dif\theta\),
+\[
+\sqrt{1-x^{2}}=\cos\theta,
+\]
+\[
+\int\sqrt{1-x^{2}}\,\dif x
+=\int\cos^{2}\theta\,\dif\theta
+=\int\frac{1+\cos(2\theta)}{2}\,\dif\theta
+=\frac{\theta}{2}+\frac{\sin(2\theta)}{4}+C.
+\]
+Como \(\sin(2\theta)=2\sin\theta\cos\theta\),
+\[
+\frac{\theta}{2}+\frac{\sin\theta\cos\theta}{2}+C
+=\frac12\arcsin x+\frac12 x\sqrt{1-x^{2}}+C,
+\]
+onde \(\cos\theta=\sqrt{1-x^{2}}\) porque \(\cos\theta\ge 0\) no intervalo escolhido. Nos extremos \(x=\pm 1\) o integrando se anula e a mesma expressão, contínua em \([-1,1]\), continua válida.
+
+Derivada, para cravar o coeficiente:
+\begin{align*}
+\frac{\dif}{\dif x}\Bigl(x\sqrt{1-x^{2}}\Bigr)
+&=\sqrt{1-x^{2}}+x\cdot\frac{-x}{\sqrt{1-x^{2}}}
+=\frac{1-x^{2}-x^{2}}{\sqrt{1-x^{2}}}
+=\frac{1-2x^{2}}{\sqrt{1-x^{2}}},\\[0.4em]
+\frac{\dif}{\dif x}\Bigl(\frac12 x\sqrt{1-x^{2}}+\frac12\arcsin x\Bigr)
+&=\frac12\cdot\frac{1-2x^{2}}{\sqrt{1-x^{2}}}+\frac12\cdot\frac{1}{\sqrt{1-x^{2}}}
+=\frac{1-x^{2}}{\sqrt{1-x^{2}}}
+=\sqrt{1-x^{2}}.
+\end{align*}
+\end{exemplo}
+
+Antes do segundo exemplo, integramos \(\sec^{3}\theta\), que não é uma citação: sai de partes.
+
+\begin{lema}
+No intervalo \(\theta\in(-\pi/2,\pi/2)\), onde \(\sec\theta>0\) e \(\tan\theta\) tem o sinal de \(\theta\),
+\[
+\int\sec^{3}\theta\,\dif\theta
+=\frac12\sec\theta\tan\theta+\frac12\ln\abs{\sec\theta+\tan\theta}+C.
+\]
+\end{lema}
+
+\noindent\textbf{Demonstração.}
+Sejam \(u=\sec\theta\) e \(\dif v=\sec^{2}\theta\,\dif\theta\). Então \(\dif u=\sec\theta\tan\theta\,\dif\theta\) e \(v=\tan\theta\), e
+\begin{align*}
+\int\sec^{3}\theta\,\dif\theta
+&=\sec\theta\tan\theta-\int\tan\theta\cdot\sec\theta\tan\theta\,\dif\theta
+=\sec\theta\tan\theta-\int\sec\theta\tan^{2}\theta\,\dif\theta.
+\end{align*}
+Como \(\tan^{2}\theta=\sec^{2}\theta-1\),
+\begin{align*}
+\int\sec^{3}\theta\,\dif\theta
+&=\sec\theta\tan\theta-\int\sec\theta(\sec^{2}\theta-1)\,\dif\theta
+=\sec\theta\tan\theta-\int\sec^{3}\theta\,\dif\theta+\int\sec\theta\,\dif\theta.
+\end{align*}
+A antiderivada de \(\sec\theta\) em \((-\pi/2,\pi/2)\) é \(\ln\abs{\sec\theta+\tan\theta}\): de fato,
+\[
+\frac{\dif}{\dif\theta}\ln\abs{\sec\theta+\tan\theta}
+=\frac{\sec\theta\tan\theta+\sec^{2}\theta}{\sec\theta+\tan\theta}
+=\frac{\sec\theta(\tan\theta+\sec\theta)}{\sec\theta+\tan\theta}
+=\sec\theta.
+\]
+Logo
+\[
+2\int\sec^{3}\theta\,\dif\theta
+=\sec\theta\tan\theta+\ln\abs{\sec\theta+\tan\theta}+C,
+\]
+e basta dividir por \(2\).
+\hfill\(\square\)
+
+\begin{exemplo}[Família \(\sqrt{a^{2}+x^{2}}\), com \(a=1\)]
+Para \(x\in\R\), seja \(x=\tan\theta\) com \(\theta\in(-\pi/2,\pi/2)\). Então \(\dif x=\sec^{2}\theta\,\dif\theta\) e \(\sqrt{1+x^{2}}=\sec\theta\), de modo que
+\[
+\int\sqrt{1+x^{2}}\,\dif x
+=\int\sec^{3}\theta\,\dif\theta
+=\frac12\sec\theta\tan\theta+\frac12\ln\abs{\sec\theta+\tan\theta}+C.
+\]
+Voltando, \(\tan\theta=x\) e \(\sec\theta=\sqrt{1+x^{2}}\). Além disso \(\sqrt{1+x^{2}}+x>0\) para todo \(x\) real, porque \(\sqrt{1+x^{2}}>\abs{x}\ge -x\). O módulo pode sair:
+\[
+\int\sqrt{1+x^{2}}\,\dif x
+=\frac12 x\sqrt{1+x^{2}}+\frac12\ln\bigl(x+\sqrt{1+x^{2}}\bigr)+C.
+\]
+\end{exemplo}
+
+\begin{exemplo}[Família \(\sqrt{x^{2}-a^{2}}\), com \(a=1\), e o sinal]
+Primeiro, \(x>1\). Seja \(x=\sec\theta\) com \(\theta\in(0,\pi/2)\). Então \(\tan\theta>0\), \(\sqrt{x^{2}-1}=\tan\theta\) e \(\dif x=\sec\theta\tan\theta\,\dif\theta\), logo
+\begin{align*}
+\int\sqrt{x^{2}-1}\,\dif x
+&=\int\tan\theta\cdot\sec\theta\tan\theta\,\dif\theta
+=\int\sec\theta\tan^{2}\theta\,\dif\theta
+=\int\sec\theta(\sec^{2}\theta-1)\,\dif\theta\\
+&=\int\sec^{3}\theta\,\dif\theta-\int\sec\theta\,\dif\theta
+=\frac12\sec\theta\tan\theta+\frac12\ln\abs{\sec\theta+\tan\theta}-\ln\abs{\sec\theta+\tan\theta}+C\\
+&=\frac12\sec\theta\tan\theta-\frac12\ln\abs{\sec\theta+\tan\theta}+C.
+\end{align*}
+Voltando para \(x\),
+\[
+\int\sqrt{x^{2}-1}\,\dif x
+=\frac12 x\sqrt{x^{2}-1}-\frac12\ln\bigl(x+\sqrt{x^{2}-1}\bigr)+C,\qquad x>1.
+\]
+O argumento do logaritmo é positivo para \(x>1\).
+
+Esta expressão também serve em \(x<-1\), mas isso não sai da substituição com \(\theta\in(0,\pi/2)\), intervalo em que \(\sec\theta\ge 1\). Conferimos por derivação em \(\{\abs{x}>1\}\), onde \(\sqrt{x^{2}-1}>0\):
+\begin{align*}
+\frac{\dif}{\dif x}\Bigl(x\sqrt{x^{2}-1}\Bigr)
+&=\sqrt{x^{2}-1}+\frac{x^{2}}{\sqrt{x^{2}-1}}
+=\frac{x^{2}-1+x^{2}}{\sqrt{x^{2}-1}}
+=\frac{2x^{2}-1}{\sqrt{x^{2}-1}},\\[0.4em]
+\frac{\dif}{\dif x}\ln\abs{x+\sqrt{x^{2}-1}}
+&=\frac{1+\dfrac{x}{\sqrt{x^{2}-1}}}{x+\sqrt{x^{2}-1}}
+=\frac{\sqrt{x^{2}-1}+x}{\sqrt{x^{2}-1}\,\bigl(x+\sqrt{x^{2}-1}\bigr)}
+=\frac{1}{\sqrt{x^{2}-1}}.
+\end{align*}
+Na segunda linha, \(x+\sqrt{x^{2}-1}\neq 0\) para \(\abs{x}>1\): o produto \(\bigl(x+\sqrt{x^{2}-1}\bigr)\bigl(x-\sqrt{x^{2}-1}\bigr)=1\) impede que o primeiro fator se anule. Portanto
+\begin{align*}
+\frac{\dif}{\dif x}\Biggl(\frac12 x\sqrt{x^{2}-1}-\frac12\ln\abs{x+\sqrt{x^{2}-1}}\Biggr)
+&=\frac12\cdot\frac{2x^{2}-1}{\sqrt{x^{2}-1}}-\frac12\cdot\frac{1}{\sqrt{x^{2}-1}}
+=\frac{x^{2}-1}{\sqrt{x^{2}-1}}
+=\sqrt{x^{2}-1}.
+\end{align*}
+A mesma fórmula é antiderivada em \((1,\infty)\) e em \((-\infty,-1)\). A constante pode ser uma em cada componente: os intervalos não se comunicam.
+\end{exemplo}
+
+\section{Frações parciais}
+
+Seja \(f=P/Q\) uma função racional, com \(P\) e \(Q\) polinômios e \(Q\) não identicamente nulo. Se \(\deg P\ge\deg Q\), dividimos primeiro:
+\[
+\frac{P}{Q}=S+\frac{R}{Q},\qquad \deg R<\deg Q,
+\]
+com \(S\) e \(R\) polinômios. Só então decompomos \(R/Q\).
+
+Sobre \(\R\), fatoramos \(Q\) em lineares e quadráticos de discriminante negativo. Para as três formas abaixo procuramos coeficientes reais, resolvemos o sistema e \emph{voltamos a multiplicar}: a identidade conferida prova a decomposição daquela função, sem apelo a um teorema geral não demonstrado.
+
+\begin{itemize}
+\item Fatores lineares distintos: \(\dfrac{A}{x-r}+\dfrac{B}{x-s}\).
+\item Fator linear repetido, aqui de ordem \(2\): \(\dfrac{A}{x-r}+\dfrac{B}{(x-r)^{2}}\). Um fator simples ao lado entra com o seu próprio coeficiente.
+\item Quadrático irredutível \(x^{2}+bx+c\), com discriminante \(b^{2}-4c<0\): \(\dfrac{Ax+B}{x^{2}+bx+c}\). A integral de \(\dfrac{x}{x^{2}+bx+c}\) produz logaritmo; o resto, depois de completar o quadrado, produz arco tangente.
+\end{itemize}
+
+\begin{exemplo}[Lineares distintos]
+\begin{equation*}
+\frac{3x+5}{(x-1)(x+2)}=\frac{A}{x-1}+\frac{B}{x+2}.
+\end{equation*}
+O grau do numerador é \(1\), menor que \(2\). Limpando o denominador,
+\[
+3x+5=A(x+2)+B(x-1).
+\]
+Em \(x=1\): \(8=3A\), logo \(A=\dfrac{8}{3}\). Em \(x=-2\): \(-1=-3B\), logo \(B=\dfrac{1}{3}\). Conferência:
+\[
+\frac83(x+2)+\frac13(x-1)=\frac{8x+16+x-1}{3}=\frac{9x+15}{3}=3x+5.
+\]
+Assim, para \(x\neq 1\) e \(x\neq -2\),
+\begin{align*}
+\int\frac{3x+5}{(x-1)(x+2)}\,\dif x
+&=\frac83\int\frac{\dif x}{x-1}+\frac13\int\frac{\dif x}{x+2}
+=\frac83\ln\abs{x-1}+\frac13\ln\abs{x+2}+C.
+\end{align*}
+\end{exemplo}
+
+\begin{exemplo}[Linear repetido]
+O grau de \(x+2\) é menor que o grau de \(x(x-1)^{2}\). Procuramos
+\[
+\frac{x+2}{x(x-1)^{2}}=\frac{A}{x}+\frac{B}{x-1}+\frac{C}{(x-1)^{2}}.
+\]
+Então
+\[
+x+2=A(x-1)^{2}+Bx(x-1)+Cx.
+\]
+Em \(x=0\): \(2=A\). Em \(x=1\): \(3=C\). Expandindo,
+\[
+A(x^{2}-2x+1)+B(x^{2}-x)+Cx=(A+B)x^{2}+(-2A-B+C)x+A.
+\]
+Comparamos com \(x+2\): o coeficiente de \(x^{2}\) dá \(A+B=0\), logo \(B=-2\). O coeficiente de \(x\) confirma: \(-2\cdot 2-(-2)+3=-4+2+3=1\), e o termo independente é \(A=2\). Portanto
+\begin{align*}
+\int\frac{x+2}{x(x-1)^{2}}\,\dif x
+&=2\ln\abs{x}-2\ln\abs{x-1}+\int C(x-1)^{-2}\,\dif x\\
+&=2\ln\abs{x}-2\ln\abs{x-1}-\frac{3}{x-1}+C_{\mathrm{int}},
+\end{align*}
+válida em cada intervalo que não contém \(0\) nem \(1\). A constante de integração foi escrita \(C_{\mathrm{int}}\) para não confundir com o coeficiente \(C\).
+\end{exemplo}
+
+\begin{exemplo}[Quadrático irredutível: logaritmo e arco tangente]
+O polinômio \(x^{2}+1\) tem discriminante \(-4<0\). O numerador \(2x+1\) tem grau menor que \(3\). Procuramos
+\[
+\frac{2x+1}{(x^{2}+1)(x+1)}=\frac{Ax+B}{x^{2}+1}+\frac{C}{x+1},
+\]
+isto é,
+\[
+2x+1=(Ax+B)(x+1)+C(x^{2}+1).
+\]
+Em \(x=-1\): \(-1=C(1+1)\), logo \(C=-\dfrac12\). Expandindo,
+\[
+(A+C)x^{2}+(A+B)x+(B+C)=2x+1.
+\]
+Daí \(A+C=0\), \(A+B=2\) e \(B+C=1\). Com \(C=-\frac12\) sai \(A=\frac12\). Depois \(\frac12+B=2\), logo \(B=\frac32\). E \(\frac32-\frac12=1\), como exigido. Conferência rápida do numerador:
+\[
+\Bigl(\frac12 x+\frac32\Bigr)(x+1)-\frac12(x^{2}+1)
+=\frac12 x^{2}+\frac12 x+\frac32 x+\frac32-\frac12 x^{2}-\frac12
+=2x+1.
+\]
+Integramos, para \(x\neq -1\):
+\begin{align*}
+\int\frac{2x+1}{(x^{2}+1)(x+1)}\,\dif x
+&=\int\frac{\frac12 x+\frac32}{x^{2}+1}\,\dif x-\frac12\int\frac{\dif x}{x+1}\\
+&=\frac12\int\frac{x}{x^{2}+1}\,\dif x+\frac32\int\frac{\dif x}{x^{2}+1}-\frac12\ln\abs{x+1}.
+\end{align*}
+Na primeira integral, \(w=x^{2}+1\), \(\dif w=2x\,\dif x\), então \(\int\frac{x}{x^{2}+1}\,\dif x=\frac12\ln(x^{2}+1)\). Conclusão:
+\[
+\frac14\ln(x^{2}+1)+\frac32\arctan x-\frac12\ln\abs{x+1}+C.
+\]
+\end{exemplo}
+
+\begin{exemplo}[O grau do numerador não é menor: dividir primeiro]
+\[
+\frac{x^{3}+x^{2}+x+2}{x^{2}+1}.
+\]
+A divisão polinomial:
+\[
+(x+1)(x^{2}+1)=x^{3}+x+x^{2}+1=x^{3}+x^{2}+x+1,
+\]
+\[
+(x^{3}+x^{2}+x+2)-(x^{3}+x^{2}+x+1)=1.
+\]
+Logo
+\[
+\frac{x^{3}+x^{2}+x+2}{x^{2}+1}=x+1+\frac{1}{x^{2}+1},
+\]
+e
+\[
+\int\frac{x^{3}+x^{2}+x+2}{x^{2}+1}\,\dif x
+=\frac{x^{2}}{2}+x+\arctan x+C.
+\]
+Sem a divisão, o numerador de uma ``fração parcial'' teria grau maior que o do quadrático, e o sistema usual não fecha.
+\end{exemplo}
+
+\section{Integrais impróprias}
+
+\begin{definicao}[Tipo I]
+Seja \(f\) contínua em \([a,\infty)\). Definimos
+\[
+\int_a^{\infty} f(x)\,\dif x
+:=\lim_{b\to\infty}\int_a^{b} f(x)\,\dif x,
+\]
+quando esse limite existe e é finito. Nesse caso a integral \textbf{converge}. Se o limite é infinito ou não existe, a integral \textbf{diverge}. O caso \(\int_{-\infty}^{b}\) é análogo, com limite \(a\to-\infty\). A integral \(\int_{-\infty}^{\infty}\) converge quando, para algum \(c\in\R\), as duas integrais \(\int_{-\infty}^{c}\) e \(\int_{c}^{\infty}\) convergem; soma-se então os valores. Os dois limites são independentes.
+\end{definicao}
+
+\begin{definicao}[Tipo II]
+Seja \(f\) contínua em \((a,b]\), possivelmente ilimitada quando \(x\to a^{+}\). Definimos
+\[
+\int_a^{b} f
+:=\lim_{c\to a^{+}}\int_c^{b} f,
+\]
+se o limite é finito. Se a singularidade está em \(b\), usa-se \(\lim_{c\to b^{-}}\int_a^{c} f\). Se a singularidade está num ponto interior \(c\in(a,b)\), a integral imprópria converge somente quando \emph{os dois} limites
+\[
+\lim_{\eps\to 0^{+}}\int_a^{c-\eps} f
+\qquad\text{e}\qquad
+\lim_{\delta\to 0^{+}}\int_{c+\delta}^{b} f
+\]
+existem e são finitos, separadamente. O valor é a soma. Não é lícito forçar \(\eps=\delta\) para produzir um cancelamento.
+\end{definicao}
+
+\begin{teorema}[Potências no infinito]
+Seja \(p\in\R\). A integral \(\int_1^{\infty} x^{-p}\,\dif x\) converge se, e somente se, \(p>1\). Nesse caso o valor é \(\dfrac{1}{p-1}\).
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Se \(p\neq 1\),
+\[
+\int_1^{b} x^{-p}\,\dif x
+=\Bigl[\frac{x^{1-p}}{1-p}\Bigr]_1^{b}
+=\frac{b^{1-p}-1}{1-p}
+=\frac{1-b^{1-p}}{p-1}.
+\]
+Se \(p>1\), então \(1-p<0\), logo \(b^{1-p}\to 0\) quando \(b\to\infty\), e o limite é \(\dfrac{1}{p-1}\).
+
+Se \(p<1\), então \(1-p>0\), logo \(b^{1-p}\to\infty\). O quociente \(\dfrac{b^{1-p}-1}{1-p}\) tem denominador positivo e numerador tendendo a \(+\infty\), portanto a integral diverge para \(+\infty\).
+
+Se \(p=1\),
+\[
+\int_1^{b}\frac{1}{x}\,\dif x=\ln b-\ln 1=\ln b\to\infty.
+\]
+A integral diverge. Reunindo os três casos, há convergência exatamente quando \(p>1\).
+\hfill\(\square\)
+
+\begin{teorema}[Potências junto à origem]
+Seja \(p\in\R\). A integral \(\int_0^{1} x^{-p}\,\dif x\) converge se, e somente se, \(p<1\). Nesse caso o valor é \(\dfrac{1}{1-p}\).
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Se \(p\le 0\), a função \(x^{-p}\) se estende continuamente a \([0,1]\): vale \(1\) se \(p=0\), e \(x^{-p}=x^{\abs{p}}\to 0\) se \(p<0\), de modo que o valor \(0\) em \(x=0\) a torna contínua. A integral de Riemann ordinária existe, e \(p\le 0\) implica \(p<1\). O cálculo do parágrafo seguinte também cobre este caso.
+
+Se \(p\neq 1\), para \(0<a<1\),
+\[
+\int_a^{1} x^{-p}\,\dif x
+=\Bigl[\frac{x^{1-p}}{1-p}\Bigr]_a^{1}
+=\frac{1-a^{1-p}}{1-p}.
+\]
+Se \(p<1\), então \(1-p>0\) e \(a^{1-p}\to 0\) quando \(a\to 0^{+}\). O limite é \(\dfrac{1}{1-p}\).
+
+Se \(p>1\), então \(1-p<0\) e \(a^{1-p}\to +\infty\). O numerador \(1-a^{1-p}\to-\infty\) e o denominador é negativo, logo o quociente tende a \(+\infty\). A integral diverge.
+
+Se \(p=1\),
+\[
+\int_a^{1}\frac{1}{x}\,\dif x=-\ln a\to+\infty
+\]
+quando \(a\to 0^{+}\). Portanto há convergência exatamente quando \(p<1\).
+\hfill\(\square\)
+
+\begin{contraexemplo}[Valor principal não é integral imprópria]
+A função \(1/x\) é contínua em \([-1,0)\) e em \((0,1]\). Calculemos os dois lados exigidos pela definição.
+\begin{align*}
+\int_{\eps}^{1}\frac{1}{x}\,\dif x
+&=\ln 1-\ln\eps=-\ln\eps\to+\infty,\\
+\int_{-1}^{-\eps}\frac{1}{x}\,\dif x
+&=\ln\eps-\ln 1=\ln\eps\to-\infty,
+\end{align*}
+quando \(\eps\to 0^{+}\). Cada limite diverge, então \(\int_{-1}^{1}\frac{1}{x}\,\dif x\) diverge.
+
+Se, à força, usarmos o mesmo \(\eps\) dos dois lados,
+\[
+\int_{-1}^{-\eps}\frac{1}{x}\,\dif x+\int_{\eps}^{1}\frac{1}{x}\,\dif x
+=\ln\eps-\ln\eps=0.
+\]
+O limite desse simétrico existe e vale \(0\). Chama-se valor principal de Cauchy. Ele não está na definição: a definição pede dois limites finitos, e aqui nenhum dos dois é finito. Cancelar \(+\infty\) com \(-\infty\) não produz convergência.
+\end{contraexemplo}
+
+\section{Testes de comparação}
+
+Os testes deste parágrafo exigem sinal. Sem isso, uma função oscilante pode ter integral convergente enquanto o módulo diverge.
+
+\begin{teorema}[Comparação direta]
+Sejam \(f\) e \(g\) contínuas em \([a,\infty)\), com \(0\le f(x)\le g(x)\) para todo \(x\ge a\).
+\begin{enumerate}
+\item Se \(\int_a^{\infty} g\) converge, então \(\int_a^{\infty} f\) converge e
+\[
+0\le\int_a^{\infty} f\le\int_a^{\infty} g.
+\]
+\item Se \(\int_a^{\infty} f\) diverge, então \(\int_a^{\infty} g\) diverge.
+\end{enumerate}
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Sejam \(F(b)=\int_a^{b} f\) e \(G(b)=\int_a^{b} g\). Como \(f\ge 0\) e \(g\ge 0\), as funções \(F\) e \(G\) são crescentes, e \(0\le F(b)\le G(b)\).
+
+Se \(\int g\) converge, \(G(b)\) tende a um limite finito \(L\) e, por ser crescente, \(G(b)\le L\). Então \(F(b)\le L\). Uma função crescente e limitada superiormente tem limite finito, digamos \(M\). Logo \(\int f\) converge e \(0\le M\le L\).
+
+Se \(\int f\) diverge, o fato de \(F\) ser crescente impede que \(F\) tenda a um limite finito, logo \(F(b)\to+\infty\). Como \(G(b)\ge F(b)\), também \(G(b)\to+\infty\).
+\hfill\(\square\)
+
+\begin{teorema}[Comparação no limite]
+Sejam \(f\) e \(g\) contínuas em \([a,\infty)\), com \(f(x)\ge 0\) e \(g(x)>0\) para todo \(x\ge a\). Suponha que
+\[
+\lim_{x\to\infty}\frac{f(x)}{g(x)}=L\in[0,\infty].
+\]
+\begin{enumerate}
+\item Se \(0<L<\infty\), então \(\int_a^{\infty} f\) converge se, e somente se, \(\int_a^{\infty} g\) converge.
+\item Se \(L=\infty\) e \(\int_a^{\infty} g\) diverge, então \(\int_a^{\infty} f\) diverge.
+\end{enumerate}
+O caso \(L=0\), com a hipótese de que \(\int g\) converge, fica para o exercício~A1. A demonstração é do mesmo tipo que a do item (i), com uma cota só de um lado.
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+(i) Existe \(M\ge a\) tal que, para \(x\ge M\),
+\[
+\Bigl\lvert\frac{f(x)}{g(x)}-L\Bigr\rvert<\frac{L}{2}.
+\]
+Daí \(\frac{L}{2}<\frac{f(x)}{g(x)}<\frac{3L}{2}\), e, como \(g>0\),
+\[
+\frac{L}{2}\,g(x)<f(x)<\frac{3L}{2}\,g(x),\qquad x\ge M.
+\]
+As integrais de \(a\) até \(M\) são ordinárias, de funções contínuas, logo finitas. Pela comparação direta, a cauda \(\int_M^{\infty} f\) converge se a cauda de \(g\) converge, e a cauda de \(g\) converge se a cauda de \(f\) converge, porque \(g<\frac{2}{L}f\). Portanto as integrais a partir de \(a\) convergem ou divergem juntas.
+
+(ii) Se \(f/g\to\infty\), existe \(M\ge a\) tal que \(f(x)/g(x)>1\) para \(x\ge M\), isto é, \(f(x)>g(x)\). Se a cauda de \(g\) diverge, a comparação direta empurra a divergência para \(f\).
+\hfill\(\square\)
+
+\cuidado{Sem uma desigualdade \(f\ge 0\), ou sem passar ao módulo, a comparação não vale. Uma primitiva pode oscilar e convergir, enquanto a integral do módulo diverge. O par clássico é \(\sin x/x\) e \(\abs{\sin x}/x\).}
+
+\begin{teorema}[Convergência de \(\int_1^{\infty}\frac{\sin x}{x}\,\dif x\)]
+A integral \(\int_1^{\infty}\frac{\sin x}{x}\,\dif x\) converge.
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Fixe \(b>1\) e integre por partes em \([1,b]\). As funções \(u(x)=1/x\) e \(v(x)=-\cos x\) são de classe \(C^1\). Com \(\dif v=\sin x\,\dif x\) e \(\dif u=-x^{-2}\,\dif x\),
+\begin{align*}
+\int_1^{b}\frac{\sin x}{x}\,\dif x
+&=\Bigl[-\frac{\cos x}{x}\Bigr]_1^{b}-\int_1^{b}(-\cos x)\Bigl(-\frac{1}{x^{2}}\Bigr)\,\dif x\\
+&=\Bigl(-\frac{\cos b}{b}+\cos 1\Bigr)-\int_1^{b}\frac{\cos x}{x^{2}}\,\dif x.
+\end{align*}
+O detalhe do sinal: \(\int v\,\dif u=\int_1^{b}(-\cos x)(-x^{-2})\,\dif x=\int_1^{b}\cos x\,x^{-2}\,\dif x\), e partes subtrai esta integral.
+
+Quando \(b\to\infty\), \(\abs{\cos b/b}\le 1/b\to 0\), logo \(\cos b/b\to 0\).
+
+Resta provar que \(\int_1^{\infty}\frac{\cos x}{x^{2}}\,\dif x\) converge. O módulo satisfaz
+\[
+0\le\frac{\abs{\cos x}}{x^{2}}\le\frac{1}{x^{2}},\qquad x\ge 1.
+\]
+A integral \(\int_1^{\infty} x^{-2}\,\dif x\) converge pelo teorema das potências, com \(p=2>1\), e vale \(1\). A comparação direta dá a convergência de \(\int_1^{\infty}\abs{\cos x}/x^{2}\,\dif x\). Em particular, \(H(b)=\int_1^{b}\cos x\,x^{-2}\,\dif x\) é de Cauchy no infinito: se \(b_{2}>b_{1}>1\),
+\[
+\abs{H(b_{2})-H(b_{1})}
+\le\int_{b_{1}}^{b_{2}}\frac{\abs{\cos x}}{x^{2}}\,\dif x,
+\]
+e a cauda do módulo tende a zero porque a integral do módulo converge. Admitimos o critério de Cauchy para limites em \(+\infty\): uma função \(H\), definida em \([1,\infty)\), possui limite finito em \(+\infty\) se, e somente se, para todo \(\eps>0\) existe \(M\) tal que \(b_{2}>b_{1}\ge M\) implica \(\abs{H(b_{2})-H(b_{1})}<\eps\). Assim \(H(b)\) converge, e portanto
+\[
+\lim_{b\to\infty}\int_1^{b}\frac{\sin x}{x}\,\dif x
+=\cos 1-\int_1^{\infty}\frac{\cos x}{x^{2}}\,\dif x
+\]
+existe e é finito.
+\hfill\(\square\)
+
+O exercício~A3 isola, sem este exemplo, o passo geral ``convergência absoluta implica convergência''.
+
+\begin{teorema}[Divergência de \(\int_1^{\infty}\frac{\abs{\sin x}}{x}\,\dif x\)]
+A integral \(\int_1^{\infty}\frac{\abs{\sin x}}{x}\,\dif x\) diverge.
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Para cada inteiro \(k\ge 1\), no intervalo \([k\pi+\pi/4,\,k\pi+3\pi/4]\) vale \(\abs{\sin x}\ge\sin(\pi/4)=\sqrt{2}/2\), e \(x\le (k+1)\pi\), logo \(1/x\ge 1/((k+1)\pi)\). O comprimento do intervalo é \(\pi/2\). Portanto
+\begin{align*}
+\int_{k\pi}^{(k+1)\pi}\frac{\abs{\sin x}}{x}\,\dif x
+&\ge\int_{k\pi+\pi/4}^{k\pi+3\pi/4}\frac{\sqrt{2}/2}{(k+1)\pi}\,\dif x
+=\frac{\sqrt{2}}{2}\cdot\frac{1}{(k+1)\pi}\cdot\frac{\pi}{2}
+=\frac{\sqrt{2}}{4(k+1)}.
+\end{align*}
+Estes intervalos, para \(k\ge 1\), estão contidos em \([1,\infty)\) e são disjuntos salvo extremos. Somando de \(k=1\) até \(N\),
+\[
+\int_1^{(N+1)\pi}\frac{\abs{\sin x}}{x}\,\dif x
+\ge\sum_{k=1}^{N}\frac{\sqrt{2}}{4(k+1)}.
+\]
+A série harmônica deslocada diverge, logo o segundo membro tende a \(+\infty\) quando \(N\to\infty\). A integral de \(1\) até \(b\) fica arbitrariamente grande e a integral imprópria diverge.
+\hfill\(\square\)
+
+\begin{observacao}
+A integral de \(\sin x/x\) converge, e a do módulo diverge. Diz-se que \(\int_1^{\infty}\sin x/x\,\dif x\) converge condicionalmente. A primitiva oscila: partes produziu \(-\cos b/b\), que amortece, mais uma integral absolutamente convergente. O amortecimento usa o sinal alternado de \(\sin x\); o módulo destrói esse cancelamento e a comparação com a série harmônica aparece.
+\end{observacao}
+
+\section{Equações diferenciais de primeira ordem}
+
+\subsection{Equação separável}
+
+\begin{definicao}
+Sejam \(g\) contínua num intervalo \(I\) e \(h\) contínua num intervalo \(J\). A equação
+\[
+y'=g(x)h(y)
+\]
+é separável. Uma solução em \(I\) é uma função \(y:I\to J\), de classe \(C^1\), que satisfaz a igualdade em todo ponto de \(I\).
+\end{definicao}
+
+\begin{teorema}
+Nas hipóteses da definição:
+\begin{enumerate}
+\item Se \(h(y_{0})=0\), a função constante \(y(x)=y_{0}\) é solução em \(I\). Chama-se solução de equilíbrio.
+\item Se \(y\) é solução e \(h(y(x))\neq 0\) para todo \(x\in I\), então
+\[
+\int\frac{1}{h(y)}\,\dif y=\int g(x)\,\dif x,
+\]
+no sentido de que uma antiderivada de \(1/h\), composta com \(y\), difere de uma antiderivada de \(g\) por uma constante.
+\end{enumerate}
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+(i) A derivada da constante é \(0\), e \(g(x)h(y_{0})=0\).
+
+(ii) Pela regra da cadeia,
+\[
+\frac{\dif}{\dif x}\int^{y(x)}\frac{1}{h}
+=\frac{y'(x)}{h(y(x))}
+=\frac{g(x)h(y(x))}{h(y(x))}
+=g(x),
+\]
+desde que \(h(y(x))\neq 0\). Duas antiderivadas de \(g\) diferem por uma constante.
+\hfill\(\square\)
+
+\cuidado{Dividir por \(h(y)\) apaga os equilíbrios, que são exatamente os zeros de \(h\). Depois de integrar, ou se reintroduz o equilíbrio à parte, ou se verifica se alguma constante da família geral o recupera. Pior: se \(h\) não é lipschitziana perto do zero, o equilíbrio pode não ser a única solução do problema de valor inicial. O exercício~A2 dá duas soluções explícitas, e uma terceira colada, para \(y'=3y^{2/3}\) com \(y(0)=0\).}
+
+\begin{exemplo}[Equação, equilíbrio e condição inicial]
+Resolvemos \(y'=2x(1-y)\) com \(y(0)=3\). Aqui \(g(x)=2x\), contínua em \(\R\), e \(h(y)=1-y\), contínua em \(\R\). O equilíbrio é \(h(y)=0\), isto é, \(y\equiv 1\). Ele não atende \(y(0)=3\).
+
+Para uma solução com \(y\neq 1\),
+\[
+\int\frac{\dif y}{1-y}=\int 2x\,\dif x.
+\]
+A primeira antiderivada: com \(w=1-y\), \(\dif w=-\dif y\), sai \(-\ln\abs{1-y}\). Logo
+\[
+-\ln\abs{1-y}=x^{2}+C_{1},\qquad
+\ln\abs{1-y}=-x^{2}+C,\qquad
+\abs{1-y}=e^{C}e^{-x^{2}}.
+\]
+Escrevemos \(1-y=Ke^{-x^{2}}\) com \(K\neq 0\). O valor \(K=0\) devolve o equilíbrio \(y=1\), então a família
+\[
+y(x)=1-Ke^{-x^{2}},\qquad K\in\R,
+\]
+contém todas as soluções constantes e as que obtivemos ao separar. A condição \(y(0)=3\) dá \(3=1-K\), logo \(K=-2\), e
+\[
+y(x)=1+2e^{-x^{2}}.
+\]
+Conferência: \(y(0)=1+2=3\) e
+\[
+y'=-4xe^{-x^{2}},\qquad
+2x(1-y)=2x\bigl(1-(1+2e^{-x^{2}})\bigr)=-4xe^{-x^{2}}.
+\]
+\end{exemplo}
+
+\subsection{Equação linear}
+
+\begin{definicao}
+Sejam \(p\) e \(q\) contínuas num intervalo \(I\). A equação
+\[
+y'+p(x)y=q(x)
+\]
+é linear de primeira ordem. Uma solução é uma função \(y:I\to\R\) de classe \(C^1\) que satisfaz a igualdade em \(I\).
+\end{definicao}
+
+\begin{teorema}[Fator integrante]
+Seja \(P\) uma antiderivada de \(p\) em \(I\), e seja \(\mu(x)=\exp\bigl(P(x)\bigr)\). Então \(\mu\) é de classe \(C^1\), \(\mu>0\), \(\mu'=p\mu\), e para toda \(y\) de classe \(C^1\)
+\[
+(\mu y)'=\mu\bigl(y'+p y\bigr).
+\]
+Em particular, \(y\) resolve a equação linear se, e somente se, \((\mu y)'=\mu q\), isto é,
+\[
+\mu(x)y(x)=\int\mu(x)q(x)\,\dif x.
+\]
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+A exponencial é positiva e de classe \(C^1\), e a regra da cadeia dá \(\mu'=e^{P}P'=p\mu\). Então
+\[
+(\mu y)'=\mu'y+\mu y'=p\mu\, y+\mu y'=\mu(y'+py).
+\]
+Se \(y'+py=q\), o segundo membro é \(\mu q\). Reciprocamente, se \((\mu y)'=\mu q\), dividimos por \(\mu>0\) e obtemos a equação. Integrar \((\mu y)'=\mu q\) é o Teorema Fundamental.
+\hfill\(\square\)
+
+\begin{exemplo}[Problema de valor inicial numérico]
+Resolvemos \(y'+3y=6\) com \(y(0)=1\), em \(\R\). Aqui \(p(x)=3\) e \(q(x)=6\) são contínuas. O fator integrante é
+\[
+\mu(x)=\exp\Bigl(\int 3\,\dif x\Bigr)=e^{3x},
+\]
+tomando a constante da antiderivada de \(p\) igual a zero; outra constante só multiplicaria \(\mu\) por um positivo e cancelaria nos dois lados. A identidade do teorema dá
+\[
+\bigl(e^{3x} y\bigr)'=6e^{3x}.
+\]
+Integramos:
+\[
+e^{3x} y=6\cdot\frac{1}{3}e^{3x}+C=2e^{3x}+C,
+\qquad
+y=2+Ce^{-3x}.
+\]
+A condição inicial: \(1=2+C\), logo \(C=-1\), e
+\[
+y(x)=2-e^{-3x}.
+\]
+Conferência: \(y(0)=2-1=1\) e
+\[
+y'=3e^{-3x},\qquad
+y'+3y=3e^{-3x}+3\bigl(2-e^{-3x}\bigr)=6.
+\]
+\end{exemplo}
+
+\section{Exercícios}
+
+\begin{exercicio}[Básico --- partes]
+\textbf{B1.} Calcule \(\int x\cos x\,\dif x\) e confira por derivação.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- expoente ímpar]
+\textbf{B2.} Calcule \(\int\sin^{3}x\,\dif x\) separando um fator \(\sin x\).
+\end{exercicio}
+
+\begin{exercicio}[Básico --- substituição trigonométrica]
+\textbf{B3.} Calcule \(\int\dfrac{1}{\sqrt{9-x^{2}}}\,\dif x\) para \(\abs{x}<3\), voltando à variável \(x\). Registre o sinal da raiz.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- lineares distintos]
+\textbf{B4.} Calcule \(\int\dfrac{1}{(x-2)(x+1)}\,\dif x\), resolvendo o sistema e conferindo a decomposição.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- imprópria de tipo I]
+\textbf{B5.} Calcule \(\int_1^{\infty} x^{-3}\,\dif x\) pelo limite. Diga o valor de \(p\) e por que a integral converge.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- dois expoentes pares]
+\textbf{I1.} Calcule \(\int\cos^{4}x\,\dif x\) pelas identidades de ângulo duplo, até uma combinação de \(x\), \(\sin(2x)\) e \(\sin(4x)\).
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- quadrático irredutível]
+\textbf{I2.} Calcule \(\int\dfrac{x+3}{(x-1)(x^{2}+1)}\,\dif x\). O resultado deve conter logaritmo e arco tangente.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- imprópria calculada]
+\textbf{I3.} Calcule \(\int_0^{\infty}\dfrac{1}{1+x^{2}}\,\dif x\) pelo limite. A função é contínua em \([0,\infty)\); a única impropriedade está no infinito.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- comparação no limite]
+\textbf{I4.} Decida se \(\int_1^{\infty}\dfrac{\sqrt{x}}{x^{2}+1}\,\dif x\) converge. Use a comparação no limite com \(g(x)=x^{-3/2}\), escrevendo o valor de \(L\).
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- separável]
+\textbf{I5.} Resolva \(y'=2x(y+1)\) com \(y(0)=0\). Trate o equilíbrio \(y\equiv -1\) antes de dividir, escreva a solução explícita do problema de valor inicial e confira por derivação.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- linear com \(p\) não constante]
+\textbf{I6.} Resolva \(y'+\dfrac{2}{x}y=x\) para \(x>0\), com \(y(1)=1\). Justifique o domínio \(x>0\) e confira a solução.
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- comparação com \(L=0\)]
+\textbf{A1.} Sejam \(f\) e \(g\) contínuas em \([a,\infty)\), com \(f\ge 0\), \(g>0\) e \(\lim_{x\to\infty} f(x)/g(x)=0\). Prove: se \(\int_a^{\infty} g\) converge, então \(\int_a^{\infty} f\) converge.
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- equilíbrio sem unicidade]
+\textbf{A2.} Considere \(y'=3y^{2/3}\) com \(y(0)=0\), a potência no sentido real \((y^{1/3})^{2}\).
+\begin{enumerate}
+\item Verifique que \(y(x)=0\) e \(y(x)=x^{3}\) são soluções em \(\R\).
+\item Verifique que a função que vale \(0\) para \(x<0\) e \(x^{3}\) para \(x\ge 0\) também é solução.
+\item Mostre que \(f(y)=3y^{2/3}\) não é lipschitziana em vizinhança alguma de \(y=0\), calculando o quociente \(\abs{f(y)-f(0)}/\abs{y}\).
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- absoluta implica convergente]
+\textbf{A3.} Seja \(f\) contínua em \([a,\infty)\). Admita o critério de Cauchy: \(H:[a,\infty)\to\R\) tem limite finito em \(+\infty\) se, e somente se, para todo \(\eps>0\) existe \(M\) tal que \(b_{2}>b_{1}\ge M\) implica \(\abs{H(b_{2})-H(b_{1})}<\eps\). Prove que, se \(\int_a^{\infty}\abs{f}\) converge, então \(\int_a^{\infty} f\) converge.
+\end{exercicio}
+
+\end{document}

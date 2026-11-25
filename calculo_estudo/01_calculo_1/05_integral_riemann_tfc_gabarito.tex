@@ -1,0 +1,229 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito --- Integral de Riemann e o teorema fundamental}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A numeração segue a ordem dos exercícios do texto. Cada enunciado é repetido e a solução vem em seguida.
+
+\section*{Exercício 1. [Básico --- somas de $x^2$]}
+
+\textbf{Enunciado.} Para $f(x)=x^2$ em $[0,1]$ e a partição uniforme $P_n$ de $n$ subintervalos, calcule $L(P_n,f)$ e $U(P_n,f)$. Na conta, prove por indução que $\sum_{k=1}^n k^2=n(n+1)(2n+1)/6$. Conclua que a integral vale $1/3$.
+
+\textbf{Solução.}
+A fórmula da soma dos quadrados se prova por indução. Para $n=1$, $1=1\cdot 2\cdot 3/6$. Se ela vale para $n$, então
+\begin{align*}
+\sum_{k=1}^{n+1}k^2
+&=\frac{n(n+1)(2n+1)}{6}+(n+1)^2
+=(n+1)\Bigl(\frac{n(2n+1)}{6}+(n+1)\Bigr)\\
+&=(n+1)\frac{2n^2+n+6n+6}{6}
+=(n+1)\frac{2n^2+7n+6}{6}.
+\end{align*}
+O numerador fatora: $(2n+3)(n+2)=2n^2+4n+3n+6=2n^2+7n+6$. Logo a soma até $n+1$ é
+\[
+\frac{(n+1)(n+2)(2n+3)}{6},
+\]
+que é a fórmula no inteiro $n+1$, porque $2(n+1)+1=2n+3$.
+
+Em $[0,1]$, $f(x)=x^2$ tem derivada $2x\ge 0$, então é não decrescente. Na partição $x_i=i/n$, o ínfimo em $[(i-1)/n,i/n]$ é $((i-1)/n)^2$ e o supremo é $(i/n)^2$. O comprimento de cada subintervalo é $1/n$. Portanto
+\begin{align*}
+L(P_n,f)
+&=\sum_{i=1}^n\Bigl(\frac{i-1}{n}\Bigr)^2\frac{1}{n}
+=\frac{1}{n^3}\sum_{j=1}^{n-1}j^2
+=\frac{1}{n^3}\cdot\frac{(n-1)n(2n-1)}{6}
+=\frac{(n-1)(2n-1)}{6n^2},\\[0.4em]
+U(P_n,f)
+&=\frac{1}{n^3}\sum_{i=1}^n i^2
+=\frac{1}{n^3}\cdot\frac{n(n+1)(2n+1)}{6}
+=\frac{(n+1)(2n+1)}{6n^2}.
+\end{align*}
+A diferença é
+\begin{align*}
+U-L
+&=\frac{(n+1)(2n+1)-(n-1)(2n-1)}{6n^2}.
+\end{align*}
+O numerador expande: $(n+1)(2n+1)=2n^2+3n+1$ e $(n-1)(2n-1)=2n^2-3n+1$, cuja diferença é $6n$. Logo $U-L=6n/(6n^2)=1/n$.
+
+Expandindo as somas,
+\begin{align*}
+L(P_n,f)
+&=\frac{2n^2-3n+1}{6n^2}
+=\frac13-\frac{1}{2n}+\frac{1}{6n^2},\\[0.3em]
+U(P_n,f)
+&=\frac{2n^2+3n+1}{6n^2}
+=\frac13+\frac{1}{2n}+\frac{1}{6n^2}.
+\end{align*}
+Como $U-L=1/n$ pode ser feito menor do que qualquer $\eps>0$, o critério de Darboux dá a integrabilidade, e $L\le\int_0^1 x^2\,\dif x\le U$. A distância da integral a $1/3$ é no máximo a maior das distâncias de $L$ e de $U$ a $1/3$, ambas menores ou iguais a $1/(2n)+1/(6n^2)\le 1/n$ para $n\ge 1$. Dado $\eps>0$, escolha $n>1/\eps$. Então a distância é menor do que $\eps$. A integral vale $1/3$.
+
+\section*{Exercício 2. [Básico --- seno pelo TFC]}
+
+\textbf{Enunciado.} Calcule $\int_0^{\pi}\sin x\,\dif x$ pelo teorema fundamental, exibindo uma antiderivada e os dois extremos.
+
+\textbf{Solução.}
+A função $\sin$ é contínua em $[0,\pi]$. Uma antiderivada é $-\cos$, porque $(-\cos)'=\sin$. O TFC, parte 2, dá
+\[
+\int_0^{\pi}\sin x\,\dif x
+=\bigl[-\cos x\bigr]_0^{\pi}
+=-\cos\pi-(-\cos 0)
+=-(-1)+1
+=2.
+\]
+
+\section*{Exercício 3. [Básico --- substituição com extremos]}
+
+\textbf{Enunciado.} Calcule $\int_0^1 2x\exp(x^2)\,\dif x$ pela substituição $u=x^2$, reescrevendo os extremos, e termine pelo TFC.
+
+\textbf{Solução.}
+Seja $\varphi(x)=x^2$. Então $\varphi'(x)=2x$, $\varphi(0)=0$ e $\varphi(1)=1$. A função $f(u)=\exp(u)$ é contínua em $\R$, que contém a imagem $[0,1]$. O produto $f(\varphi(x))\varphi'(x)=\exp(x^2)\cdot 2x$ é o integrando. A substituição dá
+\[
+\int_0^1 2x\exp(x^2)\,\dif x=\int_0^1\exp(u)\,\dif u.
+\]
+A derivada de $\exp$ é $\exp$, então o TFC avalia
+\[
+\bigl[\exp u\bigr]_0^1=\exp(1)-\exp(0)=\exp(1)-1.
+\]
+
+\section*{Exercício 4. [Básico --- média]}
+
+\textbf{Enunciado.} Encontre todos os $c\in[0,3]$ tais que $\int_0^3 x^2\,\dif x=c^2\cdot 3$.
+
+\textbf{Solução.}
+A função $x^2$ é contínua. Uma antiderivada é $x^3/3$, porque a derivada de $x^3/3$ é $x^2$. O TFC dá
+\[
+\int_0^3 x^2\,\dif x=\Bigl[\frac{x^3}{3}\Bigr]_0^3=\frac{27}{3}-0=9.
+\]
+A equação fica $9=3c^2$. Como $3>0$, equivale a $c^2=3$. As soluções reais são $c=\sqrt{3}$ e $c=-\sqrt{3}$. Só $\sqrt{3}$ está em $[0,3]$: $-\sqrt{3}<0$. Conferência: $(\sqrt{3})^2\cdot 3=3\cdot 3=9$.
+
+\section*{Exercício 5. [Intermediário --- derivada de uma integral]}
+
+\textbf{Enunciado.} Seja $F(x)=\int_0^{x^2}\exp(-t^2)\,\dif t$. Calcule $F'(x)$ para todo $x\in\R$ e o valor $F'(0)$, nomeando o TFC e a regra da cadeia.
+
+\textbf{Solução.}
+A função $g(t)=\exp(-t^2)$ é contínua em $\R$, composição de contínuas. Defina $G(u)=\int_0^u g(t)\,\dif t$ para $u\in\R$. O TFC, parte 1, em qualquer compacto que contenha $u$ no interior, ou na fronteira com derivada lateral, dá $G'(u)=g(u)=\exp(-u^2)$. Em particular a derivada é bilateral em todo ponto de $\R$, porque todo real é interior a um compacto contido em $\R$.
+
+Tem-se $F(x)=G(x^2)=(G\circ\varphi)(x)$ com $\varphi(x)=x^2$ e $\varphi'(x)=2x$. A regra da cadeia dá
+\[
+F'(x)=G'(x^2)\cdot 2x=\exp\bigl(-(x^2)^2\bigr)\cdot 2x=2x\exp(-x^4).
+\]
+Em $x=0$, $F'(0)=2\cdot 0\cdot\exp(0)=0$.
+
+\section*{Exercício 6. [Intermediário --- módulo do seno]}
+
+\textbf{Enunciado.} Calcule $\int_0^{2\pi}\abs{\sin x}\,\dif x$, partindo o intervalo onde o seno troca de sinal, e compare com $\abs{\int_0^{2\pi}\sin x\,\dif x}$.
+
+\textbf{Solução.}
+No módulo de trigonometria, $\sin x\ge 0$ em $[0,\pi]$ e $\sin x\le 0$ em $[\pi,2\pi]$. Logo $\abs{\sin x}=\sin x$ no primeiro intervalo e $\abs{\sin x}=-\sin x$ no segundo. As duas funções são contínuas nos compactos correspondentes: no ponto $\pi$, $\sin\pi=0$, então os dois lados concordam. A aditividade dá
+\[
+\int_0^{2\pi}\abs{\sin x}\,\dif x
+=\int_0^{\pi}\sin x\,\dif x+\int_{\pi}^{2\pi}(-\sin x)\,\dif x.
+\]
+Uma antiderivada de $\sin$ é $-\cos$, e uma antiderivada de $-\sin$ é $\cos$. Portanto
+\begin{align*}
+\int_0^{\pi}\sin x\,\dif x
+&=\bigl[-\cos x\bigr]_0^{\pi}
+=-\cos\pi+\cos 0
+=1+1=2,\\[0.3em]
+\int_{\pi}^{2\pi}(-\sin x)\,\dif x
+&=\bigl[\cos x\bigr]_{\pi}^{2\pi}
+=\cos(2\pi)-\cos\pi
+=1-(-1)=2.
+\end{align*}
+A soma é $4$.
+
+A integral sem módulo é
+\[
+\int_0^{2\pi}\sin x\,\dif x
+=\bigl[-\cos x\bigr]_0^{2\pi}
+=-\cos(2\pi)+\cos 0
+=-1+1=0.
+\]
+O módulo desse número é $0$, e $0\le 4$. A desigualdade $\abs{\int f}\le\int\abs{f}$ vale aqui com folga: o seno positivo e o seno negativo se cancelam na integral com sinal, e se somam na integral do módulo.
+
+\section*{Exercício 7. [Intermediário --- hipótese de limitação]}
+
+\textbf{Enunciado.} A função $f(x)=1/x$, dada em $(0,1]$, é limitada? A definição de integral de Riemann deste capítulo se aplica a ela em $[0,1]$? Depois calcule $\int_1^2(1/x)\,\dif x$ pelo TFC, verificando as hipóteses.
+
+\textbf{Solução.}
+A função não é limitada em $(0,1]$. Dado $K>0$, o ponto $x=1/(K+1)$ satisfaz $0<x\le 1$ e $1/x=K+1>K$.
+
+A integral de Riemann deste capítulo é definida para funções limitadas num intervalo fechado $[a,b]$. Em $[0,1]$ a fórmula $1/x$ não recebe valor finito em $0$, e em $(0,1]$ não admite cota. A definição não se aplica. Isso não calcula uma integral imprópria; esse assunto está no Cálculo II.
+
+Em $[1,2]$, $g(x)=1/x$ é contínua: é quociente de contínuas e o denominador não se anula. Logo é integrável. Uma antiderivada é $\ln$, porque $(\ln)'(x)=1/x$ para $x>0$, fato do módulo de derivadas, e $[1,2]$ está em $(0,\infty)$. O TFC, parte 2, pede continuidade de $g$ e $G' = g$. Assim
+\[
+\int_1^2\frac{1}{x}\,\dif x
+=\bigl[\ln x\bigr]_1^2
+=\ln 2-\ln 1
+=\ln 2,
+\]
+porque $\ln 1=\ln(\exp 0)=0$.
+
+\section*{Exercício 8. [Avançado --- salto interior]}
+
+\textbf{Enunciado.} Seja $f\colon[0,1]\to\R$ dada por $f(x)=0$ se $0\le x<1/2$ e $f(x)=1$ se $1/2\le x\le 1$. Prove que $f$ é integrável e que a integral vale $1/2$.
+
+\textbf{Solução.}
+A função é limitada: $0\le f\le 1$. Seja $\eps>0$ e escolha $\eta$ com $0<\eta<\min\{\eps,1/2\}$. Considere a partição
+\[
+P=\{0,\ 1/2-\eta,\ 1/2,\ 1\}.
+\]
+No intervalo $[0,1/2-\eta]$ tem-se $x<1/2$, logo $f=0$, ínfimo e supremo iguais a $0$. No intervalo $[1/2,1]$ tem-se $f=1$, ínfimo e supremo iguais a $1$. No intervalo $[1/2-\eta,1/2]$ a função vale $0$ em todo ponto exceto no extremo direito, onde vale $1$. O conjunto de valores é $\{0,1\}$, então o ínfimo é $0$ e o supremo é $1$. A diferença das somas só recebe contribuição desse subintervalo:
+\[
+U(P,f)-L(P,f)=1\cdot\eta-0\cdot\eta=\eta<\eps.
+\]
+O critério de Darboux dá a integrabilidade.
+
+Para o valor, calcule as somas desta $P$:
+\begin{align*}
+L(P,f)
+&=0\cdot\Bigl(\frac12-\eta\Bigr)+0\cdot\eta+1\cdot\Bigl(1-\frac12\Bigr)
+=\frac12,\\[0.3em]
+U(P,f)
+&=0\cdot\Bigl(\frac12-\eta\Bigr)+1\cdot\eta+1\cdot\frac12
+=\frac12+\eta.
+\end{align*}
+Toda soma inferior é no máximo a integral, e esta soma inferior vale $1/2$, logo $\int_0^1 f\ge 1/2$. Por outro lado $U(P,f)=1/2+\eta$ é uma soma superior, logo a integral é no máximo $1/2+\eta$. Isso vale para todo $\eta\in(0,1/2)$. Se a integral fosse um número $\alpha>1/2$, escolher $\eta=(\alpha-1/2)/2$ daria $\alpha>1/2+\eta\ge\alpha$, contradição. Logo a integral é menor ou igual a $1/2$. Juntando com a cota inferior, a integral vale $1/2$.
+
+\section*{Exercício 9. [Avançado --- erro lipschitziano]}
+
+\textbf{Enunciado.} Seja $f$ contínua em $[a,b]$, seja $c\in(a,b)$ e suponha $\abs{f(t)-f(c)}\le K\abs{t-c}$ para todo $t\in[a,b]$, com $K\ge 0$. Se $F(x)=\int_a^x f$, prove que, para todo $h\neq 0$ com $c+h\in[a,b]$, $\abs{F(c+h)-F(c)-f(c)\,h}\le (K/2)h^2$.
+
+\textbf{Solução.}
+Pela aditividade e pela integral da constante,
+\[
+F(c+h)-F(c)-f(c)\,h
+=\int_c^{c+h}\bigl(f(t)-f(c)\bigr)\,\dif t,
+\]
+também quando $h<0$, porque a integral orientada de $c$ até $c+h$ é o oposto da integral de $c+h$ até $c$, e a constante $f(c)$ integrada no sentido de $c$ até $c+h$ vale $f(c)\,h$.
+
+Suponha $h>0$. A hipótese dá $-K(t-c)\le f(t)-f(c)\le K(t-c)$ para $t\in[c,c+h]$. As três funções são contínuas, logo integráveis. A comparação preserva as desigualdades:
+\[
+-K\int_c^{c+h}(t-c)\,\dif t
+\le\int_c^{c+h}\bigl(f(t)-f(c)\bigr)\,\dif t
+\le K\int_c^{c+h}(t-c)\,\dif t.
+\]
+A função $(t-c)^2/2$ tem derivada $t-c$. O TFC dá
+\[
+\int_c^{c+h}(t-c)\,\dif t
+=\Bigl[\frac{(t-c)^2}{2}\Bigr]_c^{c+h}
+=\frac{h^2}{2}.
+\]
+O módulo da integral do meio é no máximo $K h^2/2$.
+
+Suponha $h<0$ e ponha $k=-h>0$. O módulo da integral orientada de $c$ até $c-k$ é o módulo da integral de $c-k$ até $c$. Nesse intervalo, $\abs{t-c}=c-t$, e a hipótese dá $-K(c-t)\le f(t)-f(c)\le K(c-t)$. Integrando,
+\[
+\abs{\int_{c-k}^c\bigl(f(t)-f(c)\bigr)\,\dif t}
+\le K\int_{c-k}^c(c-t)\,\dif t.
+\]
+A derivada de $-(c-t)^2/2$ é $(c-t)$: a cadeia produz $-(c-t)\cdot(-1)=c-t$. O TFC dá
+\[
+\int_{c-k}^c(c-t)\,\dif t
+=\Bigl[-\frac{(c-t)^2}{2}\Bigr]_{c-k}^c
+=0-\Bigl(-\frac{k^2}{2}\Bigr)
+=\frac{k^2}{2}.
+\]
+Como $k^2=h^2$, o módulo pedido é no máximo $K h^2/2$.
+
+\end{document}

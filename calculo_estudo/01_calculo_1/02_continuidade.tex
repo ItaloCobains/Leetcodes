@@ -1,0 +1,388 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Continuidade}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A continuidade \'e o caso do limite em que o valor do limite \'e o valor da fun\c{c}\~ao. Os teoremas de soma, produto, quociente e confronto usados aqui s\~ao os da nota de limites, j\'a demonstrados. As f\'ormulas de adi\c{c}\~ao do seno e do cosseno, a periodicidade $2\pi$ e os valores $\sin(\pi/2)=1$, $\sin(3\pi/2)=-1$ entram como fatos da revis\~ao trigonom\'etrica.
+
+\section{Defini\c{c}\~ao}
+\label{sec:def-cont}
+
+\begin{definicao}
+\label{def:cont}
+Seja $f$ definida num conjunto que cont\'em um intervalo aberto em torno de $a$, incluindo o pr\'oprio $a$. Dizemos que $f$ \'e cont\'inua em $a$ quando $\lim_{x\to a}f(x)$ existe e
+\[
+\lim_{x\to a}f(x)=f(a).
+\]
+Em quantificadores, isso \'e
+\[
+\forall\eps>0\ \exists\delta>0\ \forall x\bigl(\abs{x-a}<\delta \Rightarrow \abs{f(x)-f(a)}<\eps\bigr).
+\]
+A desigualdade n\~ao \'e furada: o ponto $x=a$ entra, e nele o m\'odulo \'e zero, menor que qualquer $\eps>0$. O que a defini\c{c}\~ao exige, e as duas coisas ao mesmo tempo, \'e que $a$ esteja no dom\'inio e que o limite exista. Se uma das duas falha, $f$ n\~ao \'e cont\'inua em $a$.
+\end{definicao}
+
+\begin{definicao}
+$f$ \'e cont\'inua \`a direita em $a$ quando $a$ est\'a no dom\'inio e $\lim_{x\to a^+}f(x)=f(a)$:
+\[
+\forall\eps>0\ \exists\delta>0\ \forall x\bigl(a\le x<a+\delta \Rightarrow \abs{f(x)-f(a)}<\eps\bigr).
+\]
+A continuidade \`a esquerda troca o intervalo por $a-\delta<x\le a$.
+
+Se $f$ est\'a definida em $[a,b]$, dizemos que $f$ \'e cont\'inua em $[a,b]$ quando \'e cont\'inua em todo ponto de $(a,b)$, cont\'inua \`a direita em $a$ e cont\'inua \`a esquerda em $b$. Uma formula\c{c}\~ao s\'o, que cobre o interior e os extremos, \'e: para cada $c\in[a,b]$,
+\[
+\forall\eps>0\ \exists\delta>0\ \forall x\in[a,b]\bigl(\abs{x-c}<\delta \Rightarrow \abs{f(x)-f(c)}<\eps\bigr).
+\]
+\end{definicao}
+
+\begin{teorema}
+\label{teo:cont-laterais}
+Se $f$ est\'a definida numa vizinhan\c{c}a de $a$, incluindo $a$, ent\~ao $f$ \'e cont\'inua em $a$ se, e somente se, \'e cont\'inua \`a direita e \`a esquerda em $a$.
+\end{teorema}
+
+\begin{proof}
+Se $f$ \'e cont\'inua em $a$, o $\delta$ da defini\c{c}\~ao bilateral serve para os dois lados: a restri\c{c}\~ao $a\le x<a+\delta$ implica $\abs{x-a}<\delta$. Reciprocamente, se os dois lados valem, dado $\eps>0$ existem $\delta_+$ e $\delta_-$. Com $\delta=\min(\delta_+,\delta_-)$, todo $x$ com $\abs{x-a}<\delta$ cai num dos dois intervalos, ou \'e o pr\'oprio $a$. Nos tr\^es ramos, $\abs{f(x)-f(a)}<\eps$.
+\end{proof}
+
+\section{\'Algebra e composi\c{c}\~ao}
+\label{sec:alg-cont}
+
+\begin{teorema}
+\label{teo:alg-cont}
+Se $f$ e $g$ s\~ao cont\'inuas em $a$, ent\~ao $f+g$ e $fg$ s\~ao cont\'inuas em $a$. Se al\'em disso $g(a)\neq 0$, ent\~ao $f/g$ est\'a definida numa vizinhan\c{c}a de $a$ e \'e cont\'inua em $a$.
+\end{teorema}
+
+\begin{proof}
+Continuidade diz que $\lim_{x\to a}f(x)=f(a)$ e $\lim_{x\to a}g(x)=g(a)$. O teorema da soma de limites d\'a
+\[
+\lim_{x\to a}\bigl(f(x)+g(x)\bigr)=f(a)+g(a)=(f+g)(a).
+\]
+O teorema do produto d\'a $\lim_{x\to a}f(x)g(x)=f(a)g(a)$. Nos dois casos o limite existe e coincide com o valor da fun\c{c}\~ao soma, ou produto, em $a$.
+
+Se $g(a)\neq 0$, o teorema do quociente de limites produz uma vizinhan\c{c}a furada em que $g(x)\neq 0$ e
+\[
+\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{f(a)}{g(a)}.
+\]
+O ponto $x=a$ n\~ao fura o quociente, porque $g(a)\neq 0$ por hip\'otese. Logo $f/g$ est\'a definida em $a$ e o limite coincide com o valor.
+
+Para ver o $\eps/2$ da soma sem sair desta nota: dado $\eps>0$, h\'a $\delta_1$ com $\abs{x-a}<\delta_1$ implicando $\abs{f(x)-f(a)}<\eps/2$, e $\delta_2$ an\'alogo para $g$. Se $\abs{x-a}<\min(\delta_1,\delta_2)$, a triangular d\'a
+\[
+\abs{(f+g)(x)-(f+g)(a)}\le \abs{f(x)-f(a)}+\abs{g(x)-g(a)}<\eps.
+\]
+\end{proof}
+
+\begin{teorema}
+\label{teo:composicao}
+Se $g$ \'e cont\'inua em $a$ e $f$ \'e cont\'inua em $b=g(a)$, ent\~ao $f\circ g$ \'e cont\'inua em $a$.
+\end{teorema}
+
+\begin{proof}
+As hip\'oteses de dom\'inio s\~ao: $g$ definida numa vizinhan\c{c}a de $a$, e $f$ definida numa vizinhan\c{c}a de $b$. Dado $\eps>0$, a continuidade de $f$ em $b$ fornece $\delta'>0$ tal que
+\[
+\abs{y-b}<\delta' \Rightarrow \abs{f(y)-f(b)}<\eps.
+\]
+A continuidade de $g$ em $a$ fornece $\delta>0$ tal que
+\[
+\abs{x-a}<\delta \Rightarrow \abs{g(x)-g(a)}<\delta'.
+\]
+Tomamos $\delta$ pequeno o bastante para que $g(x)$ caia na vizinhan\c{c}a em que $f$ est\'a definida; o $\delta'$ j\'a faz isso. Ent\~ao $\abs{x-a}<\delta$ implica $\abs{g(x)-b}<\delta'$, e portanto
+\[
+\abs{f(g(x))-f(g(a))}<\eps.
+\]
+N\~ao h\'a divis\~ao por $g(x)-g(a)$. Se esse incremento \'e zero, $f(g(x))-f(b)=0$, e a desigualdade continua verdadeira.
+\end{proof}
+
+\section{Polin\^omios, seno, cosseno e raiz}
+\label{sec:exemplos-cont}
+
+\begin{teorema}
+\label{teo:pol-cont}
+Todo polin\^omio \'e cont\'inuo em todo ponto de $\R$. Toda fun\c{c}\~ao racional \'e cont\'inua em todo ponto em que o denominador n\~ao se anula.
+\end{teorema}
+
+\begin{proof}
+A fun\c{c}\~ao constante \'e cont\'inua: $\abs{c-c}=0$. A identidade \'e cont\'inua: $\abs{x-a}<\eps$ com $\delta=\eps$, e o valor em $a$ \'e $a$. Soma e produto preservam continuidade, pelo Teorema~\ref{teo:alg-cont}. Por indu\c{c}\~ao, $x\mapsto x^n$ \'e cont\'inua para cada inteiro $n\ge 1$: o passo usa $x^{n+1}=x\cdot x^n$. Um polin\^omio \'e soma de produtos de constantes por essas pot\^encias, logo cont\'inuo. O quociente de polin\^omios, no ponto em que o denominador n\~ao \'e zero, \'e cont\'inuo pelo mesmo teorema.
+\end{proof}
+
+\begin{lema}
+\label{lem:prosta}
+Para todos $x,a\in\R$,
+\begin{align*}
+\sin x-\sin a &= 2\cos\frac{x+a}{2}\sin\frac{x-a}{2},\\
+\cos x-\cos a &= -2\sin\frac{x+a}{2}\sin\frac{x-a}{2}.
+\end{align*}
+\end{lema}
+
+\begin{proof}
+As f\'ormulas de adi\c{c}\~ao, admitidas da revis\~ao, d\~ao
+\begin{align*}
+\sin(u+v)-\sin(u-v)
+&=(\sin u\cos v+\cos u\sin v)-(\sin u\cos v-\cos u\sin v)
+=2\cos u\sin v,\\
+\cos(u+v)-\cos(u-v)
+&=(\cos u\cos v-\sin u\sin v)-(\cos u\cos v+\sin u\sin v)
+=-2\sin u\sin v.
+\end{align*}
+Tome $u=(x+a)/2$ e $v=(x-a)/2$. Ent\~ao $u+v=x$ e $u-v=a$.
+\end{proof}
+
+\begin{teorema}
+\label{teo:sen-cos-cont}
+Seno e cosseno s\~ao cont\'inuos em todo ponto de $\R$. Mais precisamente, se $0<\abs{x-a}<\pi$, ent\~ao
+\[
+\abs{\sin x-\sin a}<\abs{x-a}, \qquad \abs{\cos x-\cos a}<\abs{x-a}.
+\]
+\end{teorema}
+
+\begin{proof}
+Pelo lema dos limites fundamentais, $0<\abs{\theta}<\pi/2$ implica $\abs{\sin\theta}<\abs{\theta}$, e $\abs{\cos}\le 1$, $\abs{\sin}\le 1$. Seja $v=(x-a)/2$. Se $0<\abs{x-a}<\pi$, ent\~ao $0<\abs{v}<\pi/2$, logo $\abs{\sin v}<\abs{v}$. O Lema~\ref{lem:prosta} d\'a
+\[
+\abs{\sin x-\sin a}=2\abs{\cos\frac{x+a}{2}}\abs{\sin v}\le 2\abs{\sin v}<2\abs{v}=\abs{x-a}.
+\]
+A conta do cosseno \'e a mesma, com o fator $\abs{\sin((x+a)/2)}\le 1$. Se $x=a$, as duas diferen\c{c}as s\~ao zero. Dado $\eps>0$, escolha $\delta=\min(\pi,\eps)$. Se $\abs{x-a}<\delta$, ent\~ao $\abs{\sin x-\sin a}<\eps$ e $\abs{\cos x-\cos a}<\eps$.
+\end{proof}
+
+\begin{teorema}
+\label{teo:raiz}
+A fun\c{c}\~ao $\sqrt{\phantom{x}}\colon[0,\infty)\to[0,\infty)$ \'e cont\'inua em todo ponto do seu dom\'inio.
+\end{teorema}
+
+\begin{proof}
+Antes, um fato alg\'ebrico: se $0\le u<v$, ent\~ao $v^2-u^2=(v-u)(v+u)>0$, logo $u^2<v^2$. A raiz quadrada de $x\ge 0$ \'e o \'unico n\'umero n\~ao negativo cujo quadrado \'e $x$.
+
+Seja $a>0$. Para $x\ge 0$,
+\[
+\abs{\sqrt{x}-\sqrt{a}}=\frac{\abs{x-a}}{\sqrt{x}+\sqrt{a}}.
+\]
+Se $\abs{x-a}<a/2$, ent\~ao $x>a/2>0$. Como os dois lados s\~ao positivos e a fun\c{c}\~ao quadrado \'e estritamente crescente em $[0,\infty)$, $\sqrt{x}>\sqrt{a/2}>0$. O denominador \'e maior que $\sqrt{a}$, e
+\[
+\abs{\sqrt{x}-\sqrt{a}}<\frac{\abs{x-a}}{\sqrt{a}}.
+\]
+Dado $\eps>0$, escolha $\delta=\min(a/2,\eps\sqrt{a})$. Se $x\ge 0$ e $\abs{x-a}<\delta$, a diferen\c{c}a das raizes \'e menor que $\eps$.
+
+Em $0$, dado $\eps>0$, escolha $\delta=\eps^2$. Se $x\ge 0$ e $x<\delta$, n\~ao pode ocorrer $\sqrt{x}\ge\eps$: isso for\c{c}aria $x=(\sqrt{x})^2\ge\eps^2$. Logo $\sqrt{x}<\eps$. Esta \'e a continuidade \`a direita em $0$.
+\end{proof}
+
+\section{Quatro tipos de descontinuidade}
+\label{sec:tipos}
+
+\subsection{Remov\'ivel}
+
+Seja $f(x)=\sin x/x$ para $x\neq 0$. O limite fundamental $\lim_{x\to 0}\sin x/x=1$ existe, mas $0$ n\~ao est\'a no dom\'inio, ent\~ao $f$ n\~ao \'e cont\'inua em $0$. A extens\~ao
+\[
+\tilde f(x)=\begin{cases}
+\sin x/x, & x\neq 0,\\
+1, & x=0,
+\end{cases}
+\]
+satisfaz $\lim_{x\to 0}\tilde f(x)=1=\tilde f(0)$, logo \'e cont\'inua em $0$. Fora de $0$, $\tilde f$ \'e quociente de cont\'inuas com denominador diferente de zero. Se, no lugar de $1$, defin\'issemos o valor $0$ em $x=0$, o limite continuaria sendo $1$, diferente do valor, e a descontinuidade permaneceria. Ela \'e remov\'ivel: muda-se, ou cria-se, um \'unico valor e a fun\c{c}\~ao passa a ser cont\'inua.
+
+\subsection{Salto}
+
+A fun\c{c}\~ao sinal \'e $\operatorname{sgn}(x)=-1$ se $x<0$, $\operatorname{sgn}(0)=0$ e $\operatorname{sgn}(x)=1$ se $x>0$. Para $x>0$, $\operatorname{sgn}(x)=1$, ent\~ao $\abs{\operatorname{sgn}(x)-1}=0$. Qualquer $\delta>0$ mostra que $\lim_{x\to 0^+}\operatorname{sgn}(x)=1$. Para $x<0$, $\operatorname{sgn}(x)=-1$, e o limite \`a esquerda \'e $-1$. Os laterais existem e diferem, logo o limite bilateral n\~ao existe. Em particular $\operatorname{sgn}$ n\~ao \'e cont\'inua em $0$, qualquer que seja o valor que se ponha em $0$: um \'unico n\'umero n\~ao pode ser igual a $1$ e a $-1$. A diferen\c{c}a entre os laterais \'e o salto, de tamanho $2$.
+
+\subsection{Infinita}
+
+Para $1/x$ em $0$, o ponto n\~ao est\'a no dom\'inio. O limite \`a direita \'e $+\infty$: dado $B>0$, $\delta=1/B$ d\'a $0<x<\delta$ implicando $1/x>B$; se $B\le 0$, $\delta=1$ j\'a serve, porque $1/x>0\ge B$ ou $1/x>0=B$. O limite \`a esquerda \'e $-\infty$: se $B<0$, $\delta=-1/B$ d\'a $-\delta<x<0$ implicando $1/x<B$; se $B\ge 0$, $\delta=1$ serve. N\~ao h\'a limite real, e n\~ao h\'a valor finito que se possa atribuir em $0$ para obter continuidade. A reta $x=0$ \'e ass\'intota vertical.
+
+\figura{../figuras/descontinuidades.png}{Remov\'ivel, salto e infinita.}
+
+\subsection{Oscilat\'oria}
+
+\begin{lema}
+\label{lem:arquimedes}
+O conjunto dos inteiros positivos \'e ilimitado superiormente.
+\end{lema}
+
+\begin{proof}
+Usamos o axioma da completude: todo subconjunto n\~ao vazio de $\R$, limitado superiormente, possui supremo em $\R$. O mesmo axioma reaparece no teorema do valor intermedi\'ario. Se os inteiros positivos fossem limitados superiormente, o supremo $s$ existiria. O n\'umero $s-1$ n\~ao seria cota superior, logo haveria um inteiro positivo $n>s-1$. Ent\~ao $n+1>s$. Mas $n+1$ ainda \'e inteiro positivo, e $s$ deixaria de ser cota superior.
+\end{proof}
+
+\begin{teorema}
+\label{teo:sen-um-sobre}
+$\lim_{x\to 0}\sin(1/x)$ n\~ao existe.
+\end{teorema}
+
+\begin{proof}
+Para cada inteiro $n\ge 1$, defina
+\[
+x_n=\frac{1}{\pi/2+2\pi n}, \qquad y_n=\frac{1}{3\pi/2+2\pi n}.
+\]
+Pela periodicidade $2\pi$, $\sin(1/x_n)=\sin(\pi/2)=1$ e $\sin(1/y_n)=\sin(3\pi/2)=-1$. Al\'em disso $0<x_n<1/(2\pi n)$ e $0<y_n<1/(2\pi n)$.
+
+Suponha que o limite exista e valha $L\in\R$. Tome $\eps=1$. Existe $\delta>0$ tal que $0<\abs{x}<\delta$ implica $\abs{\sin(1/x)-L}<1$. Pelo Lema~\ref{lem:arquimedes}, existe inteiro $n>1/(2\pi\delta)$. Para esse $n$, $x_n$ e $y_n$ est\~ao em $(0,\delta)$, logo $\abs{1-L}<1$ e $\abs{-1-L}<1$. A triangular d\'a
+\[
+2=\abs{1-(-1)}\le \abs{1-L}+\abs{-1-L}<1+1=2,
+\]
+isto \'e, $2<2$. O limite n\~ao existe. A fun\c{c}\~ao $\sin(1/x)$, definida para $x\neq 0$, tem descontinuidade oscilat\'oria em $0$: em toda vizinhan\c{c}a furada o gr\'afico atinge $1$ e $-1$.
+\end{proof}
+
+\section{Teorema do valor intermedi\'ario}
+\label{sec:tvi}
+
+\begin{teorema}
+\label{teo:tvi}
+Seja $f\colon[a,b]\to\R$ cont\'inua, com $a<b$. Se $k$ est\'a estritamente entre $f(a)$ e $f(b)$, ent\~ao existe $c\in(a,b)$ tal que $f(c)=k$.
+\end{teorema}
+
+\begin{proof}
+O caso $f(a)<k<f(b)$ \'e o que se prova por completude. O caso $f(b)<k<f(a)$ reduz-se a ele: $g=-f$ \'e cont\'inua, pelo Teorema~\ref{teo:alg-cont}, e $g(a)< -k< g(b)$. Um ponto com $g(c)=-k$ satisfaz $f(c)=k$.
+
+Seja $S=\{x\in[a,b]: f(x)\le k\}$. Como $f(a)<k$, tem-se $a\in S$, e $S$ n\~ao \'e vazio. Todo elemento de $S$ \'e $\le b$, logo $S$ \'e limitado superiormente. Pelo axioma da completude, $c=\sup S$ existe em $\R$. Como $a\in S$, $c\ge a$. Como $b$ \'e cota superior, $c\le b$. Assim $c\in[a,b]$.
+
+Primeiro, $f(c)<k$ \'e imposs\'ivel. Suponha o contr\'ario e ponha $\eps=k-f(c)>0$. Pela continuidade de $f$ em $c$, existe $\delta>0$ tal que, se $x\in[a,b]$ e $\abs{x-c}<\delta$, ent\~ao $\abs{f(x)-f(c)}<\eps$, logo $f(x)<f(c)+\eps=k$. Todo tal $x$ est\'a em $S$. Se fosse $c=b$, ter\'iamos $f(b)<k$, contra a hip\'otese $f(b)>k$. Logo $c<b$. Escolha $x$ com $c<x<\min(b,c+\delta)$. Ent\~ao $x\in[a,b]$, $\abs{x-c}<\delta$ e $f(x)<k$, de modo que $x\in S$ e $x>c$. Isso contradiz $c$ ser cota superior de $S$.
+
+Segundo, $f(c)>k$ \'e imposs\'ivel. Suponha o contr\'ario e ponha $\eps=f(c)-k>0$. Existe $\delta>0$ tal que $x\in[a,b]$ e $\abs{x-c}<\delta$ implicam $f(x)>f(c)-\eps=k$. Nenhum ponto dessa interse\c{c}\~ao est\'a em $S$. Afirmamos que todo $x\in S$ satisfaz $x\le c-\delta$. De fato, se $x\in S$ e $x>c-\delta$, ent\~ao $x\le c$, porque $c$ \'e cota superior, logo $x\in(c-\delta,c]\cap[a,b]$ e $f(x)>k$, contra $x\in S$. Assim $c-\delta$ \'e cota superior de $S$. Mas $\delta>0$ for\c{c}a $c-\delta<c$, e o supremo \'e a menor cota superior. Contradi\c{c}\~ao.
+
+Portanto $f(c)=k$. Falta ver que $c$ n\~ao \'e extremo. Se $c=a$, ent\~ao $f(a)=k$, contra $f(a)<k$. Se $c=b$, ent\~ao $f(b)=k$, contra $f(b)>k$. Logo $c\in(a,b)$.
+\end{proof}
+
+\begin{proposicao}
+\label{prop:degrau}
+Defina $f\colon[0,1]\to\R$ por $f(x)=0$ se $0\le x<1/2$ e $f(x)=1$ se $1/2\le x\le 1$. Ent\~ao $f(0)<1/2<f(1)$, mas $1/2$ n\~ao est\'a na imagem de $f$. A fun\c{c}\~ao n\~ao \'e cont\'inua em $1/2$: o limite \`a esquerda \'e $0$ e o limite \`a direita \'e $1$.
+\end{proposicao}
+
+\begin{proof}
+Se $0\le x<1/2$, $f(x)=0$, ent\~ao $\abs{f(x)-0}=0$. O limite \`a esquerda em $1/2$ \'e $0$. Se $1/2<x\le 1$, $f(x)=1$, e o limite \`a direita \'e $1$. Como $f(1/2)=1$, h\'a continuidade \`a direita e n\~ao h\'a \`a esquerda, logo n\~ao h\'a continuidade em $1/2$. Os \'unicos valores de $f$ s\~ao $0$ e $1$, ent\~ao $f(x)\neq 1/2$ para todo $x\in[0,1]$, embora $f(0)=0<1/2<1=f(1)$.
+\end{proof}
+
+\begin{proposicao}
+\label{prop:aberta}
+A fun\c{c}\~ao $f\colon(0,1)\to\R$ dada por $f(x)=x$ \'e cont\'inua, e a imagem \'e $(0,1)$, que \'e um intervalo e n\~ao \'e fechado.
+\end{proposicao}
+
+\begin{proof}
+Para $a\in(0,1)$ e $\eps>0$, $\delta=\eps$ d\'a: se $x\in(0,1)$ e $\abs{x-a}<\delta$, ent\~ao $\abs{f(x)-f(a)}=\abs{x-a}<\eps$. A imagem \'e $(0,1)$: todo ponto do dom\'inio \'e valor, e nenhum n\'umero fora de $(0,1)$ \'e valor. Esse intervalo n\~ao \'e fechado. De fato, $1/n$ est\'a na imagem para todo inteiro $n\ge 2$ e $1/n\to 0$, mas $0$ n\~ao est\'a na imagem; do mesmo modo $1-1/n\to 1$ com $1$ fora da imagem.
+\end{proof}
+
+\cuidado{Sem continuidade o teorema do valor intermedi\'ario falha: no degrau da Proposi\c{c}\~ao~\ref{prop:degrau}, $1/2$ est\'a entre $f(0)$ e $f(1)$ e n\~ao \'e assumido. Em intervalo aberto, a imagem de uma cont\'inua pode n\~ao ser um intervalo fechado: a identidade em $(0,1)$ \'e cont\'inua e sua imagem \'e $(0,1)$.}
+
+\section{Teorema de Weierstrass}
+\label{sec:weierstrass}
+
+Uma sequ\^encia $(x_n)_{n\ge 1}$ em $\R$ converge a $L\in\R$ quando
+\[
+\forall\eps>0\ \exists N\in\N\ \forall n\ge N\ \bigl(\abs{x_n-L}<\eps\bigr).
+\]
+Aqui $\N$ \'e o conjunto dos inteiros positivos. Uma subsequ\^encia \'e $(x_{n_j})_{j\ge 1}$ com \'indices estritamente crescentes.
+
+\begin{lema}
+\label{lem:seq}
+\begin{enumerate}
+\item Se $c\ge 0$ e $c<\eps$ para todo $\eps>0$, ent\~ao $c=0$.
+\item O limite de uma sequ\^encia, se existe, \'e \'unico.
+\item Toda sequ\^encia convergente \'e limitada.
+\item Se $a\le x_n\le b$ para todo $n$ e $x_n\to L$, ent\~ao $a\le L\le b$.
+\item Se $x_n\to L$ e $(n_j)$ \'e estritamente crescente, ent\~ao $x_{n_j}\to L$. Em particular $n_j\ge j$.
+\item Se $f$ \'e cont\'inua em $c$ no sentido do dom\'inio $[a,b]$ e $x_n\in[a,b]$ converge a $c$, ent\~ao $f(x_n)\to f(c)$.
+\end{enumerate}
+\end{lema}
+
+\begin{proof}
+(1) Se $c>0$, o n\'umero $\eps=c$ satisfaz $c<\eps$ e $c=c$, o que \'e falso.
+
+(2) Se $x_n\to L$ e $x_n\to M$, dado $\eps>0$ existe $n$ com $\abs{x_n-L}<\eps/2$ e $\abs{x_n-M}<\eps/2$. Ent\~ao $\abs{L-M}<\eps$. Pelo item (1), $\abs{L-M}=0$.
+
+(3) Tome $\eps=1$. Existe $N$ tal que $n\ge N$ implica $\abs{x_n}<\abs{L}+1$. O conjunto finito $\{\abs{x_1},\ldots,\abs{x_{N-1}},\abs{L}+1\}$ tem m\'aximo: o m\'aximo de um real \'e ele mesmo, e o m\'aximo de $k+1$ n\'umeros \'e o maior entre o \'ultimo e o m\'aximo dos $k$ primeiros. Se $N=1$, a lista anterior a $N$ \'e vazia e a cota \'e $\abs{L}+1$. Esse m\'aximo limita $\abs{x_n}$ para todo $n$.
+
+(4) Se $L>b$, tome $\eps=L-b>0$. Para $n$ grande, $x_n>L-\eps=b$, contra $x_n\le b$. Se $L<a$, tome $\eps=a-L$; para $n$ grande, $x_n<a$.
+
+(5) Por indu\c{c}\~ao, $n_1\ge 1$ e $n_{j+1}\ge n_j+1$, logo $n_j\ge j$. Dado $\eps>0$, existe $N$ tal que $n\ge N$ implica $\abs{x_n-L}<\eps$. Se $j\ge N$, ent\~ao $n_j\ge j\ge N$, logo $\abs{x_{n_j}-L}<\eps$.
+
+(6) Dado $\eps>0$, a continuidade em $c$ d\'a $\delta>0$ tal que $x\in[a,b]$ e $\abs{x-c}<\delta$ implicam $\abs{f(x)-f(c)}<\eps$. Para $n$ grande, $\abs{x_n-c}<\delta$ e $x_n\in[a,b]$, logo $\abs{f(x_n)-f(c)}<\eps$.
+\end{proof}
+
+\begin{teorema}[Bolzano--Weierstrass, fato anterior]
+\label{teo:bw}
+Toda sequ\^encia limitada em $\R$ possui uma subsequ\^encia convergente. Este enunciado fica registrado como fato j\'a dispon\'ivel. Ele depende da completude, e n\~ao \'e demonstrado nesta nota.
+\end{teorema}
+
+\begin{teorema}[Weierstrass]
+\label{teo:weierstrass}
+Se $f\colon[a,b]\to\R$ \'e cont\'inua, ent\~ao $f$ \'e limitada e assume m\'aximo e m\'inimo: existem $x_m,x_M\in[a,b]$ tais que
+\[
+f(x_m)\le f(x)\le f(x_M) \qquad\text{para todo }x\in[a,b].
+\]
+\end{teorema}
+
+\begin{proof}
+Primeiro, $f$ \'e limitada. Suponha o contr\'ario. Para cada inteiro $n\ge 1$ existe $x_n\in[a,b]$ com $\abs{f(x_n)}>n$: se nenhum ponto satisfizesse essa desigualdade, $\abs{f}$ seria limitado por $n$. A sequ\^encia $(x_n)$ vive em $[a,b]$, logo \'e limitada. Pelo Teorema~\ref{teo:bw}, alguma subsequ\^encia $x_{n_j}$ converge a um ponto $c\in\R$. Pelo Lema~\ref{lem:seq}(4), $c\in[a,b]$. Pelo item (6) do mesmo lema, $f(x_{n_j})\to f(c)$. Uma sequ\^encia convergente \'e limitada, pelo item (3). Mas $\abs{f(x_{n_j})}>n_j\ge j$, pelo item (5), ent\~ao $(f(x_{n_j}))$ \'e ilimitada. Contradi\c{c}\~ao. Portanto existe $B$ tal que $\abs{f(x)}\le B$ para todo $x\in[a,b]$.
+
+Seja $S=f([a,b])$. O conjunto $S$ n\~ao \'e vazio e \'e limitado superiormente. Pela completude, $M=\sup S$ existe e \'e finito. Para cada inteiro $n\ge 1$, $M-1/n$ n\~ao \'e cota superior, logo existe $y_n\in[a,b]$ com $f(y_n)>M-1/n$. Como $M$ \'e cota superior, $f(y_n)\le M$, e
+\[
+0\le M-f(y_n)<\frac{1}{n}.
+\]
+Dado $\eps>0$, o Lema~\ref{lem:arquimedes} fornece um inteiro $N>1/\eps$. Se $n\ge N$, ent\~ao $\abs{f(y_n)-M}<1/n\le 1/N<\eps$. Assim $f(y_n)\to M$. Pelo Teorema~\ref{teo:bw}, uma subsequ\^encia $y_{n_j}$ converge a algum $c\in[a,b]$. Ent\~ao $f(y_{n_j})\to f(c)$. A mesma subsequ\^encia de valores tende a $M$, pelo item (5) do Lema~\ref{lem:seq}, porque a sequ\^encia inteira $(f(y_n))$ tende a $M$. Pela unicidade do limite, $f(c)=M$. O m\'aximo \'e assumido em $c$. Chamamos esse ponto de $x_M$.
+
+A fun\c{c}\~ao $-f$ \'e cont\'inua em $[a,b]$. Pelo que acabou de ser provado, $-f$ assume um m\'aximo em algum $x_m$: $-f(x_m)\ge -f(x)$ para todo $x\in[a,b]$. Multiplicar por $-1$ inverte a desigualdade, e $f(x_m)\le f(x)$. O m\'inimo \'e assumido.
+\end{proof}
+
+\begin{proposicao}
+\label{prop:um-sobre-x}
+A fun\c{c}\~ao $f(x)=1/x$ \'e cont\'inua em $(0,1]$ e n\~ao \'e limitada nesse intervalo.
+\end{proposicao}
+
+\begin{proof}
+Seja $a\in(0,1]$. Para $x>0$,
+\[
+\abs{\frac{1}{x}-\frac{1}{a}}=\frac{\abs{x-a}}{x a}.
+\]
+Se $\abs{x-a}<a/2$ e $x\in(0,1]$, ent\~ao $x>a/2$, logo o denominador \'e maior que $(a/2)a$ e a diferen\c{c}a \'e menor que $2\abs{x-a}/a^2$. Dado $\eps>0$, escolha $\delta=\min(a/2,\eps a^2/2)$. Ent\~ao $x\in(0,1]$ e $\abs{x-a}<\delta$ implicam $\abs{f(x)-f(a)}<\eps$.
+
+A fun\c{c}\~ao n\~ao \'e limitada: para cada inteiro $n\ge 1$, o ponto $x=1/(n+1)$ est\'a em $(0,1]$ e $f(x)=n+1>n$.
+\end{proof}
+
+\begin{proposicao}
+\label{prop:sem-max}
+A fun\c{c}\~ao $f(x)=x$ \'e cont\'inua em $[0,1)$ e n\~ao assume m\'aximo.
+\end{proposicao}
+
+\begin{proof}
+Continuidade: para $c\in[0,1)$ e $\eps>0$, $\delta=\eps$ serve, porque $\abs{x-c}<\eps$ e $x\in[0,1)$ implicam $\abs{f(x)-f(c)}<\eps$. Suponha que um ponto $c\in[0,1)$ fosse m\'aximo. Como $c<1$, o ponto $x=(c+1)/2$ satisfaz $c<x<1$, logo $x\in[0,1)$ e $f(x)>f(c)$, contra o m\'aximo. A imagem est\'a contida em $[0,1)$, logo $1$ \'e cota superior. Se $0\le L<1$, o ponto $x=(L+1)/2$ satisfaz $L<x<1$. Se $L<0$, qualquer $x\in(0,1)$ satisfaz $f(x)>L$. Nenhuma cota estritamente menor que $1$ \'e cota superior, o supremo \'e $1$, e $1$ n\~ao \'e valor de $f$.
+\end{proof}
+
+\cuidado{No compacto $[a,b]$ a continuidade for\c{c}a limita\c{c}\~ao e extremos. Em $(0,1]$, $f(x)=1/x$ \'e cont\'inua e ilimitada. Em $[0,1)$, $f(x)=x$ \'e cont\'inua e n\~ao assume m\'aximo. Fechar o intervalo nos dois extremos \'e hip\'otese do teorema, n\~ao um enfeite.}
+
+\section{Exerc\'icios}
+\label{sec:ex-cont}
+
+\begin{exercicio}[B\'asico --- Linear]
+Prove, pela defini\c{c}\~ao, que $f(x)=3x-1$ \'e cont\'inua em $4$, exibindo $\delta$.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- Polin\^omio]
+Seja $p(x)=x^2-3x+1$. Calcule $p(2)$ e prove que $p$ \'e cont\'inua em $2$, com $\delta$ expl\'icito.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- Degrau]
+Seja $f(x)=0$ para $x<1$ e $f(x)=2$ para $x\ge 1$. Calcule os limites laterais em $1$ e decida se h\'a continuidade \`a direita, \`a esquerda, ou dos dois lados.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- Extens\~ao remov\'ivel]
+Para $x\neq 2$, seja $f(x)=(x^2-4)/(x-2)$. Mostre que $\lim_{x\to 2}f(x)$ existe, e d\^e o valor $f(2)$ que torna a extens\~ao cont\'inua em $2$.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Sinal local]
+Prove: se $f$ \'e cont\'inua em $a$ e $f(a)>0$, ent\~ao existe $\delta>0$ tal que $\abs{x-a}<\delta$ implica $f(x)>0$.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Raiz c\'ubica]
+Prove que $x^3+x-1=0$ tem exatamente uma raiz real, e que ela pertence a $(0,1)$. A exist\^encia usa o valor intermedi\'ario; a unicidade, a fatora\c{c}\~ao de $h(y)-h(x)$.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Composi\c{c}\~ao]
+Prove que $f(x)=\sqrt{x^2+1}$ \'e cont\'inua em todo $a\in\R$, exibindo o encadeamento: dado $\eps$, um $\delta'$ vindo da raiz em $a^2+1$, e um $\delta$ vindo de $x^2+1$.
+\end{exercicio}
+
+\begin{exercicio}[Avan\c{c}ado --- Imagem do compacto]
+Prove que, se $f\colon[a,b]\to\R$ \'e cont\'inua, $m=\min f$ e $M=\max f$, ent\~ao $f([a,b])=[m,M]$. Use Weierstrass para os extremos e o valor intermedi\'ario para o que est\'a no meio.
+\end{exercicio}
+
+\begin{exercicio}[Avan\c{c}ado --- M\'inimo positivo]
+Prove: se $f\colon[a,b]\to\R$ \'e cont\'inua e $f(x)>0$ para todo $x\in[a,b]$, ent\~ao $\min f>0$. Depois mostre que $f(x)=x$ em $(0,1]$ \'e cont\'inua, positiva, e tem \'infimo $0$.
+\end{exercicio}
+
+\end{document}

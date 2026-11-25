@@ -1,0 +1,102 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Solu\c{c}\~ao do caderno --- $\eps$-$\delta$}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+As seis provas s\~ao independentes do texto das notas. Cada uma come\c{c}a da defini\c{c}\~ao.
+
+\section{Limite linear}
+
+\textbf{Enunciado.} $\lim_{x\to 2}(3x-1)=5$, com $\delta$ expl\'icito.
+
+\begin{proof}
+$\abs{(3x-1)-5}=\abs{3x-6}=3\abs{x-2}$. Dado $\eps>0$, escolha $\delta=\eps/3$. Se $0<\abs{x-2}<\delta$, ent\~ao
+\[
+\abs{(3x-1)-5}=3\abs{x-2}<3\cdot\frac{\eps}{3}=\eps.
+\]
+\end{proof}
+
+\section{Limite do quadrado}
+
+\textbf{Enunciado.} $\lim_{x\to 3}x^2=9$, com $\delta$ expl\'icito.
+
+\begin{proof}
+$\abs{x^2-9}=\abs{x-3}\abs{x+3}$. Se $\abs{x-3}<1$, ent\~ao
+\[
+\abs{x+3}=\abs{(x-3)+6}\le \abs{x-3}+6<7.
+\]
+Seja $M=7$. Dado $\eps>0$, escolha $\delta=\min(1,\eps/7)$. Se $0<\abs{x-3}<\delta$, valem $\abs{x-3}<1$ e $\abs{x-3}<\eps/7$, logo
+\[
+\abs{x^2-9}=\abs{x-3}\abs{x+3}<7\abs{x-3}<7\cdot\frac{\eps}{7}=\eps.
+\]
+\end{proof}
+
+\section{Unicidade}
+
+\textbf{Enunciado.} Se os dois limites finitos existem, eles coincidem.
+
+\begin{proof}
+Seja $r>0$ tal que $f$ est\'a definida em $(a-r,a+r)\setminus\{a\}$. Suponha $L\neq M$ e ponha $\eps=\abs{L-M}/2>0$. Existem $\delta_1>0$ e $\delta_2>0$ tais que
+\begin{align*}
+0<\abs{x-a}<\delta_1 &\Rightarrow \abs{f(x)-L}<\eps,\\
+0<\abs{x-a}<\delta_2 &\Rightarrow \abs{f(x)-M}<\eps.
+\end{align*}
+Seja $\delta=\min(\delta_1,\delta_2,r)$ e escolha $x=a+\delta/2$. Ent\~ao $0<\abs{x-a}<\delta$, o ponto est\'a no dom\'inio, e
+\begin{align*}
+\abs{L-M}
+&\le \abs{f(x)-L}+\abs{f(x)-M}
+<\eps+\eps
+=\abs{L-M}.
+\end{align*}
+A desigualdade estrita $\abs{L-M}<\abs{L-M}$ \'e falsa. Logo $L=M$.
+\end{proof}
+
+\section{Confronto}
+
+\textbf{Enunciado.} Se $f\le g\le h$ numa vizinhan\c{c}a furada e os extremos tendem a $L$, ent\~ao $g$ tende a $L$.
+
+\begin{proof}
+Dado $\eps>0$, existe $\delta_1>0$ tal que $0<\abs{x-a}<\delta_1$ implica $\abs{f(x)-L}<\eps$, isto \'e, $L-\eps<f(x)<L+\eps$. Existe $\delta_2>0$ tal que $0<\abs{x-a}<\delta_2$ implica $L-\eps<h(x)<L+\eps$. Seja $\delta=\min(\delta_0,\delta_1,\delta_2)$. Se $0<\abs{x-a}<\delta$, ent\~ao
+\[
+L-\eps<f(x)\le g(x)\le h(x)<L+\eps,
+\]
+logo $\abs{g(x)-L}<\eps$.
+\end{proof}
+
+\section{Deriv\'avel implica cont\'inua}
+
+\textbf{Enunciado.} Se $f'(a)$ existe, ent\~ao $\lim_{x\to a}f(x)=f(a)$.
+
+\begin{proof}
+Por defini\c{c}\~ao, $f'(a)=\lim_{h\to 0}(f(a+h)-f(a))/h$, com $h\neq 0$. Para esses $h$, escreva
+\[
+f(a+h)-f(a)=q(h)\,h, \qquad q(h)=\frac{f(a+h)-f(a)}{h}.
+\]
+O alvo \'e $\lim_{h\to 0}q(h)h=0$. Seja $K=\abs{f'(a)}+1$. Como $q(h)\to f'(a)$, existe $\delta_1>0$ tal que $0<\abs{h}<\delta_1$ implica $\abs{q(h)-f'(a)}<1$, e portanto
+\[
+\abs{q(h)}\le \abs{q(h)-f'(a)}+\abs{f'(a)}<1+\abs{f'(a)}=K.
+\]
+Dado $\eps>0$, escolha $\delta=\min(\delta_1,\eps/K)$. Se $0<\abs{h}<\delta$, ent\~ao
+\[
+\abs{f(a+h)-f(a)}=\abs{q(h)}\,\abs{h}<K\cdot\frac{\eps}{K}=\eps.
+\]
+Logo $\lim_{h\to 0}f(a+h)=f(a)$.
+\end{proof}
+
+\section{M\'odulo}
+
+\textbf{Enunciado.} $\abs{x}$ n\~ao \'e deriv\'avel em $0$.
+
+\begin{proof}
+Para $h\neq 0$,
+\[
+\frac{\abs{0+h}-\abs{0}}{h}=\frac{\abs{h}}{h}.
+\]
+Se $h>0$, o quociente vale $1$. Se $h<0$, vale $-1$. Suponha que o limite bilateral exista e valha $L$. Dado $\eps>0$, existe $\delta>0$ tal que $0<\abs{h}<\delta$ implica $\abs{\abs{h}/h-L}<\eps$. Em particular, para $0<h<\delta$ tem-se $\abs{1-L}<\eps$. Isso vale para todo $\eps>0$. Se fosse $L\neq 1$, o n\'umero $\eps=\abs{1-L}/2>0$ daria $\abs{1-L}<\abs{1-L}/2$, o que \'e falso. Logo $L=1$. Pelo mesmo $\delta$ no lado esquerdo, $-\delta<h<0$ implica $\abs{-1-L}<\eps$ para todo $\eps>0$, e o mesmo argumento for\c{c}a $L=-1$. N\~ao se pode ter $L=1$ e $L=-1$. A derivada em $0$ n\~ao existe.
+\end{proof}
+
+\end{document}

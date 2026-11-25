@@ -1,0 +1,166 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito --- Vetores, retas, planos e cônicas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A numeração segue a ordem dos exercícios do texto.
+
+\section*{Exercício 1. [Básico --- operações com vetores]}
+
+\textbf{Enunciado.} Para $\vet{u}=(1,-2,2)$ e $\vet{v}=(2,0,1)$, calcule a soma, $3\vet{u}$, a norma de $\vet{u}$ e o vetor unitário.
+
+\textbf{Solução.}
+A soma é coordenada a coordenada: $\vet{u}+\vet{v}=(3,-2,3)$. O produto por escalar é $3\vet{u}=(3,-6,6)$. A norma é
+\[
+\norm{\vet{u}}=\sqrt{1^2+(-2)^2+2^2}=\sqrt{1+4+4}=\sqrt{9}=3.
+\]
+Como a norma não é zero, o vetor unitário é
+\[
+\frac{\vet{u}}{3}=\Bigl(\frac13,-\frac23,\frac23\Bigr).
+\]
+A norma desse quociente é $\abs{1/3}\cdot 3=1$.
+
+\section*{Exercício 2. [Básico --- circunferência]}
+
+\textbf{Enunciado.} Identifique centro e raio de $x^2+y^2+2x-6y-6=0$.
+
+\textbf{Solução.}
+Passe a constante para o outro lado e complete os quadrados:
+\begin{align*}
+x^2+2x+y^2-6y&=6,\\
+(x^2+2x+1)+(y^2-6y+9)&=6+1+9,\\
+(x+1)^2+(y-3)^2&=16.
+\end{align*}
+O centro é $(-1,3)$ e o raio é $4$, porque $16=4^2$ e o raio é positivo.
+
+\section*{Exercício 3. [Básico --- ângulo]}
+
+\textbf{Enunciado.} Calcule o cosseno do ângulo entre $(1,2)$ e $(3,1)$, e o ângulo em $[0,\pi]$.
+
+\textbf{Solução.}
+O produto escalar é $1\cdot 3+2\cdot 1=5$. As normas são $\sqrt{1+4}=\sqrt{5}$ e $\sqrt{9+1}=\sqrt{10}$. O produto das normas é $\sqrt{50}=\sqrt{25\cdot 2}=5\sqrt{2}$. Logo
+\[
+\cos\theta=\frac{5}{5\sqrt{2}}=\frac{1}{\sqrt{2}}=\frac{\sqrt{2}}{2}.
+\]
+A última igualdade vale porque os dois números são positivos e têm quadrado $1/2$. O único ângulo de $[0,\pi]$ com esse cosseno é $\pi/4$, pois $\cos(\pi/4)=\sqrt{2}/2$ e $\cos$ é injetora nesse intervalo.
+
+\section*{Exercício 4. [Básico --- produto vetorial]}
+
+\textbf{Enunciado.} Calcule $(1,0,2)\times(2,-1,1)$, confira a ortogonalidade e a área.
+
+\textbf{Solução.}
+Pela definição,
+\begin{align*}
+\vet{u}\times\vet{v}
+&=\bigl(0\cdot 1-2\cdot(-1),\ -(1\cdot 1-2\cdot 2),\ 1\cdot(-1)-0\cdot 2\bigr)\\
+&=(2,\ 3,\ -1).
+\end{align*}
+O produto com $\vet{u}$ é $2+0-2=0$. O produto com $\vet{v}$ é $4-3-1=0$. A área do paralelogramo é
+\[
+\norm{(2,3,-1)}=\sqrt{4+9+1}=\sqrt{14}.
+\]
+
+\section*{Exercício 5. [Intermediário --- projeção]}
+
+\textbf{Enunciado.} Projete $(2,-1,3)$ sobre $(1,1,1)$ e verifique que o resto é ortogonal.
+
+\textbf{Solução.}
+O produto $\vet{u}\cdot\vet{v}=2-1+3=4$ e $\vet{v}\cdot\vet{v}=3$. A projeção é
+\[
+\operatorname{proj}_{\vet{v}}\vet{u}=\frac{4}{3}(1,1,1)=\Bigl(\frac43,\frac43,\frac43\Bigr).
+\]
+O resto é
+\[
+\vet{w}=\Bigl(2-\frac43,\ -1-\frac43,\ 3-\frac43\Bigr)
+=\Bigl(\frac23,-\frac73,\frac53\Bigr).
+\]
+O produto $\vet{w}\cdot\vet{v}=2/3-7/3+5/3=0$. O denominador $3$ não é zero, então a projeção está definida.
+
+\section*{Exercício 6. [Intermediário --- distância ao plano]}
+
+\textbf{Enunciado.} Calcule a distância de $(1,2,-1)$ ao plano $2x-y+2z+3=0$ e o pé da perpendicular.
+
+\textbf{Solução.}
+A normal é $\vet{n}=(2,-1,2)$, com $\norm{\vet{n}}^2=4+1+4=9$ e $\norm{\vet{n}}=3$. Para $\vet{p}=(1,2,-1)$,
+\[
+2\cdot 1-1\cdot 2+2\cdot(-1)+3=1,
+\]
+logo a distância é $\abs{1}/3=1/3$.
+
+O pé é $\vet{q}=\vet{p}-\lambda\vet{n}$, com $\lambda$ escolhido para que $\vet{q}$ satisfaça a equação do plano. Substitua $x=1-2\lambda$, $y=2+\lambda$ e $z=-1-2\lambda$:
+\begin{align*}
+2(1-2\lambda)-(2+\lambda)+2(-1-2\lambda)+3
+&=2-4\lambda-2-\lambda-2-4\lambda+3
+=1-9\lambda.
+\end{align*}
+A equação $1-9\lambda=0$ dá $\lambda=1/9$. Portanto
+\[
+\vet{q}
+=\Bigl(1-\frac{2}{9},\ 2+\frac{1}{9},\ -1-\frac{2}{9}\Bigr)
+=\Bigl(\frac{7}{9},\frac{19}{9},-\frac{11}{9}\Bigr).
+\]
+A norma de $\lambda\vet{n}$ é $(1/9)\cdot 3=1/3$, em acordo com a distância. O segmento $\vet{p}-\vet{q}=\lambda\vet{n}$ é paralelo à normal por construção.
+
+\section*{Exercício 7. [Intermediário --- identificar cônica]}
+
+\textbf{Enunciado.} Reduza $4x^2+9y^2-8x+18y-23=0$ e identifique a cônica.
+
+\textbf{Solução.}
+Separe as variáveis e complete os quadrados:
+\begin{align*}
+4(x^2-2x)+9(y^2+2y)&=23,\\
+4\bigl((x-1)^2-1\bigr)+9\bigl((y+1)^2-1\bigr)&=23,\\
+4(x-1)^2-4+9(y+1)^2-9&=23,\\
+4(x-1)^2+9(y+1)^2&=36.
+\end{align*}
+Dividindo por $36$,
+\[
+\frac{(x-1)^2}{9}+\frac{(y+1)^2}{4}=1.
+\]
+É uma elipse de centro $(1,-1)$, semi-eixo $3$ na direção horizontal e semi-eixo $2$ na direção vertical. Os dois denominadores são positivos e a soma dos quocientes é $1$, então não é hipérbole nem parábola.
+
+\section*{Exercício 8. [Avançado --- igualdade em Cauchy--Schwarz]}
+
+\textbf{Enunciado.} Prove que a igualdade $\abs{\vet{u}\cdot\vet{v}}=\norm{\vet{u}}\norm{\vet{v}}$ vale se e somente se um dos vetores é múltiplo escalar do outro.
+
+\textbf{Solução.}
+$(\Leftarrow)$ Se $\vet{v}=\lambda\vet{u}$, então $\vet{u}\cdot\vet{v}=\lambda\norm{\vet{u}}^2$ e $\norm{\vet{v}}=\abs{\lambda}\norm{\vet{u}}$, logo os dois lados da igualdade valem $\abs{\lambda}\norm{\vet{u}}^2$. O caso $\vet{u}=\lambda\vet{v}$ é simétrico. Em particular, se um dos dois é o vetor nulo, ele é o múltiplo $0$ do outro e os dois lados são zero.
+
+$(\Rightarrow)$ Suponha a igualdade. Se $\vet{v}=\vet{0}$, então $\vet{v}=0\cdot\vet{u}$ e a dependência está provada. Suponha $\vet{v}\neq\vet{0}$. A igualdade dos módulos, elevada ao quadrado, é $(\vet{u}\cdot\vet{v})^2=\norm{\vet{u}}^2\norm{\vet{v}}^2$. No polinômio da prova de Cauchy--Schwarz,
+\[
+q(t)=\norm{\vet{v}}^2\, t^2+2(\vet{u}\cdot\vet{v})\, t+\norm{\vet{u}}^2,
+\]
+o discriminante é $4(\vet{u}\cdot\vet{v})^2-4\norm{\vet{v}}^2\norm{\vet{u}}^2=0$. Complete o quadrado, com $A=\norm{\vet{v}}^2>0$ e $B=2(\vet{u}\cdot\vet{v})$:
+\begin{align*}
+q(t)
+&=A\Bigl(t^2+\frac{B}{A}t+\frac{C}{A}\Bigr)
+=A\Biggl(\Bigl(t+\frac{B}{2A}\Bigr)^2-\frac{B^2}{4A^2}+\frac{C}{A}\Biggr).
+\end{align*}
+O termo constante interno é $(4AC-B^2)/(4A^2)=-\Delta/(4A^2)=0$. Logo $q(t)=A\bigl(t+B/(2A)\bigr)^2$. Em $t_0=-B/(2A)$ tem-se $q(t_0)=0$, isto é $\norm{\vet{u}+t_0\vet{v}}=0$, logo $\vet{u}+t_0\vet{v}=\vet{0}$ e $\vet{u}=(-t_0)\vet{v}$.
+
+\section*{Exercício 9. [Avançado --- interseção de planos]}
+
+\textbf{Enunciado.} Determine a reta interseção de $x-y+z=1$ e $x+y-z=3$.
+
+\textbf{Solução.}
+As normais são $\vet{n_1}=(1,-1,1)$ e $\vet{n_2}=(1,1,-1)$. O produto vetorial é
+\begin{align*}
+\vet{n_1}\times\vet{n_2}
+&=\bigl((-1)(-1)-1\cdot 1,\ -(1\cdot(-1)-1\cdot 1),\ 1\cdot 1-(-1)\cdot 1\bigr)\\
+&=(0,2,2).
+\end{align*}
+A direção $(0,1,1)$ gera a mesma reta, e não é o vetor nulo, então os planos não são paralelos. Para achar um ponto, imponha $y=0$:
+\[
+x+z=1,\qquad x-z=3.
+\]
+Somando, $2x=4$, logo $x=2$ e $z=-1$. O ponto $(2,0,-1)$ satisfaz as duas equações: $2-0+(-1)=1$ e $2+0-(-1)=3$. A reta é
+\[
+(x,y,z)=(2,0,-1)+t(0,1,1),\qquad t\in\R.
+\]
+A primeira componente da direção é zero, então $x=2$, e $(y-0)/1=(z+1)/1$. O ponto $t=1$ é $(2,1,0)$: $2-1+0=1$ e $2+1-0=3$.
+
+\end{document}

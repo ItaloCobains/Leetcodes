@@ -1,0 +1,59 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Caderno de prova 2: Rolle, valor médio e teorema fundamental}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+Prove os seis enunciados. No item 2 pode usar o teorema de Weierstrass. Nos itens 5 e 6 pode usar a definição da integral de Riemann para função contínua, a aditividade no intervalo, a comparação e a integral da constante. Cada item pode usar os anteriores. Não há outra indicação.
+
+\section{Fermat interior}
+
+Seja $f\colon D\to\R$ e seja $c$ ponto interior de $D$. Se $f$ tem um extremo local em $c$ e $f$ é derivável em $c$, então $f'(c)=0$.
+
+\vspace{6.5cm}
+
+\section{Rolle}
+
+Seja $f$ contínua em $[a,b]$ e derivável em $(a,b)$, com $a<b$ e $f(a)=f(b)$. Então existe $c\in(a,b)$ tal que $f'(c)=0$.
+
+\vspace{6.5cm}
+
+\section{Valor médio de Lagrange}
+
+Seja $f$ contínua em $[a,b]$ e derivável em $(a,b)$, com $a<b$. Então existe $c\in(a,b)$ tal que
+\[
+f'(c)=\frac{f(b)-f(a)}{b-a}.
+\]
+Use a função auxiliar
+\[
+g(x)=f(x)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)
+\]
+e o teorema de Rolle.
+
+\vspace{6.5cm}
+
+\section{Derivada nula}
+
+Seja $I\subseteq\R$ um intervalo e seja $f\colon I\to\R$ contínua em $I$ e derivável no interior de $I$, com $f'(x)=0$ em todo ponto interior. Então $f$ é constante em $I$.
+
+\vspace{6.5cm}
+
+\section{Teorema fundamental, parte 1}
+
+Seja $f$ contínua em $[a,b]$ e defina $F(x)=\int_a^x f(t)\,\dif t$. Prove que $F'(c)=f(c)$ para todo $c\in(a,b)$, que a derivada lateral direita em $a$ é $f(a)$ e que a derivada lateral esquerda em $b$ é $f(b)$.
+
+\vspace{6.5cm}
+
+\section{Teorema fundamental, parte 2}
+
+Seja $f$ contínua em $[a,b]$. Se $F\colon[a,b]\to\R$ satisfaz $F'=f$ em $[a,b]$, com derivada bilateral no aberto e derivadas laterais nos extremos, então
+\[
+\int_a^b f(x)\,\dif x=F(b)-F(a).
+\]
+
+\vspace{6.5cm}
+
+\end{document}

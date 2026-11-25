@@ -1,0 +1,183 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: integrais múltiplas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercícios}
+
+\begin{exercicio}[{[Básico --- iterada no triângulo]}]
+Integral de $x+2y$ no triângulo $0\le x\le 1$, $0\le y\le 1-x$.
+
+\textbf{Solução.}
+A região é do tipo I. A iterada é
+\[
+\int_0^1\int_0^{1-x}(x+2y)\,\dif y\,\dif x.
+\]
+A primitiva em $y$ é $xy+y^2$. Entre $0$ e $1-x$,
+\begin{align*}
+x(1-x)+(1-x)^2
+&=x-x^2+1-2x+x^2
+=1-x.
+\end{align*}
+Os termos $-x^2$ e $+x^2$ se cancelam; o que sobra não é um acaso da conta, é o valor da integral interna. Então
+\[
+\int_0^1(1-x)\,\dif x=\Bigl[x-\frac{x^2}{2}\Bigr]_0^1=\frac12.
+\]
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- Fubini nas duas ordens]}]
+Integral de $xy$ em $[0,1]\times[0,2]$, nas duas ordens.
+
+\textbf{Solução.}
+A função $xy$ é contínua no retângulo compacto, então o teorema de Fubini no retângulo se aplica e as duas ordens coincidem.
+\begin{align*}
+\int_0^1\int_0^2 xy\,\dif y\,\dif x
+&=\int_0^1 x\Bigl[\frac{y^2}{2}\Bigr]_0^2\,\dif x
+=\int_0^1 x\cdot 2\,\dif x
+=\bigl[x^2\bigr]_0^1
+=1.
+\end{align*}
+Na outra ordem,
+\begin{align*}
+\int_0^2\int_0^1 xy\,\dif x\,\dif y
+&=\int_0^2 y\Bigl[\frac{x^2}{2}\Bigr]_0^1\,\dif y
+=\int_0^2 y\cdot\frac12\,\dif y
+=\frac14\bigl[y^2\bigr]_0^2
+=1.
+\end{align*}
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- polar direta]}]
+Integral de $x^2+y^2$ no disco unitário.
+
+\textbf{Solução.}
+Em polares, $x^2+y^2=r^2$ e o elemento de área é $r\,\dif r\,\dif\theta$, com $0\le r\le 1$ e $0\le\theta\le 2\pi$. O integrando vezes o jacobiano é $r^2\cdot r=r^3$:
+\begin{align*}
+\iint_{x^2+y^2\le 1}(x^2+y^2)\,\dif A
+&=\int_0^{2\pi}\int_0^1 r^3\,\dif r\,\dif\theta
+=2\pi\Bigl[\frac{r^4}{4}\Bigr]_0^1
+=\frac{\pi}{2}.
+\end{align*}
+Esquecer o fator $r$ produziria $\int_0^1 r^2\,\dif r=1/3$ vezes $2\pi$, isto é $2\pi/3$, que é outra integral.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- valor médio]}]
+Valor médio de $x^2+y^2$ no disco unitário.
+
+\textbf{Solução.}
+A área do disco é $\pi$. A integral de $f$ foi calculada no exercício anterior e vale $\pi/2$. O valor médio é
+\[
+\overline{f}=\frac{1}{\pi}\cdot\frac{\pi}{2}=\frac12.
+\]
+A função $r^2$ no disco, ponderada pela área polar $r\,\dif r\,\dif\theta$, não tem média zero nem média $1$: o peso $r$ concentra área longe da origem, e $1/2$ é o equilíbrio dessa conta.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- trocar a ordem]}]
+Calcular $\int_0^1\int_y^1 e^{x^2}\,\dif x\,\dif y$.
+
+\textbf{Solução.}
+A região é $0\le y\le 1$ e $y\le x\le 1$. Na ordem $y$ interno, $x$ vai de $0$ a $1$ e, para cada $x$, $y$ vai de $0$ até $x$. A função é contínua nesse triângulo compacto. Então
+\begin{align*}
+\int_0^1\int_y^1 e^{x^2}\,\dif x\,\dif y
+&=\int_0^1\int_0^x e^{x^2}\,\dif y\,\dif x
+=\int_0^1 x\,e^{x^2}\,\dif x.
+\end{align*}
+Com $u=x^2$, $\dif u=2x\,\dif x$, $u$ percorre $[0,1]$:
+\[
+\int_0^1 x\,e^{x^2}\,\dif x=\frac12\int_0^1 e^u\,\dif u=\frac{e-1}{2}.
+\]
+A ordem original pedia uma primitiva de $e^{x^2}$ em $x$, que não é elementar. A troca usa que $e^{x^2}$ não depende de $y$, então a integral interna só multiplica pelo comprimento $x$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- centro de massa]}]
+Quarto de disco homogêneo.
+
+\textbf{Solução.}
+Densidade $1$. A massa é a área,
+\[
+m=\int_0^{\pi/2}\int_0^1 r\,\dif r\,\dif\theta
+=\frac{\pi}{2}\cdot\frac12=\frac{\pi}{4}.
+\]
+O momento para $\bar x$ é
+\begin{align*}
+M_y
+&=\int_0^{\pi/2}\int_0^1 (r\cos\theta)\,r\,\dif r\,\dif\theta
+=\Biggl(\int_0^{\pi/2}\cos\theta\,\dif\theta\Biggr)
+\Biggl(\int_0^1 r^2\,\dif r\Biggr)
+=\bigl[\sin\theta\bigr]_0^{\pi/2}\cdot\frac13
+=\frac13.
+\end{align*}
+Logo $\bar x=(1/3)/(\pi/4)=4/(3\pi)$. A região é simétrica em relação à reta $y=x$, e a densidade é constante, então $\bar y=\bar x=4/(3\pi)$. O centro de massa é $\bigl(4/(3\pi),\,4/(3\pi)\bigr)$.
+
+O número $4/(3\pi)$ é maior que $1/3$ e menor que $1/2$: o quarto de disco tem mais área longe da origem do que um triângulo com os mesmos extremos nos eixos, e o centroide do triângulo de vértices $(0,0)$, $(1,0)$, $(0,1)$ seria outro problema.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- cilíndricas]}]
+Volume sob $z=1-x^2-y^2$ no disco unitário.
+
+\textbf{Solução.}
+No disco $r\le 1$, tem-se $1-r^2\ge 0$, então o sólido está acima de $z=0$. Em cilíndricas, $\abs{J}=r$ e
+\begin{align*}
+V
+&=\int_0^{2\pi}\int_0^1\int_0^{1-r^2} r\,\dif z\,\dif r\,\dif\theta
+=\int_0^{2\pi}\int_0^1 (1-r^2)\,r\,\dif r\,\dif\theta.
+\end{align*}
+A integral em $r$ é
+\[
+\int_0^1(r-r^3)\,\dif r=\Bigl[\frac{r^2}{2}-\frac{r^4}{4}\Bigr]_0^1=\frac12-\frac14=\frac14.
+\]
+Multiplicando por $2\pi$, o volume é $\pi/2$.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- setor esférico]}]
+Volume de $\rho\le R$, $0\le\varphi\le\pi/4$.
+
+\textbf{Solução.}
+Na convenção fixa, $\varphi$ parte do eixo $z$ positivo. O cone $\varphi=\pi/4$ é o conjunto em que $\rho\cos\varphi=\rho\sin\varphi$, isto é, $z=\sqrt{x^2+y^2}$, porque a coordenada cilíndrica radial é $\rho\sin\varphi$. O jacobiano já calculado na nota é $\rho^2\sin\varphi$, não negativo para $\varphi\in[0,\pi/4]\subset[0,\pi]$. O volume separa:
+\begin{align*}
+V
+&=\int_0^{2\pi}\int_0^{\pi/4}\int_0^R \rho^2\sin\varphi\,\dif\rho\,\dif\varphi\,\dif\theta
+=\Biggl(\int_0^{2\pi}\dif\theta\Biggr)
+\Biggl(\int_0^R\rho^2\,\dif\rho\Biggr)
+\Biggl(\int_0^{\pi/4}\sin\varphi\,\dif\varphi\Biggr)\\
+&=2\pi\cdot\frac{R^3}{3}\cdot\bigl[-\cos\varphi\bigr]_0^{\pi/4}
+=\frac{2\pi R^3}{3}\Biggl(1-\frac{\sqrt{2}}{2}\Biggr)
+=\frac{\pi R^3}{3}\bigl(2-\sqrt{2}\bigr).
+\end{align*}
+A última igualdade é $2(1-\sqrt{2}/2)=2-\sqrt{2}$.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- centro de massa do cone]}]
+Cone de vértice na origem e base de raio $R$ em $z=H$.
+
+\textbf{Solução.}
+A densidade constante cancela na razão; usamos densidade $1$. A região é simétrica em relação aos planos $x=0$ e $y=0$. Os integrandos $x$ e $y$ são ímpares nessas reflexões e a região não muda, então $\bar x=\bar y=0$. Em cilíndricas isso aparece como $\int_0^{2\pi}\cos\theta\,\dif\theta=0$ e $\int_0^{2\pi}\sin\theta\,\dif\theta=0$, multiplicando integrais em $r$ e $z$ finitas.
+
+O raio da seção à altura $z$ é $(R/H)z$. O volume é
+\begin{align*}
+m
+&=\int_0^H\int_0^{2\pi}\int_0^{(R/H)z} r\,\dif r\,\dif\theta\,\dif z
+=\int_0^H \pi\Bigl(\frac{R}{H}\Bigr)^2 z^2\,\dif z
+=\pi\frac{R^2}{H^2}\cdot\frac{H^3}{3}
+=\frac13\pi R^2 H.
+\end{align*}
+O momento vertical é a integral de $z$ contra a área da seção:
+\begin{align*}
+\iiint z\,\dif V
+&=\int_0^H z\cdot\pi\Bigl(\frac{R}{H}\Bigr)^2 z^2\,\dif z
+=\pi\frac{R^2}{H^2}\int_0^H z^3\,\dif z
+=\pi\frac{R^2}{H^2}\cdot\frac{H^4}{4}
+=\frac14\pi R^2 H^2.
+\end{align*}
+Portanto
+\[
+\bar z=\frac{\frac14\pi R^2 H^2}{\frac13\pi R^2 H}=\frac{H}{4}\cdot 3=\frac{3H}{4}.
+\]
+A cota fica a três quartos da altura, medida a partir do vértice, não a partir da base. A base larga pesa mais do que a ponta, por isso o centro de massa não é $H/2$.
+\end{exercicio}
+
+\end{document}

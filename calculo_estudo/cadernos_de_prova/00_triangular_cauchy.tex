@@ -1,0 +1,52 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Caderno --- Desigualdade triangular e Cauchy--Schwarz}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section*{Notação}
+
+Para $x\in\R$, $\abs{x}=x$ se $x\ge 0$ e $\abs{x}=-x$ se $x<0$. Em $\R^n$, $n\ge 1$, o produto escalar e a norma euclidiana são
+\[
+\vet{u}\cdot\vet{v}=\sum_{i=1}^n u_i v_i,\qquad
+\norm{\vet{u}}=\sqrt{\vet{u}\cdot\vet{u}}.
+\]
+
+\section*{Enunciados}
+
+Escreva cada demonstração por completo, com quantificadores e contas. Não há roteiro além do enunciado.
+
+\begin{teorema}[Desigualdade triangular em $\R$]
+Para todos $x,y\in\R$, $\abs{x+y}\le\abs{x}+\abs{y}$.
+\end{teorema}
+
+\vspace{7.5cm}
+
+\begin{corolario}[Diferença dos módulos]
+Para todos $x,y\in\R$, $\abs{\,\abs{x}-\abs{y}\,}\le\abs{x-y}$.
+\end{corolario}
+
+\vspace{7.5cm}
+
+\begin{teorema}[Cauchy--Schwarz em $\R^n$]
+Para todos $\vet{u},\vet{v}\in\R^n$,
+\[
+\abs{\vet{u}\cdot\vet{v}}\le\norm{\vet{u}}\,\norm{\vet{v}}.
+\]
+\end{teorema}
+
+\vspace{9cm}
+
+\begin{teorema}[Desigualdade triangular da norma euclidiana]
+Para todos $\vet{u},\vet{v}\in\R^n$,
+\[
+\norm{\vet{u}+\vet{v}}\le\norm{\vet{u}}+\norm{\vet{v}}.
+\]
+\end{teorema}
+
+\vspace{8cm}
+
+\end{document}

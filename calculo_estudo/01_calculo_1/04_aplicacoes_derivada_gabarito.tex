@@ -1,0 +1,236 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito --- Aplicações da derivada}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A numeração segue a ordem dos exercícios do texto. Cada enunciado é repetido e a solução vem em seguida. As derivadas elementares, a regra da cadeia, a do produto e a do quociente são as do módulo de derivadas. O crescimento estrito de $\ln$ e a bijeção $\exp\colon\R\to(0,\infty)$ são os do módulo de funções.
+
+\section*{Exercício 1. [Básico --- pontos críticos]}
+
+\textbf{Enunciado.} Determine os pontos críticos de $f(x)=x^3-3x+1$, classifique cada um pelo teste da segunda derivada e decida se $f$ tem máximo ou mínimo absoluto em $\R$.
+
+\textbf{Solução.}
+A função é polinomial, logo derivável em $\R$. Não há crítico por falta de derivada. A derivada é
+\[
+f'(x)=3x^2-3=3(x^2-1)=3(x-1)(x+1).
+\]
+Um produto é zero se e somente se algum fator é zero. Como $3\neq 0$, tem-se $f'(x)=0$ exatamente quando $x=1$ ou $x=-1$. Os dois pontos são interiores a $\R$.
+
+A segunda derivada é $f''(x)=6x$. Então $f''(1)=6>0$ e $f''(-1)=-6<0$. O teste da segunda derivada dá mínimo local estrito em $1$ e máximo local estrito em $-1$. Os valores são
+\begin{align*}
+f(1)&=1-3+1=-1,\\
+f(-1)&=-1+3+1=3.
+\end{align*}
+
+Não há máximo absoluto. Para $x>2$ vale $x^2-3>4-3=1$, e $x>0$, logo
+\[
+x^3-3x=x(x^2-3)>x\cdot 1=x.
+\]
+Somando $1$ não é necessário para a cota inferior usada a seguir: $f(x)=x^3-3x+1>x^3-3x>x$. Dado $M\in\R$, escolha $x>\max\{2,M\}$. Então $f(x)>x>M$. A função não é limitada superiormente, e um máximo absoluto exigiria cota superior atingida.
+
+Não há mínimo absoluto. Para $t>2$, o mesmo cálculo dá $t^3-3t>t$, logo $t^3-3t-1>t-1$. Se $x=-t$,
+\[
+f(-t)=-t^3+3t+1=-(t^3-3t-1)<-(t-1).
+\]
+Dado $M\in\R$, escolha $t>\max\{2,1-M\}$. Então $-(t-1)<M$, e $f(-t)<M$. A função não é limitada inferiormente.
+
+\section*{Exercício 2. [Básico --- Rolle]}
+
+\textbf{Enunciado.} Verifique as hipóteses do teorema de Rolle para $f(x)=\sin x$ em $[0,\pi]$ e encontre todos os $c\in(0,\pi)$ com $f'(c)=0$.
+
+\textbf{Solução.}
+A derivada $f'(x)=\cos x$ existe em $\R$, logo $f$ é derivável em $(0,\pi)$ e contínua em $[0,\pi]$. Os valores nos extremos são $\sin 0=0$ e $\sin\pi=0$. As três hipóteses de Rolle estão satisfeitas, e existe ao menos um $c\in(0,\pi)$ com $\cos c=0$.
+
+O ponto $c=\pi/2$ serve, porque $\cos(\pi/2)=0$ e $0<\pi/2<\pi$. Para ver que é o único, usa-se que $\sin x>0$ em $(0,\pi)$, fato do módulo de trigonometria. Então $(\cos)'(x)=-\sin x<0$ em $(0,\pi)$. O corolário do sinal da derivada diz que $\cos$ é estritamente decrescente em $[0,\pi]$. Uma função estritamente decrescente assume cada valor no máximo uma vez: se $\cos c_1=\cos c_2=0$ com $c_1<c_2$, teríamos $\cos c_1>\cos c_2$. Logo $\pi/2$ é o único zero de $\cos$ em $(0,\pi)$.
+
+\section*{Exercício 3. [Básico --- Lagrange]}
+
+\textbf{Enunciado.} Para $f(x)=x^2+x$ em $[0,2]$, calcule a razão $(f(2)-f(0))/(2-0)$ e encontre explicitamente um $c$ dado pelo teorema do valor médio de Lagrange.
+
+\textbf{Solução.}
+A função é polinomial, contínua em $[0,2]$ e derivável em $(0,2)$. Além disso
+\[
+f(2)=4+2=6,\qquad f(0)=0,\qquad \frac{f(2)-f(0)}{2-0}=\frac{6}{2}=3.
+\]
+A derivada é $f'(x)=2x+1$. A equação $2x+1=3$ equivale a $2x=2$, logo $x=1$, porque se pode subtrair $1$ e multiplicar pelo inverso positivo $1/2$. O ponto $1$ está em $(0,2)$. Conferência: $f'(1)=2+1=3$.
+
+\section*{Exercício 4. [Básico --- L'Hôpital $0/0$]}
+
+\textbf{Enunciado.} Calcule $\lim_{x\to 0}(1-\cos x)/x^2$ pela regra de L'Hôpital. Em cada aplicação, registre o par de funções, o tipo $0/0$ e o motivo pelo qual a derivada do denominador não se anula na vizinhança furada.
+
+\textbf{Solução.}
+Primeira aplicação. Sejam $f_1(x)=1-\cos x$ e $g_1(x)=x^2$, para $x\neq 0$. Então $\lim_{x\to 0}f_1(x)=1-\cos 0=0$ e $\lim_{x\to 0}g_1(x)=0$. As derivadas são $f_1'(x)=\sin x$ e $g_1'(x)=2x$. Em $\R\setminus\{0\}$ tem-se $2x\neq 0$. O quociente das derivadas é $\sin x/(2x)$, e a regra reduz o limite original ao limite deste quociente, desde que o segundo exista.
+
+Segunda aplicação. Sejam $f_2(x)=\sin x$ e $g_2(x)=2x$. Os limites em $0$ são $\sin 0=0$ e $0$. As derivadas são $\cos x$ e $2$. A constante $2$ é diferente de zero em toda a reta, em particular na vizinhança furada de $0$. Como $\cos$ é derivável, é contínua, e
+\[
+\lim_{x\to 0}\frac{\cos x}{2}=\frac{\cos 0}{2}=\frac{1}{2}.
+\]
+A forma $0/0$ dá $\lim_{x\to 0}\sin x/(2x)=1/2$. Voltando à primeira aplicação, cuja derivada do denominador não se anula fora de $0$,
+\[
+\lim_{x\to 0}\frac{1-\cos x}{x^2}=\frac12.
+\]
+
+\section*{Exercício 5. [Básico --- linearização]}
+
+\textbf{Enunciado.} Escreva a linearização de $f(x)=\sqrt{x}$ em $a=9$, use-a para estimar $\sqrt{10}$ e, com a cota do resto de ordem $1$, prove que $\abs{\sqrt{10}-19/6}\le 1/216$.
+
+\textbf{Solução.}
+Para $x>0$, $f'(x)=1/(2\sqrt{x})$. Assim $f(9)=3$ e $f'(9)=1/(2\cdot 3)=1/6$. A linearização é
+\[
+L(x)=3+\frac{1}{6}(x-9),\qquad L(10)=3+\frac16=\frac{18}{6}+\frac{1}{6}=\frac{19}{6}.
+\]
+A estimativa é $\sqrt{10}\approx 19/6$. O erro é $E(10)=\sqrt{10}-19/6$.
+
+A segunda derivada sai da regra do quociente aplicada a $1/(2\sqrt{x})$. A derivada do denominador $2\sqrt{x}$ é $2\cdot 1/(2\sqrt{x})=1/\sqrt{x}$. O quadrado do denominador é $(2\sqrt{x})^2=4x$. Logo
+\[
+f''(x)=\frac{0\cdot 2\sqrt{x}-1\cdot(1/\sqrt{x})}{4x}=-\frac{1}{4x\sqrt{x}}=-\frac{1}{4x^{3/2}},\qquad x>0.
+\]
+No segmento entre $9$ e $10$ a fórmula do resto dá $d\in(9,10)$ com
+\[
+E(10)=\frac{f''(d)}{2}(10-9)^2=\frac{f''(d)}{2}.
+\]
+Resta majorar $\abs{f''(d)}=1/(4d^{3/2})$. A raiz quadrada é estritamente crescente em $[0,\infty)$: se $0\le u<v$ e fosse $\sqrt{u}\ge\sqrt{v}$, os dois lados seriam não negativos e o quadrado preservaria a desigualdade, dando $u\ge v$. Assim, para $9\le d\le 10$, $\sqrt{d}\ge\sqrt{9}=3$ e $d\ge 9$, logo
+\[
+d^{3/2}=d\sqrt{d}\ge 9\cdot 3=27,
+\]
+porque o produto de desigualdades não negativas com o mesmo sentido se mantém: de $d\ge 9$ e $\sqrt{d}\ge 3$ segue $d\sqrt{d}\ge 9\sqrt{d}\ge 9\cdot 3$. O denominador $4d^{3/2}$ é então pelo menos $4\cdot 27=108$, e
+\[
+\abs{f''(d)}\le\frac{1}{108}.
+\]
+Portanto
+\[
+\abs{E(10)}=\frac{\abs{f''(d)}}{2}\le\frac{1}{216},
+\]
+que é $\abs{\sqrt{10}-19/6}\le 1/216$.
+
+\section*{Exercício 6. [Intermediário --- lata cilíndrica]}
+
+\textbf{Enunciado.} Uma lata cilíndrica fechada tem volume $V>0$ fixo. Entre todos os raios $r>0$, determine o raio e a altura que minimizam a área total da superfície, e justifique que o mínimo é absoluto.
+
+\textbf{Solução.}
+Sejam $r>0$ o raio da base e $h>0$ a altura. O volume fixa $h$ em função de $r$:
+\[
+\pi r^2 h=V,\qquad h=\frac{V}{\pi r^2}.
+\]
+A área total é a lateral mais as duas bases:
+\[
+A(r)=2\pi rh+2\pi r^2=\frac{2V}{r}+2\pi r^2,\qquad r>0.
+\]
+A derivada existe em $(0,\infty)$:
+\[
+A'(r)=-\frac{2V}{r^2}+4\pi r,\qquad A''(r)=\frac{4V}{r^3}+4\pi.
+\]
+Para $r>0$ e $V>0$ tem-se $A''(r)>0$. A equação $A'(r)=0$ equivale a $4\pi r^3=2V$, isto é $r^3=V/(2\pi)$. A função $t\mapsto t^3$ é contínua e estritamente crescente em $[0,\infty)$. A fatoração $t_2^3-t_1^3=(t_2-t_1)(t_1^2+t_1t_2+t_2^2)$, já usada para $x^3$ na nota, tem segundo fator positivo quando $t_1\neq t_2$ são não negativos: ele vale $\frac12\bigl(t_1^2+t_2^2+(t_1+t_2)^2\bigr)$, soma de quadrados que só se anula se $t_1=t_2=0$. Para a existência, $0^3=0<V/(2\pi)$. Se $t>1+V/(2\pi)$, então $t>1$ e $t^3=t\cdot t^2>t\cdot 1=t>V/(2\pi)$. O teorema do valor intermediário no intervalo $[0,t]$ produz $r_0$ com $r_0^3=V/(2\pi)$. O crescimento estrito impede um segundo zero. O teste da segunda derivada, com $A''(r_0)>0$ e $A'(r_0)=0$, dá mínimo local estrito em $r_0$.
+
+A altura correspondente usa $V=2\pi r_0^3$:
+\[
+h_0=\frac{V}{\pi r_0^2}=\frac{2\pi r_0^3}{\pi r_0^2}=2r_0.
+\]
+A área nesse ponto é
+\[
+A(r_0)=\frac{2V}{r_0}+2\pi r_0^2=\frac{4\pi r_0^3}{r_0}+2\pi r_0^2=6\pi r_0^2.
+\]
+
+O domínio $(0,\infty)$ não é compacto, então Weierstrass não se aplica diretamente. Compara-se com um compacto que isola o crítico. Para $r>0$,
+\[
+A(r)\ge\frac{2V}{r},\qquad A(r)\ge 2\pi r^2,
+\]
+porque os dois termos da soma são positivos. Se $0<r<(2/3)r_0$, então $1/r>3/(2r_0)$ e
+\[
+\frac{2V}{r}>\frac{2V\cdot 3}{2r_0}=\frac{3V}{r_0}=\frac{3\cdot 2\pi r_0^3}{r_0}=6\pi r_0^2=A(r_0).
+\]
+Logo $A(r)>A(r_0)$. Se $r>\sqrt{3}\,r_0$, então $r^2>3r_0^2$, porque a raiz é estritamente crescente e $(\sqrt{3}\,r_0)^2=3r_0^2$. Multiplicando por $2\pi>0$,
+\[
+2\pi r^2>6\pi r_0^2=A(r_0),
+\]
+logo $A(r)>A(r_0)$. Além disso $\sqrt{3}>1$: se fosse $\sqrt{3}\le 1$, o quadrado daria $3\le 1$. E $2/3<1$. Assim $r_0$ está no interior do intervalo compacto $I=[(2/3)r_0,\sqrt{3}\,r_0]$.
+
+Nos extremos de $I$ a desigualdade ainda é estrita. Em $r=(2/3)r_0$ o termo $2\pi r^2$ é positivo, então $A(r)>2V/r$, e a conta do parágrafo anterior dá $2V/r=A(r_0)$ exatamente nesse raio, porque a desigualdade usada virou igualdade na fronteira $r=(2/3)r_0$. Logo $A((2/3)r_0)>A(r_0)$. Em $r=\sqrt{3}\,r_0$ tem-se $2\pi r^2=A(r_0)$ e o termo $2V/r>0$, logo $A(r)>A(r_0)$.
+
+A restrição de $A$ a $I$ é contínua. Weierstrass dá um ponto $r_*\in I$ de mínimo absoluto em $I$. Esse valor é no máximo $A(r_0)$, e os extremos de $I$ têm área estritamente maior, então $r_*$ não é extremo de $I$. É interior, $A$ é derivável, e Fermat força $A'(r_*)=0$. O único zero positivo de $A'$ é $r_0$, logo $r_*=r_0$ e o mínimo de $A$ em $I$ é $A(r_0)$. Fora de $I$ já se tem $A(r)>A(r_0)$. Portanto $r_0$ é mínimo absoluto em $(0,\infty)$, com altura $h_0=2r_0$.
+
+\section*{Exercício 7. [Intermediário --- L'Hôpital no infinito]}
+
+\textbf{Enunciado.} Calcule $\lim_{x\to+\infty}(\ln x)/x$. Diga qual forma da regra de L'Hôpital se aplica e verifique cada hipótese, inclusive o limite de $\ln x$.
+
+\textbf{Solução.}
+A forma é $\infty/\infty$ quando $x\to+\infty$, no intervalo $(1,\infty)$, por exemplo. Seja $f(x)=\ln x$ e $g(x)=x$. A derivada $g'(x)=1$ não se anula. Além disso $g(x)\to+\infty$.
+
+O logaritmo tende a $+\infty$. Dado $M>0$, a sobrejetividade de $\exp$ fornece o ponto $\exp(M)$, e $\ln(\exp(M))=M$. Se $x>\exp(M)$, o crescimento estrito de $\ln$ dá $\ln x>M$.
+
+As derivadas são $f'(x)=1/x$ e $g'(x)=1$, para $x>0$. O quociente é $1/x$. Dado $\eps>0$, se $x>1/\eps$ então $\abs{1/x}=1/x<\eps$. Logo $f'(x)/g'(x)\to 0$, que é limite finito. A forma $\infty/\infty$ em $+\infty$ conclui
+\[
+\lim_{x\to+\infty}\frac{\ln x}{x}=0.
+\]
+
+\section*{Exercício 8. [Intermediário --- estudo de função]}
+
+\textbf{Enunciado.} Para $f(x)=x\exp(-x)$, determine os intervalos de monotonicidade, os extremos locais e absolutos em $\R$, os intervalos de concavidade e os pontos de inflexão.
+
+\textbf{Solução.}
+A regra do produto e a cadeia dão
+\begin{align*}
+f'(x)
+&=\exp(-x)+x\exp(-x)\cdot(-1)
+=\exp(-x)\,(1-x).
+\end{align*}
+Como $\exp(-x)>0$ para todo $x$, o sinal de $f'$ é o sinal de $1-x$. Assim $f'(x)>0$ se $x<1$, $f'(1)=0$ e $f'(x)<0$ se $x>1$. O único ponto crítico é $x=1$.
+
+Se $x_1<x_2\le 1$, o teorema do valor médio em $[x_1,x_2]$ dá $c\in(x_1,x_2)$. Então $c<1$ e $f'(c)>0$, logo $f(x_2)-f(x_1)=f'(c)(x_2-x_1)>0$. A função é estritamente crescente em $(-\infty,1]$. Se $1\le x_1<x_2$, o ponto intermediário satisfaz $c>1$ e $f'(c)<0$, logo $f(x_2)<f(x_1)$. A função é estritamente decrescente em $[1,\infty)$.
+
+O valor $f(1)=\exp(-1)$ é máximo local estrito. É absoluto: se $x<1$, o crescimento estrito dá $f(x)<f(1)$; se $x>1$, o decrescimento estrito dá $f(x)<f(1)$. Não há outro crítico, logo não há mínimo local.
+
+Não há mínimo absoluto, porque a imagem não é limitada inferiormente. A nota prova $\exp(t)\ge 1+t$ para todo $t$, com desigualdade estrita se $t\neq 0$. Para $t>0$ segue $\exp(t)>t$, logo $t\exp(t)>t^2$ e $f(-t)=-t\exp(t)<0$. Dado $M\in\R$, se $M\ge 0$ tome $t>1$: então $f(-t)<0\le M$. Se $M<0$, tome $t>\max\{1,\sqrt{-M}\}$. A raiz é estritamente crescente, então $t^2>-M$. Assim $t\exp(t)>t^2>-M$. Multiplicar por $-1$ inverte o sentido: $f(-t)=-t\exp(t)<M$. Em todo caso há pontos da imagem menores do que $M$.
+
+Para a concavidade, derive de novo. Com $u=\exp(-x)$ e $v=1-x$,
+\begin{align*}
+f''(x)
+&=-\exp(-x)\,(1-x)+\exp(-x)\cdot(-1)
+=\exp(-x)\bigl(-(1-x)-1\bigr)
+=\exp(-x)\,(x-2).
+\end{align*}
+O fator $\exp(-x)$ é positivo, então $f''(x)<0$ se $x<2$, $f''(2)=0$ e $f''(x)>0$ se $x>2$.
+
+A derivada $f'$ é estritamente decrescente em $(-\infty,2]$. De fato, se $x_1<x_2\le 2$, o valor médio aplicado a $f'$ produz $c\in(x_1,x_2)\subseteq(-\infty,2)$ com $f''(c)<0$, logo $f'(x_2)-f'(x_1)<0$. É estritamente crescente em $[2,\infty)$: se $2\le x_1<x_2$, o ponto intermediário tem segunda derivada positiva. A proposição da tangente dá $f$ estritamente côncava em $(-\infty,2]$ e estritamente convexa em $[2,\infty)$.
+
+O ponto $2$ é inflexão: à esquerda, no intervalo $(2-\delta,2]$, a função é côncava; à direita, em $[2,2+\delta)$, é convexa. Não há outro. Se $c<2$, uma vizinhança pequena de $c$ cabe em $(-\infty,2]$, onde $f$ é côncava dos dois lados. Se $c>2$, a vizinhança cabe em $[2,\infty)$, onde $f$ é convexa dos dois lados. O valor no ponto de inflexão é $f(2)=2\exp(-2)$.
+
+\section*{Exercício 9. [Avançado --- derivada sem zero]}
+
+\textbf{Enunciado.} Prove que, se $f$ é contínua em $[a,b]$, derivável em $(a,b)$ e $f'(x)\neq 0$ para todo $x\in(a,b)$, então $f$ é injetora em $[a,b]$.
+
+\textbf{Solução.}
+Suponha $x_1,x_2\in[a,b]$ com $f(x_1)=f(x_2)$. Se fosse $x_1\neq x_2$, a tricotomia daria, por exemplo, $x_1<x_2$. O segmento $[x_1,x_2]$ está contido em $[a,b]$. A restrição é contínua no fechado, derivável no aberto $(x_1,x_2)$ e assume o mesmo valor nos extremos. Rolle fornece $c\in(x_1,x_2)\subseteq(a,b)$ com $f'(c)=0$, contra a hipótese. O caso $x_2<x_1$ é idêntico, trocando os nomes. Logo $x_1=x_2$. A função é injetora.
+
+\section*{Exercício 10. [Avançado --- L'Hôpital não necessário]}
+
+\textbf{Enunciado.} Sejam $f(x)=x^2\sin(1/x)$ para $x\neq 0$, $f(0)=0$ e $g(x)=x$. Mostre que $\lim_{x\to 0}f(x)/g(x)=0$ e que $\lim_{x\to 0}f'(x)/g'(x)$ não existe.
+
+\textbf{Solução.}
+Para $x\neq 0$,
+\[
+\abs{\frac{f(x)}{g(x)}}=\abs{x\sin\frac{1}{x}}\le\abs{x},
+\]
+porque $\abs{\sin}\le 1$. Dado $\eps>0$, se $0<\abs{x}<\eps$, então $\abs{f(x)/g(x)}<\eps$. Logo o limite do quociente é $0$. Em particular $\lim f(x)=0$, pois $\abs{f(x)}\le x^2$ e $x^2\to 0$, e $\lim g(x)=0$. O par está na forma $0/0$, e $g'(x)=1\neq 0$. A regra não se aplica porque o limite de $f'/g'$ não existe, como se calcula agora. O limite de $f/g$ foi obtido sem ela.
+
+Para $x\neq 0$, a regra do produto e a cadeia dão
+\begin{align*}
+f'(x)
+&=2x\sin\frac{1}{x}+x^2\cos\frac{1}{x}\cdot\Bigl(-\frac{1}{x^2}\Bigr)
+=2x\sin\frac{1}{x}-\cos\frac{1}{x}.
+\end{align*}
+Assim $f'(x)/g'(x)=2x\sin(1/x)-\cos(1/x)$. Nos pontos $x_n=1/(n\pi)$, com $n\in\N$, tem-se $1/x_n=n\pi$, $\sin(n\pi)=0$ e $\cos(n\pi)=(-1)^n$. Portanto
+\[
+\frac{f'(x_n)}{g'(x_n)}=-(-1)^n=(-1)^{n+1}.
+\]
+Para $n$ par, $n=2k$, o valor é $(-1)^{2k+1}=-1$. Para $n$ ímpar, $n=2k+1$, o valor é $(-1)^{2k+2}=1$. E $x_n\to 0$, porque $n\pi\to\infty$ e o recíproco de um módulo que tende a infinito tende a zero: dado $\eps>0$, escolha $n>1/(\pi\eps)$, possível pela propriedade arquimediana; então $\abs{x_n}=1/(n\pi)<\eps$.
+
+Suponha que $f'/g'$ tivesse limite finito $L$. Para $\eps=1$ existiria $\delta>0$ tal que $0<\abs{x}<\delta$ implicaria $\abs{f'(x)/g'(x)-L}<1$. Escolha $n$ par e $n$ ímpar grandes o bastante para que os dois pontos $x_n$ caiam nessa vizinhança. Os valores $-1$ e $1$ satisfariam $\abs{-1-L}<1$ e $\abs{1-L}<1$, isto é $-2<L<0$ e $0<L<2$. Não existe $L$ nas duas condições. O limite em $\R$ não existe.
+
+Tampouco tende a $\pm\infty$: em toda vizinhança furada de $0$ a função assume o valor $1$ e o valor $-1$, então não fica maior do que $2$, nem menor do que $-2$, a partir de certo momento.
+
+\end{document}

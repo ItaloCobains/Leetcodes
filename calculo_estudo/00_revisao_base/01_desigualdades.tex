@@ -1,0 +1,436 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Desigualdades, valor absoluto e frações parciais}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{Um corpo tem adição e multiplicação associativas e comutativas, neutros $0$ e $1$, oposto $-x$ para cada $x$, inverso $x^{-1}$ para cada $x\neq 0$, e a distributividade $x(y+z)=xy+xz$. Neste capítulo $\R$ é um corpo ordenado: além da estrutura de corpo, há uma relação $<$ satisfazendo os quatro axiomas abaixo. Não construímos $\R$. Admitimos também que, para cada $a\ge 0$, existe pelo menos um $b\ge 0$ com $b^2=a$; a unicidade desse $b$ será demonstrada.}
+
+\begin{intuicao}
+A relação $x<y$ diz que $y-x$ é positivo. Somar o mesmo número aos dois lados desloca os dois pontos e preserva a ordem. Multiplicar por um número positivo amplia os dois sem trocar o sentido; multiplicar por um número negativo reflete a reta e inverte o sentido. O valor absoluto $\abs{x-a}$ é a distância entre $x$ e $a$ na reta. A desigualdade triangular diz que a distância de $0$ a $x+y$ não supera a soma das distâncias de $0$ a $x$ e de $0$ a $y$: o caminho que passa pela origem e depois segue até $x+y$ não é mais curto do que o segmento direto.
+\end{intuicao}
+
+\section{Ordem em \texorpdfstring{$\R$}{R}}
+
+\begin{definicao}
+Uma relação $<$ em $\R$ é uma \emph{ordem compatível com o corpo} quando valem, para todos $x,y,z\in\R$:
+\begin{enumerate}
+\item \textbf{Tricotomia.} Vale exatamente uma das três afirmações $x<y$, $x=y$ e $y<x$.
+\item \textbf{Transitividade.} Se $x<y$ e $y<z$, então $x<z$.
+\item \textbf{Compatibilidade com a soma.} Se $x<y$, então $x+z<y+z$.
+\item \textbf{Compatibilidade com o produto.} Se $x<y$ e $0<z$, então $xz<yz$.
+\end{enumerate}
+Escrevemos $x>y$ para $y<x$, e $x\le y$ para ``$x<y$ ou $x=y$''. O conjunto dos positivos é $\{x\in\R:x>0\}$.
+\end{definicao}
+
+\begin{proposicao}[Consequências algébricas da ordem]\label{prop:ordem-basica}
+Para todos $x,y,z,a\in\R$:
+\begin{enumerate}
+\item Se $x<y$, então $x+z<y+z$ e, reciprocamente, a desigualdade obtida implica a original. O mesmo vale com $\le$ no lugar de $<$.
+\item Se $x\le y$ e $y\le z$, então $x\le z$. Se numa das duas hipóteses a desigualdade for estrita, a conclusão é estrita.
+\item $0<1$.
+\item Se $x>0$, então $x^2>0$. Se $x<0$, então $x^2>0$. Em todo caso $x^2\ge 0$, e $x^2=0$ se e somente se $x=0$.
+\item Se $x<y$ e $z<0$, então $xz>yz$.
+\item Se $c>0$, então $c^{-1}>0$. Se $c<0$, então $c^{-1}<0$.
+\item Se $a\le b$ e $c\le d$, então $a+c\le b+d$. Se $a<b$ e $c\le d$, então $a+c<b+d$.
+\item Se $a\le b$ e $c\ge 0$, então $ac\le bc$.
+\end{enumerate}
+\end{proposicao}
+
+\begin{proof}
+(1) A ida é o axioma da soma. Para a volta, some $-z$: de $x+z<y+z$ segue $x<y$. Se $x\le y$, ou $x<y$, e então $x+z<y+z$, ou $x=y$, e então $x+z=y+z$. Nos dois casos $x+z\le y+z$. A recíproca soma $-z$.
+
+(2) Se $x=y$ e $y=z$, então $x=z$. Se $x<y$ e $y\le z$, então ou $y=z$, logo $x<z$, ou $y<z$, logo $x<z$ pela transitividade. O caso $x\le y$ e $y<z$ é análogo. Se as duas forem não estritas e alguma for igualdade, caímos nos casos anteriores; se as duas forem igualdades, $x=z$.
+
+(3) Em um corpo, $1\neq 0$. Pela tricotomia, $0<1$ ou $1<0$. Suponha $1<0$. Somando $-1$, obtemos $0<-1$. Multiplicando $1<0$ pelo positivo $-1$, o axioma do produto dá $1\cdot(-1)<0\cdot(-1)$, isto é $-1<0$. Mas $0<-1$ e $-1<0$ contradizem a tricotomia. Logo $0<1$.
+
+(4) Primeiro a identidade de corpo $(-a)(-b)=ab$. De $a(b+(-b))=0$ segue $ab+a(-b)=0$, logo $a(-b)=-(ab)$. De $(-a+a)(-b)=0$ segue $(-a)(-b)+a(-b)=0$, logo $(-a)(-b)=-(a(-b))=-(-(ab))$. Como $ab+(-(ab))=0$, o oposto de $-(ab)$ é $ab$. Assim $(-a)(-b)=ab$. Em particular $(-x)^2=x^2$.
+
+Se $x>0$, o axioma do produto aplicado a $0<x$ e ao positivo $x$ dá $0\cdot x<x\cdot x$, isto é $x^2>0$. Se $x<0$, então $0<-x$ (some $-x$), logo $(-x)^2>0$ pelo caso anterior, e $(-x)^2=x^2$. Se $x=0$, então $x^2=0$. Portanto $x^2\ge 0$. Se $x\neq 0$, a tricotomia e os dois primeiros casos dão $x^2>0$.
+
+(5) De $z<0$ segue $0<-z$. De $x<y$ e $-z>0$ segue $x(-z)<y(-z)$, isto é $-xz<-yz$. Somando $xz+yz$ aos dois lados, $yz<xz$.
+
+(6) O inverso de $c\neq 0$ não é zero. Suponha $c>0$ e, por absurdo, $c^{-1}<0$. Multiplique $c^{-1}<0$ pelo positivo $c$: $1<0$, o que contradiz o item (3). Logo $c^{-1}>0$. Se $c<0$, então $-c>0$, logo $(-c)^{-1}>0$. Mas $(-c)^{-1}=-(c^{-1})$, porque $(-c)\bigl(-(c^{-1})\bigr)=c\cdot c^{-1}=1$. Assim $-(c^{-1})>0$, e portanto $c^{-1}<0$.
+
+(7) De $a\le b$ segue $a+c\le b+c$. De $c\le d$ segue $b+c\le b+d$. A transitividade de $\le$ dá $a+c\le b+d$. Se $a<b$, a primeira parcela é estrita: $a+c<b+c\le b+d$, e o item (2) dá $a+c<b+d$.
+
+(8) Se $c=0$, então $ac=bc=0$. Se $c>0$ e $a<b$, o axioma do produto dá $ac<bc$. Se $a=b$, então $ac=bc$.
+\end{proof}
+
+\begin{teorema}[Inversão pelo oposto e recíproco]\label{teo:inverso-ordem}
+Sejam $x,y\in\R$.
+\begin{enumerate}
+\item Se $x<y$, então $-y<-x$.
+\item Se $x$ e $y$ são não nulos e $xy>0$, então $x<y$ implica $y^{-1}<x^{-1}$.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+(1) Some $-x-y$ aos dois lados de $x<y$: $-y<-x$.
+
+(2) Como $xy>0$, o item (6) da Proposição~\ref{prop:ordem-basica} dá $(xy)^{-1}>0$. De $x<y$ e $(xy)^{-1}>0$ segue $x(xy)^{-1}<y(xy)^{-1}$, isto é $y^{-1}<x^{-1}$.
+\end{proof}
+
+\begin{contraexemplo}
+A hipótese $z>0$ no axioma do produto é necessária para preservar o sentido. Tem-se $1<2$, mas o fator $-3$ é negativo e $1\cdot(-3)=-3> -6=2\cdot(-3)$. O item (5) da Proposição~\ref{prop:ordem-basica} descreve exatamente essa inversão.
+
+A hipótese $xy>0$ no Teorema~\ref{teo:inverso-ordem}(2) também é necessária. Para $x=-1$ e $y=2$ vale $x<y$, porém $x^{-1}=-1<1/2=y^{-1}$: os recíprocos não trocam de ordem, porque $x$ e $y$ têm sinais opostos e $xy<0$.
+\end{contraexemplo}
+
+\cuidado{Multiplicar (ou dividir) os dois lados de uma desigualdade por um número exige o sinal desse número. Se ele for negativo, o sentido muda. Tomar recíprocos exige que os dois números tenham o mesmo sinal estrito; caso contrário a conclusão $y^{-1}<x^{-1}$ pode falhar, como no par $(-1,2)$.}
+
+\section{Intervalos}
+
+\begin{definicao}
+Sejam $a,b\in\R$ com $a<b$. Os intervalos limitados de extremos $a$ e $b$ são
+\begin{align*}
+(a,b)&=\{x\in\R:a<x<b\},&
+[a,b]&=\{x\in\R:a\le x\le b\},\\
+[a,b)&=\{x\in\R:a\le x<b\},&
+(a,b]&=\{x\in\R:a<x\le b\}.
+\end{align*}
+Os intervalos ilimitados são, para $a\in\R$,
+\begin{align*}
+(a,\infty)&=\{x\in\R:x>a\},&
+[a,\infty)&=\{x\in\R:x\ge a\},\\
+(-\infty,a)&=\{x\in\R:x<a\},&
+(-\infty,a]&=\{x\in\R:x\le a\},
+\end{align*}
+e $(-\infty,\infty)=\R$. Os símbolos $\infty$ e $-\infty$ não denotam elementos de $\R$; apenas indicam a ausência de extremo real. Um intervalo da forma $(a,b)$, $(a,\infty)$ ou $(-\infty,a)$ é aberto. Um intervalo da forma $[a,b]$, $[a,\infty)$ ou $(-\infty,a]$ é fechado.
+\end{definicao}
+
+\begin{observacao}
+Se $a\ge b$, a expressão $\{x:a<x<b\}$ é vazia, porque $a<x$ e $x<b$ com $b\le a$ contradizem a transitividade. Por isso a notação $(a,b)$ fica reservada ao caso $a<b$. O mesmo cuidado vale para $[a,b]$: exige-se $a\le b$.
+\end{observacao}
+
+\section{Valor absoluto}
+
+\begin{definicao}
+O \emph{valor absoluto} de $x\in\R$ é
+\[
+\abs{x}=
+\begin{cases}
+x,&\text{se }x\ge 0,\\
+-x,&\text{se }x<0.
+\end{cases}
+\]
+A distância entre $x$ e $a$ é $\abs{x-a}$. Em particular $\abs{x}$ é a distância de $x$ a $0$.
+\end{definicao}
+
+\begin{proposicao}[Propriedades imediatas do módulo]\label{prop:mod-basico}
+Para todos $x,y\in\R$:
+\begin{enumerate}
+\item $\abs{x}\ge 0$, e $\abs{x}=0$ se e somente se $x=0$.
+\item $\abs{-x}=\abs{x}$.
+\item $\abs{xy}=\abs{x}\abs{y}$.
+\item $-\abs{x}\le x\le\abs{x}$.
+\item $\abs{x}^2=x^2$.
+\end{enumerate}
+\end{proposicao}
+
+\begin{proof}
+(1) Se $x\ge 0$, então $\abs{x}=x\ge 0$. Se $x<0$, então $\abs{x}=-x$ e, somando $-x$ a $x<0$, obtemos $0<-x$, logo $\abs{x}>0$. Se $\abs{x}=0$, o caso $x<0$ daria $\abs{x}>0$, absurdo; logo $x\ge 0$ e $x=\abs{x}=0$. Se $x=0$, então $\abs{x}=0$.
+
+(2) Se $x>0$, então $-x<0$, logo $\abs{-x}=-(-x)=x=\abs{x}$. Se $x=0$, ambos os lados são zero. Se $x<0$, então $-x>0$, logo $\abs{-x}=-x=\abs{x}$.
+
+(3) Há quatro casos.
+Se $x\ge 0$ e $y\ge 0$, o item (8) da Proposição~\ref{prop:ordem-basica}, aplicado duas vezes, dá $xy\ge 0$. Assim $\abs{xy}=xy=\abs{x}\abs{y}$.
+Se $x\ge 0$ e $y<0$, então, multiplicando $y<0$ pelo número $x$: se $x>0$, $xy<0$; se $x=0$, $xy=0$. Em ambos, $xy\le 0$, logo $\abs{xy}=-xy=x(-y)=\abs{x}\abs{y}$.
+Se $x<0$ e $y\ge 0$, o mesmo argumento com os papéis trocados dá $\abs{xy}=(-x)y=\abs{x}\abs{y}$.
+Se $x<0$ e $y<0$, então $-x>0$, $-y>0$ e $xy=(-x)(-y)>0$. Logo $\abs{xy}=xy=(-x)(-y)=\abs{x}\abs{y}$.
+
+(4) Se $x\ge 0$, então $\abs{x}=x$, de modo que $x\le\abs{x}$ é igualdade, e $-\abs{x}=-x\le 0\le x$, donde $-\abs{x}\le x$ pela transitividade.
+Se $x<0$, então $\abs{x}=-x$, logo $-\abs{x}=x$ e a desigualdade $-\abs{x}\le x$ é igualdade. Além disso $x<0<-x$ seria pedir $x<\abs{x}$: como $0<-x$ e $x<0$, a transitividade dá $x<\abs{x}$. Assim $x\le\abs{x}$.
+
+(5) Se $x\ge 0$, $\abs{x}=x$ e $\abs{x}^2=x^2$. Se $x<0$, $\abs{x}=-x$ e $\abs{x}^2=(-x)^2=x^2$, pela identidade usada na Proposição~\ref{prop:ordem-basica}(4).
+\end{proof}
+
+\begin{definicao}
+Para $a\ge 0$, a \emph{raiz quadrada} $\sqrt{a}$ é o único real $b\ge 0$ tal que $b^2=a$. A existência foi admitida no início do capítulo. A unicidade é a proposição seguinte.
+\end{definicao}
+
+\begin{proposicao}[Unicidade da raiz não negativa]\label{prop:raiz-unica}
+Se $b\ge 0$, $c\ge 0$ e $b^2=c^2$, então $b=c$. Em particular, para todo $x\in\R$, $\abs{x}=\sqrt{x^2}$.
+\end{proposicao}
+
+\begin{proof}
+De $b^2-c^2=0$ segue $(b-c)(b+c)=0$, porque $(b-c)(b+c)=b^2-c^2$. Logo $b-c=0$ ou $b+c=0$. No segundo caso, $c=-b$. Como $b\ge 0$ e $c\ge 0$, tem-se $b=c=0$. Nos dois casos $b=c$.
+
+Para a segunda afirmação, $\abs{x}\ge 0$ e $\bigl(\abs{x}\bigr)^2=x^2=\bigl(\sqrt{x^2}\bigr)^2$, com $\sqrt{x^2}\ge 0$. A unicidade dá $\abs{x}=\sqrt{x^2}$.
+\end{proof}
+
+\begin{teorema}[Caracterização do módulo]\label{teo:caracterizacao}
+Sejam $z\in\R$ e $a\in\R$.
+\begin{enumerate}
+\item $\abs{z}\le a$ se e somente se $-a\le z\le a$. Em particular, se $a<0$, as duas afirmações são falsas.
+\item Se $a>0$, então $\abs{z}<a$ se e somente se $-a<z<a$. Se $a\le 0$, as duas afirmações são falsas.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+(1) Suponha primeiro $a<0$. Como $\abs{z}\ge 0>a$, a desigualdade $\abs{z}\le a$ é falsa. Por outro lado $-a>0>a$, logo $-a>a$ e não existe $z$ com $-a\le z\le a$. As duas afirmações são falsas, e a equivalência vale para esse $z$.
+
+Suponha agora $a\ge 0$. Se $\abs{z}\le a$, a Proposição~\ref{prop:mod-basico}(4) dá $-\abs{z}\le z\le\abs{z}$. Resta comparar $-\abs{z}$ com $-a$. Se $\abs{z}=a$, então $-\abs{z}=-a$. Se $\abs{z}<a$, o Teorema~\ref{teo:inverso-ordem}(1) dá $-a<-\abs{z}$. Nos dois casos $-a\le -\abs{z}$. A transitividade de $\le$, aplicada a $-a\le -\abs{z}\le z\le\abs{z}\le a$, produz $-a\le z\le a$.
+
+Reciprocamente, suponha $-a\le z\le a$. Se $z\ge 0$, então $\abs{z}=z\le a$. Se $z<0$, então $\abs{z}=-z$. De $-a\le z$: se $-a<z$, o Teorema~\ref{teo:inverso-ordem}(1) dá $-z<a$; se $-a=z$, então $-z=a$. Nos dois casos $-z\le a$, logo $\abs{z}\le a$.
+
+(2) Se $a\le 0$, $\abs{z}<a$ exigiria $\abs{z}<a\le 0$, contradizendo $\abs{z}\ge 0$, a menos que se trate de uma falsidade: de fato $\abs{z}\ge 0\ge a$ e a desigualdade estrita $\abs{z}<a$ falha. E $-a\ge 0\ge a$; se $a<0$, então $-a>a$ e o intervalo aberto é vazio; se $a=0$, então $0<z<0$ é vazio.
+
+Se $a>0$ e $\abs{z}<a$, então $-\abs{z}\le z\le\abs{z}$ e $-a<-\abs{z}$, logo $-a<z<a$.
+
+Reciprocamente, se $-a<z<a$ e $z\ge 0$, então $\abs{z}=z<a$. Se $z<0$, então $\abs{z}=-z$ e, de $-a<z$, a multiplicação por $-1$ dá $-z<a$.
+\end{proof}
+
+\begin{teorema}[Desigualdade triangular]\label{teo:triangular}
+Para todos $x,y\in\R$,
+\[
+\abs{x+y}\le\abs{x}+\abs{y}.
+\]
+\end{teorema}
+
+\begin{proof}
+Pela Proposição~\ref{prop:mod-basico}(4), $-\abs{x}\le x\le\abs{x}$ e $-\abs{y}\le y\le\abs{y}$. A Proposição~\ref{prop:ordem-basica}(7), aplicada aos dois pares, dá
+\[
+-\abs{x}-\abs{y}\le x+y\le\abs{x}+\abs{y},
+\]
+isto é
+\[
+-\bigl(\abs{x}+\abs{y}\bigr)\le x+y\le\abs{x}+\abs{y}.
+\]
+O número $a=\abs{x}+\abs{y}$ satisfaz $a\ge 0$. O Teorema~\ref{teo:caracterizacao}(1), com $z=x+y$, fornece $\abs{x+y}\le\abs{x}+\abs{y}$.
+\end{proof}
+
+\begin{corolario}[Diferença de módulos]\label{cor:diferenca-modulos}
+Para todos $x,y\in\R$,
+\[
+\abs{\,\abs{x}-\abs{y}\,}\le\abs{x-y}.
+\]
+\end{corolario}
+
+\begin{proof}
+A triangular aplicada a $x=(x-y)+y$ dá $\abs{x}\le\abs{x-y}+\abs{y}$, e a compatibilidade da soma com a ordem produz $\abs{x}-\abs{y}\le\abs{x-y}$. Trocando os papéis de $x$ e $y$, $\abs{y}-\abs{x}\le\abs{y-x}$. Como $\abs{y-x}=\abs{-(x-y)}=\abs{x-y}$, obtemos $\abs{y}-\abs{x}\le\abs{x-y}$. Se a desigualdade for estrita, o Teorema~\ref{teo:inverso-ordem}(1) inverte o sentido; se for igualdade, o oposto preserva a igualdade. Nos dois casos
+\[
+-\abs{x-y}\le\abs{x}-\abs{y}.
+\]
+Juntando as duas estimativas,
+\[
+-\abs{x-y}\le\abs{x}-\abs{y}\le\abs{x-y}.
+\]
+O Teorema~\ref{teo:caracterizacao}(1), com $z=\abs{x}-\abs{y}$ e com o número não negativo $\abs{x-y}$, dá o resultado.
+\end{proof}
+
+\begin{teorema}[Módulo e intervalo]\label{teo:vizinhanca}
+Sejam $a\in\R$ e $\delta\in\R$. Se $\delta>0$, então
+\[
+\abs{x-a}<\delta\quad\Longleftrightarrow\quad a-\delta<x<a+\delta.
+\]
+Se $\delta\ge 0$, então
+\[
+\abs{x-a}\le\delta\quad\Longleftrightarrow\quad a-\delta\le x\le a+\delta.
+\]
+\end{teorema}
+
+\begin{proof}
+Pelo Teorema~\ref{teo:caracterizacao}(2), $\abs{x-a}<\delta$ equivale a $-\delta<x-a<\delta$. Somar $a$ preserva as duas desigualdades estritas, e subtrair $a$ reverte o passo. Logo isso equivale a $a-\delta<x<a+\delta$.
+
+Se $\delta\ge 0$, a caracterização não estrita dá $-\delta\le x-a\le\delta$, e somar $a$ dá o intervalo fechado.
+\end{proof}
+
+\begin{exemplo}
+Para $\delta=1$ e $a=2$, o Teorema~\ref{teo:vizinhanca} diz que $\abs{x-2}<1$ se e somente se $1<x<3$. O conjunto solução é o intervalo aberto $(1,3)$.
+\end{exemplo}
+
+\figura{../figuras/abs_e_intervalos.png}{A desigualdade $\abs{x-2}<1$ é o intervalo $(1,3)$.}
+
+\begin{lema}[Comparação de quadrados não negativos]\label{lem:quadrados}
+Se $0\le a\le b$, então $a^2\le b^2$.
+\end{lema}
+
+\begin{esqueleto}
+\item A diferença de quadrados fatora: $b^2-a^2=(b-a)(b+a)$, porque $(b-a)(b+a)=b^2-a^2$.
+\item \textbf{Passo difícil.} Como $0\le a\le b$, tem-se $b-a\ge 0$ e $b+a\ge 0$. O item (8) da Proposição~\ref{prop:ordem-basica} dá $(b-a)(b+a)\ge 0$. Portanto $b^2-a^2\ge 0$.
+\item Conclua $a^2\le b^2$. A igualdade ocorre precisamente quando $a=b$: se $b^2=a^2$ com $a,b\ge 0$, a Proposição~\ref{prop:raiz-unica} força $a=b$.
+\end{esqueleto}
+
+\section{Completar quadrados}
+
+A identidade usada aqui é algébrica: para todo $h\in\R$,
+\[
+x^2+2hx=(x+h)^2-h^2,
+\]
+pois $(x+h)^2=x^2+2hx+h^2$. Se o coeficiente de $x$ é $b$, escolhe-se $h=b/2$.
+
+\begin{exemplo}[Mínimo]
+Considere $x^2-6x+13$, para $x\in\R$. Com $b=-6$ e $h=-3$,
+\begin{align*}
+x^2-6x+13
+&=(x-3)^2-(-3)^2+13
+=(x-3)^2-9+13
+=(x-3)^2+4.
+\end{align*}
+Pela Proposição~\ref{prop:ordem-basica}(4), $(x-3)^2\ge 0$ para todo $x$, e o valor $0$ ocorre se e somente se $x-3=0$, isto é $x=3$. Somando $4$, $(x-3)^2+4\ge 4$, com igualdade somente em $x=3$. O menor valor da expressão é $4$, atingido em $x=3$. O discriminante $36-52=-16<0$ confirma que o polinômio não tem raiz real, em acordo com o mínimo positivo.
+\end{exemplo}
+
+\begin{exemplo}[Fatoração]
+Considere $x^2+4x-5$. Com $h=2$,
+\begin{align*}
+x^2+4x-5
+&=(x+2)^2-4-5
+=(x+2)^2-9
+=(x+2)^2-3^2.
+\end{align*}
+A diferença de quadrados dá
+\[
+(x+2)^2-3^2=(x+2-3)(x+2+3)=(x-1)(x+5).
+\]
+A volta confere: $(x-1)(x+5)=x^2+5x-x-5=x^2+4x-5$. As raízes são $x=1$ e $x=-5$.
+\end{exemplo}
+
+\section{Frações parciais algébricas}
+
+Sejam $P$ e $Q$ polinômios com coeficientes reais, $Q$ não identicamente nulo, e suponha $\deg P<\deg Q$. Se $Q$ se fatora em polinômios reais de grau $1$ e de grau $2$ sem raiz real, procura-se uma soma de frações cujos denominadores são as potências desses fatores, até a multiplicidade com que aparecem. Os numeradores são constantes sobre potências de fatores lineares, e polinômios de grau no máximo $1$ sobre potências de fatores quadráticos irredutíveis. A existência dessa decomposição para um $Q$ arbitrário não é demonstrada neste capítulo: ela depende da fatoração completa em irredutíveis e da divisão euclidiana. Em cada exemplo abaixo o sistema linear é resolvido por equivalências e a identidade é conferida pela multiplicação, o que demonstra a decomposição daquela fração.
+
+Um polinômio real de grau $2$, $x^2+px+q$, é irredutível sobre $\R$ quando o discriminante $p^2-4q$ é negativo: se houvesse fatoração em lineares reais, haveria raiz real.
+
+\begin{exemplo}[Fatores lineares distintos]\label{ex:fp-distintos}
+Decomponha $\dfrac{4x+2}{(x-1)(x+3)}$, para $x\neq 1$ e $x\neq -3$. Procura-se $A,B\in\R$ tais que
+\[
+\frac{4x+2}{(x-1)(x+3)}=\frac{A}{x-1}+\frac{B}{x+3}.
+\]
+Multiplicando pelo denominador, a igualdade de funções racionais equivale à igualdade de polinômios
+\[
+4x+2=A(x+3)+B(x-1)=(A+B)x+(3A-B).
+\]
+O sistema é
+\begin{equation}
+\begin{cases}
+A+B=4,\\
+3A-B=2.
+\end{cases}
+\label{eq:fp-distintos}
+\end{equation}
+Somando as duas equações, $4A=6$, logo $A=3/2$. A primeira equação dá $B=4-3/2=5/2$. As duas operações são reversíveis, então a solução é única. A conferência:
+\[
+\frac{3}{2}(x+3)+\frac{5}{2}(x-1)
+=\frac{3}{2}x+\frac{9}{2}+\frac{5}{2}x-\frac{5}{2}
+=4x+2.
+\]
+Portanto
+\[
+\frac{4x+2}{(x-1)(x+3)}=\frac{3/2}{x-1}+\frac{5/2}{x+3}.
+\]
+\end{exemplo}
+
+\begin{exemplo}[Fator linear repetido]\label{ex:fp-repetido}
+Decomponha $\dfrac{2x^2+3x+1}{(x-1)^2(x+2)}$, para $x\neq 1$ e $x\neq -2$. O fator linear repetido contribui com duas parcelas:
+\[
+\frac{2x^2+3x+1}{(x-1)^2(x+2)}
+=\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{C}{x+2}.
+\]
+Multiplicando por $(x-1)^2(x+2)$,
+\[
+2x^2+3x+1=A(x-1)(x+2)+B(x+2)+C(x-1)^2.
+\]
+Como $(x-1)(x+2)=x^2+x-2$ e $(x-1)^2=x^2-2x+1$,
+\begin{align*}
+A(x^2+x-2)+B(x+2)+C(x^2-2x+1)
+&=(A+C)x^2+(A+B-2C)x+(-2A+2B+C).
+\end{align*}
+O sistema é
+\begin{equation}
+\begin{cases}
+A+C=2,\\
+A+B-2C=3,\\
+-2A+2B+C=1.
+\end{cases}
+\label{eq:fp-repetido}
+\end{equation}
+Da primeira equação, $C=2-A$. Substituindo na segunda,
+\[
+A+B-2(2-A)=3\Longrightarrow 3A+B-4=3\Longrightarrow B=7-3A.
+\]
+Na terceira,
+\begin{align*}
+-2A+2(7-3A)+(2-A)
+&=-2A+14-6A+2-A
+=-9A+16.
+\end{align*}
+A equação $-9A+16=1$ dá $-9A=-15$, logo $A=15/9=5/3$. Então $C=2-5/3=1/3$ e $B=7-3\cdot(5/3)=7-5=2$. Cada substituição foi uma equivalência, e o coeficiente de $A$ na última equação é $-9\neq 0$, então a solução é única. Assim
+\[
+\frac{2x^2+3x+1}{(x-1)^2(x+2)}
+=\frac{5/3}{x-1}+\frac{2}{(x-1)^2}+\frac{1/3}{x+2}.
+\]
+\end{exemplo}
+
+\begin{exemplo}[Fator quadrático irredutível]\label{ex:fp-quad}
+Decomponha $\dfrac{x^2+x+1}{(x-1)(x^2+1)}$, para $x\neq 1$. O discriminante de $x^2+1$ é $-4<0$, logo $x^2+1$ não tem raiz real e é irredutível sobre $\R$. Procura-se
+\[
+\frac{x^2+x+1}{(x-1)(x^2+1)}=\frac{A}{x-1}+\frac{Bx+C}{x^2+1}.
+\]
+Multiplicando pelo denominador,
+\begin{align*}
+x^2+x+1
+&=A(x^2+1)+(Bx+C)(x-1)\\
+&=Ax^2+A+Bx^2-Bx+Cx-C
+=(A+B)x^2+(-B+C)x+(A-C).
+\end{align*}
+O sistema é
+\begin{equation}
+\begin{cases}
+A+B=1,\\
+-B+C=1,\\
+A-C=1.
+\end{cases}
+\label{eq:fp-quad}
+\end{equation}
+A terceira equação dá $A=C+1$. Substituindo na primeira, $C+1+B=1$, logo $B=-C$. A segunda fica $C+C=1$, isto é $2C=1$, $C=1/2$. Portanto $B=-1/2$ e $A=3/2$. A solução é única porque a terceira equação determina $A$ a partir de $C$, a primeira determina $B$ a partir de $C$, e a segunda fixa $C$ com coeficiente $2\neq 0$. A decomposição é
+\[
+\frac{x^2+x+1}{(x-1)(x^2+1)}
+=\frac{3/2}{x-1}+\frac{-\frac12 x+\frac12}{x^2+1}.
+\]
+\end{exemplo}
+
+\section{Exercícios}
+
+As soluções comentadas estão em \texttt{01\_desigualdades\_gabarito.tex}. O enunciado de cada exercício fica apenas aqui.
+
+\begin{exercicio}[Básico — módulo e intervalo]
+Determine o conjunto $\{x\in\R:\abs{3x-6}\le 9\}$ e escreva-o como um intervalo.
+\end{exercicio}
+
+\begin{exercicio}[Básico — inversão por número negativo]
+Prove que, se $a<b$, então $-b<-a$. Em seguida, exiba números para os quais a multiplicação por um fator negativo inverte uma desigualdade estrita, e diga qual hipótese do axioma do produto foi retirada.
+\end{exercicio}
+
+\begin{exercicio}[Básico — mínimo por quadrado]
+Escreva $x^2-8x+3$ na forma $(x-h)^2+k$ e determine o menor valor da expressão em $\R$, indicando o ponto em que ele ocorre.
+\end{exercicio}
+
+\begin{exercicio}[Básico — frações lineares distintas]
+Decomponha $\dfrac{5}{(x-2)(x+3)}$ em frações parciais, resolvendo o sistema linear e conferindo a soma.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — três termos]
+Prove que $\abs{x+y+z}\le\abs{x}+\abs{y}+\abs{z}$ para todos $x,y,z\in\R$, nomeando as duas aplicações da desigualdade triangular.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — produto próximo de 9]
+Se $\abs{x-3}<\dfrac{1}{2}$ e $\abs{y-3}<\dfrac{1}{2}$, prove que $\abs{xy-9}<\dfrac{13}{4}$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — fator linear repetido]
+Decomponha $\dfrac{4x-1}{(x+1)^2}$ e verifique a identidade multiplicando os dois lados pelo denominador.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — igualdade na triangular]
+Prove que $\abs{x+y}=\abs{x}+\abs{y}$ se, e somente se, $xy\ge 0$.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — fator quadrático irredutível]
+Decomponha $\dfrac{3x^2+x+2}{(x-1)(x^2+x+1)}$ em frações parciais sobre $\R$. Justifique que $x^2+x+1$ é irredutível sobre $\R$ e resolva o sistema.
+\end{exercicio}
+
+\end{document}

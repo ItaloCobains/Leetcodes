@@ -1,0 +1,185 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Solução do caderno: séries e Taylor}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Série geométrica}
+
+\begin{proof}
+Se \(r=1\), a soma tem \(N\) parcelas iguais a \(1\). Se \(r\neq 1\),
+\begin{align*}
+(1-r)\sum_{k=0}^{N-1} r^k
+&=\sum_{k=0}^{N-1} r^k-\sum_{k=0}^{N-1} r^{k+1}
+=\sum_{k=0}^{N-1} r^k-\sum_{k=1}^{N} r^k
+=1-r^N.
+\end{align*}
+Dividindo por \(1-r\), obtém-se \((1-r^N)/(1-r)\).
+
+Resta a série infinita. Escreva \(s_N=\sum_{k=0}^{N-1} r^k\).
+
+Primeiro, um lema sobre potências. Se \(0<\rho<1\), ponha \(h=(1-\rho)/\rho>0\), de modo que \(\rho=1/(1+h)\). Por indução, \((1+h)^n\ge 1+nh\): a base \(n=1\) é igualdade, e
+\[
+(1+h)^{n+1}\ge(1+nh)(1+h)=1+(n+1)h+nh^2\ge 1+(n+1)h.
+\]
+Logo \(\rho^n\le 1/(nh)\). Dado \(\eps>0\), escolha \(N>1/(h\eps)\). Para \(n\ge N\), \(\rho^n\le 1/(nh)<\eps\). Assim \(\rho^n\to 0\). Se \(\rho>1\), escreva \(\rho=1+h\) com \(h>0\). A mesma desigualdade dá \(\rho^n\ge 1+nh\to+\infty\).
+
+Caso \(\abs{r}<1\). O lema com \(\rho=\abs{r}\) dá \(r^N\to 0\), porque \(\abs{r^N}\to 0\). Se \(r=0\) isso é imediato. Então
+\[
+s_N=\frac{1-r^N}{1-r}\to\frac{1}{1-r}.
+\]
+
+Caso \(r=1\). Aqui \(s_N=N\), que não converge em \(\R\).
+
+Caso \(r=-1\). Se \(N=2m\), os pares \(1+(-1)\) somam zero e \(s_{2m}=0\). Se \(N=2m+1\), \(s_{2m+1}=1\). As somas parciais pares tendem a \(0\) e as ímpares tendem a \(1\). Se \((s_N)\) convergisse, as duas subsequências teriam o mesmo limite. A série diverge.
+
+Caso \(\abs{r}>1\). O lema dá \(\abs{r}^N\to+\infty\). Como \(r\neq 1\),
+\[
+\abs{s_N}=\frac{\abs{1-r^N}}{\abs{1-r}}\ge\frac{\abs{r}^N-1}{\abs{1-r}}\to+\infty.
+\]
+A sequência \((s_N)\) não converge.
+
+Os casos cobrem todo \(r\in\R\). A série converge exatamente quando \(\abs{r}<1\), e a soma é \(1/(1-r)\). O caso \(r=-1\) foi separado da desigualdade \(\abs{r}>1\): nele as somas parciais oscilam entre \(0\) e \(1\), em vez de irem para infinito.
+\end{proof}
+
+\section{Teste da divergência e harmônica}
+
+\begin{proof}
+Suponha \(s_N=\sum_{n=1}^N a_n\to S\). Para \(n\ge 2\), \(a_n=s_n-s_{n-1}\). A sequência \((s_{n-1})_{n\ge 2}\) é \((s_N)\) sem o primeiro termo, logo também tende a \(S\). Portanto \(a_n\to S-S=0\).
+
+A recíproca é falsa, porque \(1/n\to 0\) e a harmônica diverge. Os termos são positivos, então \((s_N)\) é crescente, e basta mostrar que não é limitada. Para \(k\ge 1\),
+\begin{align*}
+s_{2^k}
+&=1+\frac12+\Bigl(\frac13+\frac14\Bigr)+\cdots+\Bigl(\frac{1}{2^{k-1}+1}+\cdots+\frac{1}{2^k}\Bigr)\\
+&=1+\sum_{m=0}^{k-1}\sum_{n=2^m+1}^{2^{m+1}}\frac{1}{n}.
+\end{align*}
+O bloco de índice \(m\) vai de \(2^m+1\) a \(2^{m+1}\) e tem \(2^m\) termos, cada um maior ou igual a \(1/2^{m+1}\). A soma do bloco é pelo menos \(2^m/2^{m+1}=1/2\). São \(k\) blocos, do \(m=0\) (só o termo \(1/2\)) até o \(m=k-1\). Logo
+\[
+s_{2^k}\ge 1+\frac{k}{2}.
+\]
+O lado direito tende a infinito. As somas parciais não convergem, e a série harmônica diverge. Como o termo geral vai a zero, a recíproca do teste da divergência é falsa.
+\end{proof}
+
+\section{Teste da razão, caso \(L<1\)}
+
+\begin{proof}
+O limite \(L\) só está definido se \(a_n\neq 0\) para todo \(n\) grande; a partir desse índice as razões existem. Escolha \(r\) com \(L<r<1\). Existe \(N\in\N\) tal que \(n\ge N\) implica
+\[
+\abs{\frac{a_{n+1}}{a_n}}<r,
+\]
+isto é \(\abs{a_{n+1}}\le r\abs{a_n}\). Por indução em \(k\ge 0\),
+\[
+\abs{a_{N+k}}\le\abs{a_N}\,r^k.
+\]
+A base \(k=0\) é igualdade. Se vale para \(k\), então \(\abs{a_{N+k+1}}\le r\abs{a_{N+k}}\le\abs{a_N} r^{k+1}\).
+
+A soma finita da geométrica, para \(r\neq 1\), é \(\sum_{k=0}^{K-1} r^k=(1-r^K)/(1-r)\). Como \(0<r<1\), o mesmo argumento de Bernoulli do problema da geométrica, ou diretamente \(r^K\to 0\) se já estiver provado, dá
+\[
+\sum_{k=0}^\infty r^k=\frac{1}{1-r}.
+\]
+Para não depender dessa prova, repetimos o limite: \(r=1/(1+h)\) com \(h=(1-r)/r>0\), \((1+h)^k\ge 1+kh\), logo \(r^k\le 1/(kh)\to 0\), e a soma parcial tende a \(1/(1-r)\). Portanto
+\[
+\sum_{k=0}^\infty\abs{a_{N+k}}
+\le\abs{a_N}\sum_{k=0}^\infty r^k
+=\frac{\abs{a_N}}{1-r}<\infty.
+\]
+Os termos \(\abs{a_n}\) são não negativos e, a partir de \(N\), ficam abaixo de uma série convergente. As somas parciais da cauda são crescentes e limitadas superiormente por \(\abs{a_N}/(1-r)\), logo convergem. Somar os primeiros \(N-1\) módulos, um número finito, não altera a convergência. Assim \(\sum\abs{a_n}\) converge.
+\end{proof}
+
+\section{Resto de Leibniz}
+
+\begin{proof}
+Seja \(s_N=\sum_{n=1}^N (-1)^{n+1} b_n\), de modo que a série começa \(b_1-b_2+b_3-b_4+\cdots\).
+
+Somas pares. 
+\[
+s_{2m+2}-s_{2m}=b_{2m+1}-b_{2m+2}\ge 0,
+\]
+porque \((b_n)\) é decrescente. Logo \(s_2\le s_4\le s_6\le\cdots\). Reagrupe
+\[
+s_{2m}=b_1-(b_2-b_3)-(b_4-b_5)-\cdots-(b_{2m-2}-b_{2m-1})-b_{2m}.
+\]
+Cada diferença entre parênteses é não negativa e \(b_{2m}\ge 0\), logo \(s_{2m}\le b_1\). Uma sequência crescente e limitada superiormente converge: o supremo \(S_{\mathrm{par}}\) das somas pares satisfaz, dado \(\eps>0\), que algum termo passa de \(S_{\mathrm{par}}-\eps\), e daí em diante a monotonicidade mantém a soma no intervalo \((S_{\mathrm{par}}-\eps,S_{\mathrm{par}}]\). Assim \(s_{2m}\to S_{\mathrm{par}}\) e \(s_{2m}\le S_{\mathrm{par}}\le b_1\).
+
+Somas ímpares.
+\[
+s_{2m+1}-s_{2m+3}=b_{2m+2}-b_{2m+3}\ge 0,
+\]
+logo \(s_1\ge s_3\ge s_5\ge\cdots\). Além disso \(s_{2m+1}=s_{2m}+b_{2m+1}\ge s_{2m}\ge s_2=b_1-b_2\ge 0\). A sequência decrescente e limitada inferiormente converge para algum \(S_{\mathrm{impar}}\), e \(s_{2m+1}\ge S_{\mathrm{impar}}\).
+
+Os limites coincidem: \(s_{2m+1}-s_{2m}=b_{2m+1}\to 0\). Chame o limite comum de \(S\). Toda soma parcial é par ou ímpar, então \(s_N\to S\). A ordem é \(s_{2m}\le S\le s_{2m+1}\) para todo \(m\), e também \(S\le s_{2m-1}\).
+
+Resto, \(N=2m\) par. Então \(s_{2m}\le S\le s_{2m+1}=s_{2m}+b_{2m+1}\), logo
+\[
+0\le S-s_{2m}\le b_{2m+1}=b_{N+1}.
+\]
+
+Resto, \(N=2m-1\) ímpar. Então \(s_{2m}=s_{2m-1}-b_{2m}\le S\le s_{2m-1}\), porque \(S\) está entre a soma par \(s_{2m}\) e todas as somas ímpares anteriores, em particular \(s_{2m-1}\). Logo
+\[
+0\le s_{2m-1}-S\le b_{2m}=b_{N+1}.
+\]
+Nos dois casos \(\abs{S-s_N}\le b_{N+1}\).
+\end{proof}
+
+\section{Resto de Lagrange para \(n=1\)}
+
+\begin{proof}
+Defina o número \(M\) pela equação
+\[
+f(x)=f(a)+f'(a)(x-a)+M(x-a)^2.
+\]
+Para \(t\) no intervalo aberto que contém o segmento de \(a\) até \(x\), defina
+\[
+g(t)=f(x)-f(t)-f'(t)(x-t)-M(x-t)^2.
+\]
+Então \(g(x)=f(x)-f(x)-f'(x)\cdot 0-M\cdot 0=0\). E, pela escolha de \(M\),
+\[
+g(a)=f(x)-f(a)-f'(a)(x-a)-M(x-a)^2=0.
+\]
+
+A derivada de \(f'(t)(x-t)\) é \(f''(t)(x-t)+f'(t)\cdot(-1)\), pela regra do produto. A derivada de \((x-t)^2\) é \(2(x-t)\cdot(-1)\). Portanto
+\begin{align*}
+g'(t)
+&=-f'(t)-\bigl(f''(t)(x-t)-f'(t)\bigr)-M\cdot\bigl(-2(x-t)\bigr)\\
+&=-f'(t)-f''(t)(x-t)+f'(t)+2M(x-t)\\
+&=(x-t)\bigl(2M-f''(t)\bigr).
+\end{align*}
+A função \(g\) é contínua no segmento fechado, porque \(f'\) existe no aberto que o contém e portanto \(f\) e \(f'\) são contínuas nesse segmento, e \(g\) é derivável no aberto, porque \(f''\) existe aí. Os valores \(g(a)\) e \(g(x)\) coincidem. Rolle fornece \(c\) estritamente entre \(a\) e \(x\) com \(g'(c)=0\).
+
+Como \(c\neq x\), o fator \(x-c\) não é zero. De \(g'(c)=0\) segue \(2M-f''(c)=0\), isto é \(M=f''(c)/2\). Substituindo na equação que definiu \(M\),
+\[
+f(x)-T_1(x)=\frac{f''(c)}{2}(x-a)^2.
+\]
+\end{proof}
+
+\section{A série de \(e^x\)}
+
+\begin{proof}
+Seja \(f(x)=e^x\). Então \(f^{(n)}(x)=e^x\) para todo \(n\), e \(f^{(n)}(0)=1\). O polinômio de Taylor de ordem \(n\) em \(0\) é \(T_n(x)=\sum_{k=0}^n x^k/k!\).
+
+Se \(x=0\), a série vale \(1=e^0\). Suponha \(x\neq 0\). O resto de Lagrange dá \(c\) estritamente entre \(0\) e \(x\) com
+\[
+R_n(x)=e^x-T_n(x)=\frac{e^{c}}{(n+1)!}x^{n+1}.
+\]
+Se \(x>0\), então \(0<c<x\) e \(0<e^c<e^x\), logo
+\[
+\abs{R_n(x)}<e^x\frac{\abs{x}^{n+1}}{(n+1)!}.
+\]
+Se \(x<0\), então \(x<c<0\) e \(0<e^c<1\), logo
+\[
+\abs{R_n(x)}<\frac{\abs{x}^{n+1}}{(n+1)!}.
+\]
+Nos dois casos basta provar que \(\abs{x}^{n}/n!\to 0\). Escolha um inteiro \(m\ge 1\) com \(m>2\abs{x}\), de modo que \(\abs{x}/m<1/2\). Para \(n\ge m\),
+\begin{align*}
+\frac{\abs{x}^{n+1}}{(n+1)!}
+&=\frac{\abs{x}^{m}}{m!}\prod_{j=1}^{n+1-m}\frac{\abs{x}}{m+j}\\
+&\le\frac{\abs{x}^{m}}{m!}\left(\frac{\abs{x}}{m}\right)^{n+1-m}
+\le\frac{\abs{x}^{m}}{m!}\left(\frac{1}{2}\right)^{n+1-m}.
+\end{align*}
+O número de fatores no produto, de \(m+1\) até \(n+1\), é \(n+1-m\). A última cota tende a zero quando \(n\to\infty\), porque é uma constante vezes uma geométrica de razão \(1/2\). Logo \(R_n(x)\to 0\), e \(T_n(x)\to e^x\). As somas \(T_n(x)\) são as somas parciais da série, que portanto converge para \(e^x\).
+\end{proof}
+
+\end{document}

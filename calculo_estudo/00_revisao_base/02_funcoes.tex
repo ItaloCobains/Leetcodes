@@ -1,0 +1,310 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Funções, exponencial e logaritmo}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{Uma função $f$ de um conjunto $D$ em um conjunto $E$ associa a cada elemento de $D$ um único elemento de $E$. Escreve-se $f\colon D\to E$. O conjunto $D$ é o domínio. Neste capítulo a raiz quadrada não negativa e a ordem de $\R$ são as da nota de desigualdades: para cada $a\ge 0$ existe um único $b\ge 0$ com $b^2=a$. Não construímos a exponencial; ela entra por três axiomas, e o logaritmo é a inversa.}
+
+\begin{intuicao}
+O gráfico é o conjunto dos pares $(x,f(x))$. A função é injetora quando retas horizontais encontram o gráfico no máximo uma vez, e sobrejetora no contradomínio $E$ quando toda reta horizontal $y=c$, com $c\in E$, encontra o gráfico pelo menos uma vez. A inversa percorre o par no sentido oposto: o gráfico de $f^{-1}$ é o reflexo do gráfico de $f$ pela diagonal $y=x$. A exponencial transforma somas em produtos; o logaritmo, por ser a inversa, transforma produtos em somas.
+\end{intuicao}
+
+\section{Domínio, imagem, gráfico e inversa}
+
+\begin{definicao}
+Sejam $D$ e $E$ conjuntos e $f\colon D\to E$. A \emph{imagem} de $f$ é
+\[
+\operatorname{Im}(f)=\{f(x):x\in D\}\subseteq E.
+\]
+O \emph{gráfico} é $G(f)=\{(x,f(x)):x\in D\}\subseteq D\times E$. Diz-se que $f$ é
+\begin{enumerate}
+\item \emph{injetora} quando, para todos $x_1,x_2\in D$, $f(x_1)=f(x_2)$ implica $x_1=x_2$;
+\item \emph{sobrejetora} quando $\operatorname{Im}(f)=E$, isto é, para todo $y\in E$ existe $x\in D$ com $f(x)=y$;
+\item \emph{bijetora} quando é injetora e sobrejetora.
+\end{enumerate}
+Uma função $g\colon E\to D$ é \emph{inversa} de $f$ quando
+\[
+g(f(x))=x\quad\text{para todo }x\in D
+\qquad\text{e}\qquad
+f(g(y))=y\quad\text{para todo }y\in E.
+\]
+\end{definicao}
+
+\begin{teorema}[Existência, unicidade e desfazimento]\label{teo:inversa}
+Seja $f\colon D\to E$. As afirmações seguintes são equivalentes.
+\begin{enumerate}
+\item $f$ é bijetora.
+\item Existe uma inversa $g\colon E\to D$.
+\end{enumerate}
+Quando existem, a inversa é única. Denota-se essa única inversa por $f^{-1}$, e vale
+\[
+\bigl(f^{-1}\circ f\bigr)(x)=x\qquad\text{para todo }x\in D,
+\]
+\[
+\bigl(f\circ f^{-1}\bigr)(y)=y\qquad\text{para todo }y\in E.
+\]
+\end{teorema}
+
+\begin{proof}
+Suponha $f$ bijetora. Fixe $y\in E$. A sobrejetividade fornece ao menos um $x\in D$ com $f(x)=y$. A injetividade impede que haja dois: se $f(x_1)=y=f(x_2)$, então $x_1=x_2$. Defina $g(y)$ como esse único $x$. Por construção, $f(g(y))=y$ para todo $y\in E$.
+
+Tome agora $x\in D$ e ponha $y=f(x)$. Então $f(x)=y=f(g(y))$. A injetividade força $x=g(y)$, isto é $g(f(x))=x$. Assim $g$ é inversa de $f$, e a identidade $\bigl(g\circ f\bigr)(x)=x$ vale em todo o domínio.
+
+Reciprocamente, suponha que $g\colon E\to D$ é inversa. Se $f(x_1)=f(x_2)$, aplique $g$: $x_1=g(f(x_1))=g(f(x_2))=x_2$, logo $f$ é injetora. Se $y\in E$, o elemento $x=g(y)$ satisfaz $f(x)=f(g(y))=y$, logo $f$ é sobrejetora.
+
+Unicidade: se $h\colon E\to D$ também é inversa, então, para todo $y\in E$, $f(g(y))=y=f(h(y))$. A injetividade de $f$ dá $g(y)=h(y)$. As duas identidades do enunciado são a definição de inversa aplicadas a $f^{-1}$.
+\end{proof}
+
+\begin{corolario}
+Se $f\colon D\to E$ é bijetora, então $f^{-1}\colon E\to D$ é bijetora e $\bigl(f^{-1}\bigr)^{-1}=f$.
+\end{corolario}
+
+\begin{proof}
+As identidades $f^{-1}(f(x))=x$ e $f(f^{-1}(y))=y$ dizem que $f$ é inversa de $f^{-1}$. O Teorema~\ref{teo:inversa} dá a bijetividade de $f^{-1}$ e a unicidade da inversa.
+\end{proof}
+
+\begin{contraexemplo}
+A bijetividade no contradomínio declarado é necessária para existir inversa definida nesse contradomínio. A função $f\colon[0,\infty)\to\R$ dada por $f(x)=x$ é injetora, mas não é sobrejetora: $-1$ não está na imagem. Não existe $g\colon\R\to[0,\infty)$ com $f(g(-1))=-1$, porque $g(-1)$ teria de ser $-1$, que não pertence a $[0,\infty)$.
+
+A injetividade também é necessária. A função $s\colon\R\to[0,\infty)$, $s(x)=x^2$, é sobrejetora, pois para cada $a\ge 0$ a raiz $\sqrt{a}$ satisfaz $s(\sqrt{a})=a$. Não é injetora: $s(-2)=s(2)=4$. Se uma inversa $g$ existisse, $g(4)$ teria de ser, ao mesmo tempo, igual a $-2$ e a $2$.
+\end{contraexemplo}
+
+\cuidado{Restringir o domínio ou o contradomínio muda a resposta. A mesma fórmula $x^2$, vista como função $[0,\infty)\to[0,\infty)$, é bijetora: a injetividade vale porque, se $x_1,x_2\ge 0$ e $x_1^2=x_2^2$, a unicidade da raiz não negativa dá $x_1=x_2$; a sobrejetividade é a existência dessa raiz. A inversa é $\sqrt{\,\cdot\,}$.}
+
+\begin{definicao}
+Sejam $g\colon D\to E$ e $f\colon E\to F$. A \emph{composição} $f\circ g\colon D\to F$ é $(f\circ g)(x)=f(g(x))$. Quando $f$ e $g$ são dadas por fórmulas e ainda não se fixou o domínio, o domínio de $f\circ g$ é
+\[
+\{x\in\operatorname{Dom}(g): g(x)\in\operatorname{Dom}(f)\}.
+\]
+\end{definicao}
+
+\begin{exemplo}
+Sejam $g(x)=x^2-1$, com domínio $\R$, e $f(t)=\sqrt{t}$, com domínio $[0,\infty)$. Então $(f\circ g)(x)$ está definido precisamente quando $x^2-1\ge 0$. Como $x^2\ge 1$ equivale a $\abs{x}\ge 1$, o domínio é $(-\infty,-1]\cup[1,\infty)$, e $(f\circ g)(x)=\sqrt{x^2-1}$.
+
+A ordem importa. Com $u(x)=x+1$ e $v(x)=x^2$, ambos de $\R$ em $\R$, $(u\circ v)(1)=1+1=2$ e $(v\circ u)(1)=2^2=4$.
+\end{exemplo}
+
+\begin{proposicao}[Monotonia estrita e injetividade]\label{prop:monotonia}
+Seja $I\subseteq\R$ e $f\colon I\to\R$. Se $f$ é estritamente crescente, isto é, $x_1<x_2$ em $I$ implica $f(x_1)<f(x_2)$, então $f$ é injetora. O mesmo vale para $f$ estritamente decrescente.
+\end{proposicao}
+
+\begin{proof}
+Se $x_1\neq x_2$, a tricotomia dá $x_1<x_2$ ou $x_2<x_1$. No primeiro caso $f(x_1)<f(x_2)$; no segundo, $f(x_2)<f(x_1)$. Em ambos $f(x_1)\neq f(x_2)$.
+\end{proof}
+
+\section{Polinômios, racionais, raízes e funções por partes}
+
+\begin{definicao}
+Um \emph{polinômio} é uma função $p\colon\R\to\R$ da forma $p(x)=a_nx^n+\cdots+a_1x+a_0$, com $n\in\N\cup\{0\}$, $a_j\in\R$ e, se $n\ge 1$, $a_n\neq 0$. O inteiro $n$ é o grau quando $p$ não é a função nula; a função nula não recebe grau. Neste texto $\N=\{1,2,3,\ldots\}$.
+
+Uma função \emph{racional} é um quociente $P/Q$ de polinômios em que $Q$ não é identicamente nulo. O domínio é $\{x\in\R:Q(x)\neq 0\}$.
+
+A \emph{raiz quadrada} $\sqrt{\,\cdot\,}\colon[0,\infty)\to[0,\infty)$ é a inversa de $s(x)=x^2$ restrita a $[0,\infty)$, já registrada no contraexemplo anterior. Se $g$ é uma fórmula, $\sqrt{g(x)}$ está definido exatamente quando $g(x)$ está definido e $g(x)\ge 0$.
+
+Uma função \emph{definida por partes} em $\R$ é dada por fórmulas em subconjuntos que cobrem $\R$ sem interseção dois a dois. Cada $x$ cai em exatamente uma peça, de modo que $f(x)$ fica único.
+\end{definicao}
+
+\begin{exemplo}
+A função $f\colon\R\to\R$ definida por $f(x)=2x$ se $x<1$ e $f(x)=x+1$ se $x\ge 1$ está bem definida: $\{x:x<1\}$ e $\{x:x\ge 1\}$ particionam $\R$.
+
+A imagem da primeira peça é $\{2x:x<1\}=(-\infty,2)$. A imagem da segunda é $\{x+1:x\ge 1\}=[2,\infty)$. A união é $\R$, logo $f$ é sobrejetora.
+
+As imagens das peças são disjuntas, porque a primeira só produz números estritamente menores do que $2$. Em $(-\infty,1)$, $f(x)=2x$ é estritamente crescente, logo injetora. Em $[1,\infty)$, $f(x)=x+1$ é estritamente crescente, logo injetora. Se $f(x_1)=f(x_2)$, os dois pontos estão na mesma peça, e a injetividade da peça dá $x_1=x_2$. Assim $f$ é bijetora.
+
+A inversa lê-se peça a peça. Se $y<2$, então $y=2x$ com $x=y/2<1$, logo $f^{-1}(y)=y/2$. Se $y\ge 2$, então $y=x+1$ com $x=y-1\ge 1$, logo $f^{-1}(y)=y-1$.
+\end{exemplo}
+
+\section{Exponencial e logaritmo natural}
+
+A exponencial não é construída aqui. Usamos três axiomas e deduzimos o restante.
+
+\begin{definicao}[Axiomas da exponencial]\label{def:exp}
+Existe uma função $\exp\colon\R\to(0,\infty)$ tal que:
+\begin{enumerate}
+\item $\exp$ é bijetora de $\R$ em $(0,\infty)$;
+\item $\exp(x+y)=\exp(x)\exp(y)$ para todos $x,y\in\R$;
+\item $\exp$ é estritamente crescente: se $x<y$, então $\exp x<\exp y$.
+\end{enumerate}
+O \emph{logaritmo natural} $\ln\colon(0,\infty)\to\R$ é a inversa de $\exp$, que existe e é única pelo Teorema~\ref{teo:inversa}.
+\end{definicao}
+
+O axioma de crescimento já implica a injetividade, pela Proposição~\ref{prop:monotonia}. O que o primeiro axioma acrescenta, além dessa injetividade, é a sobrejetividade sobre $(0,\infty)$ e o fato de que nenhum valor é não positivo.
+
+\begin{proposicao}[Valores especiais e oposto]\label{prop:exp-zero}
+Para todo $x\in\R$, $\exp(0)=1$ e $\exp(-x)=1/\exp(x)$. Além disso, $\exp(x)>1$ se $x>0$, e $0<\exp(x)<1$ se $x<0$.
+\end{proposicao}
+
+\begin{proof}
+O axioma funcional dá $\exp(0)=\exp(0+0)=\exp(0)\exp(0)$. Seja $c=\exp(0)$. Então $c\in(0,\infty)$ e $c=c^2$, logo $c(c-1)=0$. Como $c\neq 0$, segue $c=1$.
+
+Depois, $\exp(x)\exp(-x)=\exp(0)=1$. Como $\exp(x)\neq 0$, podemos multiplicar pelo inverso: $\exp(-x)=1/\exp(x)$.
+
+Se $x>0$, o crescimento estrito dá $\exp(x)>\exp(0)=1$. Se $x<0$, $\exp(x)<\exp(0)=1$. A desigualdade $\exp(x)>0$ é o contradomínio $(0,\infty)$.
+\end{proof}
+
+\begin{teorema}[Propriedades do logaritmo]\label{teo:log}
+Sejam $a>0$, $b>0$ e $r\in\R$. Então:
+\begin{enumerate}
+\item $\ln(\exp x)=x$ para todo $x\in\R$, e $\exp(\ln a)=a$.
+\item $\ln 1=0$ e $\ln$ é estritamente crescente em $(0,\infty)$.
+\item $\ln(ab)=\ln a+\ln b$.
+\item Definindo $a^r=\exp(r\ln a)$, vale $\ln(a^r)=r\ln a$, $a^{r+s}=a^ra^s$ para todo $s\in\R$, e $(ab)^r=a^rb^r$.
+\item Para cada inteiro $n\ge 1$, $a^n$, no sentido do item anterior, coincide com o produto de $n$ fatores iguais a $a$. Além disso $a^0=1$ e $a^{-n}=1/a^n$.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+(1) É o Teorema~\ref{teo:inversa} aplicado a $\exp$ e a $\ln=\exp^{-1}$.
+
+(2) De $\exp(0)=1$ e da identidade $\ln(\exp 0)=0$ segue $\ln 1=0$. Sejam $0<a<b$. Suponha, por absurdo, que $\ln b\le\ln a$. Se $\ln b=\ln a$, aplique $\exp$: $b=a$, absurdo. Se $\ln b<\ln a$, o crescimento estrito de $\exp$ dá $\exp(\ln b)<\exp(\ln a)$, isto é $b<a$, absurdo. Logo $\ln a<\ln b$.
+
+(3) Sejam $u=\ln a$ e $v=\ln b$, de modo que $\exp u=a$ e $\exp v=b$. O axioma funcional dá
+\[
+ab=\exp(u)\exp(v)=\exp(u+v).
+\]
+Aplique $\ln$ e use $\ln(\exp(u+v))=u+v$:
+\[
+\ln(ab)=u+v=\ln a+\ln b.
+\]
+
+(4) Pelo item (1), $\ln(a^r)=\ln\bigl(\exp(r\ln a)\bigr)=r\ln a$. Para a soma de expoentes,
+\begin{align*}
+a^{r+s}
+&=\exp\bigl((r+s)\ln a\bigr)
+=\exp(r\ln a+s\ln a)
+=\exp(r\ln a)\exp(s\ln a)
+=a^ra^s,
+\end{align*}
+em que a terceira igualdade é o axioma funcional. Para o produto das bases, o item (3) dá $\ln(ab)=\ln a+\ln b$, logo
+\begin{align*}
+(ab)^r
+&=\exp\bigl(r\ln(ab)\bigr)
+=\exp\bigl(r\ln a+r\ln b\bigr)
+=\exp(r\ln a)\exp(r\ln b)
+=a^rb^r.
+\end{align*}
+
+(5) Prove-se por indução que $\exp(n\ln a)$ é o produto de $n$ fatores $a$. Para $n=1$, $\exp(\ln a)=a$. Se a afirmação vale para $n$, então
+\[
+\exp\bigl((n+1)\ln a\bigr)
+=\exp(n\ln a+\ln a)
+=\exp(n\ln a)\exp(\ln a)
+=a^n\cdot a,
+\]
+que é o produto de $n+1$ fatores. Além disso $a^0=\exp(0\cdot\ln a)=\exp(0)=1$, e
+\[
+a^{-n}=\exp(-n\ln a)=\frac{1}{\exp(n\ln a)}=\frac{1}{a^n},
+\]
+pela Proposição~\ref{prop:exp-zero}.
+\end{proof}
+
+\begin{lema}[Logaritmo do quociente]\label{lem:quociente}
+Se $a>0$ e $b>0$, então $\ln(a/b)=\ln a-\ln b$.
+\end{lema}
+
+\begin{esqueleto}
+\item Como $b>0$, tem-se $1/b>0$ e $a/b=a\cdot(1/b)$.
+\item \textbf{Passo difícil.} A Proposição~\ref{prop:exp-zero} dá $\exp(-\ln b)=1/\exp(\ln b)=1/b$. Aplicando $\ln$ e usando $\ln(\exp(-\ln b))=-\ln b$, obtém-se $\ln(1/b)=-\ln b$.
+\item Aplique o Teorema~\ref{teo:log}(3) ao produto $a\cdot(1/b)$ e substitua $\ln(1/b)$.
+\end{esqueleto}
+
+\begin{teorema}[Mudança de base]\label{teo:mudanca-base}
+Sejam $a>0$, $b>0$, $b\neq 1$ e $t>0$. Existe um único $y\in\R$ tal que $b^y=t$. Esse $y$ é o logaritmo $\log_b t$, e
+\[
+\log_b t=\frac{\ln t}{\ln b}.
+\]
+Em particular $\ln b\neq 0$, $\log_b$ está definido, e a função $x\mapsto b^x$ é bijetora de $\R$ em $(0,\infty)$.
+\end{teorema}
+
+\begin{proof}
+Por definição, $b^y=\exp(y\ln b)$ e $t=\exp(\ln t)$. A igualdade $b^y=t$ equivale a $\exp(y\ln b)=\exp(\ln t)$. Como $\exp$ é injetora, isso equivale a $y\ln b=\ln t$.
+
+O número $\ln b$ é zero se e somente se $b=\exp(0)=1$, porque $\ln(\exp 0)=0$ e $\exp(\ln b)=b$. A hipótese $b\neq 1$ dá $\ln b\neq 0$, e existe um único $y=(\ln t)/(\ln b)$.
+
+A função $x\mapsto b^x=\exp(x\ln b)$ é bijetora de $\R$ em $(0,\infty)$ porque é a composição da bijeção $x\mapsto x\ln b$ (multiplicação por um número não nulo) com a bijeção $\exp$.
+\end{proof}
+
+\begin{contraexemplo}
+As hipóteses $a>0$ e $b>0$ no Teorema~\ref{teo:log}(3) não podem ser trocadas por $ab>0$. Para $a=-2$ e $b=-3$ tem-se $ab=6>0$, mas $\ln a$ e $\ln b$ não estão definidos em $\R$: o domínio de $\ln$ é $(0,\infty)$. A identidade $\ln(ab)=\ln a+\ln b$ não faz sentido nesses dados, embora $\ln(ab)=\ln 6$ esteja definido.
+\end{contraexemplo}
+
+\cuidado{Uma equação com logaritmos só pode ser reescrita por $\ln u+\ln v=\ln(uv)$ depois de impor $u>0$ e $v>0$. O produto $uv>0$ não basta: ele admite pares de fatores negativos, fora do domínio.}
+
+\section{Equações exponenciais e logarítmicas}
+
+\begin{exemplo}[Equação exponencial]
+Resolva $4^{x}=8^{x-1}$ em $\R$.
+
+As bases são positivas e diferentes de $1$, então os dois lados estão definidos para todo $x\in\R$. Escreva tudo na base $2$, usando o Teorema~\ref{teo:log}(5) e a regra do produto de expoentes já contida em $4=2^2$ e $8=2^3$:
+\[
+4^{x}=(2^{2})^{x}=\exp\bigl(x\ln(2^{2})\bigr)=\exp(x\cdot 2\ln 2)=2^{2x},
+\]
+\[
+8^{x-1}=(2^{3})^{x-1}=\exp\bigl((x-1)\cdot 3\ln 2\bigr)=2^{3x-3}.
+\]
+A equação fica $2^{2x}=2^{3x-3}$, isto é $\exp(2x\ln 2)=\exp((3x-3)\ln 2)$. A injetividade de $\exp$ e o fato de $\ln 2\neq 0$ (porque $2\neq 1$) dão $2x=3x-3$, logo $x=3$.
+
+Conferência: $4^{3}=64$ e $8^{2}=64$.
+\end{exemplo}
+
+\begin{exemplo}[Equação logarítmica]
+Resolva $\ln(x+1)+\ln(x-1)=\ln 3$.
+
+Condição de existência, imposta antes de qualquer identidade: $x+1>0$ e $x-1>0$, isto é $x>1$. Também $\ln 3$ está definido porque $3>0$. Para esses $x$, o Teorema~\ref{teo:log}(3) dá
+\[
+\ln\bigl((x+1)(x-1)\bigr)=\ln 3.
+\]
+A injetividade de $\ln$ equivale a $(x-1)(x+1)=3$, isto é $x^2-1=3$, $x^2=4$, $x=2$ ou $x=-2$.
+
+O candidato $x=-2$ não satisfaz $x>1$: nele $x+1=-1<0$ e $x-1=-3<0$, e os dois logaritmos do primeiro membro não existem. O candidato $x=2$ satisfaz $x>1$. Conferência: $\ln 3+\ln 1=\ln 3+0=\ln 3$. A única solução é $x=2$.
+\end{exemplo}
+
+\section{Exercícios}
+
+As soluções comentadas estão em \texttt{02\_funcoes\_gabarito.tex}.
+
+\begin{exercicio}[Básico — domínio]
+Determine o domínio de $f(x)=\dfrac{\sqrt{x-2}}{x-5}$.
+\end{exercicio}
+
+\begin{exercicio}[Básico — inversa afim]
+Mostre que $f\colon\R\to\R$, $f(x)=2x+3$, é bijetora, e determine uma fórmula para $f^{-1}$.
+\end{exercicio}
+
+\begin{exercicio}[Básico — composição]
+Sejam $g(x)=\sqrt{x-1}$ e $f(t)=\ln t$. Determine o domínio de $f\circ g$ e calcule $(f\circ g)(5)$.
+\end{exercicio}
+
+\begin{exercicio}[Básico — equação exponencial]
+Resolva $2^{3x-1}=4^{x+1}$ em $\R$. Registre o domínio e o ponto em que a injetividade é usada.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — inversa da composição]
+Sejam $g\colon D\to E$ e $f\colon E\to F$ bijetoras. Prove que $f\circ g\colon D\to F$ é bijetora e que $(f\circ g)^{-1}=g^{-1}\circ f^{-1}$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — equação logarítmica]
+Resolva $\ln x+\ln(x-1)=\ln 6$. Escreva as condições de existência antes de usar identidades e descarte, com o motivo, cada raiz que não as cumpra.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — função por partes]
+Seja $f\colon\R\to\R$ dada por $f(x)=x+1$ se $x<0$ e $f(x)=x^2$ se $x\ge 0$. Determine a imagem de $f$ e decida se $f$ é injetora e se é sobrejetora.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — potência de potência]
+Para $a>0$ e $r,s\in\R$, com $a^r=\exp(r\ln a)$, prove que $(a^r)^s=a^{rs}$. Conclua que, para cada inteiro $n\ge 1$, $(a^{1/n})^n=a$ e que $a^{1/n}$ é positivo.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — mudança de base e equação]
+Prove que, para $a>0$, $a\neq 1$, $b>0$, $b\neq 1$ e $t>0$,
+\[
+\log_b t=\frac{\log_a t}{\log_a b}.
+\]
+Em seguida resolva $\log_2(x+1)+\log_2(x-1)=3$, escrevendo o domínio antes de transformar a equação.
+\end{exercicio}
+
+\end{document}

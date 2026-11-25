@@ -1,0 +1,169 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito --- Limites}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A ordem \'e a da se\c{c}\~ao de exerc\'icios de \texttt{01\_limites.tex}. Cada solu\c{c}\~ao repete o enunciado curto e escolhe o $\delta$, ou o $M$, por escrito.
+
+\section{B\'asico --- Constante}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to -3}2=2$.
+
+\begin{proof}
+Dado $\eps>0$, escolha $\delta=1$. Se $0<\abs{x-(-3)}<\delta$, ent\~ao $\abs{2-2}=0<\eps$.
+\end{proof}
+
+\section{B\'asico --- Linear}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to 2}(3x-1)=5$, com $\delta$ expl\'icito.
+
+\begin{proof}
+$\abs{(3x-1)-5}=\abs{3x-6}=3\abs{x-2}$. Dado $\eps>0$, escolha $\delta=\eps/3$. Se $0<\abs{x-2}<\delta$, ent\~ao
+\[
+\abs{(3x-1)-5}=3\abs{x-2}<3\cdot\frac{\eps}{3}=\eps.
+\]
+\end{proof}
+
+\section{B\'asico --- Identidade}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to 4}x=4$.
+
+\begin{proof}
+Dado $\eps>0$, escolha $\delta=\eps$. Se $0<\abs{x-4}<\delta$, ent\~ao $\abs{x-4}<\eps$.
+\end{proof}
+
+\section{B\'asico --- M\'ultiplo negativo}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to 1}(-5x)=-5$.
+
+\begin{proof}
+$\abs{-5x-(-5)}=\abs{-5x+5}=\abs{-5}\abs{x-1}=5\abs{x-1}$. O sinal de $-5$ desaparece no valor absoluto: $\abs{-5}=5$. Dado $\eps>0$, escolha $\delta=\eps/5$. Se $0<\abs{x-1}<\delta$, ent\~ao
+\[
+\abs{-5x+5}=5\abs{x-1}<5\cdot\frac{\eps}{5}=\eps.
+\]
+\end{proof}
+
+\section{Intermedi\'ario --- Quadrado}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to 3}x^2=9$, com $M$ e $\delta=\min(1,\eps/M)$.
+
+\begin{proof}
+$\abs{x^2-9}=\abs{x-3}\abs{x+3}$. Se $\abs{x-3}<1$, ent\~ao
+\[
+\abs{x+3}=\abs{(x-3)+6}\le \abs{x-3}+6<1+6=7.
+\]
+Tome $M=2\abs{3}+1=7$. Assim $\abs{x^2-9}<7\abs{x-3}$ sempre que $0<\abs{x-3}<1$. Dado $\eps>0$, escolha
+\[
+\delta=\min\Bigl(1,\frac{\eps}{7}\Bigr).
+\]
+Se $0<\abs{x-3}<\delta$, valem $\abs{x-3}<1$ e $\abs{x-3}<\eps/7$, logo
+\[
+\abs{x^2-9}=\abs{x-3}\abs{x+3}<7\abs{x-3}<7\cdot\frac{\eps}{7}=\eps.
+\]
+\end{proof}
+
+\section{Intermedi\'ario --- Racional}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to 1}2x/(x+1)=1$, com $\delta$ que evita $x=-1$.
+
+\begin{proof}
+Para $x\neq -1$,
+\[
+\abs{\frac{2x}{x+1}-1}=\frac{\abs{2x-(x+1)}}{\abs{x+1}}=\frac{\abs{x-1}}{\abs{x+1}}.
+\]
+Se $\abs{x-1}<1$, ent\~ao $x\in(0,2)$, logo $x+1\in(1,3)$ e $\abs{x+1}>1$. Em particular $x\neq -1$, e
+\[
+\abs{\frac{2x}{x+1}-1}=\frac{\abs{x-1}}{\abs{x+1}}<\abs{x-1}.
+\]
+Dado $\eps>0$, escolha $\delta=\min(1,\eps)$. Se $0<\abs{x-1}<\delta$, ent\~ao $\abs{x-1}<1$ e $\abs{x-1}<\eps$, portanto o m\'odulo da diferen\c{c}a \'e menor que $\abs{x-1}$, que \'e menor que $\eps$.
+\end{proof}
+
+\section{Intermedi\'ario --- Confronto}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to 0}x^2\sin(1/x)=0$, com $\delta$ expl\'icito.
+
+\begin{proof}
+De $\sin^2 t+\cos^2 t=1$ segue $\sin^2 t\le 1$, logo $\abs{\sin t}\le 1$ para todo $t$ real. Para $x\neq 0$,
+\[
+\abs{x^2\sin\frac{1}{x}}\le x^2\cdot 1=x^2,
+\]
+e portanto $-x^2\le x^2\sin(1/x)\le x^2$. Os dois extremos t\^em limite $0$ quando $x\to 0$: dado $\eps>0$, a escolha $\delta=\sqrt{\eps}$ d\'a, para $0<\abs{x}<\delta$,
+\[
+x^2<\eps,
+\]
+porque $0\le u<v$ implica $u^2<v^2$ (de fato $v^2-u^2=(v-u)(v+u)>0$). Assim $\abs{-x^2}<\eps$ e $\abs{x^2}<\eps$ na mesma vizinhan\c{c}a. Pelo teorema do confronto, o termo do meio tende a $0$.
+
+A mesma conta \'e um $\eps$-$\delta$ direto, sem citar o nome do teorema: se $0<\abs{x}<\sqrt{\eps}$, ent\~ao
+\[
+\abs{x^2\sin\frac{1}{x}}\le x^2<\eps.
+\]
+O $\delta$ expl\'icito \'e $\delta=\sqrt{\eps}$. O valor da fun\c{c}\~ao em $0$ n\~ao entra, porque a defini\c{c}\~ao s\'o olha para $x\neq 0$.
+\end{proof}
+
+\section{Intermedi\'ario --- No infinito}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to +\infty}(2x+3)/(x+1)=2$, com $M$ expl\'icito.
+
+\begin{proof}
+Para $x\neq -1$,
+\[
+\abs{\frac{2x+3}{x+1}-2}=\frac{\abs{2x+3-2(x+1)}}{\abs{x+1}}=\frac{\abs{1}}{\abs{x+1}}=\frac{1}{\abs{x+1}}.
+\]
+Dado $\eps>0$, escolha $M=1/\eps>0$. Se $x>M$, ent\~ao $x>0$, logo $x\neq -1$ e $x+1>x$, portanto
+\[
+\abs{\frac{2x+3}{x+1}-2}=\frac{1}{x+1}<\frac{1}{x}<\frac{1}{M}=\eps.
+\]
+\end{proof}
+
+\section{Avan\c{c}ado --- Unicidade}
+
+\textbf{Enunciado.} Se $\lim_{x\to a}f(x)=L$ e $\lim_{x\to a}f(x)=M$, ent\~ao $L=M$. A fun\c{c}\~ao est\'a definida numa vizinhan\c{c}a furada de $a$.
+
+\begin{proof}
+Seja $r>0$ tal que $f$ est\'a definida em $(a-r,a+r)\setminus\{a\}$. Suponha, para contradizer, que $L\neq M$, e ponha $\eps=\abs{L-M}/2>0$. Existem $\delta_1>0$ e $\delta_2>0$ tais que
+\begin{align*}
+0<\abs{x-a}<\delta_1 &\Rightarrow \abs{f(x)-L}<\eps,\\
+0<\abs{x-a}<\delta_2 &\Rightarrow \abs{f(x)-M}<\eps.
+\end{align*}
+Seja $\delta=\min(\delta_1,\delta_2,r)>0$ e escolha o ponto $x=a+\delta/2$. Ent\~ao $0<\abs{x-a}=\delta/2<\delta$, logo $x$ est\'a no dom\'inio e as duas estimativas valem. Portanto
+\begin{align*}
+\abs{L-M}
+&=\abs{\bigl(L-f(x)\bigr)+\bigl(f(x)-M\bigr)}\\
+&\le \abs{f(x)-L}+\abs{f(x)-M}
+<\eps+\eps
+=\abs{L-M}.
+\end{align*}
+\'E falso que $\abs{L-M}<\abs{L-M}$. Logo $L=M$.
+\end{proof}
+
+\section{Avan\c{c}ado --- Cubo}
+
+\textbf{Enunciado.} Prove que $\lim_{x\to a}x^3=a^3$, com $M$ dependendo s\'o de $a$ e $\delta=\min(1,\eps/M)$.
+
+\begin{proof}
+Fatore $\abs{x^3-a^3}=\abs{x-a}\abs{x^2+ax+a^2}$. Suponha $\abs{x-a}<1$. Ent\~ao $\abs{x}\le \abs{x-a}+\abs{a}<1+\abs{a}$. A fun\c{c}\~ao $t\mapsto t^2$ \'e estritamente crescente em $[0,\infty)$: se $0\le u<v$, ent\~ao $v^2-u^2=(v-u)(v+u)>0$. Logo $\abs{x}^2<(1+\abs{a})^2$. Al\'em disso $\abs{a}\abs{x}\le \abs{a}(1+\abs{a})$. Somando,
+\begin{align*}
+\abs{x^2+ax+a^2}
+&\le \abs{x}^2+\abs{a}\abs{x}+\abs{a}^2\\
+&<(1+\abs{a})^2+\abs{a}(1+\abs{a})+\abs{a}^2.
+\end{align*}
+A primeira parcela j\'a \'e estritamente menor e as outras duas s\~ao menores ou iguais, ent\~ao a soma \'e estritamente menor. O lado direito expande para
+\[
+1+2\abs{a}+\abs{a}^2+\abs{a}+\abs{a}^2+\abs{a}^2=3\abs{a}^2+3\abs{a}+1.
+\]
+Seja $M=3\abs{a}^2+3\abs{a}+1$. Ent\~ao $M\ge 1>0$ e, sempre que $0<\abs{x-a}<1$,
+\[
+\abs{x^3-a^3}<M\abs{x-a}.
+\]
+Dado $\eps>0$, escolha $\delta=\min(1,\eps/M)$. Se $0<\abs{x-a}<\delta$, ent\~ao $\abs{x-a}<1$ e $\abs{x-a}<\eps/M$, logo
+\[
+\abs{x^3-a^3}<M\abs{x-a}<M\cdot\frac{\eps}{M}=\eps.
+\]
+O caso $a=0$ est\'a coberto: $M=1$ e $\abs{x}^2<1$, de modo que a desigualdade estrita continua valendo.
+\end{proof}
+
+\end{document}

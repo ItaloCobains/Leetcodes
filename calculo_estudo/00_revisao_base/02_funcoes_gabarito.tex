@@ -1,0 +1,161 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito --- Funções, exponencial e logaritmo}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A numeração segue a ordem dos exercícios do texto.
+
+\section*{Exercício 1. [Básico --- domínio]}
+
+\textbf{Enunciado.} Determine o domínio de $f(x)=\dfrac{\sqrt{x-2}}{x-5}$.
+
+\textbf{Solução.}
+A raiz quadrada exige $x-2\ge 0$, isto é $x\ge 2$. O denominador exige $x-5\neq 0$, isto é $x\neq 5$. As duas condições valem ao mesmo tempo em $[2,5)\cup(5,\infty)$. Fora desse conjunto, ou a raiz não está definida em $\R$, ou a divisão não está definida.
+
+\section*{Exercício 2. [Básico --- inversa afim]}
+
+\textbf{Enunciado.} Mostre que $f\colon\R\to\R$, $f(x)=2x+3$, é bijetora, e determine $f^{-1}$.
+
+\textbf{Solução.}
+Injetividade: se $2x_1+3=2x_2+3$, então $2x_1=2x_2$. Multiplicando pelo inverso positivo $1/2$, $x_1=x_2$.
+
+Sobrejetividade: seja $y\in\R$ arbitrário. O número $x=(y-3)/2$ satisfaz
+\[
+f(x)=2\cdot\frac{y-3}{2}+3=y-3+3=y.
+\]
+
+Pela construção, $f\bigl((y-3)/2\bigr)=y$ e, pondo $y=f(x)=2x+3$, o mesmo cálculo devolve $(f(x)-3)/2=x$. Logo $f^{-1}(y)=(y-3)/2$. A unicidade da inversa diz que não há outra.
+
+\section*{Exercício 3. [Básico --- composição]}
+
+\textbf{Enunciado.} Sejam $g(x)=\sqrt{x-1}$ e $f(t)=\ln t$. Determine o domínio de $f\circ g$ e calcule $(f\circ g)(5)$.
+
+\textbf{Solução.}
+A fórmula $g(x)$ exige $x-1\ge 0$, isto é $x\ge 1$, e então $g(x)\ge 0$. A fórmula $f$ exige que a entrada seja positiva. Como $\sqrt{x-1}=0$ exatamente quando $x=1$, a condição $g(x)>0$ fica $x>1$. O domínio de $f\circ g$ é $(1,\infty)$.
+
+Em $x=5>1$, $g(5)=\sqrt{4}=2$ e $(f\circ g)(5)=\ln 2$.
+
+\section*{Exercício 4. [Básico --- equação exponencial]}
+
+\textbf{Enunciado.} Resolva $2^{3x-1}=4^{x+1}$ em $\R$, registrando domínio e injetividade.
+
+\textbf{Solução.}
+As bases $2$ e $4$ são positivas e diferentes de $1$, então os dois lados estão definidos para todo $x\in\R$. O domínio da equação é $\R$.
+
+Como $4=2^2$ e $(2^2)^{x+1}=\exp\bigl((x+1)\ln(2^2)\bigr)=\exp\bigl((x+1)\cdot 2\ln 2\bigr)=2^{2x+2}$, a equação é $2^{3x-1}=2^{2x+2}$. Pela definição $2^{t}=\exp(t\ln 2)$,
+\[
+\exp\bigl((3x-1)\ln 2\bigr)=\exp\bigl((2x+2)\ln 2\bigr).
+\]
+A injetividade de $\exp$ dá $(3x-1)\ln 2=(2x+2)\ln 2$. Como $2\neq 1$, tem-se $\ln 2\neq 0$, e podemos dividir por $\ln 2$: $3x-1=2x+2$, logo $x=3$.
+
+Conferência: $2^{3\cdot 3-1}=2^{8}=256$ e $4^{3+1}=4^{4}=(2^{2})^{4}=2^{8}=256$.
+
+\section*{Exercício 5. [Intermediário --- inversa da composição]}
+
+\textbf{Enunciado.} Se $g\colon D\to E$ e $f\colon E\to F$ são bijetoras, prove que $f\circ g$ é bijetora e que $(f\circ g)^{-1}=g^{-1}\circ f^{-1}$.
+
+\textbf{Solução.}
+Injetividade de $f\circ g$. Se $f(g(x_1))=f(g(x_2))$, a injetividade de $f$ dá $g(x_1)=g(x_2)$, e a injetividade de $g$ dá $x_1=x_2$.
+
+Sobrejetividade. Seja $y\in F$. Como $f$ é sobrejetora, existe $z\in E$ com $f(z)=y$. Como $g$ é sobrejetora, existe $x\in D$ com $g(x)=z$. Então $(f\circ g)(x)=f(z)=y$.
+
+Inversa. As funções $f^{-1}\colon F\to E$ e $g^{-1}\colon E\to D$ existem. Para todo $x\in D$,
+\begin{align*}
+\bigl(g^{-1}\circ f^{-1}\bigr)\bigl((f\circ g)(x)\bigr)
+&=g^{-1}\bigl(f^{-1}(f(g(x)))\bigr)
+=g^{-1}(g(x))
+=x.
+\end{align*}
+Para todo $y\in F$,
+\begin{align*}
+(f\circ g)\bigl((g^{-1}\circ f^{-1})(y)\bigr)
+&=f\bigl(g(g^{-1}(f^{-1}(y)))\bigr)
+=f(f^{-1}(y))
+=y.
+\end{align*}
+Assim $g^{-1}\circ f^{-1}$ é uma inversa de $f\circ g$. Pela unicidade da inversa, $(f\circ g)^{-1}=g^{-1}\circ f^{-1}$.
+
+\section*{Exercício 6. [Intermediário --- equação logarítmica]}
+
+\textbf{Enunciado.} Resolva $\ln x+\ln(x-1)=\ln 6$, com as condições de existência.
+
+\textbf{Solução.}
+Antes de somar os logaritmos: $x>0$, $x-1>0$ e $6>0$. A última é verdadeira, e as duas primeiras equivalem a $x>1$. Fora de $(1,\infty)$ o primeiro membro não está definido em $\R$.
+
+Para $x>1$, a propriedade do produto dá $\ln\bigl(x(x-1)\bigr)=\ln 6$. A injetividade de $\ln$ dá $x(x-1)=6$, isto é $x^2-x-6=0$. O polinômio fatora como $(x-3)(x+2)$, porque $3\cdot(-2)=-6$ e $3+(-2)=1$ com o sinal do coeficiente de $x$ igual a $-1$: de fato $(x-3)(x+2)=x^2-x-6$. As raízes são $x=3$ e $x=-2$.
+
+A raiz $x=-2$ não cumpre $x>1$. Nela, $x<0$ e $x-1=-3<0$, então $\ln x$ e $\ln(x-1)$ não existem. Ela não é solução.
+
+A raiz $x=3$ cumpre $x>1$. Conferência: $\ln 3+\ln 2=\ln 6$. A única solução é $x=3$.
+
+\section*{Exercício 7. [Intermediário --- função por partes]}
+
+\textbf{Enunciado.} Para $f(x)=x+1$ se $x<0$ e $f(x)=x^2$ se $x\ge 0$, determine a imagem e decida injetividade e sobrejetividade em $\R$.
+
+\textbf{Solução.}
+As peças $\{x:x<0\}$ e $\{x:x\ge 0\}$ particionam $\R$, então $f$ está bem definida.
+
+Imagem da primeira peça: $\{x+1:x<0\}=(-\infty,1)$. Imagem da segunda: $\{x^2:x\ge 0\}=[0,\infty)$, porque todo $a\ge 0$ é $f(\sqrt{a})$ e um quadrado de número real não negativo é não negativo. A união $(-\infty,1)\cup[0,\infty)$ é $\R$. Logo $f$ é sobrejetora e $\operatorname{Im}(f)=\R$.
+
+Não é injetora. Os pontos $x_1=-1/2<0$ e $x_2=\sqrt{1/2}>0$ são distintos, mas
+\[
+f(x_1)=-\frac12+1=\frac12,\qquad f(x_2)=\Bigl(\sqrt{\frac12}\Bigr)^2=\frac12.
+\]
+
+\section*{Exercício 8. [Avançado --- potência de potência]}
+
+\textbf{Enunciado.} Prove que $(a^r)^s=a^{rs}$ e que $a^{1/n}$ é uma raiz $n$-ésima positiva de $a$.
+
+\textbf{Solução.}
+Por definição, $a^r=\exp(r\ln a)>0$, e
+\[
+(a^r)^s=\exp\bigl(s\ln(a^r)\bigr).
+\]
+A propriedade $\ln(a^r)=r\ln a$ dá
+\[
+\exp\bigl(s\cdot r\ln a\bigr)=\exp\bigl((rs)\ln a\bigr)=a^{rs}.
+\]
+Para inteiro $n\ge 1$, tome $r=1/n$ e $s=n$:
+\[
+\bigl(a^{1/n}\bigr)^n=a^{(1/n)\cdot n}=a^{1}=a,
+\]
+em que $a^1=\exp(1\cdot\ln a)=a$. Além disso $a^{1/n}=\exp\bigl((1/n)\ln a\bigr)$ pertence a $(0,\infty)$. Portanto $a^{1/n}$ é positivo e o produto de $n$ fatores iguais a ele é $a$.
+
+\section*{Exercício 9. [Avançado --- mudança de base e equação]}
+
+\textbf{Enunciado.} Prove $\log_b t=\log_a t/\log_a b$ e resolva $\log_2(x+1)+\log_2(x-1)=3$.
+
+\textbf{Solução.}
+Pela mudança de base já demonstrada no texto,
+\[
+\log_a t=\frac{\ln t}{\ln a},\qquad \log_a b=\frac{\ln b}{\ln a},\qquad \log_b t=\frac{\ln t}{\ln b},
+\]
+com $\ln a\neq 0$ e $\ln b\neq 0$ porque $a\neq 1$ e $b\neq 1$. Então
+\[
+\frac{\log_a t}{\log_a b}
+=\frac{\ln t/\ln a}{\ln b/\ln a}
+=\frac{\ln t}{\ln b}
+=\log_b t.
+\]
+
+Na equação, a base $2$ satisfaz $2>0$ e $2\neq 1$. Cada logaritmo exige argumento positivo: $x+1>0$ e $x-1>0$, isto é $x>1$. Esse é o domínio.
+
+Para $u>0$ e $v>0$,
+\[
+\log_2(uv)=\frac{\ln(uv)}{\ln 2}=\frac{\ln u+\ln v}{\ln 2}=\log_2 u+\log_2 v.
+\]
+No domínio, $x+1>0$ e $x-1>0$, logo
+\[
+\log_2\bigl((x+1)(x-1)\bigr)=3,
+\]
+isto é $\log_2(x^2-1)=3$. Pela definição de $\log_2$, isso significa $2^{3}=x^2-1$. Como $2^{3}=8$, vem $x^2=9$, logo $x=3$ ou $x=-3$.
+
+O valor $x=-3$ não satisfaz $x>1$: nele $x+1=-2<0$ e $x-1=-4<0$. Não é solução.
+
+O valor $x=3$ está no domínio. Conferência: $\log_2 4+\log_2 2$. Como $2^{2}=4$ e $2^{1}=2$, os logaritmos valem $2$ e $1$, e a soma é $3$. A única solução é $x=3$.
+
+\end{document}

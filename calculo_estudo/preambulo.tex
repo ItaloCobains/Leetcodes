@@ -1,0 +1,66 @@
+% Preâmbulo comum. Não duplicar pacotes nos módulos.
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\geometry{a4paper,margin=2.3cm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!40!black,urlcolor=blue!50!black}
+
+\setcounter{tocdepth}{2}
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{proposicao}[teorema]{Proposição}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{corolario}[teorema]{Corolário}
+
+\theoremstyle{definition}
+\newtheorem{definicao}[teorema]{Definição}
+\newtheorem{exemplo}[teorema]{Exemplo}
+\newtheorem{exercicio}{Exercício}[section]
+
+\theoremstyle{remark}
+\newtheorem{observacao}[teorema]{Observação}
+\newtheorem{contraexemplo}[teorema]{Contraexemplo}
+\newtheorem{intuicao}[teorema]{Intuição}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\DeclareRobustCommand{\eps}{\varepsilon}
+\DeclareRobustCommand{\vet}[1]{\vec{#1}}
+\DeclareRobustCommand{\dif}{\mathrm{d}}
+\DeclareRobustCommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\DeclareRobustCommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\rot}{rot}
+
+\newcommand{\base}[1]{\par\medskip\noindent\textbf{Base para relembrar.} #1\par\medskip}
+\newcommand{\cuidado}[1]{\par\medskip\noindent\textbf{Quando a hipótese falha.} #1\par\medskip}
+
+\newcommand{\figura}[2]{%
+  \begin{figure}[htbp]
+  \centering
+  \IfFileExists{#1}{%
+    \includegraphics[width=0.84\textwidth]{#1}%
+  }{%
+    \fbox{\parbox{0.8\textwidth}{\centering Figura ainda não gerada:\\ \texttt{#1}}}%
+  }
+  \caption{#2}
+  \end{figure}%
+}
+
+\newenvironment{esqueleto}{%
+  \par\medskip\noindent\textbf{Esqueleto da demonstração.}\par\nopagebreak
+  \begin{enumerate}[leftmargin=1.4em]
+}{\end{enumerate}\medskip}

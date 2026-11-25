@@ -1,0 +1,631 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Integral de Riemann e o teorema fundamental}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{Neste capítulo $a<b$, salvo quando a integral orientada for definida de propósito. Uma função é limitada em $[a,b]$ quando existe $K$ com $\abs{f(x)}\le K$ para todo $x$ do intervalo. Do módulo de continuidade usamos três fatos, enunciados de novo abaixo e não reprovados aqui: Weierstrass, o teorema do valor intermediário e Heine--Cantor. Do módulo de derivadas usamos a regra da cadeia. Do módulo de aplicações da derivada usamos que derivada nula num intervalo força função constante. Admitem-se a propriedade arquimediana de $\R$ e a densidade: todo intervalo não degenerado contém um racional e um irracional. Do módulo de trigonometria, $\sin x\ge 0$ em $[0,\pi]$, $\sin x\le 0$ em $[\pi,2\pi]$, $\cos 0=\cos(2\pi)=1$ e $\cos\pi=-1$. Integração por partes e frações parciais ficam no módulo de Cálculo II.}
+
+\begin{intuicao}
+A integral é a área líquida sob o gráfico, com sinal. Uma partição corta $[a,b]$ em pedaços. Em cada pedaço, o retângulo que usa o ínfimo de $f$ cabe sob o gráfico, e o que usa o supremo cobre o gráfico. A função é integrável quando esses dois excessos podem ser feitos menores do que qualquer tolerância, ao mesmo tempo, por alguma partição. O teorema fundamental diz que essa área, como função do extremo direito, tem derivada igual ao valor da função, e que a área entre $a$ e $b$ é a variação de qualquer antiderivada.
+\end{intuicao}
+
+\begin{teorema}[Weierstrass]\label{teo:weierstrass}
+Se $\varphi$ é contínua em $[p,q]$, então $\varphi$ é limitada e atinge máximo e mínimo em $[p,q]$.
+\end{teorema}
+
+\begin{teorema}[Valor intermediário]\label{teo:tvi}
+Se $\varphi$ é contínua em $[p,q]$ e $k$ está entre $\varphi(p)$ e $\varphi(q)$, inclusive, então existe $c\in[p,q]$ com $\varphi(c)=k$.
+\end{teorema}
+
+\begin{teorema}[Heine--Cantor]\label{teo:heine}
+Se $\varphi$ é contínua em $[p,q]$, então $\varphi$ é uniformemente contínua: para todo $\eps>0$ existe $\delta>0$ tal que $x,y\in[p,q]$ e $\abs{x-y}<\delta$ implicam $\abs{\varphi(x)-\varphi(y)}<\eps$.
+\end{teorema}
+
+\section{Partições, somas e integral}
+
+\begin{definicao}
+Uma \emph{partição} de $[a,b]$ é um conjunto finito $P=\{x_0,x_1,\ldots,x_n\}$ com
+\[
+a=x_0<x_1<\cdots<x_n=b.
+\]
+O $i$-ésimo subintervalo é $[x_{i-1},x_i]$, e seu comprimento é $\Delta x_i=x_i-x_{i-1}>0$. A \emph{norma} da partição é
+\[
+\norm{P}=\max\{\Delta x_1,\ldots,\Delta x_n\}.
+\]
+A partição é \emph{uniforme} de $n$ subintervalos quando $\Delta x_i=(b-a)/n$ para todo $i$, isto é $x_i=a+i(b-a)/n$.
+
+Seja $f$ limitada em $[a,b]$. Em cada subintervalo definem-se
+\[
+m_i(f,P)=\inf\{f(x):x\in[x_{i-1},x_i]\},\qquad
+M_i(f,P)=\sup\{f(x):x\in[x_{i-1},x_i]\}.
+\]
+A \emph{soma inferior} e a \emph{soma superior} são
+\[
+L(P,f)=\sum_{i=1}^n m_i(f,P)\,\Delta x_i,\qquad
+U(P,f)=\sum_{i=1}^n M_i(f,P)\,\Delta x_i.
+\]
+Uma \emph{soma de Riemann} marca um ponto $\xi_i\in[x_{i-1},x_i]$ em cada subintervalo e vale
+\[
+S(P,f,\xi)=\sum_{i=1}^n f(\xi_i)\,\Delta x_i.
+\]
+\end{definicao}
+
+Como $m_i\le f(\xi_i)\le M_i$ e $\Delta x_i>0$, multiplicar e somar preserva as desigualdades:
+\begin{equation}
+\label{eq:entre}
+L(P,f)\le S(P,f,\xi)\le U(P,f).
+\end{equation}
+
+\figura{../figuras/riemann.png}{Somas inferior e superior de uma função crescente.}
+
+\begin{definicao}
+A partição $Q$ \emph{refina} $P$ quando $P\subseteq Q$. Todo ponto de corte de $P$ continua em $Q$, e $Q$ pode acrescentar outros.
+\end{definicao}
+
+\begin{lema}[Refinamento]\label{lem:refino}
+Seja $f$ limitada em $[a,b]$. Se $Q$ refina $P$, então
+\[
+L(P,f)\le L(Q,f)\le U(Q,f)\le U(P,f).
+\]
+\end{lema}
+
+\begin{proof}
+A desigualdade do meio é \eqref{eq:entre} sem escolher marcas: $m_i\le M_i$ em cada subintervalo de $Q$.
+
+Basta tratar o acréscimo de um ponto e repetir. Seja $c\in(x_{k-1},x_k)$ e $P'=P\cup\{c\}$. Nos subintervalos que não contêm $c$, os ínfimos, os supremos e os comprimentos não mudam. No subintervalo partido, sejam
+\begin{align*}
+m&=\inf f\text{ em }[x_{k-1},x_k],&
+m'&=\inf f\text{ em }[x_{k-1},c],&
+m''&=\inf f\text{ em }[c,x_k],
+\end{align*}
+e $M,M',M''$ os supremos correspondentes. Os intervalos menores estão contidos no maior, então o conjunto de valores é menor e o ínfimo só pode subir: $m\le m'$ e $m\le m''$. O supremo só pode descer: $M\ge M'$ e $M\ge M''$. Como os comprimentos são positivos,
+\begin{align*}
+m\Delta x_k
+&=m(c-x_{k-1})+m(x_k-c)
+\le m'(c-x_{k-1})+m''(x_k-c),\\
+M\Delta x_k
+&\ge M'(c-x_{k-1})+M''(x_k-c).
+\end{align*}
+Somando os subintervalos intocados, $L(P,f)\le L(P',f)$ e $U(P',f)\le U(P,f)$.
+
+Uma refinagem finita acrescenta um número finito de pontos. Cada acréscimo preserva as duas desigualdades, e a transitividade fecha o lema.
+\end{proof}
+
+\begin{lema}[Somas inferiores e superiores]\label{lem:separa}
+Se $f$ é limitada em $[a,b]$, então $L(P,f)\le U(Q,f)$ para quaisquer partições $P$ e $Q$. Em particular o conjunto das somas inferiores é limitado superiormente, o das superiores é limitado inferiormente, e
+\[
+\sup_P L(P,f)\le\inf_Q U(Q,f).
+\]
+\end{lema}
+
+\begin{proof}
+A união $P\cup Q$ refina $P$ e refina $Q$. O Lema~\ref{lem:refino} dá
+\[
+L(P,f)\le L(P\cup Q,f)\le U(P\cup Q,f)\le U(Q,f).
+\]
+Toda soma inferior é menor ou igual a toda soma superior. Nenhuma soma inferior ultrapassa o ínfimo das superiores, e o supremo das inferiores não ultrapassa esse ínfimo.
+\end{proof}
+
+\begin{definicao}
+Seja $f$ limitada em $[a,b]$. Diz-se que $f$ é \emph{integrável à Riemann} em $[a,b]$ quando
+\[
+\sup_P L(P,f)=\inf_Q U(Q,f).
+\]
+O valor comum é a integral $\int_a^b f(x)\,\dif x$, ou $\int_a^b f$. Quando a variável de integração não importa, ela é omitida.
+\end{definicao}
+
+\begin{lema}[Critério de Darboux]\label{lem:criterio}
+Seja $f$ limitada em $[a,b]$. As afirmações seguintes são equivalentes.
+\begin{enumerate}
+\item $f$ é integrável em $[a,b]$.
+\item Para todo $\eps>0$ existe uma partição $P$ com $U(P,f)-L(P,f)<\eps$.
+\end{enumerate}
+Quando $f$ é integrável e $U(P,f)-L(P,f)<\eps$, toda soma de Riemann dessa partição satisfaz $\abs{S(P,f,\xi)-\int_a^b f}<\eps$, e também $\abs{L(P,f)-\int_a^b f}<\eps$ e $\abs{U(P,f)-\int_a^b f}<\eps$.
+\end{lema}
+
+\begin{proof}
+Seja $I_*=\sup L$ e $I^*=\inf U$. O Lema~\ref{lem:separa} dá $I_*\le I^*$.
+
+Suponha $I_*=I^*=I$. Dado $\eps>0$, existe $P_1$ com $L(P_1,f)>I-\eps/2$, e existe $P_2$ com $U(P_2,f)<I+\eps/2$. A união $P=P_1\cup P_2$ refina as duas, logo
+\[
+L(P,f)\ge L(P_1,f)>I-\frac{\eps}{2},\qquad
+U(P,f)\le U(P_2,f)<I+\frac{\eps}{2}.
+\]
+Subtraindo, $U(P,f)-L(P,f)<\eps$.
+
+Reciprocamente, suponha o critério. Para todo $\eps>0$ existe $P$ com $U(P,f)-L(P,f)<\eps$. Como $I_*\ge L(P,f)$ e $I^*\le U(P,f)$,
+\[
+0\le I^*-I_*\le U(P,f)-L(P,f)<\eps.
+\]
+Um número maior ou igual a zero e menor do que todo $\eps>0$ é zero. Logo $I_*=I^*$.
+
+Se $f$ é integrável de integral $I$ e $U-L<\eps$ numa partição $P$, então $L\le I\le U$ e $L\le S\le U$. A distância entre dois números do intervalo $[L,U]$ é no máximo $U-L$:
+\[
+\abs{S-I}\le U-L<\eps,
+\]
+e o mesmo vale com $S$ trocado por $L$ ou por $U$.
+\end{proof}
+
+\cuidado{A definição pede função limitada. Em $(0,1]$, $f(x)=1/x$ não é limitada: dado $K>0$, o ponto $x=1/(K+1)$ está em $(0,1]$ e $f(x)=K+1>K$. Não há integral de Riemann de $f$ no intervalo fechado $[0,1]$ dentro desta definição, porque $f$ nem está definida por um valor finito em $0$ nem admite cota em $(0,1]$. Integrais impróprias são assunto do Cálculo II.}
+
+\section{Funções monótonas}
+
+\begin{teorema}[Monótona implica integrável]\label{teo:monotona}
+Seja $f$ não decrescente em $[a,b]$, ou não crescente em $[a,b]$. Então $f$ é limitada e integrável. Se $f$ é não decrescente e $P$ é uma partição,
+\begin{equation}
+\label{eq:monotona}
+U(P,f)-L(P,f)\le\bigl(f(b)-f(a)\bigr)\norm{P}.
+\end{equation}
+Na partição uniforme de $n$ subintervalos a diferença é exatamente $(f(b)-f(a))(b-a)/n$.
+\end{teorema}
+
+\begin{proof}
+Suponha $f$ não decrescente. Para todo $x\in[a,b]$ vale $f(a)\le f(x)\le f(b)$, então $f$ é limitada. No subintervalo $[x_{i-1},x_i]$ a mesma monotonia dá $f(x_{i-1})\le f(x)\le f(x_i)$. O valor $f(x_{i-1})$ é assumido, logo é o ínfimo. O valor $f(x_i)$ é o supremo. Portanto
+\[
+U(P,f)-L(P,f)
+=\sum_{i=1}^n\bigl(f(x_i)-f(x_{i-1})\bigr)\Delta x_i.
+\]
+Cada diferença $f(x_i)-f(x_{i-1})$ é maior ou igual a zero, e $\Delta x_i\le\norm{P}$, logo cada termo é no máximo $\norm{P}$ vezes a diferença. Somando,
+\begin{align*}
+U(P,f)-L(P,f)
+&\le\norm{P}\sum_{i=1}^n\bigl(f(x_i)-f(x_{i-1})\bigr)
+=\norm{P}\bigl(f(b)-f(a)\bigr),
+\end{align*}
+porque a soma telescopia: tudo se cancela, exceto $-f(x_0)$ e $f(x_n)$.
+
+Se a partição é uniforme, $\Delta x_i=(b-a)/n$ para todo $i$, e o fator sai da soma sem desigualdade:
+\[
+U(P,f)-L(P,f)=\frac{b-a}{n}\bigl(f(b)-f(a)\bigr).
+\]
+Dado $\eps>0$, se $f(b)=f(a)$ a diferença é zero para toda partição. Se $f(b)>f(a)$, a propriedade arquimediana fornece um natural
+\[
+n>\frac{\bigl(f(b)-f(a)\bigr)(b-a)}{\eps}.
+\]
+Na partição uniforme correspondente, $U-L<\eps$. O Lema~\ref{lem:criterio} dá a integrabilidade.
+
+Se $f$ é não crescente, então $-f$ seria o caminho pela linearidade, que ainda não foi provada. Repete-se a conta direto. Em $[x_{i-1},x_i]$ tem-se $f(x_i)\le f(x)\le f(x_{i-1})$, logo o ínfimo é $f(x_i)$ e o supremo é $f(x_{i-1})$. A diferença das somas é
+\[
+\sum_{i=1}^n\bigl(f(x_{i-1})-f(x_i)\bigr)\Delta x_i
+\le\norm{P}\bigl(f(a)-f(b)\bigr),
+\]
+e na partição uniforme ela vale exatamente $(f(a)-f(b))(b-a)/n$, que tende a zero pelo mesmo argumento.
+\end{proof}
+
+\begin{exemplo}[A identidade no intervalo unitário]
+Seja $f(x)=x$ em $[0,1]$ e seja $P_n$ a partição uniforme de $n$ subintervalos. A função é não decrescente, $f(0)=0$ e $f(1)=1$. O teorema dá $U-L=1/n$. A soma dos primeiros naturais $\sum_{k=1}^n k=n(n+1)/2$ se prova por indução. Para $n=1$, $1=1\cdot 2/2$. Se vale para $n$, então
+\[
+\sum_{k=1}^{n+1}k=\frac{n(n+1)}{2}+(n+1)=(n+1)\Bigl(\frac{n}{2}+1\Bigr)=\frac{(n+1)(n+2)}{2}.
+\]
+Com $x_i=i/n$, o ínfimo no $i$-ésimo intervalo é $(i-1)/n$ e o supremo é $i/n$. Logo
+\begin{align*}
+L(P_n,f)
+&=\sum_{i=1}^n\frac{i-1}{n}\cdot\frac{1}{n}
+=\frac{1}{n^2}\sum_{j=0}^{n-1}j
+=\frac{(n-1)n}{2n^2}
+=\frac{n-1}{2n},\\[0.3em]
+U(P_n,f)
+&=\frac{1}{n^2}\sum_{i=1}^n i
+=\frac{n(n+1)}{2n^2}
+=\frac{n+1}{2n}.
+\end{align*}
+Assim $L=1/2-1/(2n)$ e $U=1/2+1/(2n)$. Como $L\le\int_0^1 x\,\dif x\le U$ e a folga $U-L=1/n$ é menor do que qualquer $\eps>0$ para $n$ grande, a integral é $1/2$: a distância dela a $1/2$ é no máximo $1/(2n)$ para todo $n$.
+\end{exemplo}
+
+\section{Funções contínuas}
+
+\begin{teorema}[Contínua em compacto implica integrável]\label{teo:continua}
+Se $f$ é contínua em $[a,b]$, então $f$ é integrável em $[a,b]$.
+\end{teorema}
+
+\begin{proof}
+Se $a=b$ não há intervalo de integração neste enunciado; a integral de $a$ até $a$ será definida como zero na seção das propriedades. Suponha $a<b$.
+
+O Teorema~\ref{teo:weierstrass} dá que $f$ é limitada. Seja $\eps>0$. O Teorema~\ref{teo:heine} fornece $\delta>0$ tal que $x,y\in[a,b]$ e $\abs{x-y}<\delta$ implicam
+\[
+\abs{f(x)-f(y)}<\frac{\eps}{b-a}.
+\]
+Escolha uma partição $P$ com $\norm{P}<\delta$; a uniforme com $n>(b-a)/\delta$ serve, e tal natural existe. Em cada subintervalo $[x_{i-1},x_i]$, $f$ é contínua no compacto, logo atinge seu máximo em algum $c_i$ e seu mínimo em algum $d_i$. Então $M_i-m_i=f(c_i)-f(d_i)$ e $\abs{c_i-d_i}\le\Delta x_i<\delta$, de modo que
+\[
+M_i-m_i<\frac{\eps}{b-a}.
+\]
+Somando,
+\[
+U(P,f)-L(P,f)
+=\sum_{i=1}^n(M_i-m_i)\Delta x_i
+<\sum_{i=1}^n\frac{\eps}{b-a}\,\Delta x_i
+=\frac{\eps}{b-a}(b-a)
+=\eps.
+\]
+O Lema~\ref{lem:criterio} conclui a integrabilidade.
+\end{proof}
+
+A continuidade é suficiente, não necessária. Seja $f(x)=0$ para $0\le x<1$ e $f(1)=1$. Em $x=1$ o limite à esquerda é $0\neq f(1)$. Dado $\eps>0$, tome a partição $\{0,1-\eta,1\}$ com $0<\eta<\min\{\eps,1\}$. Em $[0,1-\eta]$ a função é identicamente $0$, então ínfimo e supremo são $0$. Em $[1-\eta,1]$ a imagem é $\{0,1\}$, então a diferença das somas é $\eta<\eps$. O critério dá integrabilidade. Nesta partição a soma inferior é $0$ e a superior é $\eta$, então $0\le\int_0^1 f\le\eta$. Isso vale para todo $\eta>0$, logo a integral é $0$: se fosse $\alpha>0$, o número $\eta=\alpha/2$ daria $\alpha\le\alpha/2$. Monotonia também não é necessária: $\sin$ em $[0,\pi]$ satisfaz $\sin 0=\sin\pi=0<\sin(\pi/2)$, então não é monótona, e é contínua, logo integrável pelo teorema anterior. A seção seguinte mostra que limitação, sozinha, não basta. O exercício avançado repete a conta do salto com a descontinuidade no interior e integral $1/2$.
+
+\section{A função de Dirichlet}
+
+\begin{contraexemplo}[Dirichlet]
+Seja $f\colon[a,b]\to\R$, com $a<b$, dada por $f(x)=1$ se $x$ é racional e $f(x)=0$ se $x$ é irracional. Então $0\le f(x)\le 1$, logo $f$ é limitada. Não é integrável.
+
+Em qualquer subintervalo $[x_{i-1},x_i]$ com $x_{i-1}<x_i$, a densidade põe um racional e um irracional. A imagem de $f$ nesse subintervalo contém $0$ e $1$. Como $f$ só assume esses dois valores, o ínfimo é $0$ e o supremo é $1$. Para toda partição $P$,
+\[
+L(P,f)=0,\qquad U(P,f)=\sum_{i=1}^n 1\cdot\Delta x_i=b-a.
+\]
+O supremo das somas inferiores é $0$ e o ínfimo das superiores é $b-a$. São diferentes. A função é limitada e não é integrável.
+\end{contraexemplo}
+
+\cuidado{Limitação é hipótese da definição, não critério de integrabilidade. A função de Dirichlet é limitada e, em todo subintervalo não degenerado, o supremo é $1$ e o ínfimo é $0$, então $U-L=b-a$ para toda partição. Continuidade num compacto e monotonia são condições suficientes, provadas acima; nenhuma das duas é necessária, e a limitação não é suficiente.}
+
+\section{Propriedades da integral}
+
+\begin{lema}[Integral da constante]\label{lem:constante}
+Se $c\in\R$ e $a<b$, a função constante de valor $c$ é integrável em $[a,b]$ e
+\[
+\int_a^b c\,\dif x=c(b-a).
+\]
+\end{lema}
+
+\begin{proof}
+Em toda partição e em todo subintervalo, ínfimo e supremo são $c$. Logo $L(P,f)=U(P,f)=c(b-a)$. O supremo das inferiores e o ínfimo das superiores coincidem nesse número.
+\end{proof}
+
+\begin{definicao}
+Define-se $\int_a^a f=0$ quando $f(a)$ está definido. Se $a>b$ e $f$ é integrável em $[b,a]$, define-se
+\[
+\int_a^b f=-\int_b^a f.
+\]
+Com essa convenção, $\int_p^q c\,\dif x=c(q-p)$ também quando $p\ge q$: se $p>q$, o lado direito da definição é $-c(p-q)=c(q-p)$; se $p=q$, os dois lados são zero.
+\end{definicao}
+
+\begin{teorema}[Homogeneidade]\label{teo:escalar}
+Se $f$ é integrável em $[a,b]$ e $c\in\R$, então $cf$ é integrável e $\int_a^b cf=c\int_a^b f$.
+\end{teorema}
+
+\begin{proof}
+Se $c=0$, $cf$ é a constante $0$ e os dois lados são zero.
+
+Se $c>0$, multiplicar por $c$ preserva ínfimos e supremos. Para um conjunto limitado $S\subseteq\R$, $c\inf S$ é cota inferior de $cS$. Se $z<c\inf S$, então $z/c<\inf S$, logo existe $x\in S$ com $x<z/c$ e $cx<z$, e $z$ não é cota inferior. Assim $\inf(cS)=c\inf S$. Do mesmo modo $c\sup S$ é cota superior de $cS$. Se $z<c\sup S$, então $z/c<\sup S$, logo existe $x\in S$ com $x>z/c$ e $cx>z$, e $z$ não é cota superior. Assim $\sup(cS)=c\sup S$. Em cada subintervalo, $m_i(cf)=c\,m_i(f)$ e $M_i(cf)=c\,M_i(f)$. As somas ficam $L(P,cf)=c\,L(P,f)$ e $U(P,cf)=c\,U(P,f)$. O supremo e o ínfimo escalam pelo fator positivo $c$, e a integral também.
+
+Se $c<0$, as desigualdades invertem. Para $S$ limitado, $\sup(cS)=c\inf S$ e $\inf(cS)=c\sup S$. Confere-se o supremo. Se $x\ge\inf S$, multiplicar por $c<0$ dá $cx\le c\inf S$, então $c\inf S$ é cota superior de $cS$. Se $z<c\inf S$, então $z/c>\inf S$, logo $z/c$ não é cota inferior de $S$: existe $x\in S$ com $x<z/c$. Multiplicando por $c<0$, $cx>z$, e $z$ não é cota superior de $cS$. Assim $\sup(cS)=c\inf S$. Para o ínfimo, seja $M=\sup S$. Se $x\le M$, multiplicar por $c<0$ dá $cx\ge cM$, então $cM$ é cota inferior de $cS$. Se $z>cM$, então $z/c<M$, logo existe $x\in S$ com $x>z/c$. Multiplicando por $c<0$ obtém-se $cx<z$, e $z$ não é cota inferior. Portanto $\inf(cS)=c\sup S$.
+
+Em cada subintervalo, $m_i(cf)=c\,M_i(f)$ e $M_i(cf)=c\,m_i(f)$. Portanto $L(P,cf)=c\,U(P,f)$ e $U(P,cf)=c\,L(P,f)$. O conjunto das somas inferiores de $cf$ é $c$ vezes o conjunto das somas superiores de $f$. Como $c<0$,
+\[
+\sup_P L(P,cf)=c\inf_P U(P,f)=c\int_a^b f.
+\]
+O ínfimo das somas superiores de $cf$ é $c$ vezes o supremo das inferiores de $f$, o mesmo número. Logo $cf$ é integrável e a integral é $c\int_a^b f$.
+\end{proof}
+
+\begin{teorema}[Aditividade algébrica]\label{teo:soma}
+Se $f$ e $g$ são integráveis em $[a,b]$, então $f+g$ é integrável e
+\[
+\int_a^b(f+g)=\int_a^b f+\int_a^b g.
+\]
+\end{teorema}
+
+\begin{proof}
+Em cada subintervalo, $f+g\le\sup f+\sup g$, então $\sup(f+g)\le\sup f+\sup g$. Também $f+g\ge\inf f+\inf g$, então $\inf(f+g)\ge\inf f+\inf g$. Para a mesma partição,
+\[
+U(P,f+g)\le U(P,f)+U(P,g),\qquad
+L(P,f+g)\ge L(P,f)+L(P,g),
+\]
+e portanto
+\[
+U(P,f+g)-L(P,f+g)\le\bigl(U(P,f)-L(P,f)\bigr)+\bigl(U(P,g)-L(P,g)\bigr).
+\]
+Dado $\eps>0$, o critério fornece $P_1$ e $P_2$ com as diferenças de $f$ e de $g$ menores do que $\eps/2$. Na união $P$, o refinamento não aumenta $U-L$ de cada função, e a soma dessas diferenças é menor do que $\eps$. A desigualdade acima dá $U(P,f+g)-L(P,f+g)<\eps$. Logo $f+g$ é integrável.
+
+Para o valor, use a mesma partição, agora com folga $\eps/2$ em cada função, de modo que $U(P,f)-\int f<\eps/2$ e $L(P,f)>\int f-\eps/2$, e o análogo para $g$. Isso vale porque $0\le U-\int\le U-L$ e $0\le\int-L\le U-L$. Então
+\begin{align*}
+\int f+\int g-\eps
+&<L(P,f)+L(P,g)
+\le L(P,f+g)
+\le\int(f+g)\\
+&\le U(P,f+g)
+\le U(P,f)+U(P,g)
+<\int f+\int g+\eps.
+\end{align*}
+A integral de $f+g$ está a menos de $\eps$ da soma das integrais. Como $\eps>0$ é arbitrário, as duas são iguais.
+\end{proof}
+
+\begin{teorema}[Aditividade no intervalo]\label{teo:aditiva}
+Seja $a<c<b$ e seja $f$ limitada em $[a,b]$. Então $f$ é integrável em $[a,b]$ se e somente se é integrável em $[a,c]$ e em $[c,b]$. Nesse caso,
+\[
+\int_a^b f=\int_a^c f+\int_c^b f.
+\]
+\end{teorema}
+
+\begin{proof}
+Suponha $f$ integrável em $[a,b]$. Dado $\eps>0$, escolha $P$ com $U(P,f)-L(P,f)<\eps$ e ponha $P'=P\cup\{c\}$. O refinamento mantém $U-L<\eps$. Separe $P'$ em $P_1=P'\cap[a,c]$ e $P_2=P'\cap[c,b]$. Os subintervalos de $P'$ são a união disjunta, no interior, dos de $P_1$ e dos de $P_2$, logo
+\[
+U(P',f)-L(P',f)=\bigl(U(P_1,f)-L(P_1,f)\bigr)+\bigl(U(P_2,f)-L(P_2,f)\bigr).
+\]
+Cada parcela é maior ou igual a zero e a soma é menor do que $\eps$, então cada parcela é menor do que $\eps$. O critério dá integrabilidade nos dois subintervalos.
+
+Para os valores, tome partições arbitrárias $Q_1$ de $[a,c]$ e $Q_2$ de $[c,b]$, e seja $Q=Q_1\cup Q_2$. Então $L(Q,f)=L(Q_1,f)+L(Q_2,f)\le\int_a^b f$, porque toda soma inferior é no máximo a integral. Logo toda soma $L(Q_1)+L(Q_2)$ é no máximo a integral de $a$ a $b$. Escolhendo $Q_1$ e $Q_2$ com somas inferiores a menos de $\eps/2$ das respectivas integrais,
+\[
+\int_a^c f+\int_c^b f-\eps<L(Q_1,f)+L(Q_2,f)\le\int_a^b f.
+\]
+O $\eps$ é arbitrário, então a soma das integrais é menor ou igual à integral em $[a,b]$. Pelo lado das somas superiores, $U(Q_1)+U(Q_2)=U(Q)\ge\int_a^b f$, e existem somas superiores arbitrariamente próximas das integrais dos pedaços, logo
+\[
+\int_a^c f+\int_c^b f\ge\int_a^b f.
+\]
+As duas desigualdades dão a igualdade.
+
+Reciprocamente, se $f$ é integrável nos dois pedaços, dado $\eps>0$ escolhem-se $P_1$ e $P_2$ com diferenças menores do que $\eps/2$. A união é partição de $[a,b]$ cuja diferença $U-L$ é a soma das duas, menor do que $\eps$. Assim $f$ é integrável em $[a,b]$, e a comparação de somas do parágrafo anterior identifica o valor.
+\end{proof}
+
+\begin{teorema}[Comparação]\label{teo:comparacao}
+Se $f$ e $g$ são integráveis em $[a,b]$ e $f(x)\le g(x)$ para todo $x\in[a,b]$, então $\int_a^b f\le\int_a^b g$. Em particular, se $f\ge 0$, a integral é maior ou igual a zero.
+\end{teorema}
+
+\begin{proof}
+Em cada subintervalo, $\sup f\le\sup g$, porque toda cota superior de $g$ é cota superior de $f$. Logo $U(P,f)\le U(P,g)$ para toda partição $P$, e o ínfimo das somas superiores de $f$ é menor ou igual ao de $g$. Esses ínfimos são as integrais.
+\end{proof}
+
+\begin{teorema}[Módulo da integral]\label{teo:modulo}
+Se $f$ é integrável em $[a,b]$, então $\abs{f}$ é integrável e
+\[
+\abs{\int_a^b f}\le\int_a^b\abs{f}.
+\]
+\end{teorema}
+
+\begin{proof}
+Antes da oscilação, registra-se $\abs{\abs{u}-\abs{v}}\le\abs{u-v}$. A triangular dá $\abs{u}=\abs{(u-v)+v}\le\abs{u-v}+\abs{v}$, logo $\abs{u}-\abs{v}\le\abs{u-v}$. Trocando $u$ e $v$, $\abs{v}-\abs{u}\le\abs{u-v}$. As duas desigualdades são o módulo da diferença dos módulos.
+
+A oscilação de $\abs{f}$ não supera a de $f$. Em um subintervalo $J$, sejam $M=\sup_J f$ e $m=\inf_J f$. Para quaisquer $x,y\in J$,
+\[
+\abs{f(x)-f(y)}\le M-m,
+\]
+porque $f(x)-f(y)\le M-m$ e $f(y)-f(x)\le M-m$. A desigualdade do parágrafo anterior dá
+\[
+\abs{\abs{f(x)}-\abs{f(y)}}\le\abs{f(x)-f(y)}\le M-m.
+\]
+Em particular $\abs{f(x)}-\abs{f(y)}\le M-m$. O supremo de $\abs{f}$ menos o ínfimo de $\abs{f}$ é o supremo das diferenças $\abs{f(x)}-\abs{f(y)}$: de fato, se $M'=\sup\abs{f}$ e $m'=\inf\abs{f}$, então toda diferença é no máximo $M'-m'$; e, dado $\eta>0$, existem pontos com $\abs{f(x)}>M'-\eta/2$ e $\abs{f(y)}<m'+\eta/2$, cuja diferença supera $M'-m'-\eta$. Logo a oscilação de $\abs{f}$ é no máximo $M-m$. Somando,
+\[
+U(P,\abs{f})-L(P,\abs{f})\le U(P,f)-L(P,f).
+\]
+O critério passa de $f$ para $\abs{f}$.
+
+Agora $-\abs{f(x)}\le f(x)\le\abs{f(x)}$ em todo o intervalo. As três funções são integráveis: $-\abs{f}$ pelo Teorema~\ref{teo:escalar}. A comparação dá
+\[
+\int_a^b\bigl(-\abs{f}\bigr)\le\int_a^b f\le\int_a^b\abs{f},
+\]
+isto é $-\int_a^b\abs{f}\le\int_a^b f\le\int_a^b\abs{f}$. Pela caracterização do módulo, isso é a desigualdade do enunciado.
+\end{proof}
+
+\section{O teorema da média}
+
+\begin{teorema}[Média integral]\label{teo:media}
+Se $f$ é contínua em $[a,b]$, com $a<b$, então existe $c\in[a,b]$ tal que
+\[
+\int_a^b f(x)\,\dif x=f(c)\,(b-a).
+\]
+\end{teorema}
+
+\begin{proof}
+O Teorema~\ref{teo:continua} dá a integrabilidade. O Teorema~\ref{teo:weierstrass} dá $p,q\in[a,b]$ com $f(p)=\min f$ e $f(q)=\max f$. Sejam $m=f(p)$ e $M=f(q)$. Então $m\le f(x)\le M$ em $[a,b]$. A comparação e o Lema~\ref{lem:constante} dão
+\[
+m(b-a)\le\int_a^b f\le M(b-a).
+\]
+Dividindo pelo positivo $b-a$,
+\[
+m\le\frac{1}{b-a}\int_a^b f\le M.
+\]
+Se a média $\lambda$ é igual a $m$ ou a $M$, toma-se $c=p$ ou $c=q$. Se $m<\lambda<M$, então $\lambda$ está estritamente entre $f(p)$ e $f(q)$. Reordene os pontos se $q<p$, e aplique o Teorema~\ref{teo:tvi} no intervalo de extremos $p$ e $q$: existe $c$ entre eles, logo em $[a,b]$, com $f(c)=\lambda$.
+\end{proof}
+
+\section{O teorema fundamental, primeira parte}
+
+\begin{teorema}[TFC, parte 1]\label{teo:tfc1}
+Seja $f$ contínua em $[a,b]$. Defina $F\colon[a,b]\to\R$ por
+\[
+F(x)=\int_a^x f(t)\,\dif t.
+\]
+Então $F$ é derivável em $(a,b)$, com $F'(c)=f(c)$ para todo $c\in(a,b)$. No extremo esquerdo a derivada lateral direita é $f(a)$; no extremo direito a derivada lateral esquerda é $f(b)$. Em particular $F$ é contínua em $[a,b]$.
+\end{teorema}
+
+\begin{proof}
+A restrição de $f$ a $[a,x]$ é contínua, logo integrável, e $F(x)$ está definida. Também $F(a)=0$ pela convenção.
+
+Sejam $c\in[a,b]$ e $h\neq 0$ com $c+h\in[a,b]$. Se $h>0$, o Teorema~\ref{teo:aditiva} dá
+\[
+F(c+h)-F(c)=\int_a^{c+h}f-\int_a^c f=\int_c^{c+h}f.
+\]
+Se $h<0$, a mesma aditividade no intervalo de extremos $c+h$ e $c$ dá $\int_a^c f=\int_a^{c+h}f+\int_{c+h}^c f$, logo
+\[
+F(c+h)-F(c)=-\int_{c+h}^c f=\int_c^{c+h}f,
+\]
+em que a última igualdade é a definição de integral orientada. Nos dois casos, o Lema~\ref{lem:constante} na forma orientada dá $\int_c^{c+h}f(c)\,\dif t=f(c)\,h$. Portanto
+\begin{equation}
+\label{eq:quociente}
+\frac{F(c+h)-F(c)}{h}-f(c)
+=\frac{1}{h}\int_c^{c+h}\bigl(f(t)-f(c)\bigr)\,\dif t.
+\end{equation}
+O quociente de diferenças é a média de $f$ no intervalo de extremos $c$ e $c+h$.
+
+Seja $\eps>0$. A continuidade de $f$ em $c$ fornece $\delta>0$ tal que $t\in[a,b]$ e $\abs{t-c}<\delta$ implicam $\abs{f(t)-f(c)}<\eps$. Tome $0<\abs{h}<\delta$ com $c+h\in[a,b]$.
+
+Se $h>0$, então $-\eps<f(t)-f(c)<\eps$ para todo $t\in[c,c+h]$. Integrando e usando a comparação,
+\[
+-\eps h<\int_c^{c+h}\bigl(f(t)-f(c)\bigr)\,\dif t<\eps h.
+\]
+Dividindo por $h>0$, o quociente \eqref{eq:quociente} tem módulo menor do que $\eps$.
+
+Se $h<0$, ponha $k=-h>0$. No intervalo $[c-k,c]$ vale $-\eps<f(t)-f(c)<\eps$. Integrando no sentido positivo,
+\[
+-\eps k<\int_{c-k}^c\bigl(f(t)-f(c)\bigr)\,\dif t<\eps k.
+\]
+A integral orientada de $c$ até $c-k$ é o oposto dessa. Dividindo por $h=-k$ troca o sinal duas vezes e devolve um número de módulo menor do que $\eps$: se $I$ é a integral de $c-k$ até $c$, então $-\eps k<I<\eps k$, e
+\[
+\frac{1}{h}\int_c^{c+h}\bigl(f-f(c)\bigr)=\frac{-I}{-k}=\frac{I}{k},
+\]
+cujo módulo é menor do que $\eps$.
+
+Assim o limite do quociente de diferenças é $f(c)$ sempre que $h\to 0$ dentro do domínio. Para $c\in(a,b)$ os dois lados estão disponíveis e $F'(c)=f(c)$. Para $c=a$ só $h>0$ entra, e a derivada lateral direita é $f(a)$. Para $c=b$ só $h<0$ entra, e a derivada lateral esquerda é $f(b)$. Derivada lateral finita implica continuidade no extremo: o quociente $(F(a+h)-F(a))/h$ fica limitado numa vizinhança direita, e o produto por $h$ tende a zero.
+\end{proof}
+
+A última frase se explicita. Se a derivada lateral direita em $a$ é $f(a)$, dado $\eps=1$ existe $\delta>0$ tal que $0<h<\delta$ e $a+h\le b$ implicam $\abs{(F(a+h)-F(a))/h-f(a)}<1$, logo o quociente tem módulo menor do que $\abs{f(a)}+1$. Então
+\[
+\abs{F(a+h)-F(a)}\le\bigl(\abs{f(a)}+1\bigr)h.
+\]
+Quando $h\to 0^+$, o lado direito tende a zero. A continuidade à esquerda em $b$ é a mesma conta.
+
+\section{O teorema fundamental, segunda parte}
+
+\begin{teorema}[TFC, parte 2]\label{teo:tfc2}
+Seja $f$ contínua em $[a,b]$. Se $F\colon[a,b]\to\R$ é contínua, derivável em $(a,b)$, com derivadas laterais nos extremos, e $F'=f$ em $[a,b]$ no sentido correspondente, então
+\[
+\int_a^b f(x)\,\dif x=F(b)-F(a).
+\]
+\end{teorema}
+
+\begin{proof}
+Seja $G(x)=\int_a^x f$. O Teorema~\ref{teo:tfc1} dá $G'(x)=f(x)=F'(x)$ para todo $x\in(a,b)$. A diferença $H=F-G$ é contínua em $[a,b]$ e tem derivada zero em $(a,b)$. O corolário da derivada nula, do módulo de aplicações da derivada, diz que $H$ é constante em $[a,b]$: o domínio é um intervalo. Em $x=a$, $G(a)=0$, logo $H(a)=F(a)$. A constante é $F(a)$. Em $x=b$,
+\[
+F(b)-G(b)=F(a),
+\]
+e $G(b)=\int_a^b f$. Portanto $\int_a^b f=F(b)-F(a)$.
+\end{proof}
+
+\begin{definicao}
+Uma \emph{antiderivada} de $f$ num intervalo $I$ é uma função $F\colon I\to\R$ derivável em $I$, com as derivadas laterais nos extremos que pertençam a $I$, tal que $F'=f$ em $I$. A notação de integral indefinida reúne todas elas:
+\[
+\int f(x)\,\dif x=F(x)+C,
+\]
+em que $C$ percorre $\R$, desde que $I$ seja um intervalo.
+\end{definicao}
+
+\begin{corolario}
+Se $F$ e $G$ são antiderivadas de uma função contínua $f$ num intervalo $I$, então $F-G$ é constante em $I$.
+\end{corolario}
+
+\begin{proof}
+$(F-G)'=f-f=0$ no interior de $I$. O corolário da derivada nula dá a constante. O Teorema~\ref{teo:tfc2}, lido num subintervalo compacto, também dá $F(x)-F(y)=G(x)-G(y)$.
+\end{proof}
+
+\cuidado{Fora de um intervalo a constante pode mudar de componente. Em $(0,1)\cup(2,3)$, a função que vale $0$ na primeira componente e $1$ na segunda tem derivada zero, como no módulo anterior, e não difere de uma antiderivada por uma única constante. A fórmula $F(b)-F(a)$ pede o segmento inteiro dentro do domínio.}
+
+\section{Substituição}
+
+\begin{teorema}[Substituição]\label{teo:substituicao}
+Seja $\varphi\colon[a,b]\to\R$ de classe $C^1$, isto é, $\varphi'$ existe e é contínua em $[a,b]$, com derivadas laterais nos extremos. Seja $f$ contínua num intervalo aberto que contém $\varphi([a,b])$. Então $f(\varphi(x))\varphi'(x)$ é contínua em $[a,b]$ e
+\begin{equation}
+\label{eq:substituicao}
+\int_a^b f\bigl(\varphi(x)\bigr)\varphi'(x)\,\dif x
+=\int_{\varphi(a)}^{\varphi(b)} f(u)\,\dif u.
+\end{equation}
+Não se pede que $\varphi$ seja monótona. Se $\varphi(b)<\varphi(a)$, a integral da direita é orientada.
+\end{teorema}
+
+\begin{proof}
+Por hipótese, $\varphi([a,b])$ está contido num intervalo aberto $J$ no qual $f$ é contínua. Weierstrass e o valor intermediário ainda dizem que essa imagem é um intervalo fechado $[m,M]$: o mínimo e o máximo são atingidos, e todo valor intermediário também. Fixe $u_0\in J$ e defina, para $u\in J$,
+\[
+F(u)=\int_{u_0}^u f,
+\]
+com a convenção orientada se $u<u_0$. Dado $u\in J$, escolha $\alpha,\beta\in J$ com $\alpha<u<\beta$. No compacto $[\alpha,\beta]$, o Teorema~\ref{teo:tfc1} aplicado a $G(t)=\int_\alpha^t f$ dá $G'(u)=f(u)$. Para $t\in[\alpha,\beta]$, a aditividade orientada escreve $F(t)=G(t)+\int_{u_0}^\alpha f$, e a segunda parcela não depende de $t$. Logo $F'(u)=G'(u)=f(u)$, com derivada bilateral. A regra da cadeia dá, para todo $x\in[a,b]$,
+\[
+\bigl(F\circ\varphi\bigr)'(x)=F'\bigl(\varphi(x)\bigr)\varphi'(x)=f\bigl(\varphi(x)\bigr)\varphi'(x).
+\]
+O produto de contínuas é contínuo. O Teorema~\ref{teo:tfc2} aplicado a $F\circ\varphi$ dá
+\begin{align*}
+\int_a^b f\bigl(\varphi(x)\bigr)\varphi'(x)\,\dif x
+&=F\bigl(\varphi(b)\bigr)-F\bigl(\varphi(a)\bigr)
+=\int_{u_0}^{\varphi(b)}f-\int_{u_0}^{\varphi(a)}f.
+\end{align*}
+Se $\varphi(a)$ e $\varphi(b)$ estão do mesmo lado de $u_0$ ou não, a aditividade orientada reduz a diferença a $\int_{\varphi(a)}^{\varphi(b)}f$. Explicitamente, escolhendo daqui em diante $u_0=\varphi(a)$, que está em $J$, tem-se $F(\varphi(a))=0$ e $F(\varphi(b))=\int_{\varphi(a)}^{\varphi(b)}f$.
+\end{proof}
+
+\begin{exemplo}[Extremos novos, valor numérico]
+Calcula-se $\int_0^{\sqrt{3}} x\bigl(1+x^2\bigr)^{-1/2}\,\dif x$. Seja $\varphi(x)=1+x^2$. Então $\varphi'(x)=2x$, $\varphi(0)=1$ e $\varphi(\sqrt{3})=4$. Tome $f(u)=1/(2\sqrt{u})$ em $(0,\infty)$, que contém $[1,4]$. O produto é
+\[
+f\bigl(\varphi(x)\bigr)\varphi'(x)=\frac{1}{2\sqrt{1+x^2}}\cdot 2x=\frac{x}{\sqrt{1+x^2}}.
+\]
+O Teorema~\ref{teo:substituicao} dá
+\[
+\int_0^{\sqrt{3}}\frac{x}{\sqrt{1+x^2}}\,\dif x
+=\int_1^4\frac{1}{2}u^{-1/2}\,\dif u.
+\]
+A função $\sqrt{u}$ tem derivada $1/(2\sqrt{u})$ para $u>0$. O Teorema~\ref{teo:tfc2} avalia
+\[
+\Bigl[\sqrt{u}\Bigr]_1^4=\sqrt{4}-\sqrt{1}=2-1=1.
+\]
+\end{exemplo}
+
+\begin{exemplo}[Integral indefinida e constante]
+No intervalo $\R$, a mesma conta sem extremos fixos produz uma antiderivada. Seja $\Phi(x)=\sqrt{1+x^2}$. A cadeia dá
+\[
+\Phi'(x)=\frac{1}{2}(1+x^2)^{-1/2}\cdot 2x=\frac{x}{\sqrt{1+x^2}}.
+\]
+Se $G$ é outra antiderivada em $\R$, então $(\Phi-G)'=0$ e $\Phi-G$ é constante. Portanto
+\[
+\int\frac{x}{\sqrt{1+x^2}}\,\dif x=\sqrt{1+x^2}+C,\qquad C\in\R.
+\]
+Pela substituição $u=1+x^2$, $du=2x\,\dif x$, o mesmo resultado aparece como $(1/2)\int u^{-1/2}\,\dif u=\sqrt{u}+C$, e devolve-se a variável.
+\end{exemplo}
+
+\begin{exemplo}[Extremo superior menor que o inferior]
+Calcula-se $\int_0^{\pi}\sin x\,\dif x$ pela substituição $\varphi(x)=\cos x$. Então $\varphi'(x)=-\sin x$, $\varphi(0)=1$ e $\varphi(\pi)=-1$. Com $f(u)=-1$, constante,
+\[
+f\bigl(\varphi(x)\bigr)\varphi'(x)=(-1)(-\sin x)=\sin x.
+\]
+A fórmula \eqref{eq:substituicao} dá
+\[
+\int_0^{\pi}\sin x\,\dif x=\int_1^{-1}(-1)\,\dif u=-(-1-1)=2.
+\]
+A integral da constante no sentido de $1$ para $-1$ é $(-1)\bigl((-1)-1\bigr)=(-1)(-2)=2$. O extremo novo é menor, e a orientação carrega o sinal. A conferência pelo TFC, sem substituição, é
+\[
+\int_0^{\pi}\sin x\,\dif x=\bigl[-\cos x\bigr]_0^{\pi}=-\cos\pi-(-\cos 0)=-(-1)+1=2.
+\]
+\end{exemplo}
+
+\begin{observacao}
+A integração por partes, que vem da regra do produto, e a decomposição em frações parciais não são usadas aqui. As duas técnicas abrem o módulo de Cálculo II, porque dependem do teorema fundamental já provado e de uma álgebra de antiderivadas mais longa.
+\end{observacao}
+
+\section{Exercícios}
+
+As soluções comentadas estão em \texttt{05\_integral\_riemann\_tfc\_gabarito.tex}.
+
+\begin{exercicio}[Básico --- somas de $x^2$]
+Para $f(x)=x^2$ em $[0,1]$ e a partição uniforme $P_n$ de $n$ subintervalos, calcule $L(P_n,f)$ e $U(P_n,f)$. Na conta, prove por indução que $\sum_{k=1}^n k^2=n(n+1)(2n+1)/6$. Conclua que a integral vale $1/3$.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- seno pelo TFC]
+Calcule $\int_0^{\pi}\sin x\,\dif x$ pelo teorema fundamental, exibindo uma antiderivada e os dois extremos.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- substituição com extremos]
+Calcule $\int_0^1 2x\exp(x^2)\,\dif x$ pela substituição $u=x^2$, reescrevendo os extremos, e termine pelo TFC.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- média]
+Encontre todos os $c\in[0,3]$ tais que $\int_0^3 x^2\,\dif x=c^2\cdot 3$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- derivada de uma integral]
+Seja $F(x)=\int_0^{x^2}\exp(-t^2)\,\dif t$. Calcule $F'(x)$ para todo $x\in\R$ e o valor $F'(0)$, nomeando o TFC e a regra da cadeia.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- módulo do seno]
+Calcule $\int_0^{2\pi}\abs{\sin x}\,\dif x$, partindo o intervalo onde o seno troca de sinal, e compare com $\abs{\int_0^{2\pi}\sin x\,\dif x}$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- hipótese de limitação]
+A função $f(x)=1/x$, dada em $(0,1]$, é limitada? A definição de integral de Riemann deste capítulo se aplica a ela em $[0,1]$? Depois calcule $\int_1^2(1/x)\,\dif x$ pelo TFC, verificando as hipóteses.
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- salto interior]
+Seja $f\colon[0,1]\to\R$ dada por $f(x)=0$ se $0\le x<1/2$ e $f(x)=1$ se $1/2\le x\le 1$. Prove que $f$ é integrável e que a integral vale $1/2$.
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- erro lipschitziano]
+Seja $f$ contínua em $[a,b]$, seja $c\in(a,b)$ e suponha $\abs{f(t)-f(c)}\le K\abs{t-c}$ para todo $t\in[a,b]$, com $K\ge 0$. Se $F(x)=\int_a^x f$, prove que, para todo $h\neq 0$ com $c+h\in[a,b]$,
+\[
+\abs{F(c+h)-F(c)-f(c)\,h}\le\frac{K}{2}h^2.
+\]
+\end{exercicio}
+
+\end{document}

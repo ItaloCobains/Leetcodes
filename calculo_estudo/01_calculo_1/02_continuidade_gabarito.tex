@@ -1,0 +1,121 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito --- Continuidade}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A ordem \'e a da se\c{c}\~ao de exerc\'icios de \texttt{02\_continuidade.tex}.
+
+\section{B\'asico --- Linear}
+
+\textbf{Enunciado.} $f(x)=3x-1$ \'e cont\'inua em $4$.
+
+\begin{proof}
+$f(4)=11$ e $\abs{f(x)-f(4)}=\abs{3x-1-11}=3\abs{x-4}$. Dado $\eps>0$, escolha $\delta=\eps/3$. Se $\abs{x-4}<\delta$, ent\~ao $\abs{f(x)-f(4)}<\eps$. O ponto $x=4$ entra na conta e d\'a diferen\c{c}a zero.
+\end{proof}
+
+\section{B\'asico --- Polin\^omio}
+
+\textbf{Enunciado.} $p(x)=x^2-3x+1$ \'e cont\'inua em $2$, com $\delta$ expl\'icito.
+
+\begin{proof}
+$p(2)=4-6+1=-1$. Al\'em disso
+\[
+p(x)-p(2)=x^2-3x+1-(-1)=x^2-3x+2=(x-1)(x-2),
+\]
+logo $\abs{p(x)-p(2)}=\abs{x-2}\abs{x-1}$. Se $\abs{x-2}<1$, ent\~ao $1<x<3$, logo $0<x-1<2$ e $\abs{x-1}<2$. Portanto $\abs{p(x)-p(2)}<2\abs{x-2}$. Dado $\eps>0$, escolha $\delta=\min(1,\eps/2)$. Se $\abs{x-2}<\delta$, a diferen\c{c}a \'e menor que $2\cdot(\eps/2)=\eps$.
+\end{proof}
+
+\section{B\'asico --- Degrau}
+
+\textbf{Enunciado.} $f(x)=0$ para $x<1$ e $f(x)=2$ para $x\ge 1$. Laterais em $1$.
+
+\begin{proof}
+Se $1-\delta<x<1$, ent\~ao $f(x)=0$, logo $\abs{f(x)-0}=0$. Qualquer $\delta>0$ mostra que o limite \`a esquerda \'e $0$. Se $1<x<1+\delta$, ent\~ao $f(x)=2$, logo o limite \`a direita \'e $2$. Como $f(1)=2$, a fun\c{c}\~ao \'e cont\'inua \`a direita em $1$ e n\~ao \'e cont\'inua \`a esquerda. Os laterais diferem, ent\~ao n\~ao h\'a continuidade bilateral.
+\end{proof}
+
+\section{B\'asico --- Extens\~ao remov\'ivel}
+
+\textbf{Enunciado.} Estenda $(x^2-4)/(x-2)$ continuamente a $x=2$.
+
+\begin{proof}
+Para $x\neq 2$, $(x^2-4)/(x-2)=(x-2)(x+2)/(x-2)=x+2$. Ent\~ao $\abs{f(x)-4}=\abs{x-2}$. Dado $\eps>0$, $\delta=\eps$ mostra que o limite \'e $4$. Defina $f(2)=4$. O limite coincide com o valor, e a extens\~ao \'e cont\'inua em $2$.
+\end{proof}
+
+\section{Intermedi\'ario --- Sinal local}
+
+\textbf{Enunciado.} Se $f$ \'e cont\'inua em $a$ e $f(a)>0$, ent\~ao $f$ \'e positiva numa vizinhan\c{c}a de $a$.
+
+\begin{proof}
+Seja $\eps=f(a)/2>0$. Existe $\delta>0$ tal que $\abs{x-a}<\delta$ implica $\abs{f(x)-f(a)}<\eps$. Logo
+\[
+f(x)>f(a)-\frac{f(a)}{2}=\frac{f(a)}{2}>0.
+\]
+\end{proof}
+
+\section{Intermedi\'ario --- Raiz c\'ubica}
+
+\textbf{Enunciado.} $x^3+x-1=0$ tem uma \'unica raiz real, e ela est\'a em $(0,1)$.
+
+\begin{proof}
+Seja $h(x)=x^3+x-1$. O polin\^omio $h$ \'e cont\'inuo em $[0,1]$. Temos $h(0)=-1<0$ e $h(1)=1>0$. Pelo teorema do valor intermedi\'ario existe $c\in(0,1)$ com $h(c)=0$.
+
+Para a unicidade, tome $y>x$. Ent\~ao
+\[
+h(y)-h(x)=(y^3-x^3)+(y-x)=(y-x)(y^2+xy+x^2+1).
+\]
+O fator $y-x$ \'e positivo. O outro fator \'e positivo porque
+\[
+y^2+xy+x^2=\Bigl(x+\frac{y}{2}\Bigr)^2+\frac{3}{4}y^2\ge 0,
+\]
+logo $y^2+xy+x^2+1\ge 1>0$. Portanto $h(y)>h(x)$. A fun\c{c}\~ao \'e estritamente crescente em $\R$ e n\~ao pode ter duas raizes. A raiz de $(0,1)$ \'e a \'unica raiz real.
+\end{proof}
+
+\section{Intermedi\'ario --- Composi\c{c}\~ao}
+
+\textbf{Enunciado.} $\sqrt{x^2+1}$ \'e cont\'inua em cada $a\in\R$, com $\delta'$ da raiz e $\delta$ do polin\^omio encadeados.
+
+\begin{proof}
+Seja $a\in\R$, $b=a^2+1\ge 1$ e $u(x)=x^2+1$, de modo que $f=\sqrt{\phantom{x}}\circ u$ e $u(a)=b$. Fixe $\eps>0$. Na prova da continuidade da raiz em $b>0$, a escolha
+\[
+\delta'=\min\Bigl(\frac{b}{2},\eps\sqrt{b}\Bigr)
+\]
+satisfaz: se $y\ge 0$ e $\abs{y-b}<\delta'$, ent\~ao $y>b/2$ e
+\[
+\abs{\sqrt{y}-\sqrt{b}}=\frac{\abs{y-b}}{\sqrt{y}+\sqrt{b}}<\frac{\abs{y-b}}{\sqrt{b}}<\eps.
+\]
+Resta for\c{c}ar $\abs{u(x)-b}<\delta'$. Fatore $\abs{u(x)-u(a)}=\abs{x-a}\abs{x+a}$. Se $\abs{x-a}<1$,
+\[
+\abs{x+a}\le \abs{x-a}+2\abs{a}<1+2\abs{a}.
+\]
+Seja $M=2\abs{a}+1\ge 1$. Ent\~ao $\abs{u(x)-b}<M\abs{x-a}$ sempre que $0<\abs{x-a}<1$. Escolha
+\[
+\delta=\min\Bigl(1,\frac{\delta'}{M}\Bigr).
+\]
+Se $\abs{x-a}<\delta$, ou $x=a$ e a diferen\c{c}a de $f$ \'e zero, ou $0<\abs{x-a}<\delta$ e $\abs{u(x)-b}<\delta'$. Como $u(x)\ge 1>0$, a estimativa da raiz d\'a $\abs{f(x)-f(a)}<\eps$.
+\end{proof}
+
+\section{Avan\c{c}ado --- Imagem do compacto}
+
+\textbf{Enunciado.} Se $f\colon[a,b]\to\R$ \'e cont\'inua, a imagem \'e $[m,M]$, com $m=\min f$ e $M=\max f$.
+
+\begin{proof}
+Pelo teorema de Weierstrass existem $x_m,x_M\in[a,b]$ com $f(x_m)=m$ e $f(x_M)=M$, e $m\le f(x)\le M$ para todo $x\in[a,b]$. Logo a imagem est\'a contida em $[m,M]$, e $m$ e $M$ s\~ao valores.
+
+Seja $k\in(m,M)$. Se $x_m<x_M$, ent\~ao $f(x_m)=m<k<M=f(x_M)$. O teorema do valor intermedi\'ario em $[x_m,x_M]$ fornece $c$ com $f(c)=k$. Se $x_M<x_m$, ent\~ao $f(x_M)>k>f(x_m)$, e o mesmo teorema, no caso em que o valor da esquerda \'e o maior, fornece $c$ em $(x_M,x_m)$. Se $x_m=x_M$, ent\~ao $m=M$ e o intervalo $(m,M)$ \'e vazio; a imagem \'e o conjunto de um ponto $[m,m]$. Em todos os casos $[m,M]$ est\'a contido na imagem.
+\end{proof}
+
+\section{Avan\c{c}ado --- M\'inimo positivo}
+
+\textbf{Enunciado.} Cont\'inua e positiva em $[a,b]$ tem m\'inimo positivo. Em $(0,1]$, $f(x)=x$ \'e positiva e tem \'infimo $0$.
+
+\begin{proof}
+Pelo teorema de Weierstrass, o m\'inimo \'e assumido em algum $c\in[a,b]$. Por hip\'otese $f(c)>0$. O m\'inimo \'e exatamente $f(c)$, logo \'e positivo. Em particular o \'infimo, que coincide com o m\'inimo, \'e positivo.
+
+Agora $f(x)=x$ em $(0,1]$. Para $c\in(0,1]$ e $\eps>0$, $\delta=\eps$ d\'a a continuidade: se $x\in(0,1]$ e $\abs{x-c}<\delta$, ent\~ao $\abs{f(x)-f(c)}<\eps$. Al\'em disso $f(x)>0$ em todo o dom\'inio. O n\'umero $0$ \'e cota inferior. Se $\eta>0$, o ponto $x=\min(\eta/2,1)$ est\'a em $(0,1]$ e $f(x)\le \eta/2<\eta$, logo $\eta$ n\~ao \'e cota inferior. O \'infimo \'e $0$, que n\~ao \'e positivo e n\~ao \'e assumido.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,349 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: quádricas, curvas no espaço e curvatura}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+Cada solução repete o enunciado e faz a conta até o fim. A numeração é a da nota \texttt{05\_curvas\_espaco.tex}.
+
+\section{Básicos}
+
+\begin{exercicio}[Básico --- B1]
+Traço \(z=0\) do elipsoide \(\dfrac{x^{2}}{4}+\dfrac{y^{2}}{9}+\dfrac{z^{2}}{16}=1\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Substituir \(z=0\) anula o terceiro termo:
+\[
+\frac{x^{2}}{4}+\frac{y^{2}}{9}=1.
+\]
+É uma elipse no plano \(z=0\), com semieixos \(2\) e \(3\): os interceptos são \(x=\pm 2\) quando \(y=0\), e \(y=\pm 3\) quando \(x=0\). A superfície é um elipsoide, e esta elipse é um traço que a identifica como limitada e oval no plano horizontal.
+
+\begin{exercicio}[Básico --- B2]
+Traços \(z=0\) dos dois hiperboloides.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Para \(x^{2}+y^{2}-z^{2}=1\), o plano \(z=0\) dá
+\[
+x^{2}+y^{2}=1,
+\]
+a circunferência unitária. O traço não é vazio. Esta é a equação canônica do hiperboloide de uma folha com \(a=b=c=1\): a superfície corta o plano \(xy\).
+
+Para \(z^{2}-x^{2}-y^{2}=1\), o plano \(z=0\) dá
+\[
+-x^{2}-y^{2}=1.
+\]
+O primeiro membro é \(\le 0\) e o segundo membro é \(1\). Não existe \((x,y)\) real satisfazendo a equação. O traço é vazio. Além disso,
+\[
+z^{2}=1+x^{2}+y^{2}\ge 1,
+\]
+logo \(\abs{z}\ge 1\). Há uma componente em \(z\ge 1\) e outra em \(z\le -1\): hiperboloide de duas folhas. O traço vazio em \(z=0\) é o que distingue as duas folhas da folha única, cujo traço correspondente é a circunferência.
+
+\begin{exercicio}[Básico --- B3]
+Comprimento de \(\vet{r}(t)=(2\cos t,\,2\sin t,\,t)\) em \([0,2\pi]\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+A velocidade é
+\[
+\vet{r}'(t)=(-2\sin t,\,2\cos t,\,1).
+\]
+A norma é
+\begin{align*}
+\norm{\vet{r}'(t)}
+&=\sqrt{4\sin^{2}t+4\cos^{2}t+1}
+=\sqrt{4(\sin^{2}t+\cos^{2}t)+1}
+=\sqrt{4+1}
+=\sqrt{5}.
+\end{align*}
+O integrando é constante. O comprimento é
+\[
+L=\int_{0}^{2\pi}\sqrt{5}\,\dif t=2\pi\sqrt{5}.
+\]
+
+\begin{exercicio}[Básico --- B4]
+Velocidade, aceleração e reta tangente de \(\vet{r}(t)=(t,t^{2},t^{3})\) em \(t=1\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+\begin{align*}
+\vet{r}'(t)&=(1,\,2t,\,3t^{2}),\\
+\vet{r}''(t)&=(0,\,2,\,6t).
+\end{align*}
+Em \(t=1\),
+\[
+\vet{r}(1)=(1,1,1),
+\qquad
+\vet{r}'(1)=(1,2,3),
+\qquad
+\vet{r}''(1)=(0,2,6).
+\]
+A norma da velocidade é
+\[
+\norm{\vet{r}'(1)}=\sqrt{1^{2}+2^{2}+3^{2}}=\sqrt{1+4+9}=\sqrt{14}\neq 0.
+\]
+A reta tangente é
+\[
+\vet{R}(s)=(1,1,1)+s(1,2,3),\qquad s\in\R,
+\]
+ou, em coordenadas, \(X=1+s\), \(Y=1+2s\), \(Z=1+3s\).
+
+\section{Intermediários}
+
+\begin{exercicio}[Intermediário --- I1]
+Curvatura do círculo de raio \(a\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Seja \(\vet{r}(t)=(a\cos t,\,a\sin t,\,0)\), com \(a>0\). Então
+\begin{align*}
+\vet{r}'(t)&=(-a\sin t,\,a\cos t,\,0),\\
+\vet{r}''(t)&=(-a\cos t,\,-a\sin t,\,0),\\
+\norm{\vet{r}'(t)}
+&=\sqrt{a^{2}\sin^{2}t+a^{2}\cos^{2}t}
+=a.
+\end{align*}
+A velocidade não se anula. O produto vetorial é
+\begin{align*}
+\vet{r}'\times\vet{r}''
+&=
+\begin{vmatrix}
+\vet{i}&\vet{j}&\vet{k}\\
+-a\sin t&a\cos t&0\\
+-a\cos t&-a\sin t&0
+\end{vmatrix}
+=(0,\,0,\,a^{2}\sin^{2}t+a^{2}\cos^{2}t)
+=(0,\,0,\,a^{2}).
+\end{align*}
+A componente \(\vet{k}\) é \((-a\sin t)(-a\sin t)-(a\cos t)(-a\cos t)=a^{2}\sin^{2}t+a^{2}\cos^{2}t=a^{2}\). As componentes \(\vet{i}\) e \(\vet{j}\) são zero porque a terceira coordenada de \(\vet{r}'\) e de \(\vet{r}''\) é zero. A norma do produto é \(\abs{a^{2}}=a^{2}\). Portanto
+\[
+\kappa
+=\frac{\norm{\vet{r}'\times\vet{r}''}}{\norm{\vet{r}'}^{3}}
+=\frac{a^{2}}{a^{3}}
+=\frac{1}{a}.
+\]
+O raio de curvatura é \(1/\kappa=a\), o raio do círculo.
+
+\begin{exercicio}[Intermediário --- I2]
+Curvatura de \(\vet{r}(t)=(t,t^{2},t)\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+\begin{align*}
+\vet{r}'(t)&=(1,\,2t,\,1),\\
+\vet{r}''(t)&=(0,\,2,\,0).
+\end{align*}
+A norma da velocidade é
+\[
+\norm{\vet{r}'(t)}
+=\sqrt{1+4t^{2}+1}
+=\sqrt{2+4t^{2}}
+=\sqrt{2(1+2t^{2})}
+=\sqrt{2}\,\sqrt{1+2t^{2}}.
+\]
+Ela nunca se anula. O produto vetorial é
+\begin{align*}
+\vet{r}'\times\vet{r}''
+&=
+\begin{vmatrix}
+\vet{i}&\vet{j}&\vet{k}\\
+1&2t&1\\
+0&2&0
+\end{vmatrix}.
+\end{align*}
+Componente \(\vet{i}\): \(2t\cdot 0-1\cdot 2=-2\).
+
+Componente \(\vet{j}\): \(-\bigl(1\cdot 0-1\cdot 0\bigr)=0\).
+
+Componente \(\vet{k}\): \(1\cdot 2-2t\cdot 0=2\).
+
+Logo \(\vet{r}'\times\vet{r}''=(-2,\,0,\,2)\) e
+\[
+\norm{\vet{r}'\times\vet{r}''}
+=\sqrt{4+0+4}
+=\sqrt{8}
+=2\sqrt{2}.
+\]
+A curvatura é
+\begin{align*}
+\kappa(t)
+&=\frac{2\sqrt{2}}{\bigl(\sqrt{2}\,\sqrt{1+2t^{2}}\bigr)^{3}}
+=\frac{2\sqrt{2}}{(\sqrt{2})^{3}\,(1+2t^{2})^{3/2}}
+=\frac{2\sqrt{2}}{2\sqrt{2}\,(1+2t^{2})^{3/2}}
+=\frac{1}{(1+2t^{2})^{3/2}}.
+\end{align*}
+Usamos \((\sqrt{2})^{3}=(\sqrt{2})^{2}\cdot\sqrt{2}=2\sqrt{2}\). Em \(t=1\),
+\[
+\kappa(1)=\frac{1}{(1+2)^{3/2}}=\frac{1}{3^{3/2}}=\frac{1}{3\sqrt{3}}.
+\]
+Racionalizando,
+\[
+\frac{1}{3\sqrt{3}}\cdot\frac{\sqrt{3}}{\sqrt{3}}=\frac{\sqrt{3}}{9}.
+\]
+
+\begin{exercicio}[Intermediário --- I3]
+\(\norm{\dif\vet{T}/\dif s}\) na hélice.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Para \(\vet{r}(t)=(\cos t,\sin t,t)\), a nota já calculou \(\norm{\vet{r}'(t)}=\sqrt{2}\) e
+\[
+\vet{T}(t)
+=\Biggl(-\frac{\sin t}{\sqrt{2}},\,\frac{\cos t}{\sqrt{2}},\,\frac{1}{\sqrt{2}}\Biggr).
+\]
+O comprimento de arco a partir de \(t=0\), no sentido crescente, é
+\[
+s(t)=\int_{0}^{t}\sqrt{2}\,\dif u=\sqrt{2}\,t.
+\]
+A função \(s\) é de classe \(C^1\), estritamente crescente, e \(t=s/\sqrt{2}\). A derivada \(\dif s/\dif t=\sqrt{2}\) nunca se anula. Pela regra da cadeia,
+\[
+\frac{\dif\vet{T}}{\dif s}
+=\frac{\dif\vet{T}/\dif t}{\dif s/\dif t}
+=\frac{\vet{T}'(t)}{\sqrt{2}}.
+\]
+Derivando \(\vet{T}\),
+\[
+\vet{T}'(t)
+=\Biggl(-\frac{\cos t}{\sqrt{2}},\,-\frac{\sin t}{\sqrt{2}},\,0\Biggr),
+\]
+logo
+\[
+\frac{\dif\vet{T}}{\dif s}
+=\Biggl(-\frac{\cos t}{2},\,-\frac{\sin t}{2},\,0\Biggr).
+\]
+A norma é
+\[
+\norm{\frac{\dif\vet{T}}{\dif s}}
+=\sqrt{\frac{\cos^{2}t}{4}+\frac{\sin^{2}t}{4}}
+=\sqrt{\frac14}
+=\frac12.
+\]
+Este é exatamente \(\kappa\). A curvatura é a taxa com que \(\vet{T}\) vira por unidade de comprimento de arco, e na hélice essa taxa vale \(1/2\) em todo ponto.
+
+\section{Avançados}
+
+\begin{exercicio}[Avançado --- A1]
+Curvatura nula se, e somente se, a imagem está numa reta.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Hipótese comum: \(\vet{r}\) é de classe \(C^2\) num intervalo \(I\), e \(\vet{r}'(t)\neq\vet{0}\) para todo \(t\in I\).
+
+Primeiro, suponha que a imagem está contida numa reta. Existem um ponto \(\vet{p}\) e um vetor \(\vet{d}\) com \(\norm{\vet{d}}=1\) tais que, para cada \(t\), existe um escalar \(\lambda(t)\) com
+\[
+\vet{r}(t)=\vet{p}+\lambda(t)\,\vet{d}.
+\]
+O escalar é a função de classe \(C^2\)
+\[
+\lambda(t)=\bigl(\vet{r}(t)-\vet{p}\bigr)\cdot\vet{d},
+\]
+porque \(\vet{r}\) é de classe \(C^2\). Derivando,
+\[
+\vet{r}'(t)=\lambda'(t)\,\vet{d},
+\qquad
+\vet{r}''(t)=\lambda''(t)\,\vet{d}.
+\]
+Os dois vetores são paralelos, logo \(\vet{r}'\times\vet{r}''=\vet{0}\). Como \(\vet{r}'\neq\vet{0}\), a fórmula da curvatura dá \(\kappa=0\) em todo ponto.
+
+Reciprocamente, suponha \(\kappa\equiv 0\). A fórmula \(\kappa=\norm{\vet{T}'}/\norm{\vet{r}'}\) e a hipótese \(\norm{\vet{r}'}>0\) forçam \(\vet{T}'=\vet{0}\) em \(I\). Uma função de classe \(C^1\) com derivada identicamente nula num intervalo é constante: para \(t,t_{0}\in I\),
+\[
+\vet{T}(t)-\vet{T}(t_{0})
+=\int_{t_{0}}^{t}\vet{T}'(u)\,\dif u=\vet{0}.
+\]
+Seja \(\vet{T}_{0}\) esse vetor constante. Por definição, \(\vet{r}'(t)=v(t)\vet{T}_{0}\) com \(v(t)=\norm{\vet{r}'(t)}>0\). Integrando a partir de um \(t_{0}\in I\),
+\begin{align*}
+\vet{r}(t)
+&=\vet{r}(t_{0})+\int_{t_{0}}^{t}\vet{r}'(u)\,\dif u
+=\vet{r}(t_{0})+\Biggl(\int_{t_{0}}^{t} v(u)\,\dif u\Biggr)\vet{T}_{0}.
+\end{align*}
+Todo ponto da imagem é \(\vet{r}(t_{0})\) mais um escalar vezes o vetor fixo \(\vet{T}_{0}\). A imagem está na reta que passa por \(\vet{r}(t_{0})\) com direção \(\vet{T}_{0}\).
+
+\begin{exercicio}[Avançado --- A2]
+A cúspide \(\vet{r}(t)=(t^{2},t^{3},0)\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+(i) A velocidade é \(\vet{r}'(t)=(2t,\,3t^{2},\,0)\). Em \(t=0\), \(\vet{r}'(0)=(0,0,0)\). As fórmulas de \(\vet{T}\) e de \(\kappa\) dividem por \(\norm{\vet{r}'}\) e não estão definidas nesse ponto.
+
+A imagem: \(x=t^{2}\), \(y=t^{3}\), \(z=0\). Então \(y^{2}=t^{6}=(t^{2})^{3}=x^{3}\), com \(z=0\) e \(x\ge 0\). É a parábola semicúbica no plano \(z=0\).
+
+(ii) Para \(t\neq 0\), \(\vet{r}''(t)=(2,\,6t,\,0)\) e
+\[
+\norm{\vet{r}'(t)}
+=\sqrt{4t^{2}+9t^{4}}
+=\sqrt{t^{2}(4+9t^{2})}
+=\abs{t}\sqrt{4+9t^{2}}.
+\]
+O produto vetorial é
+\begin{align*}
+\vet{r}'\times\vet{r}''
+&=
+\begin{vmatrix}
+\vet{i}&\vet{j}&\vet{k}\\
+2t&3t^{2}&0\\
+2&6t&0
+\end{vmatrix}
+=(0,\,0,\,12t^{2}-6t^{2})
+=(0,\,0,\,6t^{2}).
+\end{align*}
+A componente \(\vet{k}\) é \(2t\cdot 6t-3t^{2}\cdot 2=12t^{2}-6t^{2}=6t^{2}\). Como \(t^{2}\ge 0\), a norma é \(6t^{2}\). Portanto, para \(t\neq 0\),
+\begin{align*}
+\kappa(t)
+&=\frac{6t^{2}}{\bigl(\abs{t}\sqrt{4+9t^{2}}\bigr)^{3}}
+=\frac{6t^{2}}{\abs{t}^{3}\,(4+9t^{2})^{3/2}}
+=\frac{6}{\abs{t}\,(4+9t^{2})^{3/2}}.
+\end{align*}
+Na última passagem usamos \(t^{2}/\abs{t}^{3}=1/\abs{t}\).
+
+(iii) O denominador tende a \(0\) quando \(t\to 0\), porque \(\abs{t}\to 0\) e \((4+9t^{2})^{3/2}\to 4^{3/2}=8\). O numerador é a constante \(6\). Logo
+\[
+\lim_{t\to 0}\kappa(t)=+\infty.
+\]
+A curvatura explode na cúspide, e o ponto \(t=0\) permanece fora do domínio da fórmula.
+
+\begin{exercicio}[Avançado --- A3]
+O triedro é ortonormal.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Hipóteses: \(\vet{r}'\neq\vet{0}\) e \(\vet{T}'\neq\vet{0}\) no ponto considerado.
+
+Por definição, \(\vet{T}=\vet{r}'/\norm{\vet{r}'}\), logo \(\norm{\vet{T}}=1\).
+
+De \(\vet{T}\cdot\vet{T}=1\), derivando, \(2\vet{T}\cdot\vet{T}'=0\), logo \(\vet{T}\cdot\vet{T}'=0\). A normal principal é \(\vet{N}=\vet{T}'/\norm{\vet{T}'}\), então \(\norm{\vet{N}}=1\) e
+\[
+\vet{T}\cdot\vet{N}
+=\frac{\vet{T}\cdot\vet{T}'}{\norm{\vet{T}'}}=0.
+\]
+
+A igualdade \(\vet{B}=\vet{T}\times\vet{N}\) é a definição de \(\vet{B}\). Falta provar que essa definição produz um vetor unitário ortogonal a \(\vet{T}\) e a \(\vet{N}\).
+
+Primeiro, \((\vet{u}\times\vet{v})\cdot\vet{u}=0\) para quaisquer \(\vet{u},\vet{v}\). Em componentes, com \(\vet{u}=(u_{1},u_{2},u_{3})\) e \(\vet{v}=(v_{1},v_{2},v_{3})\),
+\begin{align*}
+(\vet{u}\times\vet{v})\cdot\vet{u}
+&=(u_{2}v_{3}-u_{3}v_{2})u_{1}+(u_{3}v_{1}-u_{1}v_{3})u_{2}+(u_{1}v_{2}-u_{2}v_{1})u_{3}\\
+&=u_{1}u_{2}v_{3}-u_{1}u_{3}v_{2}+u_{2}u_{3}v_{1}-u_{1}u_{2}v_{3}+u_{1}u_{3}v_{2}-u_{2}u_{3}v_{1}
+=0.
+\end{align*}
+O mesmo cálculo com o segundo fator, ou a troca \(\vet{u}\times\vet{v}=-(\vet{v}\times\vet{u})\), dá \((\vet{u}\times\vet{v})\cdot\vet{v}=0\). Aplicando a \(\vet{u}=\vet{T}\) e \(\vet{v}=\vet{N}\),
+\[
+\vet{B}\cdot\vet{T}=0,
+\qquad
+\vet{B}\cdot\vet{N}=0.
+\]
+
+A norma sai do lema da nota, \(\norm{\vet{u}\times\vet{v}}^{2}=\norm{\vet{u}}^{2}\norm{\vet{v}}^{2}-(\vet{u}\cdot\vet{v})^{2}\):
+\[
+\norm{\vet{B}}^{2}
+=\norm{\vet{T}\times\vet{N}}^{2}
+=\norm{\vet{T}}^{2}\norm{\vet{N}}^{2}-(\vet{T}\cdot\vet{N})^{2}
+=1\cdot 1-0
+=1.
+\]
+Logo \(\norm{\vet{B}}=1\). Os três vetores são unitários e dois a dois ortogonais. Junto com a definição \(\vet{B}=\vet{T}\times\vet{N}\), formam uma base ortonormal positiva.
+
+\end{document}

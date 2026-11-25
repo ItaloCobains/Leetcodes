@@ -1,0 +1,487 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Cálculo III: derivadas parciais, diferenciabilidade e gradiente}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Derivadas parciais}
+
+\base{A derivada em uma variável é o limite do quociente de incrementos. A parcial faz a mesma conta em uma coordenada, com as outras congeladas. O teorema do valor médio em uma variável será usado mais adiante: se $\varphi$ é contínua em $[p,q]$ e derivável no intervalo aberto, então $\varphi(q)-\varphi(p)=\varphi'(c)(q-p)$ para algum $c$ entre $p$ e $q$.}
+
+\begin{definicao}
+Seja $f$ definida numa bola aberta em torno de $(a,b)$. A \emph{derivada parcial em relação a $x$} no ponto é
+\[
+f_x(a,b)=\partial_x f(a,b)=\lim_{h\to 0}\frac{f(a+h,b)-f(a,b)}{h},
+\]
+quando o limite existe. A parcial em relação a $y$ congela $x$ em $a$:
+\[
+f_y(a,b)=\lim_{k\to 0}\frac{f(a,b+k)-f(a,b)}{k}.
+\]
+\end{definicao}
+
+Fora de pontos excepcionais, a conta prática é derivar em uma variável tratando a outra como constante.
+
+\begin{exemplo}
+Seja $f(x,y)=x^3 y-2xy^2+5$, polinômio, definido em $\R^2$. Tratando $y$ como constante,
+\[
+f_x(x,y)=3x^2 y-2y^2.
+\]
+Tratando $x$ como constante,
+\[
+f_y(x,y)=x^3-4xy.
+\]
+As duas existem em todo ponto.
+\end{exemplo}
+
+\begin{exemplo}
+Seja $g(x,y)=\arctan(y/x)$. A expressão $y/x$ está definida exatamente quando $x\neq 0$, e $\arctan$ está definida em $\R$. O domínio de $g$ é o plano sem o eixo $y$, isto é, $\{(x,y):x\neq 0\}$. Não se trata da função argumento completa: em $x<0$ o valor $\arctan(y/x)$ cai em $(-\pi/2,\pi/2)$ e não acompanha o ângulo polar usual.
+
+Para $x\neq 0$, a regra da cadeia em uma variável, com $u=y/x$, dá
+\[
+\partial_x g=\frac{1}{1+u^2}\cdot\Bigl(-\frac{y}{x^2}\Bigr).
+\]
+Como $1+(y/x)^2=(x^2+y^2)/x^2$,
+\[
+\frac{1}{1+(y/x)^2}=\frac{x^2}{x^2+y^2},
+\]
+e portanto
+\[
+\partial_x g=\frac{x^2}{x^2+y^2}\cdot\Bigl(-\frac{y}{x^2}\Bigr)=-\frac{y}{x^2+y^2}.
+\]
+Na variável $y$, $\partial_y u=1/x$, logo
+\[
+\partial_y g=\frac{x^2}{x^2+y^2}\cdot\frac{1}{x}=\frac{x}{x^2+y^2}.
+\]
+As duas fórmulas valem em $x\neq 0$. O eixo $y$ está fora do domínio, mesmo nos pontos em que $x^2+y^2\neq 0$.
+\end{exemplo}
+
+\section{Diferenciabilidade}
+
+Existir parcial é controlar $f$ sobre dois segmentos, o horizontal e o vertical. Diferenciabilidade pede uma aproximação linear que funcione no disco, em todas as direções ao mesmo tempo, com erro pequeno em comparação com a distância.
+
+\begin{definicao}
+A função $f$, definida numa bola aberta em torno de $(a,b)$, é \emph{diferenciável} em $(a,b)$ quando existem números $A$ e $B$ tais que
+\begin{equation}
+f(a+h,b+k)=f(a,b)+Ah+Bk+R(h,k),
+\label{eq:diferenciavel}
+\end{equation}
+com
+\[
+\lim_{(h,k)\to(0,0)}\frac{R(h,k)}{\sqrt{h^2+k^2}}=0.
+\]
+Convenciona-se $R(0,0)=0$. O vetor $(A,B)$ é a derivada de $f$ no ponto, quando essa aproximação existe.
+\end{definicao}
+
+O quociente $R/\sqrt{h^2+k^2}$ é o erro dividido pela distância até $(a,b)$. Pedir que ele vá a zero é mais forte do que pedir que o próprio erro vá a zero.
+
+\begin{teorema}
+Se $f$ é diferenciável em $(a,b)$, então $f_x(a,b)$ e $f_y(a,b)$ existem, e na definição acima $A=f_x(a,b)$ e $B=f_y(a,b)$.
+\end{teorema}
+
+\begin{proof}
+Ponhamos $k=0$ em \eqref{eq:diferenciavel}, com $h\neq 0$:
+\[
+f(a+h,b)-f(a,b)=Ah+R(h,0),
+\]
+logo
+\[
+\frac{f(a+h,b)-f(a,b)}{h}=A+\frac{R(h,0)}{h}.
+\]
+O módulo do resto satisfaz
+\[
+\abs{\frac{R(h,0)}{h}}=\abs{\frac{R(h,0)}{\sqrt{h^2}}},
+\]
+e o lado direito tende a $0$ quando $h\to 0$, pela hipótese sobre $R$, porque $(h,0)\to(0,0)$. Portanto o quociente incremental tende a $A$, a parcial $f_x(a,b)$ existe e vale $A$.
+
+Com $h=0$ e $k\neq 0$, o mesmo argumento dá $f_y(a,b)=B$.
+\end{proof}
+
+\begin{teorema}
+Se $f$ é diferenciável em $(a,b)$, então $f$ é contínua em $(a,b)$.
+\end{teorema}
+
+\begin{proof}
+Com a notação da definição e $\rho=\sqrt{h^2+k^2}$, para $\rho>0$,
+\begin{align*}
+\abs{f(a+h,b+k)-f(a,b)}
+&=\abs{Ah+Bk+R(h,k)}\\
+&\le\abs{A}\abs{h}+\abs{B}\abs{k}+\abs{R(h,k)}\\
+&\le\bigl(\abs{A}+\abs{B}\bigr)\rho+\rho\cdot\abs{\frac{R(h,k)}{\rho}}\\
+&=\rho\Biggl(\abs{A}+\abs{B}+\abs{\frac{R}{\rho}}\Biggr).
+\end{align*}
+Como $R/\rho\to 0$, existe $\delta_1>0$ tal que $0<\rho<\delta_1$ implica $\abs{R/\rho}<1$. Nesse caso o incremento é no máximo $\rho\,(\abs{A}+\abs{B}+1)$. Dado $\eps>0$, escolha
+\[
+\delta=\min\Biggl\{\delta_1,\,\frac{\eps}{\abs{A}+\abs{B}+1}\Biggr\}.
+\]
+O denominador é pelo menos $1$. Se $0<\rho<\delta$, o incremento é menor que $\eps$. O limite de $f$ no ponto é $f(a,b)$.
+\end{proof}
+
+\section{O que as parciais sozinhas não dizem}
+
+\cuidado{A existência das duas parciais no ponto não implica continuidade e, portanto, não implica diferenciabilidade. A hipótese que falta no critério suficiente da próxima seção é a continuidade das parciais numa vizinhança, não a mera existência.}
+
+\begin{contraexemplo}
+Defina
+\[
+f(x,y)=\begin{cases}
+\dfrac{xy}{x^2+y^2}, & (x,y)\neq(0,0),\\[1mm]
+0, & (x,y)=(0,0).
+\end{cases}
+\]
+Pela nota anterior, o limite na origem não existe: ao longo de $y=mx$ ele vale $m/(1+m^2)$. Em particular $f$ não é contínua em $(0,0)$, qualquer que seja o valor atribuído na origem. Pelo teorema anterior, $f$ não é diferenciável em $(0,0)$.
+
+As parciais na origem, porém, existem. Pela definição,
+\[
+f_x(0,0)=\lim_{h\to 0}\frac{f(h,0)-f(0,0)}{h}=\lim_{h\to 0}\frac{0}{h}=0,
+\]
+porque $f(h,0)=0$ para $h\neq 0$. Do mesmo modo $f(0,k)=0$, e $f_y(0,0)=0$.
+
+Fora da origem o denominador não se anula e $f$ é racional, logo as parciais existem em todo ponto $(x,y)\neq(0,0)$. A regra do quociente dá
+\begin{align*}
+f_x(x,y)&=\frac{y(x^2+y^2)-xy\cdot 2x}{(x^2+y^2)^2}=\frac{y(y^2-x^2)}{(x^2+y^2)^2},\\[1mm]
+f_y(x,y)&=\frac{x(x^2+y^2)-xy\cdot 2y}{(x^2+y^2)^2}=\frac{x(x^2-y^2)}{(x^2+y^2)^2}.
+\end{align*}
+Assim as duas parciais existem em todo o plano. Isso não restaura a continuidade de $f$. Também não torna as parciais contínuas na origem: para $y\neq 0$,
+\[
+f_x(0,y)=\frac{y(y^2-0)}{(y^2)^2}=\frac{1}{y},
+\]
+que não tende a $f_x(0,0)=0$ quando $y\to 0$. A parcial $f_x$ nem sequer é limitada em nenhuma bola em torno da origem.
+\end{contraexemplo}
+
+O exemplo separa três propriedades que em uma variável andam juntas de outro modo. Em uma variável, derivável implica contínua. Em duas, existir as parciais é mais fraco do que ser diferenciável, e mais fraco do que ser contínuo.
+
+\section{Critério suficiente e plano tangente}
+
+\begin{teorema}
+Seja $f$ definida numa bola aberta em torno de $(a,b)$. Suponha que $f_x$ e $f_y$ existem em todos os pontos dessa bola e são contínuas em $(a,b)$. Então $f$ é diferenciável em $(a,b)$, e os coeficientes são $A=f_x(a,b)$ e $B=f_y(a,b)$.
+\end{teorema}
+
+\begin{proof}
+Para $(h,k)$ pequeno o bastante, os segmentos de $(a,b)$ até $(a,b+k)$ e de $(a,b+k)$ até $(a+h,b+k)$ ficam dentro da bola. Separe o incremento em duas diferenças de uma variável:
+\begin{align*}
+f(a+h,b+k)-f(a,b)
+&=
+\bigl(f(a+h,b+k)-f(a,b+k)\bigr)
++
+\bigl(f(a,b+k)-f(a,b)\bigr).
+\end{align*}
+Se $h=0$, a primeira diferença é zero. Se $h\neq 0$, a função $x\mapsto f(x,b+k)$ é derivável no intervalo entre $a$ e $a+h$, porque $f_x$ existe na bola, e portanto é contínua nesse intervalo. O teorema do valor médio fornece $\theta_1\in(0,1)$ tal que
+\[
+f(a+h,b+k)-f(a,b+k)=f_x(a+\theta_1 h,\,b+k)\,h.
+\]
+Se $k=0$, a segunda diferença é zero. Se $k\neq 0$, a função $y\mapsto f(a,y)$ é derivável entre $b$ e $b+k$, e existe $\theta_2\in(0,1)$ tal que
+\[
+f(a,b+k)-f(a,b)=f_y(a,\,b+\theta_2 k)\,k.
+\]
+Somando e reescrevendo em torno dos valores no ponto,
+\begin{align*}
+f(a+h,b+k)-f(a,b)
+&=f_x(a,b)\,h+f_y(a,b)\,k+R(h,k),
+\end{align*}
+com $R(h,k)$ definido assim: se $h=0$, o primeiro termo abaixo é zero e não há $\theta_1$; se $k=0$, o segundo termo é zero e não há $\theta_2$; nos outros casos,
+\begin{align*}
+R(h,k)
+&=\bigl(f_x(a+\theta_1 h,\,b+k)-f_x(a,b)\bigr)h\\
+&\qquad+\bigl(f_y(a,\,b+\theta_2 k)-f_y(a,b)\bigr)k.
+\end{align*}
+Seja $\rho=\sqrt{h^2+k^2}$. Se $\rho=0$, então $R=0$. Se $\rho>0$, cada termo ausente conta como zero na estimativa, e
+\begin{align*}
+\abs{\frac{R}{\rho}}
+&\le\abs{f_x(a+\theta_1 h,\,b+k)-f_x(a,b)}\cdot\frac{\abs{h}}{\rho}\\
+&\qquad+\abs{f_y(a,\,b+\theta_2 k)-f_y(a,b)}\cdot\frac{\abs{k}}{\rho}.
+\end{align*}
+Cada razão $\abs{h}/\rho$ e $\abs{k}/\rho$ é no máximo $1$. Se $h\neq 0$, o ponto $(a+\theta_1 h,\,b+k)$ tende a $(a,b)$ quando $(h,k)\to(0,0)$, porque $\theta_1\in(0,1)$; a continuidade de $f_x$ anula o primeiro módulo. Se $h=0$, esse termo já é zero. O mesmo vale para $f_y$ e para $k$. Logo $R/\rho\to 0$, que é a definição de diferenciabilidade.
+\end{proof}
+
+A continuidade das parciais é uma hipótese suficiente, confortável para polinômios, funções racionais fora dos zeros do denominador, e composições usuais. Não é necessária: há funções diferenciáveis com parcial descontínua. O que o contraexemplo anterior mostra é que a existência, sozinha, não pode ocupar o lugar dessa hipótese.
+
+Quando $f$ é diferenciável em $(a,b)$, a aproximação linear
+\begin{equation}
+z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)
+\label{eq:plano}
+\end{equation}
+é o \emph{plano tangente} ao gráfico no ponto correspondente. É também a linearização de $f$ usada para estimar valores próximos.
+
+\begin{exemplo}
+Seja $f(x,y)=x^2+xy+y^2$ e o ponto $(1,1)$. Então $f(1,1)=3$, $f_x=2x+y$ e $f_y=x+2y$, de modo que $f_x(1,1)=3$ e $f_y(1,1)=3$. As parciais são polinômios, contínuas, e o critério suficiente garante a diferenciabilidade. O plano tangente é
+\[
+z=3+3(x-1)+3(y-1)=3x+3y-3.
+\]
+No ponto vizinho $(1{,}1;\,1{,}1)$, a função vale $1{,}21+1{,}21+1{,}21=3{,}63$ e o plano vale $3{,}6$. O erro é $0{,}03$, da ordem do quadrado do deslocamento, como a definição de diferenciabilidade pede.
+\end{exemplo}
+
+\section{Regra da cadeia}
+
+\begin{teorema}
+Seja $f$ diferenciável em $(x(t_0),y(t_0))$. Sejam $x$ e $y$ deriváveis em $t_0$. Então $\varphi(t)=f(x(t),y(t))$ é derivável em $t_0$ e
+\[
+\varphi'(t_0)=f_x\,x'(t_0)+f_y\,y'(t_0),
+\]
+com as parciais de $f$ calculadas em $(x(t_0),y(t_0))$.
+\end{teorema}
+
+\begin{proof}
+Escreva $\Delta x=x(t_0+\Delta t)-x(t_0)$ e $\Delta y=y(t_0+\Delta t)-y(t_0)$, para $\Delta t\neq 0$. A diferenciabilidade de $f$ dá
+\[
+\Delta\varphi=f_x\,\Delta x+f_y\,\Delta y+R(\Delta x,\Delta y),
+\]
+com $R(0,0)=0$ e $R(\Delta x,\Delta y)/\rho\to 0$ quando $\rho=\sqrt{(\Delta x)^2+(\Delta y)^2}\to 0$. Dividindo por $\Delta t$,
+\[
+\frac{\Delta\varphi}{\Delta t}=f_x\frac{\Delta x}{\Delta t}+f_y\frac{\Delta y}{\Delta t}+\frac{R}{\Delta t}.
+\]
+Os dois primeiros quocientes tendem a $x'(t_0)$ e $y'(t_0)$. Falta mostrar que $R/\Delta t\to 0$.
+
+Como $x$ e $y$ são deriváveis em $t_0$, são contínuas em $t_0$, logo $(\Delta x,\Delta y)\to(0,0)$ quando $\Delta t\to 0$. Se $\rho=0$, então $R=0$ e o quociente é zero. Se $\rho>0$,
+\[
+\abs{\frac{R}{\Delta t}}=\abs{\frac{R}{\rho}}\cdot\frac{\rho}{\abs{\Delta t}}
+=\abs{\frac{R}{\rho}}\sqrt{\Bigl(\frac{\Delta x}{\Delta t}\Bigr)^2+\Bigl(\frac{\Delta y}{\Delta t}\Bigr)^2}.
+\]
+O segundo fator tende a $\sqrt{x'(t_0)^2+y'(t_0)^2}$, logo fica limitado para $\Delta t$ pequeno: existe $M$ tal que ele é $\le M$. O primeiro fator tende a $0$. O produto tende a $0$.
+
+Portanto $\varphi'(t_0)=f_x x'(t_0)+f_y y'(t_0)$.
+\end{proof}
+
+\begin{exemplo}
+Seja $f(x,y)=x^2 y$, com $x(t)=t^2$ e $y(t)=t$. A fórmula dá
+\[
+\frac{\dif}{\dif t}f(x(t),y(t))=2xy\cdot(2t)+x^2\cdot 1=2(t^2)(t)(2t)+t^4=4t^4+t^4=5t^4.
+\]
+Diretamente, $f(x(t),y(t))=t^4\cdot t=t^5$, cuja derivada é $5t^4$. As duas contas concordam.
+\end{exemplo}
+
+A versão com duas variáveis independentes reduz-se a essa. Se $f$ é diferenciável em $(x(u_0,v_0),y(u_0,v_0))$ e se $x$ e $y$ possuem parciais em $(u_0,v_0)$, então, congelando $v=v_0$, as funções $u\mapsto x(u,v_0)$ e $u\mapsto y(u,v_0)$ são deriváveis em $u_0$. O teorema de uma variável dá
+\begin{align}
+\partial_u f &= f_x\, x_u+f_y\, y_u, \label{eq:cadeia-u}\\
+\partial_v f &= f_x\, x_v+f_y\, y_v, \label{eq:cadeia-v}
+\end{align}
+com $f_x$ e $f_y$ no ponto $(x,y)$ correspondente, e as parciais de $x$ e $y$ em $(u_0,v_0)$. A segunda fórmula é o mesmo argumento com $u$ congelado.
+
+A árvore abaixo é um jeito de lembrar \eqref{eq:cadeia-u} e \eqref{eq:cadeia-v} depois que a conta já está feita. Ela não substitui a hipótese de diferenciabilidade de $f$: se só existem parciais de $f$, a fórmula pode falhar.
+
+\[
+\begin{array}{ccccc}
+ & & f & & \\
+ & \swarrow & & \searrow & \\
+x & & & & y \\
+\swarrow\ \searrow & & & \swarrow\ \searrow & \\
+u\quad v & & & u\quad v &
+\end{array}
+\]
+
+Cada rota de $f$ até $u$ contribui com um produto, e $\partial_u f$ é a soma dessas rotas: o ramo $f\to x\to u$ contribui com $f_x x_u$, o ramo $f\to y\to u$ contribui com $f_y y_u$. O mesmo desenho, lido até $v$, produz $\partial_v f$.
+
+\section{Derivada direcional e gradiente}
+
+\begin{definicao}
+Seja $\vet{u}=(u_1,u_2)$ um vetor com $\norm{\vet{u}}=1$. A \emph{derivada direcional} de $f$ em $(a,b)$, na direção $\vet{u}$, é
+\[
+D_{\vet{u}} f(a,b)=\lim_{t\to 0}\frac{f(a+tu_1,\,b+tu_2)-f(a,b)}{t},
+\]
+quando o limite existe. Exigir norma $1$ faz de $t$ o deslocamento medido em comprimento: o quociente é uma taxa de variação por unidade de distância.
+\end{definicao}
+
+As parciais são as direcionais nas direções $(1,0)$ e $(0,1)$, com o sinal de $t\to 0$ dos dois lados. Existir todas as direcionais ainda é mais fraco do que ser diferenciável. A fórmula do produto escalar precisa da aproximação linear no disco.
+
+O \emph{gradiente} no ponto em que as parciais existem é o vetor
+\[
+\nabla f(a,b)=\bigl(f_x(a,b),\,f_y(a,b)\bigr).
+\]
+
+\begin{teorema}
+Se $f$ é diferenciável em $(a,b)$ e $\norm{\vet{u}}=1$, então $D_{\vet{u}} f(a,b)$ existe e
+\[
+D_{\vet{u}} f(a,b)=\nabla f(a,b)\cdot\vet{u}.
+\]
+\end{teorema}
+
+\begin{proof}
+Pela definição de diferenciabilidade, com $h=tu_1$ e $k=tu_2$,
+\[
+f(a+tu_1,b+tu_2)-f(a,b)=f_x\,(tu_1)+f_y\,(tu_2)+R(tu_1,tu_2).
+\]
+Para $t\neq 0$,
+\[
+\frac{f(a+tu_1,b+tu_2)-f(a,b)}{t}=f_x u_1+f_y u_2+\frac{R(tu_1,tu_2)}{t}.
+\]
+A distância do incremento até a origem é $\rho=\abs{t}\sqrt{u_1^2+u_2^2}=\abs{t}$, porque $\vet{u}$ é unitário. Se $R=0$, o quociente extra é zero. Caso contrário,
+\[
+\abs{\frac{R}{t}}=\abs{\frac{R}{\rho}}.
+\]
+Quando $t\to 0$, tem-se $\rho\to 0$, logo $R/\rho\to 0$. O limite do quociente incremental é $f_x u_1+f_y u_2$.
+\end{proof}
+
+\base{Desigualdade de Cauchy--Schwarz em $\R^n$: $\abs{\vet{v}\cdot\vet{w}}\le\norm{\vet{v}}\norm{\vet{w}}$. A igualdade ocorre se, e somente se, um dos vetores é múltiplo escalar do outro.}
+
+\begin{teorema}
+Seja $f$ diferenciável em $(a,b)$. Entre todos os vetores unitários, a derivada direcional é máxima na direção do gradiente, quando $\nabla f(a,b)\neq\vet{0}$, e esse máximo vale $\norm{\nabla f(a,b)}$. A derivada direcional é mínima na direção oposta, e esse mínimo vale $-\norm{\nabla f(a,b)}$.
+\end{teorema}
+
+\begin{proof}
+Para $\norm{\vet{u}}=1$, o teorema anterior e Cauchy--Schwarz dão
+\[
+\abs{D_{\vet{u}} f}=\abs{\nabla f\cdot\vet{u}}\le\norm{\nabla f}\,\norm{\vet{u}}=\norm{\nabla f}.
+\]
+Se $\nabla f=\vet{0}$, toda direcional é zero e não há direção de crescimento. Se $\nabla f\neq\vet{0}$, o vetor unitário $\vet{u}=\nabla f/\norm{\nabla f}$ é paralelo a $\nabla f$, e a igualdade de Cauchy--Schwarz vale:
+\[
+D_{\vet{u}} f=\nabla f\cdot\frac{\nabla f}{\norm{\nabla f}}=\norm{\nabla f}.
+\]
+Na direção oposta, $\vet{u}=-\nabla f/\norm{\nabla f}$, o produto escalar vale $-\norm{\nabla f}$.
+\end{proof}
+
+\begin{exemplo}
+Seja $f(x,y)=100-x^2-2y^2$, pensada como uma temperatura. No ponto $(3,2)$, $\nabla f=(-2x,-4y)=(-6,-8)$ e $\norm{\nabla f}=10$. A direção de maior crescimento é $(-3/5,-4/5)$, e a taxa correspondente é $10$. A direção de maior decrescimento é $(3/5,4/5)$, com taxa $-10$.
+\end{exemplo}
+
+\section{Gradiente e curva de nível}
+
+\begin{teorema}
+Seja $f$ diferenciável num aberto. Seja $\gamma$ uma curva derivável cuja imagem está contida na curva de nível $f(x,y)=c$. Então, em cada $t$,
+\[
+\nabla f\bigl(\gamma(t)\bigr)\cdot\gamma'(t)=0.
+\]
+Se, num ponto, $\nabla f\neq\vet{0}$ e $\gamma'\neq\vet{0}$, o gradiente é ortogonal à reta tangente à curva de nível.
+\end{teorema}
+
+\begin{proof}
+A função $t\mapsto f(\gamma(t))$ é constante, igual a $c$. A regra da cadeia, aplicável porque $f$ é diferenciável e $\gamma$ é derivável, dá
+\[
+\frac{\dif}{\dif t}f(\gamma(t))=\nabla f(\gamma(t))\cdot\gamma'(t)=0,
+\]
+pois a derivada de uma constante é zero.
+\end{proof}
+
+\figura{../figuras/gradiente_nivel.png}{Gradiente de $x^2+y^2$ ortogonal às circunferências de nível.}
+
+No desenho, $f(x,y)=x^2+y^2$ tem $\nabla f=(2x,2y)$, que é radial, e as curvas de nível são circunferências, cujas tangentes são perpendiculares ao raio. A conta do teorema é a versão sem desenho: ao longo de $\gamma(t)=(\cos t,\sin t)$, tem-se $f(\gamma(t))=1$ e $\gamma'(t)=(-\sin t,\cos t)$, e
+\[
+\nabla f(\gamma(t))\cdot\gamma'(t)=(2\cos t,\,2\sin t)\cdot(-\sin t,\,\cos t)=0.
+\]
+
+\section{Teorema de Clairaut e o contraexemplo}
+
+\begin{teorema}[Clairaut--Schwarz]
+Seja $f$ definida numa bola aberta em torno de $(a,b)$. Suponha que $f_{xy}$ e $f_{yx}$ existem em todos os pontos dessa bola e são contínuas em $(a,b)$. Então
+\[
+f_{xy}(a,b)=f_{yx}(a,b).
+\]
+Aqui $f_{xy}=\partial_y(f_x)$ e $f_{yx}=\partial_x(f_y)$.
+\end{teorema}
+
+\begin{esqueleto}
+\item Para $h$ e $k$ pequenos e não nulos, forme a diferença segunda
+\[
+\Delta(h,k)=f(a+h,b+k)-f(a+h,b)-f(a,b+k)+f(a,b).
+\]
+\item Ponha $\phi(x)=f(x,b+k)-f(x,b)$. Então $\Delta=\phi(a+h)-\phi(a)$. O teorema do valor médio produz $\theta\in(0,1)$ com $\Delta=\phi'(a+\theta h)\,h$, isto é,
+\[
+\Delta=\bigl(f_x(a+\theta h,\,b+k)-f_x(a+\theta h,\,b)\bigr)h.
+\]
+\item Aplique o teorema do valor médio na variável $y$, agora à função $y\mapsto f_x(a+\theta h,\,y)$. Existe $\eta\in(0,1)$ tal que
+\[
+\Delta=f_{xy}(a+\theta h,\,b+\eta k)\,hk.
+\]
+\item Repita a conta na ordem inversa, primeiro em $y$ e depois em $x$, para obter $\theta',\eta'\in(0,1)$ com
+\[
+\Delta=f_{yx}(a+\theta' h,\,b+\eta' k)\,hk.
+\]
+\item Cancele $hk\neq 0$. Faça $(h,k)\to(0,0)$. Os pontos intermediários tendem a $(a,b)$, e a continuidade de $f_{xy}$ e de $f_{yx}$ no ponto força os dois limites a coincidirem com os valores no ponto.
+\end{esqueleto}
+
+A continuidade das mistas não pode sair da hipótese. O exemplo seguinte tem as duas mistas existentes em todo o plano, inclusive na origem, e mesmo assim $f_{xy}(0,0)\neq f_{yx}(0,0)$.
+
+\begin{contraexemplo}
+Defina $f(0,0)=0$ e, para $(x,y)\neq(0,0)$,
+\[
+f(x,y)=\frac{xy(x^2-y^2)}{x^2+y^2}.
+\]
+Fora da origem o denominador é positivo e $f$ é quociente de polinômios, logo é de classe $C^\infty$ e as mistas coincidem em cada ponto $(x,y)\neq(0,0)$. O trabalho está na origem, e é feito pela definição, sem derivar a fórmula fechada.
+
+Primeiro, $f(0,y)=0$ para todo $y$: se $y\neq 0$ o fator $x$ no numerador se anula, e se $y=0$ vale a definição. Então, para $y$ fixo,
+\[
+f_x(0,y)=\lim_{h\to 0}\frac{f(h,y)-f(0,y)}{h}=\lim_{h\to 0}\frac{1}{h}\cdot\frac{h y(h^2-y^2)}{h^2+y^2}=\lim_{h\to 0}\frac{y(h^2-y^2)}{h^2+y^2}.
+\]
+Se $y\neq 0$, o limite é $y(0-y^2)/y^2=-y$. Se $y=0$, o quociente é identicamente zero. Nos dois casos,
+\begin{equation}
+f_x(0,y)=-y.\label{eq:fx-eixo}
+\end{equation}
+
+Em seguida, $f(x,0)=0$ para todo $x$. Para $x$ fixo,
+\[
+f_y(x,0)=\lim_{k\to 0}\frac{f(x,k)}{k}=\lim_{k\to 0}\frac{x(x^2-k^2)}{x^2+k^2}.
+\]
+Se $x\neq 0$, o limite é $x(x^2)/x^2=x$. Se $x=0$, o quociente é zero. Logo
+\begin{equation}
+f_y(x,0)=x.\label{eq:fy-eixo}
+\end{equation}
+
+A mista $f_{xy}(0,0)$ é a derivada em relação a $y$, na origem, da função $y\mapsto f_x(0,y)$:
+\[
+f_{xy}(0,0)=\lim_{k\to 0}\frac{f_x(0,k)-f_x(0,0)}{k}=\lim_{k\to 0}\frac{-k-0}{k}=-1.
+\]
+A mista na ordem inversa usa $x\mapsto f_y(x,0)$:
+\[
+f_{yx}(0,0)=\lim_{h\to 0}\frac{f_y(h,0)-f_y(0,0)}{h}=\lim_{h\to 0}\frac{h-0}{h}=1.
+\]
+Portanto $f_{xy}(0,0)=-1$ e $f_{yx}(0,0)=1$. São números diferentes.
+
+As duas mistas existem na origem e fora dela. Não podem ser ambas contínuas em $(0,0)$: se fossem, o teorema de Clairaut obrigaria $f_{xy}(0,0)=f_{yx}(0,0)$. A conta mostra que a conclusão do teorema caiu exatamente onde a continuidade deixou de valer.
+\end{contraexemplo}
+
+\section{Exercícios}
+
+\begin{exercicio}[{[Básico --- parciais de um polinômio]}]
+Calcule $f_x$ e $f_y$ de $f(x,y)=x^3 y+e^{xy}$ e diga em que conjunto elas existem.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- parciais e domínio]}]
+Calcule as parciais de $f(x,y)=\ln(x^2+y^2)$ e descreva o domínio.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- plano tangente]}]
+Escreva a equação do plano tangente ao gráfico de $f(x,y)=e^x\cos y$ no ponto $(0,0)$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- direcional]}]
+Para $f(x,y)=x^2-3xy+y^2$, calcule $D_{\vet{u}} f(1,2)$ com $\vet{u}=(3/5,\,4/5)$. Use o produto escalar e registre por que ele se aplica.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- definição de diferenciabilidade]}]
+Mostre, pela definição, que $f(x,y)=xy$ é diferenciável em $(0,0)$. Exiba $A$, $B$ e prove que o resto dividido pela distância tende a zero. A desigualdade $\abs{xy}\le(x^2+y^2)/2$ pode entrar na conta.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- contínua, com parciais, sem ser diferenciável]}]
+Seja $f(0,0)=0$ e, para $(x,y)\neq(0,0)$,
+\[
+f(x,y)=\frac{xy}{\sqrt{x^2+y^2}}.
+\]
+\begin{enumerate}[label=\alph*)]
+\item Prove que $f$ é contínua na origem.
+\item Calcule $f_x(0,0)$ e $f_y(0,0)$ pela definição.
+\item Prove que $f$ não é diferenciável na origem.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- cadeia]}]
+Seja $w=x^2 y$, com $x=u+v$ e $y=uv$. Calcule $\partial w/\partial u$ no ponto $(u,v)=(1,1)$, pela regra da cadeia, e confira derivando a expressão $w(u,v)$ diretamente.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- parciais nulas]}]
+Seja $B$ uma bola aberta de $\R^2$ na qual $f_x$ e $f_y$ existem e são identicamente zero. Prove que $f$ é constante em $B$. Primeiro mostre que $f$ é constante em cada retângulo aberto contido em $B$, usando o teorema do valor médio nos dois segmentos do incremento. O canto desse caminho fica no retângulo; numa bola euclidiana, o canto do caminho horizontal-vertical entre dois pontos quaisquer pode sair da bola, então não aplique os dois segmentos direto à bola inteira. Depois use que $B$ é conexa.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- direcionais sem diferenciabilidade]}]
+Seja $f(0,0)=0$ e, para $(x,y)\neq(0,0)$,
+\[
+f(x,y)=\frac{x^2 y}{x^4+y^2}.
+\]
+\begin{enumerate}[label=\alph*)]
+\item Para cada vetor unitário $\vet{u}=(a,b)$, calcule $D_{\vet{u}} f(0,0)$.
+\item Calcule $f_x(0,0)$ e $f_y(0,0)$. Compare $D_{\vet{u}} f(0,0)$ com $\nabla f(0,0)\cdot\vet{u}$.
+\item Mostre que $f$ não é contínua na origem, exibindo a parábola $y=x^2$, e conclua que $f$ não é diferenciável na origem.
+\end{enumerate}
+\end{exercicio}
+
+\end{document}

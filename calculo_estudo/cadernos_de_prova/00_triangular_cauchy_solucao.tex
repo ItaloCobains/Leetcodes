@@ -1,0 +1,113 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Solução --- Desigualdade triangular e Cauchy--Schwarz}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+As quatro demonstrações seguem a ordem do caderno de enunciados. Cada uma inclui os fatos auxiliares que ela usa.
+
+\section{Desigualdade triangular em \texorpdfstring{$\R$}{R}}
+
+\begin{teorema}
+Para todos $x,y\in\R$, $\abs{x+y}\le\abs{x}+\abs{y}$.
+\end{teorema}
+
+\begin{proof}
+Usa-se que $\R$ é corpo ordenado: a ordem é tricotômica e transitiva, $x<y$ implica $x+z<y+z$, e $x<y$ com $z>0$ implica $xz<yz$. Escreve-se $x\le y$ quando $x<y$ ou $x=y$.
+
+Primeiro, $t^2\ge 0$ para todo $t$, com igualdade só em $t=0$. Se $t>0$, então $t\cdot t>0$. Se $t<0$, então $-t>0$ e $t^2=(-t)^2>0$. A identidade $(-a)(-a)=a^2$ vem de $a(-a)=-(a^2)$ e de $(-a)(-a)=-(a(-a))$. Além disso $0<1$: se $1<0$, então $0<-1$, e multiplicar $1<0$ por $-1>0$ daria $-1<0$, contradizendo a tricotomia.
+
+Se $x\ge 0$ e $y\ge 0$, então $xy\ge 0$. Se $a\le b$ e $c\le d$, então $a+c\le b+d$: some $c$ à primeira desigualdade e $b$ à segunda, e use a transitividade. Se $x<y$, então $-y<-x$, somando $-x-y$. O caso não estrito segue separando igualdade e desigualdade estrita.
+
+Agora o módulo. Se $x\ge 0$, $\abs{x}=x\ge 0$. Se $x<0$, $\abs{x}=-x>0$. Em ambos, $-\abs{x}\le x\le\abs{x}$: no caso $x\ge 0$, $-\abs{x}=-x\le 0\le x$; no caso $x<0$, $-\abs{x}=x$ e $x<0<-x$. Também $\abs{xy}=\abs{x}\abs{y}$, por inspeção dos quatro sinais, e $\abs{-x}=\abs{x}$.
+
+Caracterização. Seja $a\ge 0$. Então $\abs{z}\le a$ se e somente se $-a\le z\le a$. Se $\abs{z}\le a$, já se tem $-\abs{z}\le z\le\abs{z}$. Se $\abs{z}=a$, então $-\abs{z}=-a$; se $\abs{z}<a$, então $-a<-\abs{z}$. Logo $-a\le z\le a$. Reciprocamente, se $-a\le z\le a$ e $z\ge 0$, então $\abs{z}=z\le a$. Se $z<0$, $\abs{z}=-z$; de $-a\le z$ segue $-z\le a$, separando igualdade e desigualdade estrita ao multiplicar por $-1$.
+
+Aplique $-\abs{x}\le x\le\abs{x}$ e $-\abs{y}\le y\le\abs{y}$. Somando,
+\[
+-\bigl(\abs{x}+\abs{y}\bigr)\le x+y\le\abs{x}+\abs{y}.
+\]
+O número $\abs{x}+\abs{y}$ é não negativo. A caracterização com $z=x+y$ dá $\abs{x+y}\le\abs{x}+\abs{y}$.
+\end{proof}
+
+\section{Diferença dos módulos}
+
+\begin{corolario}
+Para todos $x,y\in\R$, $\abs{\,\abs{x}-\abs{y}\,}\le\abs{x-y}$.
+\end{corolario}
+
+\begin{proof}
+Pela desigualdade triangular aplicada a $(x-y)+y$,
+\[
+\abs{x}\le\abs{x-y}+\abs{y},
+\]
+logo $\abs{x}-\abs{y}\le\abs{x-y}$. Trocando $x$ e $y$, $\abs{y}-\abs{x}\le\abs{y-x}$. Como $\abs{y-x}=\abs{-(x-y)}=\abs{x-y}$, tem-se $\abs{y}-\abs{x}\le\abs{x-y}$. Multiplicar por $-1$ inverte o sentido, com o cuidado de que a igualdade permanece igualdade. Assim
+\[
+-\abs{x-y}\le\abs{x}-\abs{y}\le\abs{x-y}.
+\]
+A caracterização do módulo, com o número não negativo $\abs{x-y}$, dá $\abs{\,\abs{x}-\abs{y}\,}\le\abs{x-y}$.
+\end{proof}
+
+\section{Cauchy--Schwarz em \texorpdfstring{$\R^n$}{Rn}}
+
+\begin{teorema}
+Para todos $\vet{u},\vet{v}\in\R^n$, $\abs{\vet{u}\cdot\vet{v}}\le\norm{\vet{u}}\norm{\vet{v}}$.
+\end{teorema}
+
+\begin{proof}
+O produto escalar é bilinear e simétrico, porque a soma e o produto de $\R$ o são em cada coordenada. Em particular
+\[
+\norm{\vet{u}+t\vet{v}}^2
+=\norm{\vet{u}}^2+2t\,(\vet{u}\cdot\vet{v})+t^2\norm{\vet{v}}^2
+\]
+para todo $t\in\R$, e o primeiro membro é não negativo. Também $\norm{\vet{v}}^2=\sum v_i^2=0$ se e somente se $\vet{v}=\vet{0}$. Se $b\ge 0$, $c\ge 0$ e $b^2=c^2$, então $b=c$, porque $(b-c)(b+c)=0$ e $b=-c$ com ambos não negativos força $b=c=0$. Daí $\sqrt{w^2}=\abs{w}$. Se $0\le\alpha\le\beta$, então $\sqrt{\alpha}\le\sqrt{\beta}$. Caso contrário $\sqrt{\beta}<\sqrt{\alpha}$. As duas raízes são não negativas, e
+\[
+\alpha-\beta
+=\bigl(\sqrt{\alpha}-\sqrt{\beta}\bigr)\bigl(\sqrt{\alpha}+\sqrt{\beta}\bigr)>0,
+\]
+porque os dois fatores são positivos. Isso contradiz $\alpha\le\beta$.
+
+Se $\vet{v}=\vet{0}$, os dois lados da desigualdade pedida são zero.
+
+Se $\vet{v}\neq\vet{0}$, seja $q(t)=At^2+Bt+C$ com $A=\norm{\vet{v}}^2>0$, $B=2(\vet{u}\cdot\vet{v})$ e $C=\norm{\vet{u}}^2$. Então $q(t)\ge 0$ para todo real $t$. O discriminante $\Delta=B^2-4AC$ não pode ser positivo. Se fosse, as raízes $t_{\pm}=(-B\pm\sqrt{\Delta})/(2A)$ satisfariam $t_-<t_+$ e
+\[
+t_-+t_+=-\frac{B}{A},\qquad
+t_-t_+=\frac{B^2-\Delta}{4A^2}=\frac{C}{A},
+\]
+porque $B^2-\Delta=4AC$. Logo $q(t)=A(t-t_-)(t-t_+)$. Entre as raízes o produto $(t-t_-)(t-t_+)$ é negativo e $A>0$, então $q(t)<0$, absurdo. Portanto $\Delta\le 0$, isto é
+\[
+(\vet{u}\cdot\vet{v})^2\le\norm{\vet{u}}^2\norm{\vet{v}}^2.
+\]
+Os dois lados são não negativos. A raiz quadrada preserva a ordem, e $\sqrt{(\vet{u}\cdot\vet{v})^2}=\abs{\vet{u}\cdot\vet{v}}$, enquanto $\sqrt{\norm{\vet{u}}^2\norm{\vet{v}}^2}=\norm{\vet{u}}\norm{\vet{v}}$.
+\end{proof}
+
+\section{Desigualdade triangular da norma euclidiana}
+
+\begin{teorema}
+Para todos $\vet{u},\vet{v}\in\R^n$, $\norm{\vet{u}+\vet{v}}\le\norm{\vet{u}}+\norm{\vet{v}}$.
+\end{teorema}
+
+\begin{proof}
+Expanda o quadrado da norma pela bilinearidade:
+\[
+\norm{\vet{u}+\vet{v}}^2
+=\norm{\vet{u}}^2+2\,\vet{u}\cdot\vet{v}+\norm{\vet{v}}^2.
+\]
+Para todo real $t$, $t\le\abs{t}$: se $t\ge 0$ há igualdade, e se $t<0$ então $t<0<\abs{t}$. Logo $\vet{u}\cdot\vet{v}\le\abs{\vet{u}\cdot\vet{v}}$ e
+\[
+\norm{\vet{u}+\vet{v}}^2
+\le\norm{\vet{u}}^2+2\abs{\vet{u}\cdot\vet{v}}+\norm{\vet{v}}^2.
+\]
+Cauchy--Schwarz substitui o módulo do produto escalar:
+\[
+\norm{\vet{u}+\vet{v}}^2
+\le\norm{\vet{u}}^2+2\norm{\vet{u}}\norm{\vet{v}}+\norm{\vet{v}}^2
+=\bigl(\norm{\vet{u}}+\norm{\vet{v}}\bigr)^2.
+\]
+Os números $\norm{\vet{u}+\vet{v}}$ e $\norm{\vet{u}}+\norm{\vet{v}}$ são não negativos, e a desigualdade dos quadrados passa para as raízes, porque a raiz quadrada é crescente em $[0,\infty)$, como registrado na prova anterior. Portanto $\norm{\vet{u}+\vet{v}}\le\norm{\vet{u}}+\norm{\vet{v}}$.
+\end{proof}
+
+\end{document}

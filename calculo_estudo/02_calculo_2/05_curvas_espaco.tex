@@ -1,0 +1,432 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Quádricas, curvas no espaço e curvatura}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{Usamos o produto escalar e o produto vetorial em \(\R^3\), a norma \(\norm{\vet{v}}=\sqrt{\vet{v}\cdot\vet{v}}\), e o comprimento de uma curva paramétrica. Uma curva \(\vet{r}\) de classe \(C^2\) tem coordenadas duas vezes continuamente deriváveis. Nesta nota, \(a,b,c>0\).}
+
+\section{Quádricas e seus traços}
+
+Uma quádrica é o conjunto de pontos \((x,y,z)\in\R^3\) que satisfazem uma equação polinomial de grau dois. O traço por um plano é a interseção da superfície com esse plano. A equação da interseção, já substituído o plano, é o que identifica a superfície: não basta o nome.
+
+\subsection{Elipsoide}
+
+A equação canônica é
+\[
+\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}+\frac{z^{2}}{c^{2}}=1.
+\]
+O traço no plano \(z=0\) é
+\[
+\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1,
+\]
+uma elipse. Se \(a=b=c=R\), a equação é \(x^{2}+y^{2}+z^{2}=R^{2}\), a esfera de raio \(R\), e o traço \(z=0\) é a circunferência \(x^{2}+y^{2}=R^{2}\).
+
+\subsection{Paraboloide elíptico}
+
+A equação canônica é
+\[
+z=\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}.
+\]
+O traço no plano \(z=k\), com \(k>0\), é a elipse
+\[
+\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=k.
+\]
+O traço no plano \(y=0\) é a parábola \(z=x^{2}/a^{2}\) no plano \(xz\). Para \(k<0\) o traço horizontal é vazio, porque o segundo membro da equação canônica é não negativo. A superfície fica em \(z\ge 0\) e corta os planos horizontais em elipses.
+
+\subsection{Paraboloide hiperbólico}
+
+A equação canônica é
+\[
+z=\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}.
+\]
+O traço no plano \(y=0\) é a parábola \(z=x^{2}/a^{2}\), que abre para cima. O traço no plano \(x=0\) é a parábola \(z=-y^{2}/b^{2}\), que abre para baixo. As duas parábolas em direções opostas identificam o paraboloide hiperbólico: o elíptico não troca o sentido da abertura.
+
+O traço \(z=0\) confirma a sela. A equação vira
+\[
+\frac{x^{2}}{a^{2}}=\frac{y^{2}}{b^{2}},
+\qquad
+y=\frac{b}{a}x
+\quad\text{ou}\quad
+y=-\frac{b}{a}x,
+\]
+duas retas concorrentes na origem, não uma elipse.
+
+\subsection{Cone}
+
+A equação canônica é
+\[
+\frac{z^{2}}{c^{2}}=\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}.
+\]
+O traço no plano \(z=k\), com \(k\neq 0\), é a elipse
+\[
+\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=\frac{k^{2}}{c^{2}}.
+\]
+O traço no plano \(z=0\) é só a origem: \(x=y=0\). O traço no plano \(y=0\) é
+\[
+\frac{z^{2}}{c^{2}}=\frac{x^{2}}{a^{2}},
+\qquad
+z=\frac{c}{a}x
+\quad\text{ou}\quad
+z=-\frac{c}{a}x,
+\]
+duas retas. Elipses horizontais que encolhem até a origem, mais esse par de retas no plano \(y=0\), identificam o cone. O traço do paraboloide elíptico no mesmo plano \(y=0\) é a parábola \(z=x^{2}/a^{2}\), não um par de retas.
+
+\subsection{Hiperboloide de uma folha}
+
+A equação canônica é
+\[
+\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}-\frac{z^{2}}{c^{2}}=1.
+\]
+O traço no plano \(z=0\) é a elipse
+\[
+\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1,
+\]
+não vazia. A superfície corta o plano \(xy\). O traço no plano \(x=0\) é a hipérbole
+\[
+\frac{y^{2}}{b^{2}}-\frac{z^{2}}{c^{2}}=1.
+\]
+Há pontos com \(z\) arbitrariamente grande e pontos com \(z=0\). Este traço elíptico não vazio em \(z=0\) é o que separa esta superfície da de duas folhas.
+
+\subsection{Hiperboloide de duas folhas}
+
+A equação canônica é
+\[
+\frac{z^{2}}{c^{2}}-\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1.
+\]
+O traço no plano \(z=0\) é
+\[
+-\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1.
+\]
+O primeiro membro é \(\le 0\) e o segundo é \(1\). Não há solução real: o traço é vazio. Como
+\[
+\frac{z^{2}}{c^{2}}=1+\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}\ge 1,
+\]
+vale \(\abs{z}\ge c\). O traço no plano \(z=k\), com \(\abs{k}>c\), é a elipse
+\[
+\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=\frac{k^{2}}{c^{2}}-1>0.
+\]
+Há uma componente em \(z\ge c\) e outra em \(z\le -c\). O traço vazio \(z=0\) é a seção que identifica as duas folhas.
+
+\begin{intuicao}
+O traço horizontal \(z=0\) já separa três situações: elipse não vazia no elipsoide e no hiperboloide de uma folha, conjunto vazio no de duas folhas, e só a origem no cone. O paraboloide hiperbólico é reconhecido pelas duas parábolas de aberturas opostas, não por uma elipse.
+\end{intuicao}
+
+\section{Curvas no espaço}
+
+\begin{definicao}
+Uma curva no espaço de classe \(C^2\) é uma função \(\vet{r}:I\to\R^3\),
+\[
+\vet{r}(t)=\bigl(x(t),y(t),z(t)\bigr),
+\]
+com \(x,y,z\) de classe \(C^2\) num intervalo \(I\). A velocidade é \(\vet{r}'(t)\) e a aceleração é \(\vet{r}''(t)\). Se \(\vet{r}'(t_{0})\neq\vet{0}\), a reta tangente em \(t_{0}\) é
+\[
+\vet{R}(s)=\vet{r}(t_{0})+s\,\vet{r}'(t_{0}),\qquad s\in\R.
+\]
+\end{definicao}
+
+\begin{teorema}[Comprimento]
+Se \(\vet{r}\) é de classe \(C^1\) em \([a,b]\), o comprimento do caminho é
+\[
+L=\int_{a}^{b}\norm{\vet{r}'(t)}\,\dif t.
+\]
+A demonstração é a da curva plana, com três coordenadas no lugar de duas: o Teorema do Valor Médio em cada coordenada produz a corda \(\norm{\bigl(x'(c),y'(d),z'(e)\bigr)}\Delta t\), e a continuidade uniforme das três derivadas no compacto faz as poligonais convergirem para a integral. A norma continua \(1\)-lipschitziana, pela desigualdade triangular.
+\end{teorema}
+
+\begin{exemplo}[A hélice circular]
+Seja \(\vet{r}(t)=(\cos t,\sin t,t)\). Então
+\begin{align*}
+\vet{r}'(t)&=(-\sin t,\cos t,1),\\
+\vet{r}''(t)&=(-\cos t,-\sin t,0),\\
+\norm{\vet{r}'(t)}
+&=\sqrt{\sin^{2}t+\cos^{2}t+1}
+=\sqrt{2}.
+\end{align*}
+A velocidade nunca se anula. A reta tangente em \(t_{0}\) é
+\[
+(\cos t_{0},\sin t_{0},t_{0})+s(-\sin t_{0},\cos t_{0},1).
+\]
+De \(t=0\) a \(t=2\pi\), uma volta,
+\[
+L=\int_{0}^{2\pi}\sqrt{2}\,\dif t=2\pi\sqrt{2}.
+\]
+\end{exemplo}
+
+\figura{../figuras/helice.png}{Hélice circular.}
+
+\section{Tangente unitária e curvatura}
+
+\begin{definicao}
+Se \(\vet{r}'(t)\neq\vet{0}\), o vetor tangente unitário é
+\[
+\vet{T}(t)=\frac{\vet{r}'(t)}{\norm{\vet{r}'(t)}}.
+\]
+Se além disso \(\vet{T}'(t)\neq\vet{0}\), a curvatura é
+\[
+\kappa(t)=\frac{\norm{\vet{T}'(t)}}{\norm{\vet{r}'(t)}}.
+\]
+\end{definicao}
+
+\begin{teorema}[As duas fórmulas]
+Seja \(\vet{r}\) de classe \(C^2\) num intervalo e suponha \(\vet{r}'(t)\neq\vet{0}\). Então \(\vet{T}\) é de classe \(C^1\) e
+\begin{equation}
+\kappa
+=\frac{\norm{\vet{T}'}}{\norm{\vet{r}'}}
+=\frac{\norm{\vet{r}'\times\vet{r}''}}{\norm{\vet{r}'}^{3}},
+\label{eq:curvatura}
+\end{equation}
+onde a primeira expressão só é chamada de curvatura quando \(\vet{T}'\neq\vet{0}\); se \(\vet{T}'=\vet{0}\), os dois lados valem zero e a curvatura é zero.
+\end{teorema}
+
+A prova usa um lema algébrico, escrito por completo, e a ortogonalidade \(\vet{T}\perp\vet{T}'\).
+
+\begin{lema}
+Para \(\vet{u},\vet{v}\in\R^3\),
+\[
+\norm{\vet{u}\times\vet{v}}^{2}
+=\norm{\vet{u}}^{2}\norm{\vet{v}}^{2}-(\vet{u}\cdot\vet{v})^{2}.
+\]
+\end{lema}
+
+\noindent\textbf{Demonstração.}
+Escreva \(\vet{u}=(u_{1},u_{2},u_{3})\) e \(\vet{v}=(v_{1},v_{2},v_{3})\). As componentes de \(\vet{u}\times\vet{v}\) são \(u_{2}v_{3}-u_{3}v_{2}\), \(u_{3}v_{1}-u_{1}v_{3}\) e \(u_{1}v_{2}-u_{2}v_{1}\), logo o primeiro membro é
+\[
+(u_{1}v_{2}-u_{2}v_{1})^{2}+(u_{1}v_{3}-u_{3}v_{1})^{2}+(u_{2}v_{3}-u_{3}v_{2})^{2}.
+\]
+Expandindo,
+\begin{align*}
+&u_{1}^{2}v_{2}^{2}-2u_{1}u_{2}v_{1}v_{2}+u_{2}^{2}v_{1}^{2}
++u_{1}^{2}v_{3}^{2}-2u_{1}u_{3}v_{1}v_{3}+u_{3}^{2}v_{1}^{2}\\
+&\qquad+u_{2}^{2}v_{3}^{2}-2u_{2}u_{3}v_{2}v_{3}+u_{3}^{2}v_{2}^{2}.
+\end{align*}
+O segundo membro da identidade é
+\begin{align*}
+&(u_{1}^{2}+u_{2}^{2}+u_{3}^{2})(v_{1}^{2}+v_{2}^{2}+v_{3}^{2})
+-(u_{1}v_{1}+u_{2}v_{2}+u_{3}v_{3})^{2}.
+\end{align*}
+O quadrado do produto escalar contribui os termos \(u_{i}^{2}v_{i}^{2}\) e os cruzados \(2u_{i}u_{j}v_{i}v_{j}\) para \(i<j\). Depois de cancelar \(u_{1}^{2}v_{1}^{2}\), \(u_{2}^{2}v_{2}^{2}\) e \(u_{3}^{2}v_{3}^{2}\) com os termos iguais de \(\norm{\vet{u}}^{2}\norm{\vet{v}}^{2}\), sobra
+\begin{align*}
+&u_{1}^{2}v_{2}^{2}+u_{1}^{2}v_{3}^{2}+u_{2}^{2}v_{1}^{2}+u_{2}^{2}v_{3}^{2}+u_{3}^{2}v_{1}^{2}+u_{3}^{2}v_{2}^{2}\\
+&\qquad-2u_{1}u_{2}v_{1}v_{2}-2u_{1}u_{3}v_{1}v_{3}-2u_{2}u_{3}v_{2}v_{3},
+\end{align*}
+que é exatamente a expansão do primeiro membro.
+\hfill\(\square\)
+
+\noindent\textbf{Demonstração do teorema.}
+Seja \(v(t)=\norm{\vet{r}'(t)}>0\) e \(\vet{T}=\vet{r}'/v\). Como \(\vet{r}'\) é de classe \(C^1\) e não se anula, \(v\) é de classe \(C^1\) e \(\vet{T}\) também.
+
+De \(\vet{T}\cdot\vet{T}=1\), derivamos:
+\[
+\vet{T}'\cdot\vet{T}+\vet{T}\cdot\vet{T}'=0,
+\qquad
+2\,\vet{T}\cdot\vet{T}'=0,
+\qquad
+\vet{T}\cdot\vet{T}'=0.
+\]
+Assim \(\vet{T}\perp\vet{T}'\). Pelo lema,
+\[
+\norm{\vet{T}\times\vet{T}'}^{2}
+=\norm{\vet{T}}^{2}\norm{\vet{T}'}^{2}-0
+=\norm{\vet{T}'}^{2},
+\]
+logo \(\norm{\vet{T}\times\vet{T}'}=\norm{\vet{T}'}\).
+
+Derivamos \(\vet{r}'=v\vet{T}\):
+\[
+\vet{r}''=v'\vet{T}+v\vet{T}'.
+\]
+O produto vetorial com \(\vet{r}'=v\vet{T}\) mata o termo paralelo a \(\vet{T}\):
+\begin{align*}
+\vet{r}'\times\vet{r}''
+&=(v\vet{T})\times(v'\vet{T}+v\vet{T}')
+=vv'(\vet{T}\times\vet{T})+v^{2}(\vet{T}\times\vet{T}')
+=v^{2}(\vet{T}\times\vet{T}').
+\end{align*}
+Tomando normas,
+\[
+\norm{\vet{r}'\times\vet{r}''}
+=v^{2}\norm{\vet{T}\times\vet{T}'}
+=v^{2}\norm{\vet{T}'}.
+\]
+Dividindo por \(v^{3}=\norm{\vet{r}'}^{3}\),
+\[
+\frac{\norm{\vet{r}'\times\vet{r}''}}{\norm{\vet{r}'}^{3}}
+=\frac{\norm{\vet{T}'}}{v}
+=\frac{\norm{\vet{T}'}}{\norm{\vet{r}'}}.
+\]
+\hfill\(\square\)
+
+\cuidado{As duas fórmulas dividem por \(\norm{\vet{r}'}\). Se a velocidade se anula, elas não estão definidas. Na curva \(\vet{r}(t)=(t^{2},t^{3},0)\) tem-se \(\vet{r}'(t)=(2t,3t^{2},0)\), logo \(\vet{r}'(0)=\vet{0}\). A imagem satisfaz \(y^{2}=t^{6}=(t^{2})^{3}=x^{3}\) e \(z=0\). O exercício~A2 calcula \(\kappa(t)\) para \(t\neq 0\) e o limite quando \(t\to 0\).}
+
+\section{Triedro, plano osculador e raio de curvatura}
+
+\begin{definicao}
+No ponto em que \(\vet{r}'\neq\vet{0}\) e \(\vet{T}'\neq\vet{0}\),
+\[
+\vet{N}=\frac{\vet{T}'}{\norm{\vet{T}'}},
+\qquad
+\vet{B}=\vet{T}\times\vet{N}.
+\]
+O vetor \(\vet{N}\) é a normal principal e \(\vet{B}\) é a binormal. O triedro é a base ordenada \((\vet{T},\vet{N},\vet{B})\). O plano osculador é o plano por \(\vet{r}(t)\) paralelo a \(\vet{T}\) e a \(\vet{N}\); a normal desse plano é \(\vet{B}\), e a equação é
+\[
+\vet{B}(t)\cdot\bigl(\vet{R}-\vet{r}(t)\bigr)=0.
+\]
+Se \(\kappa(t)>0\), o raio de curvatura é \(1/\kappa(t)\).
+\end{definicao}
+
+\begin{intuicao}
+Se \(s\) é o comprimento de arco, \(\norm{\dif\vet{r}/\dif s}=1\) e \(\vet{T}=\dif\vet{r}/\dif s\). A curvatura é a taxa com que \(\vet{T}\) vira em relação ao comprimento de arco: \(\kappa=\norm{\dif\vet{T}/\dif s}\). Num parâmetro qualquer, com \(v=\norm{\vet{r}'}>0\),
+\[
+\frac{\dif\vet{T}}{\dif s}
+=\frac{\dif\vet{T}/\dif t}{\dif s/\dif t}
+=\frac{\vet{T}'}{v},
+\]
+logo \(\norm{\dif\vet{T}/\dif s}=\norm{\vet{T}'}/v=\kappa\).
+\end{intuicao}
+
+\begin{exemplo}[Triedro da hélice num \(t\) genérico]
+Para \(\vet{r}(t)=(\cos t,\sin t,t)\), já temos \(\vet{r}'=(-\sin t,\cos t,1)\), \(v=\sqrt{2}\) e \(\vet{r}''=(-\cos t,-\sin t,0)\). Portanto
+\[
+\vet{T}(t)
+=\Biggl(-\frac{\sin t}{\sqrt{2}},\frac{\cos t}{\sqrt{2}},\frac{1}{\sqrt{2}}\Biggr).
+\]
+Derivando,
+\[
+\vet{T}'(t)
+=\Biggl(-\frac{\cos t}{\sqrt{2}},-\frac{\sin t}{\sqrt{2}},0\Biggr),
+\qquad
+\norm{\vet{T}'}
+=\sqrt{\frac{\cos^{2}t}{2}+\frac{\sin^{2}t}{2}}
+=\sqrt{\frac12}
+=\frac{1}{\sqrt{2}}.
+\]
+A curvatura pela primeira fórmula é
+\[
+\kappa=\frac{1/\sqrt{2}}{\sqrt{2}}=\frac{1}{2}.
+\]
+Ela não depende de \(t\). O raio de curvatura é \(1/\kappa=2\).
+
+A segunda fórmula confirma. O produto vetorial é
+\begin{align*}
+\vet{r}'\times\vet{r}''
+&=
+\begin{vmatrix}
+\vet{i}&\vet{j}&\vet{k}\\
+-\sin t&\cos t&1\\
+-\cos t&-\sin t&0
+\end{vmatrix}
+=(\sin t,\,-\cos t,\,1).
+\end{align*}
+A componente \(\vet{i}\) é \(\cos t\cdot 0-1\cdot(-\sin t)=\sin t\). A componente \(\vet{j}\) é \(-\bigl((-\sin t)\cdot 0-1\cdot(-\cos t)\bigr)=-\cos t\). A componente \(\vet{k}\) é \((-\sin t)(-\sin t)-(\cos t)(-\cos t)=\sin^{2}t+\cos^{2}t=1\). A norma é
+\[
+\norm{\vet{r}'\times\vet{r}''}=\sqrt{\sin^{2}t+\cos^{2}t+1}=\sqrt{2}.
+\]
+Logo
+\[
+\kappa=\frac{\sqrt{2}}{(\sqrt{2})^{3}}=\frac{\sqrt{2}}{2\sqrt{2}}=\frac12.
+\]
+
+A normal principal é
+\[
+\vet{N}
+=\frac{\vet{T}'}{1/\sqrt{2}}
+=(-\cos t,\,-\sin t,\,0).
+\]
+A binormal é \(\vet{B}=\vet{T}\times\vet{N}\):
+\begin{align*}
+\vet{B}
+&=
+\begin{vmatrix}
+\vet{i}&\vet{j}&\vet{k}\\
+-\sin t/\sqrt{2}&\cos t/\sqrt{2}&1/\sqrt{2}\\
+-\cos t&-\sin t&0
+\end{vmatrix}
+=\Biggl(\frac{\sin t}{\sqrt{2}},\,-\frac{\cos t}{\sqrt{2}},\,\frac{1}{\sqrt{2}}\Biggr).
+\end{align*}
+Conta das componentes: a de \(\vet{i}\) é \((\cos t/\sqrt{2})\cdot 0-(1/\sqrt{2})(-\sin t)=\sin t/\sqrt{2}\); a de \(\vet{j}\) é \(-\bigl((-\sin t/\sqrt{2})\cdot 0-(1/\sqrt{2})(-\cos t)\bigr)=-\cos t/\sqrt{2}\); a de \(\vet{k}\) é
+\[
+\Bigl(-\frac{\sin t}{\sqrt{2}}\Bigr)(-\sin t)-\Bigl(\frac{\cos t}{\sqrt{2}}\Bigr)(-\cos t)
+=\frac{\sin^{2}t+\cos^{2}t}{\sqrt{2}}
+=\frac{1}{\sqrt{2}}.
+\]
+Conferência de norma e de ortogonalidade com \(\vet{T}\):
+\begin{align*}
+\norm{\vet{B}}^{2}
+&=\frac{\sin^{2}t}{2}+\frac{\cos^{2}t}{2}+\frac{1}{2}=1,\\[0.4em]
+\vet{B}\cdot\vet{T}
+&=\frac{\sin t}{\sqrt{2}}\cdot\Bigl(-\frac{\sin t}{\sqrt{2}}\Bigr)
++\Bigl(-\frac{\cos t}{\sqrt{2}}\Bigr)\cdot\frac{\cos t}{\sqrt{2}}
++\frac{1}{\sqrt{2}}\cdot\frac{1}{\sqrt{2}}
+=-\frac{\sin^{2}t+\cos^{2}t}{2}+\frac12
+=0.
+\end{align*}
+E \(\vet{B}\cdot\vet{N}=0\):
+\[
+\frac{\sin t}{\sqrt{2}}(-\cos t)
++\Bigl(-\frac{\cos t}{\sqrt{2}}\Bigr)(-\sin t)
++\frac{1}{\sqrt{2}}\cdot 0
+=\frac{-\sin t\cos t+\cos t\sin t}{\sqrt{2}}
+=0.
+\]
+O plano osculador tem normal \(\vet{B}\). Multiplicando a equação \(\vet{B}\cdot(\vet{R}-\vet{r})=0\) por \(\sqrt{2}\),
+\begin{align*}
+\sin t\,(X-\cos t)-\cos t\,(Y-\sin t)+(Z-t)&=0,\\
+\sin t\, X-\sin t\cos t-\cos t\, Y+\cos t\sin t+Z-t&=0.
+\end{align*}
+Os termos \(-\sin t\cos t\) e \(\cos t\sin t\) cancelam, e o plano osculador é
+\[
+X\sin t-Y\cos t+Z=t.
+\]
+\end{exemplo}
+
+\section{Exercícios}
+
+\begin{exercicio}[Básico --- elipsoide]
+\textbf{B1.} Para \(\dfrac{x^{2}}{4}+\dfrac{y^{2}}{9}+\dfrac{z^{2}}{16}=1\), escreva a equação do traço \(z=0\) e identifique a curva.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- uma folha e duas folhas]
+\textbf{B2.} Escreva o traço \(z=0\) de \(x^{2}+y^{2}-z^{2}=1\) e o traço \(z=0\) de \(z^{2}-x^{2}-y^{2}=1\). Diga qual é vazio e o que isso distingue.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- comprimento]
+\textbf{B3.} Calcule o comprimento de \(\vet{r}(t)=(2\cos t,\,2\sin t,\,t)\) de \(t=0\) a \(t=2\pi\).
+\end{exercicio}
+
+\begin{exercicio}[Básico --- reta tangente]
+\textbf{B4.} Para \(\vet{r}(t)=(t,t^{2},t^{3})\), calcule velocidade, aceleração, a norma da velocidade e a reta tangente em \(t=1\).
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- curvatura do círculo]
+\textbf{I1.} Seja \(\vet{r}(t)=(a\cos t,\,a\sin t,\,0)\) com \(a>0\). Calcule \(\kappa\) pela fórmula do produto vetorial e o raio de curvatura.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- curvatura num ponto]
+\textbf{I2.} Para \(\vet{r}(t)=(t,t^{2},t)\), calcule \(\kappa(t)\) e o valor numérico exato em \(t=1\).
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- derivada em relação ao arco]
+\textbf{I3.} Na hélice \(\vet{r}(t)=(\cos t,\sin t,t)\), tome o comprimento de arco \(s\) a partir de \(t=0\), no sentido de \(t\) crescente. Reparametrize, calcule \(\norm{\dif\vet{T}/\dif s}\) e confira que o resultado é \(\kappa=1/2\).
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- reta e curvatura nula]
+\textbf{A1.} Seja \(\vet{r}\) de classe \(C^2\) num intervalo, com \(\vet{r}'(t)\neq\vet{0}\) em todo ponto. Prove que \(\kappa\) é identicamente zero se, e somente se, a imagem de \(\vet{r}\) está contida numa reta.
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- cúspide]
+\textbf{A2.} Seja \(\vet{r}(t)=(t^{2},t^{3},0)\).
+\begin{enumerate}
+\item Mostre que \(\vet{r}'(0)=\vet{0}\) e que a imagem satisfaz \(y^{2}=x^{3}\) com \(z=0\).
+\item Para \(t\neq 0\), calcule \(\kappa(t)\) pela fórmula do produto vetorial.
+\item Calcule \(\lim_{t\to 0}\kappa(t)\).
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- triedro ortonormal]
+\textbf{A3.} Suponha \(\vet{r}'\neq\vet{0}\) e \(\vet{T}'\neq\vet{0}\). Prove, a partir das definições, que \(\norm{\vet{T}}=\norm{\vet{N}}=\norm{\vet{B}}=1\), que \(\vet{T}\cdot\vet{N}=\vet{B}\cdot\vet{T}=\vet{B}\cdot\vet{N}=0\), e que \(\vet{B}=\vet{T}\times\vet{N}\).
+\end{exercicio}
+
+\end{document}

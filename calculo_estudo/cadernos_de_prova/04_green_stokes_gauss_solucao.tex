@@ -1,0 +1,186 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Solução do caderno: Green, Stokes e o campo conservativo}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Integral de um gradiente}
+
+Seja $\vet{r}\colon[a,b]\to U$ de classe $C^1$, com $\vet{r}(a)=A$ e $\vet{r}(b)=B$. A composta $g(t)=\phi(\vet{r}(t))$ é de classe $C^1$. Pela regra da cadeia, em $\R^3$,
+\[
+g'(t)
+=\partial_x\phi(\vet{r}(t))\,x'(t)
++\partial_y\phi(\vet{r}(t))\,y'(t)
++\partial_z\phi(\vet{r}(t))\,z'(t)
+=\nabla\phi\bigl(\vet{r}(t)\bigr)\cdot\vet{r}'(t).
+\]
+No plano ou em $\R^n$ a soma tem uma parcela por coordenada. O teorema fundamental do cálculo dá
+\[
+\int_a^b g'(t)\,\dif t=g(b)-g(a)=\phi(B)-\phi(A).
+\]
+Se a curva é $C^1$ por pedaços, aplica-se o resultado a cada pedaço. Os valores de $\phi$ nos pontos de emenda se cancelam, e sobram $\phi(B)-\phi(A)$. O caminho não aparece no resultado, só os extremos. Se $A=B$, a integral é zero.
+
+\section{Conservativo implica rotacional nulo}
+
+Como $\phi$ é $C^2$, as parciais de segunda ordem são contínuas e o teorema de Clairaut se aplica. Em $\R^3$, $P=\partial_x\phi$, $Q=\partial_y\phi$ e $R=\partial_z\phi$, e
+\begin{align*}
+\partial_y R-\partial_z Q
+&=\partial_y\partial_z\phi-\partial_z\partial_y\phi=0,\\
+\partial_z P-\partial_x R
+&=\partial_z\partial_x\phi-\partial_x\partial_z\phi=0,\\
+\partial_x Q-\partial_y P
+&=\partial_x\partial_y\phi-\partial_y\partial_x\phi=0.
+\end{align*}
+Essas são as três componentes de $\nabla\times\vet{F}$. No plano só existe a terceira: se $P=\partial_x\phi$ e $Q=\partial_y\phi$, então $\partial_x Q-\partial_y P=\partial_x\partial_y\phi-\partial_y\partial_x\phi=0$.
+
+\section{A forma angular}
+
+Sejam $P=-y(x^2+y^2)^{-1}$ e $Q=x(x^2+y^2)^{-1}$. Fora da origem o denominador não se anula e as parcelas são $C^\infty$. Calcule
+\begin{align*}
+\partial_x Q
+&=(x^2+y^2)^{-1}-2x^2(x^2+y^2)^{-2}
+=\frac{x^2+y^2-2x^2}{(x^2+y^2)^2}
+=\frac{y^2-x^2}{(x^2+y^2)^2},\\
+\partial_y P
+&=-(x^2+y^2)^{-1}+2y^2(x^2+y^2)^{-2}
+=\frac{-(x^2+y^2)+2y^2}{(x^2+y^2)^2}
+=\frac{y^2-x^2}{(x^2+y^2)^2}.
+\end{align*}
+Logo $\partial_x Q-\partial_y P=0$ em $\R^2\setminus\{\vet{0}\}$.
+
+Na circunferência, $\vet{r}(t)=(\cos t,\sin t)$, $t\in[0,2\pi]$, tem-se $x^2+y^2=1$, $\vet{F}(\vet{r}(t))=(-\sin t,\cos t)$ e $\vet{r}'(t)=(-\sin t,\cos t)$. O produto escalar vale $1$, e
+\[
+\oint_{x^2+y^2=1}\vet{F}\cdot\dif\vet{r}=\int_0^{2\pi}1\,\dif t=2\pi.
+\]
+Se $\vet{F}$ fosse um gradiente nesse domínio, o primeiro item daria circulação zero. Como $2\pi\neq 0$, $\vet{F}$ não é conservativo em $\R^2\setminus\{\vet{0}\}$.
+
+\section{Green no retângulo}
+
+A fronteira anti-horária percorre a base $y=c$ com $x$ de $a$ até $b$, o lado $x=b$ com $y$ de $c$ até $d$, o topo $y=d$ com $x$ de $b$ até $a$, e o lado $x=a$ com $y$ de $d$ até $c$.
+
+Em $\oint P\,\dif x$ os lados verticais têm $\dif x=0$. Sobra
+\[
+\oint_{\partial D} P\,\dif x
+=\int_a^b P(x,c)\,\dif x+\int_b^a P(x,d)\,\dif x
+=\int_a^b P(x,c)\,\dif x-\int_a^b P(x,d)\,\dif x.
+\]
+Para cada $x$, o teorema fundamental do cálculo na variável $y$ dá $P(x,d)-P(x,c)=\int_c^d\partial_y P\,\dif y$, porque $\partial_y P$ é contínua. Portanto
+\[
+\oint_{\partial D} P\,\dif x
+=-\int_a^b\int_c^d\partial_y P\,\dif y\,\dif x
+=-\iint_D\partial_y P\,\dif A.
+\]
+
+Em $\oint Q\,\dif y$ os lados horizontais têm $\dif y=0$. Sobra
+\[
+\oint_{\partial D} Q\,\dif y
+=\int_c^d Q(b,y)\,\dif y+\int_d^c Q(a,y)\,\dif y
+=\int_c^d\bigl(Q(b,y)-Q(a,y)\bigr)\,\dif y.
+\]
+Para cada $y$, $Q(b,y)-Q(a,y)=\int_a^b\partial_x Q\,\dif x$. Portanto
+\[
+\oint_{\partial D} Q\,\dif y
+=\int_c^d\int_a^b\partial_x Q\,\dif x\,\dif y
+=\iint_D\partial_x Q\,\dif A.
+\]
+A troca de ordem vale porque $\partial_x Q$ é contínua no retângulo. Somando,
+\[
+\oint_{\partial D} P\,\dif x+Q\,\dif y
+=\iint_D\bigl(\partial_x Q-\partial_y P\bigr)\,\dif A.
+\]
+
+\section{Área da elipse}
+
+Tome $P=-y/2$ e $Q=x/2$. Então $\partial_x Q-\partial_y P=1/2-(-1/2)=1$ em todo o plano, e $P$ e $Q$ são $C^\infty$.
+
+Se uma região admite a fórmula de Green, a área é
+\[
+\iint_D 1\,\dif A=\oint_{\partial D} -\frac y2\,\dif x+\frac x2\,\dif y
+=\frac12\oint_{\partial D}-y\,\dif x+x\,\dif y.
+\]
+A elipse cheia $D$ tem gráficos $y=\pm b\sqrt{1-x^2/a^2}$, com tangente vertical em $x=\pm a$. Para cair na hipótese do retângulo e dos gráficos $C^1$, fixe $r\in(0,1)$ e corte a elipse homotética de razão $r$ por duas retas verticais, antes dos vértices da esquerda e da direita. O pedaço central é uma região entre gráficos $C^1$ e também, pelo corte horizontal análogo, entre gráficos $C^1$ na outra variável; as contas do item anterior se adaptam literalmente. Na base gráfica $y=g_1(x)$, com $x$ da esquerda para a direita,
+\[
+\int P\,\dif x=\int P\bigl(x,g_1(x)\bigr)\,\dif x;
+\]
+no topo, o sentido oposto troca o sinal. Os cortes verticais têm $\dif x=0$. Logo
+\[
+\oint P\,\dif x
+=\int\bigl(P(x,g_1)-P(x,g_2)\bigr)\,\dif x
+=-\iint\partial_y P\,\dif A,
+\]
+porque $P(x,g_2)-P(x,g_1)=\int_{g_1}^{g_2}\partial_y P\,\dif y$. A conta de $Q$, subindo o gráfico da direita e descendo o da esquerda, produz $\oint Q\,\dif y=\iint\partial_x Q\,\dif A$. Somando, a circulação na fronteira do pedaço é a área do pedaço.
+
+Quando os cortes avançam até os vértices e $r\to 1$, o comprimento dos segmentos de corte tende a zero e $P\,\dif x+Q\,\dif y$ fica limitado, então a circulação desses segmentos tende a zero. A circulação na elipse inteira é o limite das circulações, e a área de $D$ é o limite das áreas. Basta calcular a circulação na elipse.
+
+Com $x=a\cos t$, $y=b\sin t$, $t\in[0,2\pi]$,
+\[
+\dif x=-a\sin t\,\dif t,\qquad\dif y=b\cos t\,\dif t,
+\]
+\begin{align*}
+-y\,\dif x+x\,\dif y
+&=-(b\sin t)(-a\sin t\,\dif t)+(a\cos t)(b\cos t\,\dif t)\\
+&=ab\,\dif t.
+\end{align*}
+Portanto
+\[
+\frac12\oint_{\partial D}-y\,\dif x+x\,\dif y
+=\frac12\int_0^{2\pi} ab\,\dif t
+=\pi ab.
+\]
+Essa é a área.
+
+\section{Fluxo de $(x,y,z)$ pela esfera}
+
+A divergência de $\vet{F}=(x,y,z)$ é $\partial_x x+\partial_y y+\partial_z z=3$.
+
+Primeiro o caso vertical do teorema da divergência. Seja
+\[
+E=\bigl\{(x,y,z):(x,y)\in D,\; g_1(x,y)\le z\le g_2(x,y)\bigr\},
+\]
+com $g_1\le g_2$ de classe $C^1$ num aberto que contém o compacto $D$, e seja $\vet{G}=(0,0,R)$ de classe $C^1$. No topo, $\vet{r}(x,y)=(x,y,g_2)$ tem produto fundamental $(-\partial_x g_2,-\partial_y g_2,1)$, de componente $z$ positiva, apontando para fora, e
+\[
+\vet{G}\cdot(\vet{r}_x\times\vet{r}_y)=R(x,y,g_2).
+\]
+Na base, a normal para fora troca o sinal, e a contribuição é $-R(x,y,g_1)$. Na parede lateral, vertical, a normal é horizontal e o produto com $\vet{G}$ é zero. O fluxo externo é
+\begin{align*}
+\iint_D\bigl(R(x,y,g_2)-R(x,y,g_1)\bigr)\,\dif x\,\dif y
+&=\iint_D\int_{g_1}^{g_2}\partial_z R\,\dif z\,\dif x\,\dif y
+=\iiint_E\partial_z R\,\dif V.
+\end{align*}
+As componentes $(P,0,0)$ e $(0,Q,0)$ repetem a conta com gráficos em $x$ e em $y$.
+
+Agora a bola. Para $a\in(0,R)$, seja $D_a$ o disco $x^2+y^2\le a^2$ e seja $g=\sqrt{R^2-x^2-y^2}$. Em $D_a$ vale $R^2-x^2-y^2\ge R^2-a^2>0$, então $g$ é $C^\infty$ numa vizinhança de $D_a$. Seja $E_a$ a região entre $-g$ e $g$ sobre $D_a$. O caso vertical, com campo $(0,0,z)$, diz que o fluxo externo de $(0,0,z)$ por $\partial E_a$ é o volume de $E_a$. A fronteira de $E_a$ é a calota superior, a calota inferior e o cilindro $x^2+y^2=a^2$. No cilindro a normal é horizontal, e o fluxo de $(0,0,z)$ é zero. Logo o fluxo de $(0,0,z)$ pelas duas calotas, com a normal para fora da bola, é $\mathrm{Vol}(E_a)$.
+
+A parte da esfera que não está nessas calotas é a faixa $\varphi\in[\varphi_a,\pi-\varphi_a]$, onde $\sin\varphi_a=a/R$ e $\varphi$ parte do eixo $z$. O elemento de área da esfera de raio $R$ é $R^2\sin\varphi\,\dif\varphi\,\dif\theta$, porque o produto fundamental da parametrização $R(\sin\varphi\cos\theta,\sin\varphi\sin\theta,\cos\varphi)$ tem norma $R^2\sin\varphi$. A área da faixa é
+\begin{align*}
+\int_0^{2\pi}\int_{\varphi_a}^{\pi-\varphi_a} R^2\sin\varphi\,\dif\varphi\,\dif\theta
+&=2\pi R^2\bigl[-\cos\varphi\bigr]_{\varphi_a}^{\pi-\varphi_a}
+=4\pi R^2\cos\varphi_a
+=4\pi R\sqrt{R^2-a^2},
+\end{align*}
+pois $\cos\varphi_a=\sqrt{R^2-a^2}/R$. Quando $a\to R$, essa área tende a zero. Na esfera, $\norm{\vet{F}}=R$, então o fluxo de $\vet{F}$ pela faixa tende a zero, e o mesmo vale para a componente $(0,0,z)$. Portanto o fluxo de $(0,0,z)$ pela esfera inteira, normal para fora, é o limite dos volumes $\mathrm{Vol}(E_a)$, que é o volume da bola.
+
+Esse volume se calcula sem a faixa. Pelo caso vertical já provado, ou direto pelos gráficos, sobre o disco $x^2+y^2\le R^2$ a diferença das alturas é $2\sqrt{R^2-x^2-y^2}$, função contínua no disco fechado se valer $0$ no bordo. Em polares,
+\begin{align*}
+\mathrm{Vol}
+&=\int_0^{2\pi}\int_0^R 2\sqrt{R^2-r^2}\, r\,\dif r\,\dif\theta.
+\end{align*}
+Com $u=R^2-r^2$, $\dif u=-2r\,\dif r$, os limites vão de $r=0$ a $r=R$ para $u=R^2$ a $u=0$:
+\[
+\int_0^R 2r\sqrt{R^2-r^2}\,\dif r
+=\int_{R^2}^{0}-\,u^{1/2}\,\dif u
+=\frac23 R^3.
+\]
+O fator angular $2\pi$ produz
+\[
+\mathrm{Vol}=\frac{4\pi R^3}{3}.
+\]
+O fluxo de $(0,0,z)$ pela esfera é esse volume. As componentes $(x,0,0)$ e $(0,y,0)$ têm a mesma conta nos outros eixos: a bola admite a descrição entre gráficos $C^1$ em discos de raio $a<R$ nas coordenadas restantes, a parede interna não contribui para a componente normal a ela, e a faixa que falta tem área tendendo a zero. Cada uma contribui $4\pi R^3/3$. A soma é
+\[
+3\cdot\frac{4\pi R^3}{3}=4\pi R^3,
+\]
+que é também $\iiint 3\,\dif V$ na bola cheia.
+\end{document}

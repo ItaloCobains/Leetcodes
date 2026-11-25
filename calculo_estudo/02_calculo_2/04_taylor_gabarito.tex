@@ -1,0 +1,154 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: séries de potências e Taylor}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Raio}
+
+\begin{proof}
+Na primeira série, \(c_n=1/(n+1)\) e o centro é \(-2\). 
+\[
+\abs{\frac{c_{n+1}}{c_n}}=\frac{n+1}{n+2}\to 1.
+\]
+Quando esse limite \(\lambda\) existe, o raio é \(1/\lambda\). Aqui \(\lambda=1\) e \(R=1\).
+
+Na segunda, \(c_n=n!\) e o centro é \(1\).
+\[
+\abs{\frac{c_{n+1}}{c_n}}=n+1\to+\infty,
+\]
+logo \(R=0\). A série converge só em \(x=1\), onde vale o termo \(n=0\), igual a \(1\). Para \(x\neq 1\), a razão dos módulos dos termos tende a infinito, então o termo geral não vai a zero.
+\end{proof}
+
+\section{Polinômio de Taylor}
+
+\begin{proof}
+Para \(f(x)=\cos x\), as derivadas são \(\cos x\), \(-\sin x\), \(-\cos x\), \(\sin x\), \(\cos x\). Em \(0\): \(f(0)=1\), \(f'(0)=0\), \(f''(0)=-1\), \(f'''(0)=0\), \(f^{(4)}(0)=1\). Portanto
+\[
+T_4(x)=1-\frac{x^2}{2}+\frac{x^4}{24}.
+\]
+
+Para \(g(x)=\ln(1+x)\), com \(x>-1\): \(g'(x)=(1+x)^{-1}\), \(g''(x)=-(1+x)^{-2}\), \(g'''(x)=2(1+x)^{-3}\). Em \(0\): \(g(0)=0\), \(g'(0)=1\), \(g''(0)=-1\), \(g'''(0)=2\). Portanto
+\[
+T_3(x)=x-\frac{x^2}{2}+\frac{2x^3}{6}=x-\frac{x^2}{2}+\frac{x^3}{3}.
+\]
+\end{proof}
+
+\section{Intervalo}
+
+\begin{proof}
+A série é \(\sum (x-1)^n/n\), centrada em \(1\). A razão dos coeficientes tende a \(1\), logo \(R=1\). Há convergência absoluta quando \(\abs{x-1}<1\), isto é \(0<x<2\), e divergência quando \(\abs{x-1}>1\).
+
+Em \(x=2\) a série é \(\sum 1/n\). Ela diverge: \(s_{2^k}\ge 1+k/2\), porque há \(k\) blocos de índice \(m=0,\ldots,k-1\), o bloco de \(2^m+1\) até \(2^{m+1}\) tem \(2^m\) termos no mínimo \(1/2^{m+1}\), somando pelo menos \(1/2\).
+
+Em \(x=0\) a série é \(\sum (-1)^n/n=-\sum (-1)^{n+1}/n\). A sequência \(b_n=1/n\) decresce e tende a zero. As somas pares da série \(\sum (-1)^{n+1}/n\) satisfazem \(s_{2m+2}-s_{2m}=b_{2m+1}-b_{2m+2}\ge 0\) e \(s_{2m}\le b_1\), logo convergem; as ímpares decrescem e ficam acima de \(s_2\ge 0\); a diferença entre ímpar e par seguinte é \(b_{2m+1}\to 0\). A série converge, e o sinal global não muda a convergência. O intervalo é \([0,2)\).
+\end{proof}
+
+\section{Maclaurin}
+
+\begin{proof}
+A derivada de ordem \(n\) de \(e^x\) é \(e^x\), e o valor em \(0\) é \(1\). A série é \(\sum_{n=0}^\infty x^n/n!\). A razão \(\abs{c_{n+1}/c_n}=1/(n+1)\to 0\), logo o raio é infinito.
+
+A derivada de ordem \(n\) de \(\sin x\) é \(\sin(x+n\pi/2)\): vale para \(n=0\), e derivar troca seno por cosseno, que é \(\sin(x+(n+1)\pi/2)\). Em zero, \(\sin(n\pi/2)\). Se \(n=2k\), isso é \(\sin(k\pi)=0\). Se \(n=2k+1\), \(\sin(k\pi+\pi/2)=\cos(k\pi)=(-1)^k\). A série é
+\[
+\sum_{k=0}^\infty\frac{(-1)^k}{(2k+1)!}x^{2k+1}.
+\]
+O fatorial no denominador faz a razão de coeficientes não nulos tender a zero, e o raio é infinito.
+\end{proof}
+
+\section{Intervalo fechado}
+
+\begin{proof}
+Seja \(a_n=x^n/(n^2 3^n)\). Para \(x\neq 0\) e \(n\ge 1\),
+\[
+\abs{\frac{a_{n+1}}{a_n}}
+=\frac{\abs{x}}{3}\cdot\frac{n^2}{(n+1)^2}\to\frac{\abs{x}}{3}.
+\]
+Se \(\abs{x}/3<1\), escolha \(r\) com \(\abs{x}/3<r<1\). Para \(n\) grande, \(\abs{a_{n+1}}\le r\abs{a_n}\), e a cauda é dominada pela geométrica de razão \(r\). Há convergência absoluta quando \(\abs{x}<3\). Se \(\abs{x}/3>1\), a razão fica maior do que \(1\) e o termo não vai a zero: divergência para \(\abs{x}>3\). O raio é \(3\).
+
+Em \(x=3\), a série é \(\sum 1/n^2\). Para \(n\ge 2\), \(1/n^2\le 1/(n(n-1))=1/(n-1)-1/n\), e \(\sum_{n=2}^N\bigl(1/(n-1)-1/n\bigr)=1-1/N\to 1\). A comparação dá a convergência. Em \(x=-3\), os módulos são \(1/n^2\), e a convergência é absoluta. O intervalo é \([-3,3]\).
+\end{proof}
+
+\section{Erro}
+
+\begin{proof}
+A série de \(e^x\) soma \(e^x\) para todo real, em particular \(e=\sum_{n=0}^\infty 1/n!\). Para \(n\ge 2\),
+\[
+n!=2\cdot 3\cdots n\ge 2^{n-1},
+\]
+porque cada fator a partir do \(3\) é pelo menos \(2\), e há \(n-1\) fatores no produto que começa no \(2\). Logo \(1/n!\le 1/2^{n-1}\). Então
+\[
+e=1+1+\sum_{n=2}^\infty\frac{1}{n!}
+\le 2+\sum_{n=2}^\infty\frac{1}{2^{n-1}}
+=2+\sum_{j=1}^\infty\frac{1}{2^j}
+=2+1=3.
+\]
+A desigualdade \(1/n!\le 1/2^{n-1}\) é estrita em \(n=3\), pois \(1/6<1/4\). A soma da série de \(e\) é estritamente menor do que a soma majorante, logo \(e<3\).
+
+O resto de Lagrange de ordem \(3\) para \(e^x\) dá \(c\) entre \(0\) e \(x\) com \(R_3(x)=e^c x^4/24\). Para \(x\in(0,1]\), \(0<c<x\le 1\), então \(e^c<e\). Para \(x=0\), o resto é zero. Assim, em \([0,1]\),
+\[
+\abs{e^x-T_3(x)}\le\frac{e}{24}<\frac{3}{24}=\frac{1}{8}.
+\]
+No ponto \(x=1\) a desigualdade \(e^c<e\) continua estrita porque \(c<1\). A cota \(e/24\) já é estritamente menor do que \(1/8\).
+\end{proof}
+
+\section{Derivada no extremo}
+
+\begin{proof}
+Os coeficientes são \(c_n=1/(n\,2^n)\) para \(n\ge 1\).
+\[
+\abs{\frac{c_{n+1}}{c_n}}=\frac{n\,2^n}{(n+1)2^{n+1}}=\frac{1}{2}\cdot\frac{n}{n+1}\to\frac{1}{2}.
+\]
+O raio é \(2\). Em \(x=-2\),
+\[
+\frac{(-2)^n}{n\,2^n}=\frac{(-1)^n}{n}.
+\]
+A série \(\sum (-1)^{n+1}/n\) converge pelo teste de Leibniz, com \(b_n=1/n\) decrescente e tendendo a zero: as somas pares crescem e ficam \(\le 1\), as ímpares decrescem e ficam \(\ge 0\), e a diferença entre elas é \(1/(2m+1)\to 0\). Multiplicar por \(-1\) não altera a convergência. Logo há convergência em \(x=-2\).
+
+A derivada de \(x^n/(n\,2^n)\) é \(x^{n-1}/2^n\). A série derivada é \(\sum_{n=1}^\infty x^{n-1}/2^n\). Em \(x=-2\),
+\[
+\frac{(-2)^{n-1}}{2^n}=\frac{(-1)^{n-1}2^{n-1}}{2^n}=\frac{(-1)^{n-1}}{2}.
+\]
+O termo geral tem módulo \(1/2\) e não tende a zero. Pelo teste da divergência, a série derivada diverge em \(x=-2\).
+\end{proof}
+
+\section{Cosseno}
+
+\begin{proof}
+A derivada de ordem \(n\) de \(\cos x\) é \(\cos(x+n\pi/2)\). Em zero, \(\cos(n\pi/2)\): vale \((-1)^k\) se \(n=2k\), e vale \(0\) se \(n\) é ímpar. O polinômio de Taylor de ordem \(n\) contém só as potências pares até a maior que não passa de \(n\), com coeficiente \((-1)^k/(2k)!\). Qualquer derivada de cosseno tem módulo no máximo \(1\), pois é \(\pm\cos\) ou \(\pm\sin\). O resto de Lagrange dá
+\[
+\abs{R_n(x)}\le\frac{\abs{x}^{n+1}}{(n+1)!}.
+\]
+Fixe \(x\). Se \(x=0\), o resto é zero. Se \(x\neq 0\), escolha um inteiro \(m>2\abs{x}\), \(m\ge 1\). Para \(n\ge m\),
+\[
+\frac{\abs{x}^{n+1}}{(n+1)!}
+=\frac{\abs{x}^m}{m!}\prod_{j=1}^{n+1-m}\frac{\abs{x}}{m+j}
+\le\frac{\abs{x}^m}{m!}\left(\frac{1}{2}\right)^{n+1-m}\to 0.
+\]
+Logo \(R_n(x)\to 0\) e \(T_n(x)\to\cos x\). A partir da ordem \(2K\), aumentar a ordem só acrescenta os termos pares seguintes ou zeros ímpares, e o limite dos polinômios é a soma da série \(\sum_{k=0}^\infty (-1)^k x^{2k}/(2k)!\).
+\end{proof}
+
+\section{Unicidade dos coeficientes}
+
+\begin{proof}
+Seja \(f(x)=\sum_{n=0}^\infty c_n(x-a)^n=0\) para todo \(x\) num intervalo \((a-r,a+r)\) com \(r>0\). O raio da série é pelo menos \(r\), porque ela converge nesse intervalo. Em \(x=a\), \(f(a)=c_0=0\).
+
+O teorema de derivação termo a termo, válido no intervalo aberto de convergência, diz que \(f\) é derivável aí e
+\[
+f'(x)=\sum_{n=1}^\infty n c_n(x-a)^{n-1}.
+\]
+Como \(f\) é identicamente zero, \(f'\) também é, e \(f'(a)=c_1=0\).
+
+Suponha \(c_0=\cdots=c_k=0\). Derivando termo a termo \(k+1\) vezes, o que o teorema autoriza porque cada série derivada tem o mesmo raio,
+\[
+f^{(k+1)}(x)=\sum_{n=k+1}^\infty n(n-1)\cdots(n-k)c_n(x-a)^{n-k-1}.
+\]
+Em \(x=a\) só sobrevive o primeiro termo, \(n=k+1\), cujo coeficiente é \((k+1)!\,c_{k+1}\). Mas \(f^{(k+1)}(a)=0\), logo \(c_{k+1}=0\).
+
+Por indução, \(c_n=0\) para todo \(n\).
+\end{proof}
+
+\end{document}

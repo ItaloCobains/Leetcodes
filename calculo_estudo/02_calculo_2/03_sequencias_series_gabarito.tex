@@ -1,0 +1,190 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: sequências e séries numéricas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+Cada solução abaixo é completa. Os teoremas da nota são usados só quando as hipóteses são verificadas na conta; onde a nota não é necessária, a estimativa está escrita de novo.
+
+\section{Definição de limite}
+
+Mostre que \((2n+1)/(n+3)\to 2\).
+
+\begin{proof}
+Para \(n\ge 1\),
+\[
+\abs{\frac{2n+1}{n+3}-2}
+=\abs{\frac{2n+1-2(n+3)}{n+3}}
+=\frac{5}{n+3}.
+\]
+Seja \(\eps>0\). Pela propriedade arquimediana de \(\R\), existe \(N\in\N\) com \(N>5/\eps\). Se \(n\ge N\), então \(n+3>n\ge N>5/\eps\), logo
+\[
+\frac{5}{n+3}<\eps.
+\]
+Essa é a definição de limite.
+\end{proof}
+
+\section{Subsequências}
+
+Seja \(a_n=(-1)^n(1+1/n)\).
+
+\begin{proof}
+Para \(k\in\N\), o índice par \(n_k=2k\) dá
+\[
+a_{2k}=1+\frac{1}{2k}\to 1,
+\]
+porque \(1/(2k)\to 0\). O índice ímpar \(m_k=2k-1\) dá
+\[
+a_{2k-1}=-\Bigl(1+\frac{1}{2k-1}\Bigr)\to -1.
+\]
+As duas subsequências convergem, e os limites são diferentes. Se \((a_n)\) convergisse para um \(L\), toda subsequência convergiria para \(L\): dado \(\eps>0\), o \(N\) da definição de \(a_n\to L\) serve para a subsequência, pois \(n_k\ge k\), então \(k\ge N\) implica \(n_k\ge N\). A unicidade forçaria \(1=-1\). Logo \((a_n)\) diverge.
+\end{proof}
+
+A desigualdade \(n_k\ge k\) usada acima se prova por indução: \(n_1\ge 1\), e \(n_{k+1}\ge n_k+1\ge k+1\).
+
+\section{Soma geométrica}
+
+\begin{proof}
+Para \(r\neq 1\),
+\[
+(1-r)\sum_{k=0}^{N-1} r^k
+=\sum_{k=0}^{N-1} r^k-\sum_{k=1}^{N} r^k
+=1-r^N,
+\]
+logo a soma finita é \((1-r^N)/(1-r)\).
+
+Primeira série: \(r=-1/3\) e \(\abs{r}=1/3<1\). Falta \(r^N\to 0\). Escreva \(\rho=1/3=1/(1+h)\) com \(h=2\). Bernoulli, por indução, dá \((1+h)^n\ge 1+nh\): o passo é \((1+nh)(1+h)=1+(n+1)h+nh^2\ge 1+(n+1)h\). Então \(\rho^n\le 1/(nh)\to 0\). Portanto
+\[
+\sum_{k=0}^{N-1}\Bigl(-\frac{1}{3}\Bigr)^k
+=\frac{1-(-1/3)^N}{1-(-1/3)}
+\to\frac{1}{4/3}=\frac{3}{4}.
+\]
+A série converge e a soma é \(3/4\).
+
+Segunda série: \(r=2/5\), \(\abs{r}<1\), e o mesmo argumento dá \((2/5)^N\to 0\). A soma a partir de \(k=0\) é \(1/(1-2/5)=5/3\). Tirando o termo \(k=0\), que vale \(1\),
+\[
+\sum_{n=1}^\infty\Bigl(\frac{2}{5}\Bigr)^n=\frac{5}{3}-1=\frac{2}{3}.
+\]
+Pela fórmula fechada, \((2/5)/(1-2/5)=(2/5)/(3/5)=2/3\).
+\end{proof}
+
+\section{Teste da divergência}
+
+\begin{proof}
+Calcule
+\[
+\frac{n^2}{n^2+1}=\frac{1}{1+1/n^2}\to 1\neq 0.
+\]
+Se a série convergisse, o termo geral tenderia a zero: \(a_n=s_n-s_{n-1}\) e as duas somas parciais, a segunda só deslocada, tenderiam ao mesmo limite. Como o termo não vai a zero, a série diverge.
+
+A recíproca é falsa por causa da harmônica. O termo \(1/n\to 0\), mas a série diverge. As somas parciais são crescentes. Para \(k\ge 1\),
+\[
+s_{2^k}=1+\sum_{m=0}^{k-1}\sum_{n=2^m+1}^{2^{m+1}}\frac{1}{n}.
+\]
+O bloco \(m\) tem \(2^m\) termos, cada um no mínimo \(1/2^{m+1}\), e soma pelo menos \(1/2\). Há \(k\) blocos, logo \(s_{2^k}\ge 1+k/2\), que não é limitado. A sequência das somas parciais diverge.
+\end{proof}
+
+\section{Comparação}
+
+\begin{proof}
+(a) Para \(n\ge 1\), \(n^2+n\ge n^2\), então
+\[
+0<\frac{\sqrt{n}}{n^2+n}\le\frac{\sqrt{n}}{n^2}=n^{-3/2}.
+\]
+A série \(\sum n^{-3/2}\) é uma \(p\)-série com \(p=3/2>1\). Pelo teorema demonstrado na nota, ela converge: a soma \(\sum_{m=2}^N m^{-3/2}\) fica abaixo de \(\int_1^N x^{-3/2}\,\dif x\), e essa integral tende a \(1/(3/2-1)=2\). A comparação direta transfere a convergência para a série do item (a).
+
+(b) Para \(n\ge 1\), \(\sqrt{n}\ge 1\), logo \(\sqrt{n}+1\le 2\sqrt{n}\) e
+\[
+\frac{1}{\sqrt{n}+1}\ge\frac{1}{2\sqrt{n}}.
+\]
+A série \(\sum n^{-1/2}\) diverge, porque \(p=1/2\le 1\): as somas parciais dominam \(\int_1^N x^{-1/2}\,\dif x=2\sqrt{N}-2\to+\infty\). A comparação direta, no sentido ``o menor diverge'', dá a divergência de (b).
+\end{proof}
+
+\section{Razão}
+
+\begin{proof}
+(a) Os termos são positivos para \(n\ge 1\). 
+\[
+\frac{a_{n+1}}{a_n}=\frac{(n+1)^2}{2^{n+1}}\cdot\frac{2^n}{n^2}=\frac{1}{2}\Bigl(1+\frac{1}{n}\Bigr)^2\to\frac{1}{2}<1.
+\]
+Escolha \(r\) com \(1/2<r<1\), por exemplo \(r=3/4\). Existe \(N\) tal que \(n\ge N\) implica \(a_{n+1}\le r a_n\). Indutivamente, \(a_{N+k}\le a_N r^k\). A cauda é no máximo \(a_N\sum r^k=a_N/(1-r)<\infty\). A comparação com a geométrica dá a convergência.
+
+(b)
+\[
+\frac{a_{n+1}}{a_n}=\frac{(n+1)!}{10^{n+1}}\cdot\frac{10^n}{n!}=\frac{n+1}{10}\to+\infty.
+\]
+Existe \(N\) tal que \(n\ge N\) implica \(a_{n+1}>2a_n\). Então \(a_{N+k}\ge 2^k a_N\). Como \(a_N=N!/10^N>0\), o termo geral vai a infinito e não tende a zero. A série diverge.
+
+Para \(a_n=1/n^2\),
+\[
+\frac{a_{n+1}}{a_n}=\frac{n^2}{(n+1)^2}\to 1.
+\]
+O teste da razão não decide quando o limite é \(1\). Não há contradição com a convergência: o teorema só conclui nos casos \(L<1\) e \(L>1\). A convergência de \(\sum 1/n^2\) vem de outra via, a \(p\)-série com \(p=2>1\), ou da comparação \(1/n^2\le 1/(n(n-1))=1/(n-1)-1/n\) para \(n\ge 2\), cuja série é telescópica e soma \(1\).
+\end{proof}
+
+\section{Leibniz}
+
+\begin{proof}
+Seja \(b_n=n^{-1/2}\). Para \(n\ge 1\), \(b_{n+1}\le b_n\), porque a raiz cresce, e \(b_n\to 0\). O teste de Leibniz se aplica à série \(\sum (-1)^{n+1}b_n\), que portanto converge.
+
+A série dos módulos é \(\sum n^{-1/2}\), \(p\)-série com \(p=1/2\le 1\), divergente. A convergência da série alternada é condicional.
+
+A convergência e a cota saem das somas pares e ímpares, escritas aqui. Seja \(s_N=\sum_{n=1}^N (-1)^{n+1}b_n\). Então
+\[
+s_{2m+2}-s_{2m}=b_{2m+1}-b_{2m+2}\ge 0,
+\]
+logo \(s_2\le s_4\le\cdots\). Além disso
+\[
+s_{2m}=b_1-(b_2-b_3)-\cdots-(b_{2m-2}-b_{2m-1})-b_{2m}\le b_1,
+\]
+porque cada parêntese é não negativo. As somas pares convergem para algum \(S\le b_1\), pelo teorema da sequência crescente e limitada. As ímpares satisfazem \(s_{2m+1}-s_{2m+3}=b_{2m+2}-b_{2m+3}\ge 0\), então decrescem, e \(s_{2m+1}=s_{2m}+b_{2m+1}\ge s_{2m}\ge s_2=b_1-b_2\ge 0\), logo são limitadas inferiormente e convergem para algum limite. A diferença \(s_{2m+1}-s_{2m}=b_{2m+1}\to 0\) força os dois limites a coincidirem. Assim \(s_N\to S\), com \(s_{2m}\le S\le s_{2m+1}\).
+
+Se \(N=2m\), \(s_N\le S\le s_N+b_{N+1}\), logo \(0\le S-s_N\le b_{N+1}\). Se \(N=2m-1\), \(s_{N+1}=s_N-b_{N+1}\le S\le s_N\), logo \(0\le s_N-S\le b_{N+1}\). Nos dois casos \(\abs{S-s_N}\le b_{N+1}\).
+
+Queremos \(b_{N+1}<10^{-2}\), isto é
+\[
+\frac{1}{\sqrt{N+1}}<\frac{1}{100}
+\qquad\Leftrightarrow\qquad N+1>10000
+\qquad\Leftrightarrow\qquad N\ge 10000.
+\]
+Para \(N=10000\), \(\abs{R_N}\le 1/\sqrt{10001}\). Como \(10001>10000\), \(\sqrt{10001}>100\) e \(1/\sqrt{10001}<1/100\). Portanto o erro é menor do que \(10^{-2}\).
+\end{proof}
+
+\section{Termo limitado}
+
+\begin{proof}
+Seja \(\abs{b_n}\le M\) para todo \(n\), com \(M\ge 0\). Então
+\[
+0\le\abs{a_nb_n}\le M\abs{a_n}.
+\]
+Se \(M=0\), a série \(\sum a_nb_n\) é nula e converge. Se \(M>0\), as somas parciais de \(\sum M\abs{a_n}\) são \(M\) vezes as somas parciais de uma série convergente, logo convergem. A comparação direta, com termos não negativos \(\abs{a_nb_n}\) e \(M\abs{a_n}\), dá a convergência de \(\sum\abs{a_nb_n}\).
+\end{proof}
+
+\section{\(n a_n\) tende a zero}
+
+\begin{proof}
+A série converge e os termos são não negativos, então as somas parciais são de Cauchy: para todo \(\eps>0\) existe \(N\in\N\) tal que \(m>\ell\ge N\) implica \(\sum_{j=\ell+1}^{m} a_j<\eps\). A direção ``convergente implica Cauchy'' é a estimativa \(\abs{s_m-s_\ell}\le\abs{s_m-S}+\abs{s_\ell-S}\), com os dois erros menores do que \(\eps/2\).
+
+Tome \(n\ge 2N\) e \(n\ge 2\). Use que \((a_n)\) é decrescente.
+
+Se \(n=2m\) é par, então \(m=n/2\ge N\). Os termos de \(a_{m+1}\) até \(a_{2m}\) são todos pelo menos \(a_{2m}\), e há \(m\) deles:
+\[
+\sum_{j=m+1}^{2m} a_j\ge m\, a_{2m}.
+\]
+O bloco começa depois do índice \(m\ge N\), então a soma é menor do que \(\eps\). Logo \(m a_{2m}<\eps\), isto é \(n a_n<2\eps\).
+
+Se \(n=2m+1\) é ímpar, então \(n\ge 2N+1\) e \(m=(n-1)/2\ge N\). Há \(m+1\) termos de \(a_{m+1}\) até \(a_{2m+1}\), cada um no mínimo \(a_n\):
+\[
+\sum_{j=m+1}^{2m+1} a_j\ge (m+1)a_n.
+\]
+O bloco é menor do que \(\eps\), logo \((m+1)a_n<\eps\). Como \(n=2m+1\le 2m+2=2(m+1)\),
+\[
+n a_n\le 2(m+1)a_n<2\eps.
+\]
+Nos dois casos, \(n\ge 2N\) implica \(n a_n<2\eps\). Dado \(\eps>0\), o número \(2\eps\) é arbitrário no sentido usual: para forçar \(n a_n<\eps\), rode o argumento com \(\eps/2\) no lugar de \(\eps\). Portanto \(n a_n\to 0\).
+\end{proof}
+
+\end{document}

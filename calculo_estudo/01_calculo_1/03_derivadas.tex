@@ -1,0 +1,481 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Derivadas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+A derivada \'e um limite de quocientes. Os teoremas de \'algebra de limites, o limite de $\sin h/h$ e o de $(1-\cos h)/h$ j\'a est\~ao demonstrados. As f\'ormulas de adi\c{c}\~ao continuam admitidas da revis\~ao. A fun\c{c}\~ao exponencial entra por um axioma, escrito na se\c{c}\~ao das derivadas elementares; n\~ao se mistura essa rota com uma defini\c{c}\~ao por integral.
+
+\section{Defini\c{c}\~ao, tangente e taxa}
+\label{sec:def-der}
+
+\begin{definicao}
+\label{def:derivada}
+Seja $f$ definida numa vizinhan\c{c}a de $a$, incluindo $a$. A derivada de $f$ em $a$ \'e
+\[
+f'(a)=\lim_{h\to 0}\frac{f(a+h)-f(a)}{h},
+\]
+quando esse limite existe. O $h$ do limite satisfaz $h\neq 0$. Dizemos ent\~ao que $f$ \'e deriv\'avel em $a$.
+\end{definicao}
+
+O quociente $(f(a+h)-f(a))/h$ \'e a inclina\c{c}\~ao da reta secante que passa por $(a,f(a))$ e $(a+h,f(a+h))$. O limite \'e a inclina\c{c}\~ao da reta tangente. A mesma raz\~ao, lida como varia\c{c}\~ao de $f$ por unidade de $h$, \'e a taxa instant\^anea de varia\c{c}\~ao de $f$ em $a$.
+
+\begin{definicao}
+Se $f'(a)$ existe, a reta tangente ao gr\'afico de $f$ no ponto $(a,f(a))$ \'e
+\[
+y=f(a)+f'(a)(x-a).
+\]
+\end{definicao}
+
+\figura{../figuras/secante_tangente.png}{Secantes aproximando a tangente.}
+
+\section{Deriv\'avel implica cont\'inua}
+\label{sec:impl}
+
+\begin{teorema}
+\label{teo:der-cont}
+Se $f$ \'e deriv\'avel em $a$, ent\~ao $f$ \'e cont\'inua em $a$.
+\end{teorema}
+
+\begin{proof}
+Para $h\neq 0$,
+\[
+f(a+h)-f(a)=\left(\frac{f(a+h)-f(a)}{h}\right) h.
+\]
+O primeiro fator tende a $f'(a)$ quando $h\to 0$. O segundo fator \'e a fun\c{c}\~ao identidade em $h$, cujo limite \'e $0$. O teorema do produto de limites d\'a
+\[
+\lim_{h\to 0}\bigl(f(a+h)-f(a)\bigr)=f'(a)\cdot 0=0.
+\]
+Logo $\lim_{h\to 0}f(a+h)=f(a)$. Pondo $x=a+h$, isso \'e $\lim_{x\to a}f(x)=f(a)$.
+\end{proof}
+
+A rec\'iproca \'e falsa. Os dois contraexemplos seguintes separam continuidade de derivabilidade, e o segundo mostra que o quociente de Newton pode existir como fun\c{c}\~ao e ainda assim n\~ao ter limite.
+
+\section{Dois contraexemplos}
+\label{sec:contra}
+
+\begin{contraexemplo}
+\label{cx:abs}
+A fun\c{c}\~ao $f(x)=\abs{x}$ \'e cont\'inua em $0$ e n\~ao \'e deriv\'avel em $0$.
+\end{contraexemplo}
+
+\begin{proof}
+Continuidade: $\abs{f(x)-f(0)}=\abs{x}$. Dado $\eps>0$, $\delta=\eps$ serve. De fato $f$ \'e cont\'inua em todo ponto: a desigualdade reversa do valor absoluto d\'a $\abs{\abs{x}-\abs{a}}\le \abs{x-a}$, e o mesmo $\delta=\eps$ funciona em qualquer $a$.
+
+O quociente de Newton em $0$ \'e, para $h\neq 0$,
+\[
+\frac{f(0+h)-f(0)}{h}=\frac{\abs{h}}{h}.
+\]
+Se $h>0$, $\abs{h}/h=1$. Se $h<0$, $\abs{h}/h=-h/h=-1$. O limite \`a direita do quociente \'e $1$: a diferen\c{c}a $\abs{1-1}=0$ \'e menor que qualquer $\eps$, para qualquer $\delta>0$. O limite \`a esquerda \'e $-1$, pelo mesmo motivo. Como $1\neq -1$, o limite bilateral do quociente n\~ao existe. Logo $f'(0)$ n\~ao existe.
+
+Para registro, fora de $0$ a derivada existe. Se $a>0$ e $\abs{h}<a$, ent\~ao $a+h>0$, logo $(\abs{a+h}-\abs{a})/h=((a+h)-a)/h=1$, e $f'(a)=1$. Se $a<0$ e $\abs{h}<\abs{a}$, ent\~ao $a+h<0$, logo $(\abs{a+h}-\abs{a})/h=(-(a+h)-(-a))/h=-1$, e $f'(a)=-1$.
+\end{proof}
+
+\begin{contraexemplo}
+\label{cx:xsen}
+Defina $f(0)=0$ e $f(x)=x\sin(1/x)$ para $x\neq 0$. Ent\~ao $f$ \'e cont\'inua em $0$, e $f'(0)$ n\~ao existe.
+\end{contraexemplo}
+
+\begin{proof}
+De $\sin^2 t+\cos^2 t=1$ segue $\abs{\sin t}\le 1$. Para $x\neq 0$,
+\[
+\abs{f(x)-f(0)}=\abs{x\sin\frac{1}{x}}\le \abs{x}.
+\]
+Dado $\eps>0$, $\delta=\eps$ d\'a a continuidade em $0$. O mesmo encaixe \'e o confronto $- \abs{x}\le f(x)\le \abs{x}$, com os dois extremos tendendo a $0$.
+
+O quociente de Newton n\~ao herda esse limite. Para $h\neq 0$,
+\[
+\frac{f(h)-f(0)}{h}=\frac{h\sin(1/h)}{h}=\sin\frac{1}{h}.
+\]
+Para cada inteiro $n\ge 1$, sejam
+\[
+h_n=\frac{1}{\pi/2+2\pi n}, \qquad k_n=\frac{1}{3\pi/2+2\pi n}.
+\]
+Pela periodicidade $2\pi$, o quociente em $h_n$ vale $\sin(\pi/2)=1$, e em $k_n$ vale $\sin(3\pi/2)=-1$. Al\'em disso $0<h_n<1/(2\pi n)$ e $0<k_n<1/(2\pi n)$.
+
+Suponha que $\lim_{h\to 0}\sin(1/h)=L$. Tome $\eps=1$. Existe $\delta>0$ tal que $0<\abs{h}<\delta$ implica $\abs{\sin(1/h)-L}<1$. Os inteiros positivos s\~ao ilimitados, logo existe $n>1/(2\pi\delta)$. Para esse $n$, $h_n$ e $k_n$ est\~ao em $(0,\delta)$, e portanto $\abs{1-L}<1$ e $\abs{-1-L}<1$. Ent\~ao
+\[
+2=\abs{1-(-1)}\le \abs{1-L}+\abs{-1-L}<2.
+\]
+O quociente n\~ao tem limite, e $f'(0)$ n\~ao existe. A conta n\~ao \'e uma cita\c{c}\~ao: o quociente \'e exatamente $\sin(1/h)$, e essas duas sequ\^encias o levam a valores cuja dist\^ancia \'e $2$.
+\end{proof}
+
+\section{Regras de deriva\c{c}\~ao}
+\label{sec:regras}
+
+\begin{teorema}[Soma]
+\label{teo:soma-der}
+Se $f$ e $g$ s\~ao deriv\'aveis em $a$, ent\~ao $(f+g)'(a)=f'(a)+g'(a)$.
+\end{teorema}
+
+\begin{proof}
+Para $h\neq 0$,
+\[
+\frac{(f+g)(a+h)-(f+g)(a)}{h}
+=\frac{f(a+h)-f(a)}{h}+\frac{g(a+h)-g(a)}{h}.
+\]
+O limite da soma \'e a soma dos limites $f'(a)$ e $g'(a)$.
+\end{proof}
+
+\begin{teorema}[Produto]
+\label{teo:produto-der}
+Se $f$ e $g$ s\~ao deriv\'aveis em $a$, ent\~ao
+\[
+(fg)'(a)=f'(a)g(a)+f(a)g'(a).
+\]
+\end{teorema}
+
+\begin{proof}
+Para $h\neq 0$, some e subtraia $f(a+h)g(a)$:
+\begin{align*}
+(fg)(a+h)-(fg)(a)
+&= f(a+h)g(a+h)-f(a+h)g(a)+f(a+h)g(a)-f(a)g(a)\\
+&= f(a+h)\bigl(g(a+h)-g(a)\bigr)+g(a)\bigl(f(a+h)-f(a)\bigr).
+\end{align*}
+Dividindo por $h$,
+\[
+\frac{(fg)(a+h)-(fg)(a)}{h}
+= f(a+h)\cdot\frac{g(a+h)-g(a)}{h}+g(a)\cdot\frac{f(a+h)-f(a)}{h}.
+\]
+Quando $h\to 0$, o quociente de $g$ tende a $g'(a)$ e o de $f$ tende a $f'(a)$. O fator $g(a)$ \'e constante. O fator $f(a+h)$ tende a $f(a)$ porque $f$, sendo deriv\'avel em $a$, \'e cont\'inua em $a$, pelo Teorema~\ref{teo:der-cont}. O teorema do produto e o da soma de limites d\~ao $f(a)g'(a)+g(a)f'(a)$.
+\end{proof}
+
+\begin{teorema}[Quociente]
+\label{teo:quociente-der}
+Se $f$ e $g$ s\~ao deriv\'aveis em $a$ e $g(a)\neq 0$, ent\~ao $g(a+h)\neq 0$ para todo $h$ suficientemente pequeno, e
+\[
+\left(\frac{f}{g}\right)'(a)=\frac{f'(a)g(a)-f(a)g'(a)}{g(a)^2}.
+\]
+\end{teorema}
+
+\begin{proof}
+Como $g$ \'e deriv\'avel em $a$, \'e cont\'inua em $a$. Existe $\delta_1>0$ tal que $0<\abs{h}<\delta_1$ implica $\abs{g(a+h)-g(a)}<\abs{g(a)}/2$, logo
+\[
+\abs{g(a+h)}\ge \abs{g(a)}-\abs{g(a+h)-g(a)}>\frac{\abs{g(a)}}{2}>0.
+\]
+O quociente $f/g$ est\'a definido em $a$ e nessa vizinhan\c{c}a furada. Para $0<\abs{h}<\delta_1$,
+\begin{align*}
+\frac{f(a+h)}{g(a+h)}-\frac{f(a)}{g(a)}
+&=\frac{f(a+h)g(a)-f(a)g(a+h)}{g(a+h)g(a)}.
+\end{align*}
+O numerador se reescreve somando e subtraindo $f(a)g(a)$:
+\begin{align*}
+f(a+h)g(a)-f(a)g(a+h)
+&= g(a)\bigl(f(a+h)-f(a)\bigr)-f(a)\bigl(g(a+h)-g(a)\bigr).
+\end{align*}
+Dividindo por $h$,
+\[
+\frac{1}{h}\left(\frac{f(a+h)}{g(a+h)}-\frac{f(a)}{g(a)}\right)
+=\frac{ g(a)\,\dfrac{f(a+h)-f(a)}{h} - f(a)\,\dfrac{g(a+h)-g(a)}{h} }{ g(a+h)\,g(a) }.
+\]
+Quando $h\to 0$, o numerador dessa fra\c{c}\~ao tende a $g(a)f'(a)-f(a)g'(a)$, pela \'algebra de limites. O denominador tende a $g(a)\cdot g(a)=g(a)^2\neq 0$, porque $g(a+h)\to g(a)$. O teorema do quociente de limites d\'a a f\'ormula do enunciado.
+\end{proof}
+
+\begin{teorema}[Cadeia]
+\label{teo:cadeia}
+Se $g$ \'e deriv\'avel em $a$ e $f$ \'e deriv\'avel em $b=g(a)$, ent\~ao $f\circ g$ \'e deriv\'avel em $a$ e
+\[
+(f\circ g)'(a)=f'(g(a))\,g'(a).
+\]
+\end{teorema}
+
+\begin{proof}
+A divis\~ao por $g(a+h)-g(a)$ \'e ileg\'itima: esse incremento pode ser zero para uma sequ\^encia de $h\neq 0$ sem que $g$ seja constante. A fun\c{c}\~ao auxiliar evita o quociente. Como $f$ \'e deriv\'avel em $b$, est\'a definida numa vizinhan\c{c}a de $b$. Defina, para $k$ nessa vizinhan\c{c}a,
+\[
+r(k)=\begin{cases}
+\dfrac{f(b+k)-f(b)}{k}, & k\neq 0,\\[1mm]
+f'(b), & k=0.
+\end{cases}
+\]
+A fun\c{c}\~ao $r$ \'e cont\'inua em $0$. De fato, dado $\eps>0$, a defini\c{c}\~ao de $f'(b)$ fornece $\delta>0$ tal que $0<\abs{k}<\delta$ implica $\abs{r(k)-f'(b)}<\eps$. Se $k=0$, $\abs{r(0)-f'(b)}=0<\eps$. Logo $\abs{k}<\delta$ implica $\abs{r(k)-r(0)}<\eps$.
+
+Afirma\c{c}\~ao: para todo $k$ na vizinhan\c{c}a,
+\[
+f(b+k)-f(b)=r(k)\,k.
+\]
+Se $k\neq 0$, isso \'e a defini\c{c}\~ao de $r(k)$. Se $k=0$, os dois lados s\~ao zero.
+
+Seja agora $h\neq 0$ pequeno o bastante para que $g(a+h)$ esteja definido e $k=g(a+h)-g(a)$ caia na vizinhan\c{c}a em que $r$ est\'a definida. Isso \'e poss\'ivel porque $g$, deriv\'avel em $a$, \'e cont\'inua em $a$, logo $g(a+h)\to g(a)$ e $k\to 0$. A afirma\c{c}\~ao com esse $k$ d\'a
+\begin{align*}
+f(g(a+h))-f(g(a))
+&= f(b+k)-f(b)
+= r(k)\,k
+= r\bigl(g(a+h)-g(a)\bigr)\,\bigl(g(a+h)-g(a)\bigr).
+\end{align*}
+Dividindo por $h\neq 0$,
+\[
+\frac{f(g(a+h))-f(g(a))}{h}
+= r\bigl(g(a+h)-g(a)\bigr)\cdot\frac{g(a+h)-g(a)}{h}.
+\]
+O segundo fator tende a $g'(a)$. Para o primeiro, seja $\varphi(h)=g(a+h)-g(a)$. J\'a vimos que $\varphi(h)\to 0$. Dado $\eps>0$, a continuidade de $r$ em $0$ d\'a $\delta'>0$ tal que $\abs{k}<\delta'$ implica $\abs{r(k)-r(0)}<\eps$, e $\varphi(h)\to 0$ d\'a $\delta>0$ tal que $0<\abs{h}<\delta$ implica $\abs{\varphi(h)}<\delta'$. Logo $r(\varphi(h))\to r(0)=f'(b)$. O teorema do produto de limites conclui
+\[
+(f\circ g)'(a)=f'(b)\,g'(a)=f'(g(a))\,g'(a).
+\]
+\end{proof}
+
+\section{Derivadas elementares}
+\label{sec:elementares}
+
+\begin{teorema}
+\label{teo:potencia}
+A derivada da fun\c{c}\~ao constante \'e $0$. A derivada da identidade \'e $1$. Para cada inteiro $n\ge 1$, a derivada de $x^n$ em qualquer ponto $a$ \'e $n a^{n-1}$.
+\end{teorema}
+
+\begin{proof}
+Se $f(x)=c$, o quociente $(c-c)/h=0$ tende a $0$. Se $f(x)=x$, o quociente $((a+h)-a)/h=1$ tende a $1$.
+
+A pot\^encia segue por indu\c{c}\~ao, via a regra do produto. Para $n=1$, $1\cdot a^{0}=1$ se convencionarmos $a^0=1$, inclusive em $a=0$; o caso $n=1$ j\'a foi a identidade. Suponha que, em todo ponto, a derivada de $x^n$ seja $n x^{n-1}$. Ent\~ao $x^{n+1}=x\cdot x^n$, e a regra do produto em $a$ d\'a
+\[
+1\cdot a^n + a\cdot n a^{n-1}=a^n+n a^n=(n+1)a^n.
+\]
+\end{proof}
+
+\begin{exemplo}
+Pela defini\c{c}\~ao, sem a indu\c{c}\~ao,
+\[
+\frac{(a+h)^2-a^2}{h}=\frac{2ah+h^2}{h}=2a+h,
+\]
+e $2a+h\to 2a$ quando $h\to 0$. O modelo $\delta$ desse limite \'e o da fun\c{c}\~ao linear: $\abs{h}<\eps$.
+\end{exemplo}
+
+\begin{teorema}
+\label{teo:sen-cos-der}
+Para todo $a\in\R$, $\sin'(a)=\cos a$ e $\cos'(a)=-\sin a$.
+\end{teorema}
+
+\begin{proof}
+A f\'ormula de adi\c{c}\~ao d\'a
+\begin{align*}
+\sin(a+h)-\sin a
+&=\sin a\cos h+\cos a\sin h-\sin a
+=\sin a\,(\cos h-1)+\cos a\sin h.
+\end{align*}
+Para $h\neq 0$,
+\[
+\frac{\sin(a+h)-\sin a}{h}
+= -\sin a\cdot\frac{1-\cos h}{h}+\cos a\cdot\frac{\sin h}{h}.
+\]
+Quando $h\to 0$, $\sin h/h\to 1$ e $(1-\cos h)/h\to 0$. Os fatores $\sin a$ e $\cos a$ s\~ao constantes em $h$. O produto e a soma de limites d\~ao $-\sin a\cdot 0+\cos a\cdot 1=\cos a$.
+
+Para o cosseno,
+\begin{align*}
+\cos(a+h)-\cos a
+&=\cos a\cos h-\sin a\sin h-\cos a
+=\cos a\,(\cos h-1)-\sin a\sin h,
+\end{align*}
+e
+\[
+\frac{\cos(a+h)-\cos a}{h}
+=\cos a\cdot\frac{\cos h-1}{h}-\sin a\cdot\frac{\sin h}{h}
+\to \cos a\cdot 0-\sin a\cdot 1=-\sin a,
+\]
+porque $(\cos h-1)/h=-(1-\cos h)/h\to 0$.
+\end{proof}
+
+\begin{teorema}
+\label{teo:tan}
+Se $\cos a\neq 0$, ent\~ao $\tan'(a)=\sec^2 a=1+\tan^2 a$.
+\end{teorema}
+
+\begin{proof}
+$\tan=\sin/\cos$. A regra do quociente e o Teorema~\ref{teo:sen-cos-der} d\~ao
+\[
+\tan'(a)=\frac{\cos a\cdot\cos a-\sin a\cdot(-\sin a)}{\cos^2 a}=\frac{\cos^2 a+\sin^2 a}{\cos^2 a}=\frac{1}{\cos^2 a}=\sec^2 a.
+\]
+A identidade $\sec^2 a=1+\tan^2 a$ \'e
+\[
+\frac{1}{\cos^2 a}=\frac{\sin^2 a+\cos^2 a}{\cos^2 a}=\tan^2 a+1.
+\]
+\end{proof}
+
+\begin{teorema}[Axioma da exponencial]
+\label{teo:exp}
+Admitimos que existe uma fun\c{c}\~ao $\exp\colon\R\to(0,\infty)$ tal que:
+\begin{enumerate}
+\item $\exp$ \'e deriv\'avel e $\exp'(x)=\exp(x)$ para todo $x\in\R$;
+\item $\exp(0)=1$;
+\item $\exp$ \'e bijetora de $\R$ sobre $(0,\infty)$, e a inversa $\ln\colon(0,\infty)\to\R$ \'e cont\'inua.
+\end{enumerate}
+N\~ao calculamos o limite que definiria $\exp'$; a igualdade $\exp'=\exp$ \'e o axioma desta rota. N\~ao definimos $\ln$ por integral, nem deduzimos $\exp'$ a partir de $\ln$. A f\'ormula $(\ln)'(x)=1/x$ ser\'a teorema, na se\c{c}\~ao da inversa, e s\'o usa este axioma mais a regra da inversa.
+\end{teorema}
+
+O item (1) j\'a \'e a derivada. O item (3) \'e hip\'otese da regra da inversa aplicada a $\exp$, e fica expl\'icito para n\~ao parecer que a continuidade de $\ln$ saiu de gra\c{c}a. N\~ao afirmamos que $\exp'>0$ implica $\exp$ crescente: essa implica\c{c}\~ao usa o teorema do valor m\'edio, que esta nota n\~ao prova.
+
+\section{Derivada da inversa}
+\label{sec:inversa}
+
+\begin{teorema}
+\label{teo:inversa}
+Seja $f$ deriv\'avel em $a$, com $f'(a)\neq 0$, e seja $b=f(a)$. Suponha que exista um intervalo aberto $J$ contendo $b$ e uma inversa $g\colon J\to\R$ de $f$, com $g(b)=a$, tal que $g$ seja cont\'inua em $b$ e $f(g(y))=y$ para todo $y\in J$. Ent\~ao $g$ \'e deriv\'avel em $b$ e
+\[
+g'(b)=\frac{1}{f'(a)}.
+\]
+\end{teorema}
+
+\begin{proof}
+Seja $h\neq 0$ pequeno o bastante para que $b+h\in J$, e ponha $k=g(b+h)-g(b)=g(b+h)-a$. Ent\~ao $f(a+k)=f(g(b+h))=b+h$, logo $h=f(a+k)-f(a)$. Se fosse $k=0$, ter\'iamos $h=0$. Assim $k\neq 0$ e
+\[
+\frac{g(b+h)-g(b)}{h}=\frac{k}{f(a+k)-f(a)}=\frac{1}{\dfrac{f(a+k)-f(a)}{k}}.
+\]
+Como $g$ \'e cont\'inua em $b$, $k\to 0$ quando $h\to 0$. O quociente $(f(a+k)-f(a))/k$ tende a $f'(a)$ quando $k\to 0$ com $k\neq 0$. Para passar ao limite em $h$, fixe $\eta>0$. Existe $\delta'>0$ tal que $0<\abs{k}<\delta'$ implica
+\[
+\abs{\frac{f(a+k)-f(a)}{k}-f'(a)}<\eta.
+\]
+A continuidade de $g$ d\'a $\delta>0$ tal que $0<\abs{h}<\delta$ implica $\abs{k}<\delta'$, e j\'a sabemos que $k\neq 0$. Logo o denominador, como fun\c{c}\~ao de $h$, tende a $f'(a)\neq 0$. O teorema do quociente de limites, com numerador constante $1$, d\'a $g'(b)=1/f'(a)$.
+\end{proof}
+
+\begin{exemplo}[Logaritmo]
+\label{ex:ln}
+Pelo axioma, $\exp$ \'e deriv\'avel, $\exp'(a)=\exp(a)\neq 0$ porque a imagem de $\exp$ est\'a em $(0,\infty)$, e $\ln$ \'e inversa cont\'inua. Para $b>0$, seja $a=\ln b$, de modo que $b=\exp(a)$. O Teorema~\ref{teo:inversa} d\'a
+\[
+(\ln)'(b)=\frac{1}{\exp'(a)}=\frac{1}{\exp(a)}=\frac{1}{\exp(\ln b)}=\frac{1}{b}.
+\]
+\end{exemplo}
+
+\begin{exemplo}[Arco tangente]
+\label{ex:arctan}
+Admitimos da geometria do c\'irculo: $\cos x>0$ em $(-\pi/2,\pi/2)$, $\sin x>0$ em $(0,\pi)$, $\sin(\pi/2)=1$, $\cos(\pi/2)=0$, $\tan(\pi/4)=1$, e $\sin(\pi-x)=\sin x$. O resto deste exemplo \'e conta.
+
+A tangente \'e cont\'inua em $(-\pi/2,\pi/2)$: \'e quociente de cont\'inuas e o cosseno n\~ao se anula. Se $-\pi/2<y<x<\pi/2$, ent\~ao $0<x-y<\pi$. A subtra\c{c}\~ao das tangentes \'e
+\begin{align*}
+\tan x-\tan y
+&=\frac{\sin x}{\cos x}-\frac{\sin y}{\cos y}
+=\frac{\sin x\cos y-\cos x\sin y}{\cos x\cos y}
+=\frac{\sin(x-y)}{\cos x\cos y},
+\end{align*}
+onde a \'ultima igualdade \'e a f\'ormula de adi\c{c}\~ao para $\sin(x+(-y))$.
+O numerador \'e positivo e o denominador \'e positivo, logo $\tan$ \'e estritamente crescente nesse intervalo, em particular injetora.
+
+O limite \`a esquerda em $\pi/2$ \'e $+\infty$. Dado $B\le 0$, em $(\pi/4,\pi/2)$ tem-se $\tan x>\tan(\pi/4)=1>0\ge B$ se $B<0$, e $\tan x>0=B$ se $B=0$; sirva $\delta=\pi/4$. Dado $B>0$, a continuidade do seno em $\pi/2$ d\'a $\delta_1>0$ tal que $\pi/2-\delta_1<x<\pi/2$ implica $\sin x>1/2$. A continuidade do cosseno d\'a $\delta_2>0$ tal que, no mesmo tipo de intervalo \`a esquerda, $0<\cos x<1/(2B)$, usando $\cos x>0$. Com $\delta=\min(\delta_1,\delta_2,\pi/2)$,
+\[
+\tan x=\frac{\sin x}{\cos x}>\frac{1/2}{1/(2B)}=B.
+\]
+Como o seno \'e \'impar e o cosseno \'e par, $\tan(-x)=-\tan x$. O limite \`a direita em $-\pi/2$ \'e $-\infty$: dado $B\in\R$, o caso anterior com desafio $-B$ produz $\delta>0$ tal que $\pi/2-\delta<t<\pi/2$ implica $\tan t>-B$; para $x=-t$ tem-se $-\pi/2<x<-\pi/2+\delta$ e $\tan x=-\tan t<B$.
+
+Dado $K\in\R$, existem portanto $x_0,x_1\in(-\pi/2,\pi/2)$ com $\tan x_0<K<\tan x_1$. O valor intermedi\'ario em $[x_0,x_1]$ fornece um ponto em que a tangente vale $K$. Juntando com a injetividade, $\tan\colon(-\pi/2,\pi/2)\to\R$ \'e bijetora. Seja $\arctan$ a inversa. Ela \'e estritamente crescente: se $y_1<y_2$ e $\arctan y_1\ge \arctan y_2$, a tangente, crescente, inverteria a desigualdade dos $y$.
+
+A inversa \'e cont\'inua em cada $b\in\R$. Seja $a=\arctan b$ e seja $\eps>0$. Como $a\in(-\pi/2,\pi/2)$, o n\'umero
+\[
+\eta=\min\Bigl(\eps,\ \frac{a+\pi/2}{2},\ \frac{\pi/2-a}{2}\Bigr)
+\]
+\'e positivo e $[a-\eta,a+\eta]\subset(-\pi/2,\pi/2)$. A tangente \'e estritamente crescente, logo
+\[
+\tan(a-\eta)<b<\tan(a+\eta).
+\]
+Seja $\delta=\min\bigl(b-\tan(a-\eta),\,\tan(a+\eta)-b\bigr)>0$. Se $\abs{y-b}<\delta$, ent\~ao $\tan(a-\eta)<y<\tan(a+\eta)$. Aplicando $\arctan$, que \'e crescente, e usando $\arctan(\tan(a\pm\eta))=a\pm\eta$,
+\[
+a-\eta<\arctan y<a+\eta.
+\]
+Assim $\abs{\arctan y-a}<\eta\le\eps$.
+
+A derivada da tangente em $a$ \'e $\sec^2 a=1+\tan^2 a\ge 1>0$. O Teorema~\ref{teo:inversa} d\'a
+\[
+(\arctan)'(b)=\frac{1}{\sec^2 a}=\frac{1}{1+\tan^2 a}=\frac{1}{1+b^2}.
+\]
+\end{exemplo}
+
+\begin{exemplo}[Raiz quadrada]
+\label{ex:raiz-der}
+Seja $b>0$ e $a=\sqrt{b}>0$. A fun\c{c}\~ao $f(x)=x^2$, restrita a $(0,\infty)$, \'e deriv\'avel em $a$ com $f'(a)=2a\neq 0$, e a raiz quadrada \'e a inversa, cont\'inua em $b$ pelo teorema da continuidade da raiz. O Teorema~\ref{teo:inversa} d\'a
+\[
+\bigl(\sqrt{\phantom{x}}\bigr)'(b)=\frac{1}{2a}=\frac{1}{2\sqrt{b}}.
+\]
+Em $0$ a hip\'otese $f'\neq 0$ falha, e a raiz n\~ao \'e deriv\'avel: para $h>0$,
+\[
+\frac{\sqrt{h}-\sqrt{0}}{h}=\frac{1}{\sqrt{h}},
+\]
+Dado $B>0$, se $0<h<1/B^2$ ent\~ao $1/\sqrt{h}>B$. Dado $B\le 0$, se $0<h<1$ ent\~ao $1/\sqrt{h}>0\ge B$; no caso $B=0$ a desigualdade continua estrita porque $1/\sqrt{h}>0$. O limite \`a direita do quociente \'e $+\infty$, n\~ao um n\'umero real.
+\end{exemplo}
+
+\section{Deriva\c{c}\~ao impl\'icita}
+\label{sec:implicita}
+
+\begin{exemplo}
+\label{ex:circulo}
+Seja $r>0$ e $x^2+y^2=r^2$. Suponha que, num intervalo aberto, $y$ seja uma fun\c{c}\~ao deriv\'avel de $x$ cujo gr\'afico permanece na circunfer\^encia. Derivando os dois lados pela regra da cadeia,
+\[
+2x+2y(x)y'(x)=0.
+\]
+Se $y(x)\neq 0$, ent\~ao $y'(x)=-x/y(x)$.
+
+A hip\'otese falha nos pontos $(\pm r,0)$. Tome $(r,0)$. Se existisse $y$ deriv\'avel numa vizinhan\c{c}a bilateral de $x=r$ com $x^2+y(x)^2=r^2$ para todo $x$ dessa vizinhan\c{c}a, ter\'iamos $y(r)=0$, e a equa\c{c}\~ao derivada em $x=r$ daria $2r+2\cdot 0\cdot y'(r)=0$, logo $r=0$, contra $r>0$. N\~ao h\'a tal fun\c{c}\~ao.
+
+O semic\'irculo superior $y=\sqrt{r^2-x^2}$, definido em $[-r,r]$, tamb\'em n\~ao tem derivada real em $x=r$. Para $h>0$ pequeno,
+\begin{align*}
+y(r-h)&=\sqrt{r^2-(r-h)^2}=\sqrt{2rh-h^2}=\sqrt{h(2r-h)},\\
+\frac{y(r-h)-y(r)}{(r-h)-r}&=\frac{\sqrt{h(2r-h)}}{-h}=-\frac{\sqrt{2r-h}}{\sqrt{h}}.
+\end{align*}
+Quando $h\to 0^+$, $\sqrt{2r-h}/\sqrt{h}$ tende a $+\infty$, porque o numerador tende a $\sqrt{2r}>0$ e o denominador tende a $0$ por valores positivos. O sinal de menos na frente leva o quociente a $-\infty$. A reta tangente \'e a vertical $x=r$. Na linguagem $F(x,y)=x^2+y^2-r^2$, $F_y$ \'e a derivada em rela\c{c}\~ao a $y$ tratando $x$ como constante, isto \'e, $F_y=2y$. Em $(r,0)$ tem-se $F_y=0$: a equa\c{c}\~ao $F_x+F_y y'=0$ n\~ao pode ser resolvida para $y'$.
+\end{exemplo}
+
+\section{Taxas relacionadas}
+\label{sec:taxas}
+
+\begin{exemplo}
+\label{ex:escada}
+Uma escada de $5\,\mathrm{m}$ est\'a apoiada num muro vertical e no ch\~ao horizontal. A base se afasta do muro a $0{,}5\,\mathrm{m/s}$. No instante em que a base est\'a a $3\,\mathrm{m}$ do muro, com que velocidade a ponta de cima desce?
+
+Sejam $x(t)$ a dist\^ancia da base ao muro e $y(t)$ a altura da ponta, ambas em metros, com $t$ em segundos. O comprimento fixo d\'a
+\[
+x(t)^2+y(t)^2=25.
+\]
+Enquanto $x$ e $y$ forem deriv\'aveis e $y(t)\neq 0$, a regra da cadeia produz
+\[
+2x(t)x'(t)+2y(t)y'(t)=0,
+\]
+logo
+\[
+y'(t)=-\frac{x(t)}{y(t)}\,x'(t).
+\]
+No instante pedido, $x=3$ e $x'=1/2$. Como $9+y^2=25$ e a ponta est\'a acima do ch\~ao, $y=4$, n\~ao $y=-4$. Ent\~ao
+\[
+y'=-\frac{3}{4}\cdot\frac{1}{2}=-\frac{3}{8}.
+\]
+A unidade \'e metro por segundo. O sinal negativo diz que a altura diminui: a ponta desce a $3/8\,\mathrm{m/s}$.
+
+A f\'ormula degenera quando $y=0$. Nesse instante $x^2=25$, e com a base ainda do lado positivo do muro tem-se $x=5$. A equa\c{c}\~ao derivada vira $2\cdot 5\cdot x'+2\cdot 0\cdot y'=0$, isto \'e, $x'=0$. Uma velocidade horizontal diferente de zero \'e incompat\'ivel com a escada permanecer na circunfer\^encia naquele instante. A express\~ao $-x/y$ n\~ao est\'a definida, e o modelo de um segmento r\'igido tocando o muro e o ch\~ao ao mesmo tempo deixa de descrever o movimento se a base continua a se afastar.
+\end{exemplo}
+
+\section{Exerc\'icios}
+\label{sec:ex-der}
+
+\begin{exercicio}[B\'asico --- Pela defini\c{c}\~ao]
+Calcule $f'(1)$ para $f(x)=x^2$, somente com o limite do quociente de Newton.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- Tangente]
+Escreva a equa\c{c}\~ao da reta tangente ao gr\'afico de $y=x^2$ no ponto $(1,1)$.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- Constante]
+Prove, pela defini\c{c}\~ao, que a derivada de $f(x)=7$ \'e $0$ em qualquer ponto.
+\end{exercicio}
+
+\begin{exercicio}[B\'asico --- Linear]
+Prove, pela defini\c{c}\~ao, que a derivada de $f(x)=5x+2$ \'e a constante $5$.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Produto]
+Calcule $(x^2\sin x)'$, nomeando os fatores aos quais a regra do produto se aplica.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Cadeia]
+Calcule a derivada de $\cos(3x+1)$, nomeando a fun\c{c}\~ao de fora e a de dentro.
+\end{exercicio}
+
+\begin{exercicio}[Intermedi\'ario --- Escada]
+Na escada de $5\,\mathrm{m}$ do Exemplo~\ref{ex:escada}, a base se afasta a $0{,}3\,\mathrm{m/s}$. No instante em que a base est\'a a $4\,\mathrm{m}$ do muro, calcule $y'$ com unidade. Diga em que instante a express\~ao $-x/y$ deixa de fazer sentido e o que a equa\c{c}\~ao derivada exige de $x'$ nesse instante.
+\end{exercicio}
+
+\begin{exercicio}[Avan\c{c}ado --- Continuidade]
+Prove, da defini\c{c}\~ao, que deriv\'avel em $a$ implica cont\'inua em $a$. Escreva o produto do quociente de Newton por $h$.
+\end{exercicio}
+
+\begin{exercicio}[Avan\c{c}ado --- Cont\'inua e n\~ao deriv\'avel]
+Seja $f(0)=0$ e $f(x)=x\sin(1/x)$ para $x\neq 0$. Prove a continuidade em $0$ com $\delta$ expl\'icito e prove que $f'(0)$ n\~ao existe, calculando o quociente de Newton e exibindo duas sequ\^encias.
+\end{exercicio}
+
+\end{document}

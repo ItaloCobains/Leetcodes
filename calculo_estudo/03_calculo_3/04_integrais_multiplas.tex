@@ -1,0 +1,444 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Cálculo III: integrais múltiplas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Integral dupla no retângulo}
+
+\base{A integral de Riemann em $[a,b]$ é o limite das somas $f(x_i^*)\Delta x_i$ quando a malha da partição tende a zero, para $f$ contínua. O teorema de Fubini reduz a integral dupla a duas integrais de uma variável, numa ordem ou na outra.}
+
+Seja $R=[a,b]\times[c,d]$ e seja $f\colon R\to\R$ limitada. Uma partição de $R$ é um produto de partições de $[a,b]$ e de $[c,d]$: surgem sub-retângulos $R_{ij}$ de área $\Delta A_{ij}=\Delta x_i\Delta y_j$. A \emph{soma de Riemann} associada a pontos amostrais $(x_{ij}^*,y_{ij}^*)\in R_{ij}$ é
+\[
+\sum_{i,j} f(x_{ij}^*,y_{ij}^*)\,\Delta A_{ij}.
+\]
+A malha é o maior lado dentre os $\Delta x_i$ e os $\Delta y_j$. Dizemos que $f$ é \emph{integrável} em $R$, com integral $\iint_R f\,\dif A$, quando essas somas convergem para um único número sempre que a malha tende a zero, qualquer que seja a escolha dos pontos amostrais.
+
+\begin{teorema}
+Se $f$ é contínua em $R$, então $f$ é integrável em $R$.
+\end{teorema}
+
+Não reconstruímos a prova. O fato usado por baixo é a continuidade uniforme de $f$ no compacto $R$: o erro entre somas superiores e inferiores fica menor que qualquer $\eps>0$ quando a malha é fina. Toda conta concreta desta nota parte de uma função contínua numa região fechada e limitada do tipo descrito a seguir, logo integrável.
+
+A integral é linear, e $f\le g$ em $R$ implica $\iint_R f\le\iint_R g$. Se $f\ge 0$, a integral sobre um subconjunto é no máximo a integral sobre o conjunto maior. Essas três propriedades bastam para o confronto da integral gaussiana.
+
+\begin{teorema}[Fubini no retângulo]
+Se $f$ é contínua em $R=[a,b]\times[c,d]$, então as duas integrais iteradas existem e coincidem com a integral dupla:
+\[
+\iint_R f(x,y)\,\dif A
+=\int_a^b\Biggl(\int_c^d f(x,y)\,\dif y\Biggr)\dif x
+=\int_c^d\Biggl(\int_a^b f(x,y)\,\dif x\Biggr)\dif y.
+\]
+\end{teorema}
+
+\begin{esqueleto}
+\item Para cada $x$ fixo em $[a,b]$, a função $y\mapsto f(x,y)$ é contínua em $[c,d]$, logo a integral interna $g(x)=\int_c^d f(x,y)\,\dif y$ existe.
+\item A função $g$ é contínua em $[a,b]$. De fato, pela continuidade uniforme de $f$ em $R$, dado $\eps>0$ existe $\delta>0$ tal que $\abs{x-x_0}<\delta$ implica $\abs{f(x,y)-f(x_0,y)}<\eps/(d-c)$ para todo $y\in[c,d]$, se $d>c$. Então
+\[
+\abs{g(x)-g(x_0)}\le\int_c^d\abs{f(x,y)-f(x_0,y)}\,\dif y<\eps.
+\]
+\item Uma função contínua em $[a,b]$ é integrável, então $\int_a^b g(x)\,\dif x$ existe. Comparando somas de Riemann em $x$, depois de integrar em $y$, com somas duplas de $f$, esse número é a integral dupla. A malha fina torna a diferença menor que $\eps$.
+\item O mesmo argumento com a ordem trocada produz a outra iterada. As duas coincidem com a integral dupla, logo coincidem entre si.
+\end{esqueleto}
+
+O passo que não fingimos ter provado é a identificação completa entre a integral dupla, definida por somas de Riemann bidimensionais, e a iterada. O esqueleto isola o que é continuidade uniforme e o que é passagem ao limite das somas.
+
+\section{Regiões dos tipos I e II}
+
+\begin{definicao}
+Uma região $D\subset\R^2$ é do \emph{tipo I} quando existem $a<b$ e funções contínuas $g_1,g_2\colon[a,b]\to\R$, com $g_1\le g_2$, tais que
+\[
+D=\bigl\{(x,y):a\le x\le b,\ g_1(x)\le y\le g_2(x)\bigr\}.
+\]
+É do \emph{tipo II} quando
+\[
+D=\bigl\{(x,y):c\le y\le d,\ h_1(y)\le x\le h_2(y)\bigr\},
+\]
+com $h_1,h_2$ contínuas e $h_1\le h_2$.
+\end{definicao}
+
+Se $f$ é contínua em $D$ e $D$ é dos dois tipos, as integrais iteradas podem ser escritas nas duas ordens. A escolha deixa de ser indiferença quando uma das primitivas internas não é elementar e a outra é.
+
+\begin{exemplo}
+A integral
+\[
+\int_0^1\int_x^1 e^{y^2}\,\dif y\,\dif x
+\]
+não se calcula na ordem escrita por uma primitiva elementar de $y\mapsto e^{y^2}$. A região é $0\le x\le 1$ e $x\le y\le 1$. Lida na outra ordem, $y$ vai de $0$ a $1$ e, para cada $y$, $x$ vai de $0$ até $y$:
+\[
+\int_0^1\int_0^y e^{y^2}\,\dif x\,\dif y
+=\int_0^1 y\,e^{y^2}\,\dif y.
+\]
+A substituição $u=y^2$ dá $\dif u=2y\,\dif y$, com $u$ de $0$ a $1$:
+\[
+\int_0^1 y\,e^{y^2}\,\dif y=\frac12\int_0^1 e^u\,\dif u=\frac12\bigl(e-1\bigr).
+\]
+O valor da integral dupla é $(e-1)/2$. A troca dos extremos é parte da conta: errar o intervalo de $x$ para cada $y$ produz outra região.
+\end{exemplo}
+
+\section{Área, valor médio, massa e centro de massa}
+
+Se $D$ tem área positiva e $f$ é contínua em $D$, a \emph{área} e o \emph{valor médio} são
+\[
+\mathrm{área}(D)=\iint_D 1\,\dif A,
+\qquad
+\overline{f}=\frac{1}{\mathrm{área}(D)}\iint_D f\,\dif A.
+\]
+O valor médio é o número constante que, integrado em $D$, reproduz a integral de $f$.
+
+Uma lâmina ocupando $D$, com densidade contínua $\rho(x,y)\ge 0$ não identicamente nula, tem massa
+\[
+m=\iint_D \rho(x,y)\,\dif A.
+\]
+Os momentos em relação aos eixos e o centro de massa $(\bar x,\bar y)$ são
+\begin{align*}
+M_y&=\iint_D x\,\rho(x,y)\,\dif A,
+&
+\bar x&=\frac{M_y}{m},\\
+M_x&=\iint_D y\,\rho(x,y)\,\dif A,
+&
+\bar y&=\frac{M_x}{m}.
+\end{align*}
+O momento $M_y$ leva o fator $x$ porque mede a distribuição na direção horizontal, a que determina $\bar x$. Se a densidade é constante, ela sai da razão e o centro de massa é o centroide geométrico.
+
+\begin{exemplo}
+Lâmina no retângulo $[0,1]\times[0,2]$, densidade $\rho(x,y)=x$. A massa é
+\[
+m=\int_0^2\int_0^1 x\,\dif x\,\dif y=\int_0^2\frac12\,\dif y=1.
+\]
+O momento que produz $\bar x$ é
+\[
+M_y=\int_0^2\int_0^1 x^2\,\dif x\,\dif y=\int_0^2\frac13\,\dif y=\frac23,
+\]
+logo $\bar x=2/3$. O outro momento é
+\[
+M_x=\int_0^2\int_0^1 yx\,\dif x\,\dif y=\int_0^2 y\cdot\frac12\,\dif y=\frac14\cdot 4=1,
+\]
+logo $\bar y=1$. A densidade não depende de $y$, então $\bar y$ cai no meio do intervalo $[0,2]$. A densidade cresce com $x$, então $\bar x=2/3$ fica à direita do meio do intervalo $[0,1]$.
+\end{exemplo}
+
+\section{Mudança de variáveis}
+
+\begin{teorema}
+Sejam $D'\subset\R^2$ uma região dos tipos acima e
+\[
+x=x(u,v),\qquad y=y(u,v)
+\]
+funções de classe $C^1$ num aberto que contém $D'$. Suponha a transformação injetora no interior de $D'$ e o jacobiano
+\[
+J=\det\frac{\partial(x,y)}{\partial(u,v)}
+=\det\begin{pmatrix} x_u & x_v \\ y_u & y_v \end{pmatrix}
+\]
+diferente de zero nesse interior. Se $f$ é contínua em $D$, imagem de $D'$, então
+\begin{equation}
+\iint_D f(x,y)\,\dif x\,\dif y
+=\iint_{D'} f\bigl(x(u,v),y(u,v)\bigr)\,\abs{J(u,v)}\,\dif u\,\dif v.
+\label{eq:mudanca}
+\end{equation}
+\end{teorema}
+
+O módulo é parte da fórmula, não um enfeite. O determinante $J$ tem sinal: ele é positivo quando a transformação preserva a orientação do plano e negativo quando a inverte. A área não enxerga essa orientação. Se alguém integra $J$ sem módulo, uma parametrização que percorre a região ``ao contrário'' produz uma integral negativa de uma função positiva.
+
+\begin{exemplo}
+A troca $(u,v)\mapsto(x,y)=(v,u)$ tem
+\[
+J=\det\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}=-1.
+\]
+Ela leva o quadrado $[0,1]^2$ nele mesmo e é bijetora. A área do quadrado é $1$. A fórmula com $\abs{J}$ devolve $\iint 1\,\dif u\,\dif v=1$. Sem o módulo, a integral de $J$ seria $-1$, que não é área. O sinal de $J$ registrou que os eixos coordenados foram trocados, invertendo a orientação; a área ignora esse registro.
+\end{exemplo}
+
+\section{Coordenadas polares}
+
+A mudança padrão, com $r\ge 0$, é
+\[
+x=r\cos\theta,\qquad y=r\sin\theta.
+\]
+O jacobiano é
+\begin{align*}
+J
+&=\det\begin{pmatrix}
+\cos\theta & -r\sin\theta \\
+\sin\theta & r\cos\theta
+\end{pmatrix}
+=\cos\theta\cdot r\cos\theta-(-r\sin\theta)\sin\theta
+=r(\cos^2\theta+\sin^2\theta)
+=r.
+\end{align*}
+Como $r\ge 0$, tem-se $\abs{J}=r$. No interior do retângulo de parâmetros $r>0$ e $0<\theta<2\pi$, o jacobiano não se anula e a transformação é injetora. A origem, onde $r=0$, e o corte $\theta=0$ identificado com $\theta=2\pi$ têm área zero: não mudam a integral de uma função contínua. Com essa ressalva, a fórmula \eqref{eq:mudanca} vale para discos fechados e fica
+\[
+\iint_D f(x,y)\,\dif x\,\dif y
+=\iint_{D'} f(r\cos\theta,r\sin\theta)\,r\,\dif r\,\dif\theta.
+\]
+O fator $r$ é a área do retângulo polar deformado: um acréscimo $\Delta r$ e um acréscimo $\Delta\theta$ desenham, longe da origem, um setor de comprimento aproximadamente $r\Delta\theta$ e espessura $\Delta r$.
+
+\figura{../figuras/polar_jacobiano.png}{Retângulo polar e a região correspondente no plano.}
+
+\begin{exemplo}
+No disco $x^2+y^2\le 1$,
+\begin{align*}
+\iint_{x^2+y^2\le 1} e^{-(x^2+y^2)}\,\dif A
+&=\int_0^{2\pi}\int_0^1 e^{-r^2}\,r\,\dif r\,\dif\theta.
+\end{align*}
+A integral em $r$ usa $u=r^2$, $\dif u=2r\,\dif r$:
+\[
+\int_0^1 e^{-r^2}\,r\,\dif r=\frac12\int_0^1 e^{-u}\,\dif u=\frac12\bigl(1-e^{-1}\bigr).
+\]
+Multiplicando por $\int_0^{2\pi}\dif\theta=2\pi$,
+\[
+\iint_{x^2+y^2\le 1} e^{-(x^2+y^2)}\,\dif A=\pi\bigl(1-e^{-1}\bigr).
+\]
+\end{exemplo}
+
+\section{A integral gaussiana}
+
+\begin{teorema}
+\[
+\int_{-\infty}^{\infty} e^{-x^2}\,\dif x=\sqrt{\pi}.
+\]
+\end{teorema}
+
+\begin{proof}
+O integrando é positivo, par e contínuo. Defina
+\[
+I(R)=\int_{-R}^{R} e^{-x^2}\,\dif x,\qquad R>0.
+\]
+A função $I$ é crescente. A cauda $\int_1^{\infty} e^{-x^2}\,\dif x$ converge por comparação com $\int_1^{\infty} e^{-x}\,\dif x$: para $x\ge 1$ vale $x^2\ge x$, logo $e^{-x^2}\le e^{-x}$. O integrando é par, então a cauda negativa também converge, e a integral imprópria $\int_{-\infty}^{\infty} e^{-x^2}\,\dif x$ existe. O valor é o limite de $I(R)$, porque $I(R)$ é a integral simétrica e as duas caudas somem quando $R\to\infty$. Falta identificar esse limite.
+
+Seja $D_R$ o disco $x^2+y^2\le R^2$ e seja $Q_R=[-R,R]^2$. Vale
+\[
+D_R\subset Q_R\subset D_{R\sqrt{2}}.
+\]
+A primeira inclusão: se $x^2+y^2\le R^2$, então $\abs{x}\le R$ e $\abs{y}\le R$. A segunda: se $\abs{x}\le R$ e $\abs{y}\le R$, então $x^2+y^2\le 2R^2$. O integrando $e^{-(x^2+y^2)}$ é positivo, então as integrais respeitam as inclusões:
+\[
+\iint_{D_R} e^{-(x^2+y^2)}\,\dif A
+\le\iint_{Q_R} e^{-(x^2+y^2)}\,\dif A
+\le\iint_{D_{R\sqrt{2}}} e^{-(x^2+y^2)}\,\dif A.
+\]
+
+Em polares, com o jacobiano $r$ já calculado,
+\begin{align*}
+\iint_{D_R} e^{-(x^2+y^2)}\,\dif A
+&=\int_0^{2\pi}\int_0^R e^{-r^2}\,r\,\dif r\,\dif\theta
+=2\pi\cdot\frac12\int_0^{R^2} e^{-u}\,\dif u
+=\pi\bigl(1-e^{-R^2}\bigr).
+\end{align*}
+Trocando $R$ por $R\sqrt{2}$, o disco grande contribui $\pi\bigl(1-e^{-2R^2}\bigr)$.
+
+No quadrado, $f(x,y)=e^{-x^2}e^{-y^2}$ é contínua. Fubini separa o produto:
+\[
+\iint_{Q_R} e^{-(x^2+y^2)}\,\dif A
+=\Biggl(\int_{-R}^{R} e^{-x^2}\,\dif x\Biggr)
+\Biggl(\int_{-R}^{R} e^{-y^2}\,\dif y\Biggr)
+=I(R)^2.
+\]
+Juntando as três regiões,
+\[
+\pi\bigl(1-e^{-R^2}\bigr)
+\le I(R)^2
+\le\pi\bigl(1-e^{-2R^2}\bigr).
+\]
+Quando $R\to\infty$, o extremo inferior e o superior tendem a $\pi$. Pelo confronto, $I(R)^2\to\pi$. Como $I(R)>0$, $I(R)\to\sqrt{\pi}$.
+\end{proof}
+
+Elevar ao quadrado é o passo que transforma um integral sem primitiva elementar numa integral dupla com simetria rotacional. O confronto entre quadrado e discos é o que autoriza passar ao limite polar: sem ele, integrar em $\R^2$ ``em polares'' seria uma troca de região não justificada.
+
+\section{Integrais triplas}
+
+Se $f$ é contínua na caixa $[a,b]\times[c,d]\times[p,q]$, o teorema de Fubini em três variáveis iguala a integral tripla a qualquer uma das seis ordens iteradas. Não reconstruímos a prova; ela repete a continuidade uniforme, agora com duas integrais internas.
+
+Uma região entre dois gráficos contínuos, sobre uma base $D$ do tipo I ou II no plano $xy$, é
+\[
+E=\bigl\{(x,y,z):(x,y)\in D,\ u_1(x,y)\le z\le u_2(x,y)\bigr\}.
+\]
+Para $f$ contínua em $E$,
+\[
+\iiint_E f\,\dif V
+=\iint_D\Biggl(\int_{u_1(x,y)}^{u_2(x,y)} f(x,y,z)\,\dif z\Biggr)\dif A.
+\]
+O volume é o caso $f=1$.
+
+\begin{exemplo}
+O tetraedro $x\ge 0$, $y\ge 0$, $z\ge 0$, $x+y+z\le 1$ tem volume
+\begin{align*}
+V
+&=\int_0^1\int_0^{1-x}\int_0^{1-x-y}\dif z\,\dif y\,\dif x
+=\int_0^1\int_0^{1-x}(1-x-y)\,\dif y\,\dif x.
+\end{align*}
+A integral em $y$ vale
+\[
+(1-x)y-\frac{y^2}{2}\Big|_{0}^{1-x}=\frac{(1-x)^2}{2}.
+\]
+Com $u=1-x$,
+\[
+V=\int_0^1\frac{u^2}{2}\,\dif u=\frac13\cdot\frac12=\frac16.
+\]
+\end{exemplo}
+
+\section{Cilíndricas e esféricas}
+
+\subsection{Cilíndricas}
+
+A convenção é $r\ge 0$,
+\[
+x=r\cos\theta,\qquad y=r\sin\theta,\qquad z=z,
+\]
+e o elemento de volume $r\,\dif r\,\dif\theta\,\dif z$. O jacobiano da transformação $(r,\theta,z)\mapsto(x,y,z)$ é o determinante
+\[
+\det\begin{pmatrix}
+\cos\theta & -r\sin\theta & 0 \\
+\sin\theta & r\cos\theta & 0 \\
+0 & 0 & 1
+\end{pmatrix}.
+\]
+Expandindo pela terceira linha, a única entrada não nula é o $1$ do canto inferior direito, e o sinal do cofator nessa posição é positivo. O menor correspondente é
+\[
+\cos\theta\cdot r\cos\theta-(-r\sin\theta)\sin\theta=r.
+\]
+Assim $J=r$. Com $r\ge 0$, $\abs{J}=r$, e
+\[
+\iiint_E f(x,y,z)\,\dif V
+=\iiint_{E'} f(r\cos\theta,r\sin\theta,z)\,r\,\dif r\,\dif\theta\,\dif z.
+\]
+Conferência rápida: o cilindro $r\le R$, $0\le z\le H$ tem volume
+\[
+\int_0^H\int_0^{2\pi}\int_0^R r\,\dif r\,\dif\theta\,\dif z
+=H\cdot 2\pi\cdot\frac{R^2}{2}=\pi R^2 H,
+\]
+que é a fórmula conhecida.
+
+\subsection{Esféricas}
+
+A convenção fica fixa. $\rho\ge 0$ é a distância à origem, $\varphi\in[0,\pi]$ é o ângulo a partir do eixo $z$ positivo, e $\theta\in[0,2\pi)$ é o ângulo no plano $xy$ a partir do eixo $x$. As fórmulas são
+\[
+x=\rho\sin\varphi\cos\theta,\qquad
+y=\rho\sin\varphi\sin\theta,\qquad
+z=\rho\cos\varphi.
+\]
+\figura{../figuras/coordenadas_esfericas.png}{$\rho$, $\varphi$ e $\theta$.}
+
+O jacobiano é o determinante da matriz das derivadas parciais, com colunas na ordem $\partial/\partial\rho$, $\partial/\partial\varphi$, $\partial/\partial\theta$:
+\[
+\begin{pmatrix}
+\sin\varphi\cos\theta & \rho\cos\varphi\cos\theta & -\rho\sin\varphi\sin\theta \\
+\sin\varphi\sin\theta & \rho\cos\varphi\sin\theta & \rho\sin\varphi\cos\theta \\
+\cos\varphi & -\rho\sin\varphi & 0
+\end{pmatrix}.
+\]
+Expandimos pela terceira linha. O cofator da entrada $\cos\varphi$ é o menor
+\begin{align*}
+&\det\begin{pmatrix}
+\rho\cos\varphi\cos\theta & -\rho\sin\varphi\sin\theta \\
+\rho\cos\varphi\sin\theta & \rho\sin\varphi\cos\theta
+\end{pmatrix}\\
+&\qquad=\rho^2\cos\varphi\sin\varphi\cos^2\theta+\rho^2\sin\varphi\cos\varphi\sin^2\theta
+=\rho^2\sin\varphi\cos\varphi.
+\end{align*}
+A entrada do meio da terceira linha é $-\rho\sin\varphi$, e o cofator correspondente traz um sinal negativo, de modo que a contribuição é
+\[
+(-\rho\sin\varphi)\cdot(-1)\cdot
+\det\begin{pmatrix}
+\sin\varphi\cos\theta & -\rho\sin\varphi\sin\theta \\
+\sin\varphi\sin\theta & \rho\sin\varphi\cos\theta
+\end{pmatrix}.
+\]
+O menor vale
+\begin{align*}
+&\sin\varphi\cos\theta\cdot\rho\sin\varphi\cos\theta
+-(-\rho\sin\varphi\sin\theta)\sin\varphi\sin\theta
+=\rho\sin^2\varphi.
+\end{align*}
+A contribuição é $\rho\sin\varphi\cdot\rho\sin^2\varphi=\rho^2\sin^3\varphi$. A entrada da direita na terceira linha é zero. Somando,
+\begin{align*}
+J
+&=\cos\varphi\cdot\rho^2\sin\varphi\cos\varphi+\rho^2\sin^3\varphi
+=\rho^2\sin\varphi\,(\cos^2\varphi+\sin^2\varphi)
+=\rho^2\sin\varphi.
+\end{align*}
+No intervalo $\varphi\in[0,\pi]$ tem-se $\sin\varphi\ge 0$, e $\rho\ge 0$, logo
+\[
+\abs{J}=\rho^2\sin\varphi.
+\]
+O elemento de volume é $\rho^2\sin\varphi\,\dif\rho\,\dif\varphi\,\dif\theta$. Fora desse intervalo de $\varphi$ o seno troca de sinal e o módulo deixa de ser opcional; dentro da convenção fixa, $\rho^2\sin\varphi$ já é não negativo.
+
+\section{Volume da bola e centro de massa do hemisfério}
+
+\begin{exemplo}
+A bola $x^2+y^2+z^2\le R^2$ é descrita por $0\le\rho\le R$, $0\le\varphi\le\pi$ e $0\le\theta<2\pi$. O volume é
+\begin{align*}
+V
+&=\int_0^{2\pi}\int_0^{\pi}\int_0^R \rho^2\sin\varphi\,\dif\rho\,\dif\varphi\,\dif\theta
+=\Biggl(\int_0^{2\pi}\dif\theta\Biggr)
+\Biggl(\int_0^{\pi}\sin\varphi\,\dif\varphi\Biggr)
+\Biggl(\int_0^R\rho^2\,\dif\rho\Biggr)\\
+&=2\pi\cdot\bigl[-\cos\varphi\bigr]_0^{\pi}\cdot\frac{R^3}{3}
+=2\pi\cdot\bigl(1-(-1)\bigr)\cdot\frac{R^3}{3}
+=\frac{4}{3}\pi R^3.
+\end{align*}
+A integral em $\varphi$ vale $2$ porque $\varphi$ percorre o intervalo inteiro $[0,\pi]$, do polo norte ao polo sul.
+\end{exemplo}
+
+\begin{exemplo}
+Hemisfério sólido superior, $x^2+y^2+z^2\le R^2$ e $z\ge 0$, de densidade constante. A constante cancela na razão do centro de massa; fazemos a conta com densidade $1$. Por simetria em relação aos planos $x=0$ e $y=0$, $\bar x=\bar y=0$: o integrando $x$ é ímpar em $x$ e a região é simétrica, e o mesmo vale para $y$.
+
+O volume é metade do volume da bola,
+\[
+m=\frac12\cdot\frac{4}{3}\pi R^3=\frac{2}{3}\pi R^3.
+\]
+Em esféricas, $z=\rho\cos\varphi$ e o hemisfério superior é $0\le\varphi\le\pi/2$. O momento é
+\begin{align*}
+\iiint z\,\dif V
+&=\int_0^{2\pi}\int_0^{\pi/2}\int_0^R (\rho\cos\varphi)\,\rho^2\sin\varphi\,\dif\rho\,\dif\varphi\,\dif\theta\\
+&=2\pi\cdot\frac{R^4}{4}\cdot\int_0^{\pi/2}\sin\varphi\cos\varphi\,\dif\varphi.
+\end{align*}
+Com $u=\sin\varphi$, $\dif u=\cos\varphi\,\dif\varphi$, $u$ vai de $0$ a $1$ e a integral vale $1/2$. Logo
+\[
+\iiint z\,\dif V=2\pi\cdot\frac{R^4}{4}\cdot\frac12=\frac{\pi R^4}{4}.
+\]
+A cota do centro de massa é
+\[
+\bar z=\frac{\pi R^4/4}{2\pi R^3/3}=\frac{\pi R^4}{4}\cdot\frac{3}{2\pi R^3}=\frac{3R}{8}.
+\]
+\end{exemplo}
+
+\section{Exercícios}
+
+\begin{exercicio}[{[Básico --- iterada no triângulo]}]
+Calcule $\displaystyle\iint_D (x+2y)\,\dif A$, em que $D$ é o triângulo $0\le x\le 1$, $0\le y\le 1-x$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- Fubini nas duas ordens]}]
+Calcule $\displaystyle\int_0^1\int_0^2 xy\,\dif y\,\dif x$ e repita a conta na ordem $\dif x\,\dif y$. Diga por que o teorema de Fubini se aplica.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- polar direta]}]
+Calcule $\displaystyle\iint_{x^2+y^2\le 1}(x^2+y^2)\,\dif A$ em polares, com o fator $r$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- valor médio]}]
+Calcule o valor médio de $f(x,y)=x^2+y^2$ no disco unitário $x^2+y^2\le 1$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- trocar a ordem]}]
+Calcule $\displaystyle\int_0^1\int_y^1 e^{x^2}\,\dif x\,\dif y$ trocando a ordem. A primitiva interna de $e^{x^2}$ em $x$ não é elementar; a outra ordem é.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- centro de massa]}]
+Lâmina homogênea no quarto de disco $x\ge 0$, $y\ge 0$, $x^2+y^2\le 1$. Calcule a massa e o centro de massa. A densidade vale $1$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- cilíndricas]}]
+Calcule o volume do sólido $x^2+y^2\le 1$, $0\le z\le 1-x^2-y^2$, em coordenadas cilíndricas.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- setor esférico]}]
+Calcule o volume da região $\rho\le R$ e $0\le\varphi\le\pi/4$, com $\theta\in[0,2\pi)$. Na convenção desta nota, $\varphi=\pi/4$ é o cone $z=\sqrt{x^2+y^2}$. Use o jacobiano $\rho^2\sin\varphi$ e simplifique o resultado.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- centro de massa do cone]}]
+Cone sólido de vértice na origem, eixo no eixo $z$ e base de raio $R$ no plano $z=H>0$: isto é, $0\le z\le H$ e $x^2+y^2\le (Rz/H)^2$. Densidade constante. Mostre que $\bar x=\bar y=0$ e $\bar z=3H/4$.
+\end{exercicio}
+
+\end{document}

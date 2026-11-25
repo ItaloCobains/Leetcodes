@@ -1,0 +1,435 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: técnicas de integração, impróprias\\ e equações de primeira ordem}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+Cada solução repete o enunciado e faz a conta até o fim. A numeração B, I e A é a da nota \texttt{01\_tecnicas\_integracao.tex}.
+
+\section{Básicos}
+
+\begin{exercicio}[Básico --- B1]
+Calcule \(\int x\cos x\,\dif x\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+As funções \(u=x\) e \(v=\sin x\) são de classe \(C^1\) em \(\R\). Tomamos \(\dif v=\cos x\,\dif x\), de modo que \(\dif u=\dif x\) e \(v=\sin x\). Partes dá
+\begin{align*}
+\int x\cos x\,\dif x
+&=x\sin x-\int\sin x\,\dif x
+=x\sin x+\cos x+C.
+\end{align*}
+Derivada:
+\[
+\frac{\dif}{\dif x}(x\sin x+\cos x)
+=\sin x+x\cos x-\sin x
+=x\cos x.
+\]
+A antiderivada está correta.
+
+\begin{exercicio}[Básico --- B2]
+Calcule \(\int\sin^{3}x\,\dif x\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+O expoente \(3=2\cdot 1+1\) é ímpar. Separamos um seno e usamos \(\sin^{2}x=1-\cos^{2}x\):
+\[
+\int\sin^{3}x\,\dif x
+=\int\sin^{2}x\sin x\,\dif x
+=\int(1-\cos^{2}x)\sin x\,\dif x.
+\]
+Seja \(u=\cos x\), então \(\dif u=-\sin x\,\dif x\) e \(\sin x\,\dif x=-\dif u\):
+\begin{align*}
+\int(1-\cos^{2}x)\sin x\,\dif x
+&=-\int(1-u^{2})\,\dif u
+=-\int 1\,\dif u+\int u^{2}\,\dif u
+=-u+\frac{u^{3}}{3}+C\\
+&=-\cos x+\frac{\cos^{3}x}{3}+C.
+\end{align*}
+Derivada:
+\[
+\sin x+\cos^{2}x(-\sin x)
+=\sin x\bigl(1-\cos^{2}x\bigr)
+=\sin x\cdot\sin^{2}x
+=\sin^{3}x.
+\]
+
+\begin{exercicio}[Básico --- B3]
+Calcule \(\int\dfrac{1}{\sqrt{9-x^{2}}}\,\dif x\) para \(\abs{x}<3\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Aqui \(a=3\) e \(\sqrt{a^{2}-x^{2}}=\sqrt{9-x^{2}}\), com \(\abs{x}<3\). Pomos \(x=3\sin\theta\), \(\theta\in(-\pi/2,\pi/2)\), de modo que \(\cos\theta>0\) e \(\dif x=3\cos\theta\,\dif\theta\). Então
+\[
+\sqrt{9-x^{2}}
+=\sqrt{9-9\sin^{2}\theta}
+=\sqrt{9\cos^{2}\theta}
+=3\abs{\cos\theta}
+=3\cos\theta,
+\]
+o módulo cai porque \(\cos\theta>0\) no intervalo aberto escolhido. A integral fica
+\[
+\int\frac{1}{\sqrt{9-x^{2}}}\,\dif x
+=\int\frac{3\cos\theta}{3\cos\theta}\,\dif\theta
+=\int 1\,\dif\theta
+=\theta+C
+=\arcsin\Bigl(\frac{x}{3}\Bigr)+C.
+\]
+Derivada: \(\dfrac{\dif}{\dif x}\arcsin(x/3)=\dfrac{1}{\sqrt{1-(x/3)^{2}}}\cdot\dfrac{1}{3}\). E
+\[
+\sqrt{1-\frac{x^{2}}{9}}=\sqrt{\frac{9-x^{2}}{9}}=\frac{\sqrt{9-x^{2}}}{3},
+\]
+logo a derivada é
+\[
+\frac{1}{3}\cdot\frac{3}{\sqrt{9-x^{2}}}=\frac{1}{\sqrt{9-x^{2}}}.
+\]
+
+\begin{exercicio}[Básico --- B4]
+Calcule \(\int\dfrac{1}{(x-2)(x+1)}\,\dif x\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+O numerador tem grau \(0\), menor que \(2\). Procuramos
+\[
+\frac{1}{(x-2)(x+1)}=\frac{A}{x-2}+\frac{B}{x+1},
+\]
+ou seja, \(1=A(x+1)+B(x-2)\).
+
+Em \(x=2\): \(1=A(3)\), logo \(A=\dfrac{1}{3}\).
+
+Em \(x=-1\): \(1=B(-3)\), logo \(B=-\dfrac{1}{3}\).
+
+Conferência:
+\[
+\frac13(x+1)-\frac13(x-2)=\frac13\bigl(x+1-x+2\bigr)=\frac13\cdot 3=1.
+\]
+Para \(x\neq 2\) e \(x\neq -1\),
+\begin{align*}
+\int\frac{1}{(x-2)(x+1)}\,\dif x
+&=\frac13\int\frac{\dif x}{x-2}-\frac13\int\frac{\dif x}{x+1}
+=\frac13\ln\abs{x-2}-\frac13\ln\abs{x+1}+C\\
+&=\frac13\ln\Biggl\lvert\frac{x-2}{x+1}\Biggr\rvert+C.
+\end{align*}
+
+\begin{exercicio}[Básico --- B5]
+Calcule \(\int_1^{\infty} x^{-3}\,\dif x\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Aqui \(p=3>1\), então o teorema das potências no infinito já garante convergência. O valor sai do limite. Para \(b>1\),
+\[
+\int_1^{b} x^{-3}\,\dif x
+=\Bigl[\frac{x^{-2}}{-2}\Bigr]_1^{b}
+=-\frac{1}{2b^{2}}-\Bigl(-\frac{1}{2}\Bigr)
+=\frac12-\frac{1}{2b^{2}}.
+\]
+Quando \(b\to\infty\), \(1/b^{2}\to 0\), logo
+\[
+\int_1^{\infty} x^{-3}\,\dif x=\frac12.
+\]
+O mesmo número é \(1/(p-1)=1/2\).
+
+\section{Intermediários}
+
+\begin{exercicio}[Intermediário --- I1]
+Calcule \(\int\cos^{4}x\,\dif x\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Os dois fatores são pares no sentido do produto \(\cos^{4}x=\cos^{2}x\cos^{2}x\). Usamos \(\cos^{2}x=\dfrac{1+\cos(2x)}{2}\):
+\[
+\cos^{4}x
+=\Biggl(\frac{1+\cos(2x)}{2}\Biggr)^{2}
+=\frac{1+2\cos(2x)+\cos^{2}(2x)}{4}.
+\]
+De novo, \(\cos^{2}(2x)=\dfrac{1+\cos(4x)}{2}\), então
+\begin{align*}
+\cos^{4}x
+&=\frac{1}{4}\Biggl(1+2\cos(2x)+\frac{1+\cos(4x)}{2}\Biggr)
+=\frac{1}{4}\Biggl(1+2\cos(2x)+\frac12+\frac12\cos(4x)\Biggr)\\
+&=\frac{1}{4}\Biggl(\frac{3}{2}+2\cos(2x)+\frac12\cos(4x)\Biggr)
+=\frac{3}{8}+\frac12\cos(2x)+\frac18\cos(4x).
+\end{align*}
+Integramos termo a termo:
+\begin{align*}
+\int\cos^{4}x\,\dif x
+&=\int\Biggl(\frac38+\frac12\cos(2x)+\frac18\cos(4x)\Biggr)\dif x
+=\frac38 x+\frac12\cdot\frac12\sin(2x)+\frac18\cdot\frac14\sin(4x)+C\\
+&=\frac{3x}{8}+\frac14\sin(2x)+\frac{1}{32}\sin(4x)+C.
+\end{align*}
+Derivada de conferência:
+\[
+\frac38+\frac14\cdot 2\cos(2x)+\frac{1}{32}\cdot 4\cos(4x)
+=\frac38+\frac12\cos(2x)+\frac18\cos(4x),
+\]
+que é a expressão obtida para \(\cos^{4}x\).
+
+\begin{exercicio}[Intermediário --- I2]
+Calcule \(\int\dfrac{x+3}{(x-1)(x^{2}+1)}\,\dif x\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+O grau de \(x+3\) é \(1\), menor que \(3\). O fator \(x^{2}+1\) tem discriminante \(-4<0\). Procuramos
+\[
+\frac{x+3}{(x-1)(x^{2}+1)}
+=\frac{A}{x-1}+\frac{Bx+C}{x^{2}+1},
+\]
+isto é,
+\[
+x+3=A(x^{2}+1)+(Bx+C)(x-1).
+\]
+Em \(x=1\): \(4=A(1+1)=2A\), logo \(A=2\).
+
+Expandimos o segundo membro:
+\begin{align*}
+A(x^{2}+1)+Bx(x-1)+C(x-1)
+&=Ax^{2}+A+Bx^{2}-Bx+Cx-C\\
+&=(A+B)x^{2}+(-B+C)x+(A-C).
+\end{align*}
+Comparamos com \(x+3=0\cdot x^{2}+1\cdot x+3\):
+\begin{align*}
+A+B&=0,\\
+-B+C&=1,\\
+A-C&=3.
+\end{align*}
+De \(A=2\) e \(A+B=0\) sai \(B=-2\). De \(A-C=3\) sai \(2-C=3\), logo \(C=-1\). A equação do meio confirma: \(-(-2)+(-1)=2-1=1\).
+
+Conferência por expansão:
+\begin{align*}
+2(x^{2}+1)+(-2x-1)(x-1)
+&=2x^{2}+2+(-2x)(x-1)-1(x-1)\\
+&=2x^{2}+2-2x^{2}+2x-x+1
+=x+3.
+\end{align*}
+Integramos para \(x\neq 1\):
+\begin{align*}
+\int\frac{x+3}{(x-1)(x^{2}+1)}\,\dif x
+&=2\int\frac{\dif x}{x-1}+\int\frac{-2x-1}{x^{2}+1}\,\dif x\\
+&=2\ln\abs{x-1}-\int\frac{2x}{x^{2}+1}\,\dif x-\int\frac{1}{x^{2}+1}\,\dif x.
+\end{align*}
+Na integral do meio, \(w=x^{2}+1\) e \(\dif w=2x\,\dif x\), logo \(\int\frac{2x}{x^{2}+1}\,\dif x=\ln(x^{2}+1)\). A última é o arco tangente. Conclusão:
+\[
+2\ln\abs{x-1}-\ln(x^{2}+1)-\arctan x+C.
+\]
+
+\begin{exercicio}[Intermediário --- I3]
+Calcule \(\int_0^{\infty}\dfrac{1}{1+x^{2}}\,\dif x\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+A função \(1/(1+x^{2})\) é contínua em \([0,\infty)\), pois o denominador nunca se anula. A integral é imprópria só no infinito:
+\[
+\int_0^{\infty}\frac{1}{1+x^{2}}\,\dif x
+=\lim_{b\to\infty}\int_0^{b}\frac{1}{1+x^{2}}\,\dif x
+=\lim_{b\to\infty}\Bigl[\arctan x\Bigr]_0^{b}
+=\lim_{b\to\infty}\bigl(\arctan b-\arctan 0\bigr).
+\]
+Temos \(\arctan 0=0\) e \(\lim_{b\to\infty}\arctan b=\pi/2\), porque a imagem do arco tangente é \((-\pi/2,\pi/2)\) e \(\tan\) tende a \(+\infty\) quando o argumento tende a \(\pi/2\) pela esquerda. Portanto a integral converge e vale \(\pi/2\).
+
+\begin{exercicio}[Intermediário --- I4]
+Decida se \(\int_1^{\infty}\dfrac{\sqrt{x}}{x^{2}+1}\,\dif x\) converge.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Sejam \(f(x)=\sqrt{x}/(x^{2}+1)\) e \(g(x)=x^{-3/2}\), ambas contínuas em \([1,\infty)\). Temos \(f(x)>0\) e \(g(x)>0\). O quociente é
+\begin{align*}
+\frac{f(x)}{g(x)}
+&=\frac{\sqrt{x}}{x^{2}+1}\cdot x^{3/2}
+=\frac{x^{1/2}\cdot x^{3/2}}{x^{2}+1}
+=\frac{x^{2}}{x^{2}+1}.
+\end{align*}
+Dividindo numerador e denominador por \(x^{2}\),
+\[
+\frac{x^{2}}{x^{2}+1}=\frac{1}{1+1/x^{2}}\to\frac{1}{1+0}=1
+\]
+quando \(x\to\infty\). Logo \(L=1\), com \(0<L<\infty\).
+
+A integral de comparação é uma potência: \(\int_1^{\infty} x^{-3/2}\,\dif x\), com \(p=3/2>1\), converge, e o valor é \(1/(3/2-1)=1/(1/2)=2\). Pelo teste do limite, \(\int_1^{\infty} f\) converge.
+
+\begin{exercicio}[Intermediário --- I5]
+Resolva \(y'=2x(y+1)\) com \(y(0)=0\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Aqui \(g(x)=2x\) é contínua em \(\R\) e \(h(y)=y+1\) é contínua em \(\R\). O zero de \(h\) é \(y=-1\), então \(y(x)\equiv -1\) é solução de equilíbrio:
+\[
+\frac{\dif}{\dif x}(-1)=0,\qquad 2x\bigl(-1+1\bigr)=0.
+\]
+Ela não satisfaz \(y(0)=0\).
+
+Para soluções com \(y\neq -1\), separamos:
+\[
+\int\frac{\dif y}{y+1}=\int 2x\,\dif x.
+\]
+A primeira integral é \(\ln\abs{y+1}\), a segunda é \(x^{2}+C_{1}\). Então
+\[
+\ln\abs{y+1}=x^{2}+C,\qquad
+\abs{y+1}=e^{C}e^{x^{2}},\qquad
+y+1=Ke^{x^{2}},
+\]
+com \(K\neq 0\). O valor \(K=0\) recupera o equilíbrio, e a família completa é
+\[
+y(x)=Ke^{x^{2}}-1,\qquad K\in\R.
+\]
+A condição \(y(0)=0\) dá \(0=K-1\), logo \(K=1\), e
+\[
+y(x)=e^{x^{2}}-1.
+\]
+Conferência: \(y(0)=1-1=0\). A derivada é \(y'=2xe^{x^{2}}\). O segundo membro da equação é
+\[
+2x(y+1)=2x\bigl(e^{x^{2}}-1+1\bigr)=2xe^{x^{2}}.
+\]
+Os dois lados coincidem.
+
+\begin{exercicio}[Intermediário --- I6]
+Resolva \(y'+\dfrac{2}{x}y=x\) para \(x>0\), com \(y(1)=1\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Em \(I=(0,\infty)\), as funções \(p(x)=2/x\) e \(q(x)=x\) são contínuas. O coeficiente \(2/x\) não está definido em \(0\) e não é contínuo em intervalo algum que contenha números positivos e negativos ao mesmo tempo sem passar pela origem; por isso o problema fica em \(x>0\), onde também está a condição inicial \(x=1\).
+
+Uma antiderivada de \(p\) em \((0,\infty)\) é \(2\ln x=\ln(x^{2})\), sem módulo porque \(x>0\). O fator integrante é
+\[
+\mu(x)=\exp(2\ln x)=x^{2}.
+\]
+Temos \(\mu>0\) e \(\mu'=2x=p\mu\). A identidade \((\mu y)'=\mu q\) fica
+\[
+\bigl(x^{2} y\bigr)'=x^{2}\cdot x=x^{3}.
+\]
+Integramos:
+\[
+x^{2} y=\int x^{3}\,\dif x=\frac{x^{4}}{4}+C,
+\qquad
+y=\frac{x^{2}}{4}+Cx^{-2}.
+\]
+Em \(x=1\): \(1=\dfrac{1}{4}+C\), logo \(C=\dfrac{3}{4}\). A solução é
+\[
+y(x)=\frac{x^{2}}{4}+\frac{3}{4x^{2}},\qquad x>0.
+\]
+Conferência da condição: \(y(1)=\frac14+\frac34=1\).
+
+Derivada:
+\[
+y'=\frac{2x}{4}+\frac{3}{4}\cdot(-2)x^{-3}
+=\frac{x}{2}-\frac{3}{2}x^{-3}.
+\]
+Somamos \(\dfrac{2}{x}y\):
+\begin{align*}
+\frac{2}{x}y
+&=\frac{2}{x}\Biggl(\frac{x^{2}}{4}+\frac{3}{4x^{2}}\Biggr)
+=\frac{2}{x}\cdot\frac{x^{2}}{4}+\frac{2}{x}\cdot\frac{3}{4x^{2}}
+=\frac{x}{2}+\frac{3}{2x^{3}}.
+\end{align*}
+Portanto
+\[
+y'+\frac{2}{x}y
+=\frac{x}{2}-\frac{3}{2x^{3}}+\frac{x}{2}+\frac{3}{2x^{3}}
+=x,
+\]
+como pedido.
+
+\section{Avançados}
+
+\begin{exercicio}[Avançado --- A1]
+Prove o caso \(L=0\) da comparação no limite.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Hipóteses: \(f\) e \(g\) contínuas em \([a,\infty)\), \(f\ge 0\), \(g>0\), \(\lim_{x\to\infty} f(x)/g(x)=0\), e \(\int_a^{\infty} g\) converge.
+
+Como o limite é \(0\), existe \(M\ge a\) tal que, para todo \(x\ge M\),
+\[
+\Biggl\lvert\frac{f(x)}{g(x)}-0\Biggr\rvert<1,
+\]
+isto é, \(0\le f(x)/g(x)<1\). Multiplicando por \(g(x)>0\),
+\[
+0\le f(x)<g(x),\qquad x\ge M.
+\]
+A integral \(\int_a^{M} f\) é finita, porque \(f\) é contínua num intervalo fechado e limitado. A cauda \(\int_M^{\infty} g\) converge, por hipótese, pois difere da integral a partir de \(a\) pela integral finita de \(a\) até \(M\). A comparação direta, aplicada em \([M,\infty)\) com \(0\le f\le g\) no caso estrito \(f<g\), que continua coberto por \(f\le g\), implica que \(\int_M^{\infty} f\) converge. Somando a parte finita de \(a\) até \(M\), \(\int_a^{\infty} f\) converge.
+
+O número \(1\) na desigualdade é arbitrário: qualquer cota positiva no lugar de \(1\) serviria. Não há cota inferior positiva para \(f/g\), e por isso este caso não devolve a recíproca. Se \(\int f\) converge, nada se conclui sobre \(\int g\) só com \(L=0\).
+
+\begin{exercicio}[Avançado --- A2]
+Três soluções de \(y'=3y^{2/3}\), \(y(0)=0\), e a falha de Lipschitz.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Interpretamos \(y^{2/3}=(y^{1/3})^{2}\), com a raiz cúbica real, de modo que \(y^{2/3}\ge 0\) para todo \(y\) real e \(0^{2/3}=0\).
+
+(i) A função \(y(x)=0\) tem derivada \(0\), e \(3\cdot 0^{2/3}=0\). É solução, e \(y(0)=0\).
+
+A função \(y(x)=x^{3}\) tem derivada \(3x^{2}\). Por outro lado,
+\[
+\bigl(x^{3}\bigr)^{1/3}=x,\qquad
+3\bigl(x^{3}\bigr)^{2/3}=3x^{2},
+\]
+para todo \(x\) real, porque a raiz cúbica real devolve \(x\), positivo ou negativo. Assim \(y'=3y^{2/3}\). Além disso \(y(0)=0\). As duas soluções são distintas: em \(x=1\), valem \(0\) e \(1\).
+
+(ii) Seja
+\[
+y(x)=
+\begin{cases}
+0,&x<0,\\
+x^{3},&x\ge 0.
+\end{cases}
+\]
+Para \(x<0\), \(y\) coincide com a solução nula, logo satisfaz a equação. Para \(x>0\), coincide com \(x^{3}\), logo satisfaz a equação. Falta o ponto \(x=0\).
+
+Continuidade em \(0\): \(\lim_{x\to 0^{-}} y(x)=0\) e \(y(0)=0\).
+
+Derivada à direita:
+\[
+\lim_{h\to 0^{+}}\frac{y(h)-y(0)}{h}
+=\lim_{h\to 0^{+}}\frac{h^{3}}{h}
+=\lim_{h\to 0^{+}}h^{2}=0.
+\]
+Derivada à esquerda:
+\[
+\lim_{h\to 0^{-}}\frac{y(h)-y(0)}{h}
+=\lim_{h\to 0^{-}}\frac{0}{h}=0.
+\]
+Logo \(y'(0)=0\). E \(3y(0)^{2/3}=0\). A equação vale também em \(0\). Esta solução coincide com \(x^{3}\) para \(x>0\) e com \(0\) para \(x<0\), então é uma terceira solução do mesmo problema de valor inicial.
+
+(iii) Seja \(f(y)=3y^{2/3}\) e \(f(0)=0\). Para \(y\neq 0\),
+\[
+\frac{\abs{f(y)-f(0)}}{\abs{y}}
+=\frac{3\abs{y}^{2/3}}{\abs{y}}
+=3\abs{y}^{2/3-1}
+=3\abs{y}^{-1/3}.
+\]
+Quando \(y\to 0\), este quociente tende a \(+\infty\). Em particular, não existe constante \(K\) tal que \(\abs{f(y)-f(0)}\le K\abs{y}\) para todo \(y\) numa vizinhança de \(0\): qualquer candidato \(K\) é ultrapassado quando \(\abs{y}<1\) é suficientemente pequeno, pois \(3\abs{y}^{-1/3}>K\) equivale a \(\abs{y}<(3/K)^{3}\). Portanto \(f\) não é lipschitziana em \(y\) perto de \(0\).
+
+Dividir a equação por \(y^{2/3}\), que se anula em \(y=0\), joga fora o equilíbrio. E a perda de Lipschitz mostra que não há, neste ponto, a condição suficiente usual de unicidade. As três soluções exibem a falha de fato.
+
+\begin{exercicio}[Avançado --- A3]
+Convergência absoluta implica convergência.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Seja \(f\) contínua em \([a,\infty)\) e suponha que \(\int_a^{\infty}\abs{f}\) converge. Definimos
+\[
+F(b)=\int_a^{b} f(x)\,\dif x,\qquad
+G(b)=\int_a^{b}\abs{f(x)}\,\dif x,
+\]
+para \(b\ge a\). A hipótese é que \(G(b)\) tem limite finito quando \(b\to\infty\).
+
+Pelo critério de Cauchy admitido no enunciado, para todo \(\eps>0\) existe \(M\ge a\) tal que \(b_{2}>b_{1}\ge M\) implica \(\abs{G(b_{2})-G(b_{1})}<\eps\).
+
+Para os mesmos \(b_{2}>b_{1}\),
+\[
+\abs{F(b_{2})-F(b_{1})}
+=\Biggl\lvert\int_{b_{1}}^{b_{2}} f(x)\,\dif x\Biggr\rvert
+\le\int_{b_{1}}^{b_{2}}\abs{f(x)}\,\dif x
+=G(b_{2})-G(b_{1})
+=\abs{G(b_{2})-G(b_{1})},
+\]
+onde a passagem \(G(b_{2})-G(b_{1})=\abs{G(b_{2})-G(b_{1})}\) usa \(b_{2}>b_{1}\) e o crescimento de \(G\), consequência de \(\abs{f}\ge 0\). A desigualdade da integral do módulo é a desigualdade triangular para a integral de uma função contínua num intervalo fechado.
+
+Logo \(b_{2}>b_{1}\ge M\) implica \(\abs{F(b_{2})-F(b_{1})}<\eps\). O critério de Cauchy, na outra direção, diz que \(F(b)\) tem limite finito quando \(b\to\infty\). Esse limite é \(\int_a^{\infty} f\). A integral converge.
+
+O módulo foi essencial na comparação \(\abs{\int f}\le\int\abs{f}\). Sem ele, o exercício não conclui: a nota mostra que \(\int_1^{\infty}\sin x/x\,\dif x\) converge e \(\int_1^{\infty}\abs{\sin x}/x\,\dif x\) diverge.
+
+\end{document}

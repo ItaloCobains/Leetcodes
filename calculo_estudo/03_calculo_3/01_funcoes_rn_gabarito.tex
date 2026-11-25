@@ -1,0 +1,207 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: funções de várias variáveis}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercícios}
+
+Os títulos entre colchetes são os da nota. Cada solução traz a conta inteira.
+
+\begin{exercicio}[{[Básico --- domínio e imagem]}]
+\begin{enumerate}[label=\alph*)]
+\item Domínio e imagem de $f(x,y)=\sqrt{9-x^2-y^2}$.
+\item Domínio e imagem de $\vet{F}(x,y)=(x+y,\,x-y)$.
+\end{enumerate}
+
+\textbf{Solução.}
+\begin{enumerate}[label=\alph*)]
+\item A raiz quadrada real pede $9-x^2-y^2\ge 0$, isto é, $x^2+y^2\le 9$. O domínio é o disco fechado de centro na origem e raio $3$. O radicando é contínuo nesse disco, vale $9$ na origem e $0$ na circunferência $x^2+y^2=9$, e pelo teorema do valor intermediário em uma variável, ao longo de cada raio, assume todos os valores entre $0$ e $9$. A raiz desses valores preenche $[0,3]$. Nenhum valor maior que $3$ aparece, porque $9-x^2-y^2\le 9$. A imagem é $[0,3]$.
+
+\item Não há denominador nem raiz. O domínio é $\R^2$. Para a imagem, tome $(a,b)\in\R^2$ arbitrário e resolva $x+y=a$, $x-y=b$. Somando, $2x=a+b$; subtraindo, $2y=a-b$. O ponto
+\[
+\Bigl(\frac{a+b}{2},\,\frac{a-b}{2}\Bigr)
+\]
+é enviado em $(a,b)$. Todo vetor do contradomínio é atingido, e a imagem é $\R^2$. A matriz da transformação linear tem determinante $-2\neq 0$, o que é o mesmo fato em linguagem de álgebra linear: a aplicação é invertível.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- curvas de nível]}]
+Descrever as curvas de nível de $x^2+y^2$ e de $x^2-y^2$.
+
+\textbf{Solução.}
+Para $f(x,y)=x^2+y^2$:
+\begin{itemize}[leftmargin=1.4em]
+\item se $c<0$, a equação $x^2+y^2=c$ não tem solução real, e a curva é vazia;
+\item se $c=0$, só a origem;
+\item se $c>0$, a circunferência de raio $\sqrt{c}$ centrada na origem.
+\end{itemize}
+Para $g(x,y)=x^2-y^2$:
+\begin{itemize}[leftmargin=1.4em]
+\item se $c>0$, a hipérbole $x^2-y^2=c$, que corta o eixo $x$ em $(\pm\sqrt{c},0)$ e não corta o eixo $y$;
+\item se $c<0$, a hipérbole $y^2-x^2=\abs{c}$, que corta o eixo $y$;
+\item se $c=0$, $x^2=y^2$, isto é, o par de retas $y=x$ e $y=-x$.
+\end{itemize}
+Nenhuma dessas três é vazia.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- aberto, fechado, compacto]}]
+Classificar $A$, $B$, $C$ e $D$ do enunciado.
+
+\textbf{Solução.}
+\begin{enumerate}[label=\alph*)]
+\item $A$ é a bola aberta de raio $1$. É aberto: para $\vet{p}\in A$, o raio $\rho=1-\norm{\vet{p}}$ dá $B_\rho(\vet{p})\subset A$. Não é fechado, porque um ponto da circunferência $x^2+y^2=1$ é de fronteira e não pertence a $A$. É limitado, pois $\norm{\vet{p}}<1$. Não é compacto, porque não é fechado.
+
+\item $B$ contém a circunferência, que é exatamente a fronteira: toda bola em torno de um ponto com $\norm{\vet{p}}=1$ sai do disco e também entra no disco. Pontos com $\norm{\vet{p}}>1$ são interiores ao complementar. Logo $B$ contém a fronteira e é fechado. É limitado por $1$. É compacto.
+
+\item $C$ é a imagem inversa de $[1,+\infty)$ pela função contínua $(x,y)\mapsto xy$. Imagem inversa de fechado por função contínua é fechada, então $C$ é fechado. Não é limitado: os pontos $(n,1/n)$, com $n$ inteiro $\ge 1$, satisfazem $xy=1$ e têm norma indo a infinito. Não é compacto. Não é aberto: num ponto com $xy=1$, toda bola contém pontos com $xy<1$, por continuidade.
+
+\item $D$ não é aberto. O ponto $(1,0)$ está em $D$, e toda bola em torno dele contém pontos com $x>1$, que estão fora de $D$. Não é fechado: $(0,0)$ não está em $D$, mas é ponto de fronteira, porque toda bola contém pontos com $x>0$ pequeno, que estão em $D$, e pontos com $x<0$, que estão fora. Não é limitado: $(1/2,\,n)$ está em $D$ para todo $n$ e a norma cresce. Não é compacto.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- $\eps$ e $\delta$]}]
+Provar $\lim_{(x,y)\to(1,2)}(3x-y)=1$.
+
+\textbf{Solução.}
+O valor da expressão no ponto é $3\cdot 1-2=1$, mas a definição não usa isso: usa a diferença. Para $(x,y)\neq(1,2)$,
+\begin{align*}
+\abs{(3x-y)-1}
+&=\abs{3(x-1)-(y-2)}\\
+&\le 3\abs{x-1}+\abs{y-2}\\
+&\le 3\norm{(x,y)-(1,2)}+\norm{(x,y)-(1,2)}\\
+&=4\norm{(x,y)-(1,2)},
+\end{align*}
+porque cada módulo de coordenada é no máximo a norma euclidiana. Dado $\eps>0$, escolha $\delta=\eps/4$. Se $0<\norm{(x,y)-(1,2)}<\delta$, então o módulo da diferença é menor que $4\cdot(\eps/4)=\eps$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- cota pela distância]}]
+Provar que $(x^3+y^3)/(x^2+y^2)\to 0$.
+
+\textbf{Solução.}
+Para $(x,y)\neq(0,0)$,
+\[
+\abs{\frac{x^3+y^3}{x^2+y^2}}
+\le\frac{\abs{x}^3}{x^2+y^2}+\frac{\abs{y}^3}{x^2+y^2}.
+\]
+Como $x^2\le x^2+y^2$, vale $\abs{x}^3/(x^2+y^2)=\abs{x}\cdot x^2/(x^2+y^2)\le\abs{x}$. Do mesmo modo, $\abs{y}^3/(x^2+y^2)\le\abs{y}$. Portanto
+\[
+\abs{\frac{x^3+y^3}{x^2+y^2}}\le\abs{x}+\abs{y}.
+\]
+A soma dos módulos também se controla pela distância. Com $\rho=\sqrt{x^2+y^2}$,
+\[
+\bigl(\abs{x}+\abs{y}\bigr)^2=x^2+y^2+2\abs{xy}\le x^2+y^2+x^2+y^2=2\rho^2,
+\]
+onde se usou $2\abs{xy}\le x^2+y^2$. Logo $\abs{x}+\abs{y}\le\sqrt{2}\,\rho$, e
+\[
+\abs{\frac{x^3+y^3}{x^2+y^2}}\le\sqrt{2}\,\rho.
+\]
+Dado $\eps>0$, tome $\delta=\eps/\sqrt{2}$. Se $0<\rho<\delta$, o módulo do quociente é menor que $\eps$. O limite é $0$.
+
+A cota usa $x$ e $y$ ao mesmo tempo. Não basta olhar $y=mx$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- dois caminhos]}]
+Mostrar que $(x^2-y^2)/(x^2+y^2)$ não tem limite na origem.
+
+\textbf{Solução.}
+Ao longo do eixo $x$, $y=0$ e $x\neq 0$,
+\[
+\frac{x^2-0}{x^2+0}=1.
+\]
+O limite é $1$. Ao longo do eixo $y$, $x=0$ e $y\neq 0$,
+\[
+\frac{0-y^2}{0+y^2}=-1.
+\]
+O limite é $-1$. Os dois caminhos são contínuos, chegam à origem e só passam por ela no instante final, se os parametrizarmos por $t\mapsto(t,0)$ e $t\mapsto(0,t)$. Pela contrapositiva do teorema dos caminhos, o limite em $\R^2$ não existe.
+
+Em polares a mesma função vira $\cos(2\theta)$, independente de $r$, o que explica por que cada raio trava num valor e raios diferentes travam em valores diferentes.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- polares]}]
+Provar que $\sin(x^2+y^2)/(x^2+y^2)\to 1$.
+
+\textbf{Solução.}
+Para $r>0$,
+\[
+\frac{\sin(x^2+y^2)}{x^2+y^2}=\frac{\sin(r^2)}{r^2}.
+\]
+Não há $\theta$ na expressão. Seja $u=r^2$. O limite fundamental $\lim_{u\to 0}\sin u/u=1$ diz: para todo $\eps>0$ existe $\eta>0$ tal que $0<\abs{u}<\eta$ implica $\abs{\sin u/u-1}<\eps$. Escolha $\delta=\sqrt{\eta}$. Se $0<r<\delta$, então $0<u=r^2<\eta$, e
+\[
+\abs{\frac{\sin(r^2)}{r^2}-1}<\eps,
+\]
+qualquer que seja $\theta$. O $\delta$ não depende do ângulo. O limite é $1$.
+
+O ponto $(0,0)$ não precisa estar no domínio: o denominador se anula lá, e a definição de limite não consulta o valor no ponto.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- retas não bastam]}]
+Caminhos de $x^2 y/(x^4+y^2)$.
+
+\textbf{Solução.}
+\begin{enumerate}[label=\alph*)]
+\item Com $y=mx$ e $x\neq 0$,
+\begin{align*}
+f(x,mx)
+&=\frac{x^2\cdot(mx)}{x^4+(mx)^2}
+=\frac{m x^3}{x^4+m^2 x^2}
+=\frac{m x^3}{x^2(x^2+m^2)}
+=\frac{mx}{x^2+m^2}.
+\end{align*}
+O numerador tende a $0$ e o denominador tende a $m^2$. Se $m\neq 0$, o quociente tende a $0$. Se $m=0$, o quociente é identicamente $0$. Ao longo de $x=0$ e $y\neq 0$, o numerador de $f$ é zero, então $f(0,y)=0$ e o limite é $0$. Toda reta pela origem dá limite $0$.
+
+\item Com $y=x^2$ e $x\neq 0$,
+\[
+f(x,x^2)=\frac{x^2\cdot x^2}{x^4+(x^2)^2}=\frac{x^4}{x^4+x^4}=\frac{1}{2}.
+\]
+O limite ao longo da parábola é $1/2$.
+
+\item A parábola $\gamma(t)=(t,t^2)$ é contínua, $\gamma(t)\to(0,0)$ quando $t\to 0$ e $\gamma(t)\neq(0,0)$ para $t\neq 0$. Ao longo dela o limite é $1/2$. Ao longo de $\sigma(t)=(t,0)$ o limite é $0$. O teorema dos caminhos, na forma contrapositiva, impede que o limite em $\R^2$ exista: se existisse, os dois caminhos teriam de produzir o mesmo número.
+\end{enumerate}
+O erro que essa conta bloqueia é concluir ``o limite é $0$'' só porque toda reta dá $0$. A parábola é um caminho admissível e discorda.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- produto de limites]}]
+Provar $\lim(fg)=LM$.
+
+\textbf{Solução.}
+Seja $\eps>0$. Escreva
+\[
+fg-LM=f(g-M)+M(f-L),
+\]
+logo
+\[
+\abs{fg-LM}\le\abs{f}\,\abs{g-M}+\abs{M}\,\abs{f-L}.
+\]
+Primeiro limitamos $f$. Como $f\to L$, existe $\delta_1>0$ tal que $0<\norm{(x,y)-(a,b)}<\delta_1$ implica $\abs{f-L}<1$, e portanto
+\[
+\abs{f}\le\abs{f-L}+\abs{L}<1+\abs{L}.
+\]
+A constante $1+\abs{L}$ é explícita e não depende do ponto dentro dessa bola furada.
+
+Em seguida aproximamos os dois fatores. Existe $\delta_2>0$ tal que $0<\norm{\cdot}<\delta_2$ implica
+\[
+\abs{f-L}<\frac{\eps}{2(\abs{M}+1)}.
+\]
+Existe $\delta_3>0$ tal que $0<\norm{\cdot}<\delta_3$ implica
+\[
+\abs{g-M}<\frac{\eps}{2(1+\abs{L})}.
+\]
+O denominador $1+\abs{L}$ é positivo mesmo quando $L=0$; o denominador $\abs{M}+1$ é positivo mesmo quando $M=0$. Seja $\delta=\min\{\delta_1,\delta_2,\delta_3\}$. Na bola furada de raio $\delta$,
+\begin{align*}
+\abs{fg-LM}
+&<(1+\abs{L})\cdot\frac{\eps}{2(1+\abs{L})}
++\abs{M}\cdot\frac{\eps}{2(\abs{M}+1)}\\
+&=\frac{\eps}{2}+\frac{\abs{M}}{\abs{M}+1}\cdot\frac{\eps}{2}
+\le\frac{\eps}{2}+\frac{\eps}{2}
+=\eps.
+\end{align*}
+Isso é a definição de $\lim(fg)=LM$.
+
+A limitação de $f$ é obrigatória: sem ela, o fator $\abs{f}$ poderia crescer enquanto $\abs{g-M}$ encolhe, e o produto dos dois não ficaria pequeno só com a informação de que cada limite existe.
+\end{exercicio}
+
+\end{document}

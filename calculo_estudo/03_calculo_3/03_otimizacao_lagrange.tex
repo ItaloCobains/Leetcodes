@@ -1,0 +1,377 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Cálculo III: otimização e multiplicadores de Lagrange}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Pontos críticos}
+
+\base{Em uma variável, os candidatos a extremo local no interior do domínio são os zeros da derivada e os pontos em que a derivada não existe. Em várias variáveis o gradiente ocupa o lugar da derivada. O teste da segunda derivada usará o polinômio de Taylor de ordem $1$ com resto de Lagrange numa variável auxiliar: se $\varphi''$ existe numa vizinhança de $[0,1]$, então $\varphi(1)=\varphi(0)+\varphi'(0)+\frac12\varphi''(c)$ para algum $c\in(0,1)$.}
+
+\begin{definicao}
+Seja $f$ definida num aberto de $\R^2$. O ponto $(a,b)$ é \emph{ponto crítico} de $f$ quando $\nabla f(a,b)=\vet{0}$, ou quando pelo menos uma das parciais $f_x(a,b)$, $f_y(a,b)$ não existe.
+\end{definicao}
+
+Se $f$ é diferenciável e $(a,b)$ é extremo local, então $(a,b)$ é crítico. De fato, a restrição $t\mapsto f(a+t,b)$ tem extremo local em $t=0$, logo a parcial $f_x(a,b)$ existe e é zero; o mesmo vale para $f_y$. Se alguma parcial não existe, o ponto continua na lista de candidatos, porque o argumento anterior não se aplica. Fora dos pontos críticos, uma função diferenciável tem derivada direcional positiva numa direção e negativa na oposta, pela fórmula $\nabla f\cdot\vet{u}$, e portanto não tem extremo local.
+
+A definição se estende a $\R^n$: ou $\nabla f(\vet{a})=\vet{0}$, ou alguma parcial não existe.
+
+\section{Hessiana e o teste da segunda derivada}
+
+A \emph{hessiana} de $f$ no ponto é a matriz das segundas parciais
+\[
+H_f=\begin{pmatrix} f_{xx} & f_{xy} \\ f_{yx} & f_{yy} \end{pmatrix}.
+\]
+Quando as segundas parciais são contínuas, Clairaut dá $f_{xy}=f_{yx}$ e $H_f$ é simétrica. O determinante
+\[
+D=f_{xx}f_{yy}-f_{xy}^2=\det H_f
+\]
+é o número que aparece no teste. A justificativa não é a memorização do sinal de $D$: é o sinal da forma quadrática
+\[
+Q(h,k)=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2=\begin{pmatrix}h & k\end{pmatrix} H_f\begin{pmatrix}h\\ k\end{pmatrix}.
+\]
+
+\begin{teorema}
+Seja $H$ uma matriz real $2\times 2$ simétrica, com entradas $A$, $B$, $B$, $C$, e seja $Q$ a forma quadrática associada. Os autovalores de $H$ são reais. Além disso:
+\begin{enumerate}[leftmargin=1.4em]
+\item $Q(h,k)>0$ para todo $(h,k)\neq(0,0)$ se, e somente se, os dois autovalores são positivos; isso ocorre se, e somente se, $D=AC-B^2>0$ e $A>0$. Nesse caso existe $m>0$ tal que $Q(h,k)\ge m(h^2+k^2)$.
+\item $Q(h,k)<0$ para todo $(h,k)\neq(0,0)$ se, e somente se, os dois autovalores são negativos; isso ocorre se, e somente se, $D>0$ e $A<0$.
+\item $Q$ assume valores positivos e valores negativos se, e somente se, os autovalores têm sinais opostos; isso ocorre se, e somente se, $D<0$.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+O polinômio característico é $\lambda^2-(A+C)\lambda+D$. O discriminante é
+\[
+(A+C)^2-4D=(A-C)^2+4B^2\ge 0,
+\]
+então as duas raízes $\lambda_1,\lambda_2$ são reais. Uma raiz real produz um autovetor $\vet{v}\neq\vet{0}$. Como $H$ é simétrica, o complemento ortogonal de $\vet{v}$ é invariante: se $\vet{w}\cdot\vet{v}=0$, então
+\[
+\vet{v}\cdot(H\vet{w})=(H\vet{v})\cdot\vet{w}=\lambda_1\,\vet{v}\cdot\vet{w}=0,
+\]
+logo $H\vet{w}$ também é ortogonal a $\vet{v}$ e, em $\R^2$, é múltiplo de $\vet{w}$. Normalizando, existe uma base ortonormal de autovetores. Nas coordenadas $(\xi,\eta)$ dessa base,
+\[
+Q=\lambda_1\xi^2+\lambda_2\eta^2,\qquad \xi^2+\eta^2=h^2+k^2.
+\]
+O produto $\lambda_1\lambda_2$ é $D$ e a soma é $A+C$.
+
+Se $\lambda_1$ e $\lambda_2$ são positivos, $Q\ge\lambda_{\min}(h^2+k^2)$ com $\lambda_{\min}>0$. Em particular $A=Q(1,0)>0$ e $D>0$. Reciprocamente, suponha $D>0$ e $A>0$. Para $k\neq 0$ e $t=h/k$,
+\[
+\frac{Q(h,k)}{k^2}=At^2+2Bt+C.
+\]
+O discriminante desse polinômio em $t$ é $4B^2-4AC=-4D<0$. Com coeficiente líder $A>0$, o polinômio é sempre positivo. Para $k=0$ e $h\neq 0$, $Q=Ah^2>0$. Logo $Q>0$ fora da origem, os dois autovalores são positivos, e $Q\ge\lambda_{\min}(h^2+k^2)$.
+
+Se $D>0$ e $A<0$, aplique o caso anterior a $-Q$, cuja matriz tem entrada superior esquerda $-A>0$ e o mesmo determinante $D$. Então $-Q$ é positiva definida, $Q$ é negativa definida e os autovalores de $H$ são negativos.
+
+Se $D<0$, os autovalores têm sinais opostos, e $\lambda_1\xi^2+\lambda_2\eta^2$ assume os dois sinais nas direções dos autovetores. Se $D>0$, os sinais são iguais e $Q$ não troca de sinal.
+\end{proof}
+
+\begin{teorema}[Teste da segunda derivada]
+Seja $f$ de classe $C^2$ num aberto que contém o ponto crítico $(a,b)$, isto é, as segundas parciais existem e são contínuas nesse aberto. Seja $D(a,b)=f_{xx}(a,b)f_{yy}(a,b)-f_{xy}(a,b)^2$.
+\begin{enumerate}[leftmargin=1.4em]
+\item Se $D(a,b)>0$ e $f_{xx}(a,b)>0$, então $f$ tem mínimo local estrito em $(a,b)$.
+\item Se $D(a,b)>0$ e $f_{xx}(a,b)<0$, então $f$ tem máximo local estrito em $(a,b)$.
+\item Se $D(a,b)<0$, então $(a,b)$ é ponto de sela: em toda bola em torno de $(a,b)$, $f$ assume valores maiores que $f(a,b)$ e valores menores que $f(a,b)$.
+\item Se $D(a,b)=0$, o teste não decide.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+As segundas parciais contínuas garantem $f_{xy}=f_{yx}$ pelo teorema de Clairaut, e a hessiana é simétrica. Fixe $(h,k)$ pequeno e defina $\varphi(t)=f(a+th,b+tk)$ para $t\in[0,1]$. A regra da cadeia dá
+\begin{align*}
+\varphi'(t)&=f_x h+f_y k,\\
+\varphi''(t)&=f_{xx}h^2+2f_{xy}hk+f_{yy}k^2,
+\end{align*}
+com as parciais calculadas em $(a+th,b+tk)$. No ponto crítico, $\varphi'(0)=0$. O resto de Lagrange em uma variável produz $c\in(0,1)$ tal que
+\[
+f(a+h,b+k)=f(a,b)+\frac12 Q_{p_c}(h,k),
+\]
+onde $p_c=(a+ch,b+ck)$ e $Q_{p_c}$ é a forma quadrática da hessiana em $p_c$.
+
+Escreva $Q_{p_c}(h,k)=Q(h,k)+E(h,k)$, com $Q$ calculada em $(a,b)$ e
+\begin{align*}
+E&=
+\bigl(f_{xx}(p_c)-f_{xx}(a,b)\bigr)h^2
++2\bigl(f_{xy}(p_c)-f_{xy}(a,b)\bigr)hk\\
+&\qquad+\bigl(f_{yy}(p_c)-f_{yy}(a,b)\bigr)k^2.
+\end{align*}
+Pela continuidade das segundas parciais em $(a,b)$, para todo $\eta>0$ existe $\delta>0$ tal que $0<\rho=\sqrt{h^2+k^2}<\delta$ implica que cada diferença de segundas parciais tem módulo menor que $\eta$, qualquer que seja $c\in(0,1)$, porque $p_c$ dista no máximo $\rho$ de $(a,b)$. Usando $2\abs{hk}\le h^2+k^2$,
+\[
+\abs{E}\le\eta(h^2+k^2)+\eta(h^2+k^2)=2\eta\rho^2.
+\]
+Portanto
+\[
+f(a+h,b+k)-f(a,b)=\frac12 Q(h,k)+r(h,k),\qquad \abs{r(h,k)}\le\eta\rho^2.
+\]
+
+Se $D>0$ e $f_{xx}>0$, o teorema da forma quadrática dá $m>0$ com $Q\ge m\rho^2$. Escolha $\eta=m/4$. Para $0<\rho<\delta$,
+\[
+f(a+h,b+k)-f(a,b)\ge\frac12 m\rho^2-\frac{m}{4}\rho^2=\frac{m}{4}\rho^2>0.
+\]
+O mínimo local é estrito.
+
+Se $D>0$ e $f_{xx}<0$, a mesma conta aplicada a $-f$ produz máximo local estrito de $f$.
+
+Se $D<0$, existem vetores nos quais $Q$ vale positivo e negativo. Tome $\vet{u}$ unitário com $Q(\vet{u})=\alpha>0$ e $\vet{v}$ unitário com $Q(\vet{v})=\beta<0$. Ao longo de $(h,k)=t\vet{u}$,
+\[
+f(a+tu)-f(a,b)=\frac12\alpha t^2+r,\qquad \abs{r}\le\eta t^2.
+\]
+Com $\eta=\alpha/4$, o incremento é pelo menos $(\alpha/4)t^2>0$ para $t\neq 0$ pequeno. Ao longo de $\vet{v}$, com $\eta=\abs{\beta}/4$, o incremento é no máximo $-(\abs{\beta}/4)t^2<0$. Em toda bola há valores acima e abaixo de $f(a,b)$.
+
+Se $D=0$, pelo menos um autovalor é zero e a forma quadrática não domina o resto. A seção seguinte mostra que mínimo, sela e situações mistas realmente ocorrem.
+\end{proof}
+
+\begin{exemplo}
+Para $f(x,y)=x^2+y^2$, o único ponto crítico é a origem, $H=\begin{pmatrix}2&0\\0&2\end{pmatrix}$, $D=4$ e $f_{xx}=2>0$. O teste dá mínimo local. De fato $f\ge 0=f(0,0)$.
+
+Para $g(x,y)=x^2-y^2$, o único ponto crítico é a origem, $D=-4<0$, e o teste dá sela. Ao longo do eixo $x$, $g(x,0)=x^2>0$ para $x\neq 0$; ao longo do eixo $y$, $g(0,y)=-y^2<0$.
+\end{exemplo}
+
+\section{Quando o teste é inconclusivo}
+
+\cuidado{Se $D=0$, a hessiana não decide. Olhar só as retas também não promove um mínimo: um caminho que não é reta pode descer mesmo quando todas as retas sobem. Para afirmar um mínimo é preciso uma desigualdade no disco. Para negar um extremo local, basta uma reta, ou uma curva, ao longo da qual a função assume os dois sinais.}
+
+\begin{exemplo}
+Seja $f(x,y)=x^4+y^4$. Então $f_x=4x^3$ e $f_y=4y^3$, e o único ponto crítico é $(0,0)$. As segundas parciais são $f_{xx}=12x^2$, $f_{yy}=12y^2$ e $f_{xy}=0$, todas nulas na origem. Assim $H_f(0,0)$ é a matriz nula e $D(0,0)=0$.
+
+A função satisfaz $f(x,y)\ge 0=f(0,0)$ em todo o plano, então a origem é mínimo global, embora o teste se cale. Ao longo de cada reta $y=mx$ tem-se $f(t,mt)=(1+m^4)t^4\ge 0$, o que é compatível com o mínimo, mas não é a prova: a prova é a desigualdade $x^4+y^4\ge 0$ em $\R^2$, não o comportamento reta por reta.
+\end{exemplo}
+
+\begin{exemplo}
+Seja $g(x,y)=x^3+y^3$. Então $g_x=3x^2$ e $g_y=3y^2$, e de novo o único ponto crítico é a origem. A hessiana tem entradas $g_{xx}=6x$, $g_{yy}=6y$ e $g_{xy}=0$, nulas em $(0,0)$, e $D(0,0)=0$.
+
+Ao longo do eixo $x$, $g(x,0)=x^3$, que é positivo para $x>0$ e negativo para $x<0$. Em toda bola a função fica acima e abaixo de $g(0,0)=0$. A origem não é extremo local. Aqui uma reta basta, porque a negação de extremo local é existencial: dois pontos, um de cada lado do valor, já refutam máximo e mínimo locais.
+\end{exemplo}
+
+\begin{exemplo}
+Seja $h(x,y)=x^2$. Então $h_x=2x$ e $h_y=0$. O conjunto crítico é a reta $x=0$, não um ponto isolado. A hessiana é $\begin{pmatrix}2&0\\0&0\end{pmatrix}$, com $D=0$ em todo ponto crítico. Como $h\ge 0$, cada ponto $(0,y)$ é mínimo global. O teste não vê essa conclusão, e o conjunto crítico não é um pico isolado.
+\end{exemplo}
+
+\section{Extremos num compacto}
+
+\begin{teorema}[Weierstrass em $\R^n$]
+Seja $K\subset\R^n$ fechado e limitado, e seja $f\colon K\to\R$ contínua. Então existem $\vet{p},\vet{q}\in K$ tais que
+\[
+f(\vet{p})=\max_K f,\qquad f(\vet{q})=\min_K f.
+\]
+\end{teorema}
+
+Não provamos este teorema. Ele depende de toda sequência em $K$ ter subsequência convergente em $K$, que é outra face de Heine--Borel. O uso é direto: num compacto a busca por máximo e mínimo absoluto tem resposta, e os candidatos são os pontos críticos no interior mais o estudo da fronteira.
+
+O método, para $f$ de classe $C^1$ no interior de um compacto $K\subset\R^2$ cuja fronteira seja uma união finita de gráficos ou de segmentos:
+\begin{enumerate}[leftmargin=1.4em]
+\item Achar os pontos críticos de $f$ no interior de $K$ e calcular $f$ neles.
+\item Restringir $f$ a cada pedaço da fronteira, por uma parametrização ou por uma equação, e achar os extremos dessa função de uma variável, incluindo os cantos.
+\item Comparar os valores. O maior é o máximo absoluto e o menor é o mínimo absoluto.
+\end{enumerate}
+
+\begin{exemplo}
+Seja $f(x,y)=xy$ no triângulo
+\[
+K=\{(x,y):x\ge 0,\ y\ge 0,\ x+y\le 2\},
+\]
+de vértices $(0,0)$, $(2,0)$ e $(0,2)$. O conjunto $K$ é fechado, por ser interseção dos fechados $x\ge 0$, $y\ge 0$ e $x+y\le 2$, e é limitado, por exemplo pela bola de raio $2$. É compacto. A função é contínua, então máximo e mínimo absolutos existem.
+
+No interior, $x>0$, $y>0$ e $x+y<2$. O gradiente é $\nabla f=(y,x)$, que só se anula em $(0,0)$, fora do interior. Não há ponto crítico interior.
+
+Na fronteira há três segmentos.
+\begin{enumerate}[leftmargin=1.4em]
+\item $y=0$, $0\le x\le 2$: $f(x,0)=0$.
+\item $x=0$, $0\le y\le 2$: $f(0,y)=0$.
+\item $x=t$, $y=2-t$, $0\le t\le 2$: $g(t)=t(2-t)=2t-t^2$. Então $g'(t)=2-2t$, que se anula em $t=1$. O valor é $g(1)=1$, e nos extremos $g(0)=g(2)=0$.
+\end{enumerate}
+Os valores candidatos são $0$ e $1$. No triângulo, $x\ge 0$ e $y\ge 0$, logo $f(x,y)\ge 0$. O mínimo absoluto é $0$, atingido em todo o segmento de $(0,0)$ a $(2,0)$ e em todo o segmento de $(0,0)$ a $(0,2)$. O máximo absoluto é $1$, atingido só em $(1,1)$.
+
+Confirmação independente do máximo, por média aritmética e geométrica: se $x>0$, $y>0$ e $x+y\le 2$, então $\sqrt{xy}\le(x+y)/2\le 1$, logo $xy\le 1$, com igualdade somente quando $x=y$ e $x+y=2$, isto é, em $(1,1)$.
+\end{exemplo}
+
+\section{Multiplicadores de Lagrange}
+
+Seja $f$ a função que se quer extremar e seja $g(x,y)=c$ a restrição, com $f$ e $g$ de classe $C^1$ num aberto que contém o conjunto $g=c$. A hipótese geométrica é
+\[
+\nabla g(x,y)\neq\vet{0}\qquad\text{em todo ponto com }g(x,y)=c.
+\]
+Ela diz que a curva de nível de $g$ tem reta tangente: o teorema da função implícita, ou a conta do gradiente ortogonal à curva, produz uma parametrização local regular.
+
+\begin{teorema}
+Nas hipóteses acima, se $(a,b)$ é extremo local de $f$ restrita a $g(x,y)=c$, então existe $\lambda\in\R$ tal que
+\begin{equation}
+\nabla f(a,b)=\lambda\,\nabla g(a,b),\qquad g(a,b)=c.
+\label{eq:lagrange}
+\end{equation}
+\end{teorema}
+
+\begin{proof}
+Como $\nabla g(a,b)\neq\vet{0}$, alguma parcial de $g$ é não nula. Tratamos o caso $g_y(a,b)\neq 0$; o caso $g_x(a,b)\neq 0$ troca os papéis de $x$ e $y$. O teorema da função implícita, que não provamos nesta nota, fornece uma função $\varphi$ de classe $C^1$ num intervalo aberto em torno de $a$, com $\varphi(a)=b$ e $g(x,\varphi(x))=c$. A curva $\gamma(x)=(x,\varphi(x))$ percorre a restrição e $\gamma'(a)=(1,\varphi'(a))\neq\vet{0}$.
+
+A função $x\mapsto f(x,\varphi(x))$ tem extremo local em $x=a$, então sua derivada se anula. A regra da cadeia dá
+\[
+f_x(a,b)+f_y(a,b)\,\varphi'(a)=0.
+\]
+Derivando $g(x,\varphi(x))=c$,
+\[
+g_x(a,b)+g_y(a,b)\,\varphi'(a)=0,
+\]
+logo $\varphi'(a)=-g_x(a,b)/g_y(a,b)$. Substituindo,
+\[
+f_x(a,b)-f_y(a,b)\,\frac{g_x(a,b)}{g_y(a,b)}=0,
+\]
+isto é, $f_x g_y-f_y g_x=0$ no ponto. Essa igualdade diz que o determinante com linhas $\nabla f$ e $\nabla g$ é zero, logo os dois vetores são paralelos. Como $\nabla g(a,b)\neq\vet{0}$, existe $\lambda$ com $\nabla f(a,b)=\lambda\nabla g(a,b)$.
+\end{proof}
+
+A leitura geométrica é a tangência das curvas de nível. No extremo, a curva $g=c$ não pode cruzar uma curva de nível de $f$: se cruzasse com velocidades independentes, $f$ subiria e desceria ao longo da restrição. As duas curvas compartilham a mesma reta tangente. Os gradientes, ambos ortogonais a essa reta, ficam paralelos. O número $\lambda$ é o fator desse paralelismo. A figura mostra o caso resolvido a seguir: as retas $x+y=\mathrm{constante}$ tocam a circunferência exatamente nos extremos.
+
+\figura{../figuras/lagrange.png}{Níveis de $f(x,y)=x+y$ tangentes à circunferência $x^2+y^2=1$.}
+
+\subsection{Extremos de $x+y$ na circunferência}
+
+Queremos os extremos de $f(x,y)=x+y$ sujeitos a $g(x,y)=x^2+y^2=1$. A circunferência é compacta e $f$ é contínua, então máximo e mínimo existem. Além disso $\nabla g=(2x,2y)$ só se anula na origem, que não está na circunferência. A hipótese do teorema vale em toda a restrição, e todo extremo aparece entre as soluções de
+\[
+(1,1)=\lambda(2x,2y),\qquad x^2+y^2=1.
+\]
+Da primeira equação, $x=1/(2\lambda)$ e $y=1/(2\lambda)$, desde que $\lambda\neq 0$, o que é forçado porque $(1,1)\neq\vet{0}$. Logo $x=y$, e $2x^2=1$, então $x=y=\sqrt{2}/2$ ou $x=y=-\sqrt{2}/2$.
+
+No primeiro ponto, $f=\sqrt{2}$. No segundo, $f=-\sqrt{2}$. São os únicos candidatos. O máximo é $\sqrt{2}$ e o mínimo é $-\sqrt{2}$.
+
+Conferência geométrica: a reta $x+y=c$ dista $\abs{c}/\sqrt{2}$ da origem. Ela é tangente à circunferência unitária quando essa distância vale $1$, isto é, quando $\abs{c}=\sqrt{2}$. Os pontos de tangência são os que encontramos.
+
+\subsection{O ponto da parábola mais próximo de $(0,1)$}
+
+O problema agora tem interpretação métrica: achar os pontos da parábola $y=x^2$ cuja distância ao ponto $(0,1)$ é mínima. Minimizar a distância é o mesmo que minimizar o quadrado da distância,
+\[
+f(x,y)=x^2+(y-1)^2,\qquad g(x,y)=y-x^2=0,
+\]
+porque $t\mapsto t^2$ é crescente em $[0,+\infty)$. O gradiente $\nabla g=(-2x,1)$ nunca se anula, a segunda componente é $1$. Toda a parábola está sob a hipótese do teorema.
+
+O sistema é $(2x,\,2y-2)=\lambda(-2x,\,1)$ e $y=x^2$. A primeira coordenada diz $2x=-2\lambda x$, logo $x(1+\lambda)=0$. Ou $x=0$, ou $\lambda=-1$.
+
+Se $x=0$, então $y=0$ e $\lambda=2(y-1)=-2$. O ponto $(0,0)$ está na parábola e $f(0,0)=1$.
+
+Se $\lambda=-1$, então $2y-2=-1$, logo $y=1/2$. A restrição dá $x^2=1/2$, então $x=\pm 1/\sqrt{2}$. Nos dois pontos,
+\[
+f=\frac12+\Bigl(\frac12-1\Bigr)^2=\frac12+\frac14=\frac34.
+\]
+
+A parábola não é compacta. Para saber que o mínimo existe, olhe $f$ ao longo da parametrização $y=x^2$: quando $\abs{x}\to\infty$, $f(x,x^2)\to\infty$. O conjunto em que $f\le 1$, sobre a parábola, é fechado e limitado, logo compacto, e o mínimo de $f$ nesse conjunto é o mínimo global na parábola. Ele está entre os valores críticos $1$ e $3/4$. O mínimo do quadrado da distância é $3/4$, atingido em $\bigl(\pm 1/\sqrt{2},\,1/2\bigr)$. A distância mínima é $\sqrt{3}/2$.
+
+O ponto $(0,0)$ não é mínimo. A parametrização $h(x)=x^2+(x^2-1)^2=x^4-x^2+1$ tem $h'(x)=4x^3-2x=2x(2x^2-1)$, com zeros exatamente em $x=0$ e $x=\pm 1/\sqrt{2}$, e $h''(0)=-2<0$, então $x=0$ é máximo local de $h$. Lagrange lista os pontos críticos da restrição; a comparação dos valores, ou a segunda derivada na parametrização, separa máximo de mínimo. Não há máximo global: $h(x)\to\infty$.
+
+\section{Duas restrições}
+
+Em $\R^3$, extremar $f$ sujeita a $g=c_1$ e $h=c_2$ pede que os dois gradientes da restrição sejam linearmente independentes nos pontos considerados. Geometricamente, as duas superfícies se cruzam numa curva cuja tangente é ortogonal a $\nabla g$ e a $\nabla h$, logo paralela a $\nabla g\times\nabla h\neq\vet{0}$. No extremo, $\nabla f$ também é ortogonal a essa tangente, então $\nabla f$ está no plano gerado por $\nabla g$ e $\nabla h$.
+
+\begin{teorema}
+Sejam $f,g,h$ de classe $C^1$ num aberto de $\R^3$. Se $\vet{p}$ é extremo local de $f$ no conjunto $g=c_1$, $h=c_2$, e se $\nabla g(\vet{p})$ e $\nabla h(\vet{p})$ são linearmente independentes, então existem $\lambda,\mu\in\R$ tais que
+\begin{equation}
+\nabla f(\vet{p})=\lambda\nabla g(\vet{p})+\mu\nabla h(\vet{p}),
+\label{eq:duas}
+\end{equation}
+com $g(\vet{p})=c_1$ e $h(\vet{p})=c_2$.
+\end{teorema}
+
+O argumento é o de uma restrição, aplicado à curva interseção: $f\circ\gamma$ tem derivada zero, $\nabla f\cdot\gamma'=0$, enquanto $\gamma'$ é paralelo a $\nabla g\times\nabla h$ e portanto ortogonal ao plano dos dois gradientes. Não escrevemos a parametrização explícita; a conclusão é \eqref{eq:duas}.
+
+\begin{exemplo}
+A curva interseção do cilindro $x^2+y^2=1$ com o plano $x+y+z=1$ é compacta: $x$ e $y$ ficam no disco unitário e $z=1-x-y$ fica limitado. A distância à origem atinge máximo e mínimo. Minimizamos e maximizamos
+\[
+f(x,y,z)=x^2+y^2+z^2
+\]
+sujeitos a $g=x^2+y^2-1=0$ e $h=x+y+z-1=0$.
+
+Os gradientes $\nabla g=(2x,2y,0)$ e $\nabla h=(1,1,1)$ são linearmente independentes em todo ponto do cilindro. Se $\alpha(2x,2y,0)+\beta(1,1,1)=\vet{0}$, a terceira coordenada força $\beta=0$, e então $\alpha x=\alpha y=0$. Como $x^2+y^2=1$, tem-se $\alpha=0$. A hipótese do teorema vale na curva inteira.
+
+O sistema $\nabla f=\lambda\nabla g+\mu\nabla h$ é
+\begin{align*}
+2x&=2\lambda x+\mu,\\
+2y&=2\lambda y+\mu,\\
+2z&=\mu,
+\end{align*}
+junto com as duas restrições. Subtraindo as duas primeiras equações, $(x-y)(1-\lambda)=0$. Logo $x=y$ ou $\lambda=1$.
+
+Se $x=y$, a circunferência dá $2x^2=1$, então $x=y=\sqrt{2}/2$ ou $x=y=-\sqrt{2}/2$.
+\begin{enumerate}[leftmargin=1.4em]
+\item $x=y=\sqrt{2}/2$, $z=1-\sqrt{2}$. O valor de $f$ é
+\[
+1+(1-\sqrt{2})^2=1+(1-2\sqrt{2}+2)=4-2\sqrt{2}.
+\]
+\item $x=y=-\sqrt{2}/2$, $z=1+\sqrt{2}$. O valor de $f$ é
+\[
+1+(1+\sqrt{2})^2=1+(1+2\sqrt{2}+2)=4+2\sqrt{2}.
+\]
+\end{enumerate}
+
+Se $\lambda=1$, a primeira equação dá $\mu=0$, logo $z=0$. O plano reduz-se a $x+y=1$, e junto com $x^2+y^2=1$ produz
+\[
+(x+y)^2=1=x^2+2xy+y^2=1+2xy,
+\]
+então $xy=0$. As soluções são $(1,0,0)$ e $(0,1,0)$, ambos com $f=1$.
+
+Comparando os quatro valores: $4-2\sqrt{2}>1$ porque $(2\sqrt{2})^2=8<9$, logo $2\sqrt{2}<3$; e $4-2\sqrt{2}<4+2\sqrt{2}$ porque $\sqrt{2}>0$. A curva é compacta e todos os pontos que satisfazem a condição de Lagrange estão na lista, então a menor distância ao quadrado é $1$, nos pontos $(1,0,0)$ e $(0,1,0)$, e a maior é $4+2\sqrt{2}$, no ponto $\bigl(-\sqrt{2}/2,\,-\sqrt{2}/2,\,1+\sqrt{2}\bigr)$. As distâncias são $1$ e $\sqrt{4+2\sqrt{2}}$.
+\end{exemplo}
+
+\section{Quando o gradiente da restrição se anula}
+
+\cuidado{Se $\nabla g$ se anula num ponto da restrição, esse ponto não aparece na equação $\nabla f=\lambda\nabla g$, a menos que $\nabla f$ também se anule. O extremo pode estar exatamente aí, e o método, aplicado de forma mecânica, perde o ponto. Antes de resolver o sistema, vale procurar os zeros de $\nabla g$ sobre $g=c$ e testá-los à parte.}
+
+\begin{exemplo}
+Extremar $f(x,y)=x$ sujeito a $g(x,y)=(x^2+y^2-1)^2=0$. A equação $g=0$ descreve a circunferência unitária, que é compacta. O máximo de $x$ é $1$, em $(1,0)$, e o mínimo é $-1$, em $(-1,0)$.
+
+O gradiente é
+\[
+\nabla g=2(x^2+y^2-1)\,(2x,2y).
+\]
+Em todo ponto da circunferência, o fator $x^2+y^2-1$ é zero, logo $\nabla g=\vet{0}$. A equação de Lagrange fica $(1,0)=\lambda\vet{0}$, que não tem solução. A lista de candidatos sai vazia, e os dois extremos ficam de fora.
+
+A mesma circunferência escrita como $x^2+y^2-1=0$ tem $\nabla g=(2x,2y)\neq\vet{0}$ sobre ela, e o método funciona. O sumiço dos extremos veio da apresentação da restrição, não da geometria. Quando o gradiente da função escolhida para descrever o conjunto se anula, a hipótese do teorema não está satisfeita e o sistema pode não ver o extremo.
+\end{exemplo}
+
+\section{Exercícios}
+
+\begin{exercicio}[{[Básico --- ponto crítico e teste]}]
+Ache os pontos críticos de $f(x,y)=x^2+y^2-4x+2y+5$ e classifique-os pelo teste da segunda derivada. Calcule o valor de $f$ no ponto crítico.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- sela e mínimo local]}]
+Ache os pontos críticos de $f(x,y)=x^3+y^3-3xy$ e classifique cada um pelo teste da segunda derivada. Calcule $f$ no ponto em que o teste der mínimo local.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- hessiana]}]
+Para $f(x,y)=x^2-4xy+y^2$, calcule a hessiana, ache o único ponto crítico e decida a natureza dele por $D$. Confirme com o sinal de $f$ ao longo das retas $y=0$ e $y=x$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- uma restrição afim]}]
+Ache os extremos de $f(x,y)=x^2+y^2$ sujeitos a $x+y=1$. Diga se há máximo, se há mínimo, e por que a hipótese $\nabla g\neq\vet{0}$ está satisfeita. A reta não é compacta: o argumento de existência tem de usar o comportamento no infinito, não Weierstrass cru.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- compacto com interior]}]
+Ache o máximo e o mínimo absolutos de $f(x,y)=x^2+y^2+x$ no quadrado $[-1,1]\times[-1,1]$. Separe o ponto crítico interior e os quatro lados, incluindo os cantos.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- circunferência]}]
+Ache o máximo e o mínimo de $f(x,y)=x+2y$ sujeitos a $x^2+y^2=4$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- teste inconclusivo]}]
+Seja $f(x,y)=x^2 y$.
+\begin{enumerate}[label=\alph*)]
+\item Determine o conjunto dos pontos críticos e calcule $D$ em cada um deles.
+\item Classifique $(0,0)$, $(0,1)$ e $(0,-1)$ pelo sinal de $f$ numa vizinhança, sem usar o teste da hessiana.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- direções da sela]}]
+Seja $f(x,y)=x^2+4xy+y^2$.
+\begin{enumerate}[label=\alph*)]
+\item Mostre que a origem é o único ponto crítico e calcule $D(0,0)$.
+\item Exiba dois vetores unitários $\vet{u}$ e $\vet{v}$ tais que a forma quadrática $Q$ satisfaz $Q(\vet{u})>0$ e $Q(\vet{v})<0$. Como $f$ coincide com $\frac12 Q$ neste exemplo, as segundas parciais são constantes e o resto do desenvolvimento é zero: conclua que a origem é sela a partir desses dois vetores, não apenas a partir do sinal de $D$.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- duas restrições]}]
+A interseção dos planos $x+y+z=1$ e $x+y-z=0$ é uma reta. Ache o ponto dessa reta mais próximo da origem, pelo método dos multiplicadores, com $f(x,y,z)=x^2+y^2+z^2$. Confira parametrizando a reta e minimizando a função de uma variável. Não há máximo: registre por quê a reta impede Weierstrass.
+\end{exercicio}
+
+\end{document}

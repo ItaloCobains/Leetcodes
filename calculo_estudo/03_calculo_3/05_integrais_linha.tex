@@ -1,0 +1,506 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Cálculo III: integrais de linha e campos conservativos}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Campos escalares e vetoriais}
+
+Um campo associa a cada ponto de uma região uma grandeza. A grandeza pode ser um número ou um vetor. A integral de linha vai somar essa grandeza ao longo de uma curva: no caso escalar, pesando pelo comprimento; no caso vetorial, pesando pela componente tangente. Trabalho, massa de um fio e circulação são os três nomes físicos dessa soma.
+
+\begin{definicao}
+Seja $U\subset\R^n$ aberto. Um \emph{campo escalar} em $U$ é uma função $f\colon U\to\R$. Um \emph{campo vetorial} em $U$ é uma função $\vet{F}\colon U\to\R^n$. Escrevemos as componentes
+\[
+\vet{F}=(F_1,\ldots,F_n)
+\]
+e, no plano e no espaço, também $\vet{F}=(P,Q)$ e $\vet{F}=(P,Q,R)$.
+\end{definicao}
+
+O aberto garante vizinhança em cada ponto, que é o que as derivadas parciais e a regra da cadeia vão pedir.
+
+\begin{exemplo}
+Três campos com unidade mental.
+\begin{enumerate}
+\item A temperatura $T(x,y,z)$, em kelvin, é um campo escalar. O valor não tem direção.
+\item A velocidade $\vet{v}(x,y,z)$ de um fluido, em metro por segundo, é um campo vetorial. A seta em cada ponto é a velocidade da partícula que passa por ali.
+\item Se $T$ é de classe $C^1$, o gradiente $\nabla T$ é um campo vetorial, em kelvin por metro. Ele aponta para o crescimento mais rápido de $T$. O fluxo de calor, no modelo mais simples, aponta para o lado oposto: a direção de $-\nabla T$.
+\end{enumerate}
+Uma força $\vet{F}$, em newton, é um campo vetorial do mesmo tipo que a velocidade: o que muda é a unidade, não a geometria da integral.
+\end{exemplo}
+
+\begingroup\catcode`\_=12
+\figura{../figuras/campo_vetorial.png}{À esquerda um campo conservativo; à direita $\vet{F}=(-y,x)$.}
+\endgroup
+
+À esquerda, as setas variam como um gradiente: não há giro líquido em volta de um ponto. À direita, $\vet{F}=(-y,x)$ é perpendicular ao raio vetor, porque
+\[
+\vet{F}(x,y)\cdot(x,y)=-yx+xy=0,
+\]
+e $\norm{\vet{F}}=\sqrt{x^2+y^2}$ é a distância à origem. O campo é tangente às circunferências e gira no sentido anti-horário. A circulação desse giro, na circunferência unitária, será $2\pi$.
+
+\begin{intuicao}
+O campo escalar responde à pergunta ``quanto tem aqui?''. O campo vetorial responde ``para onde e com que intensidade?''. A integral de linha do escalar soma ``quanto'' vezes ``quanto de fio''. A integral de linha do vetor soma só o que está alinhado com a curva.
+\end{intuicao}
+
+\section{Integral de linha de um escalar}
+
+\begin{definicao}
+Seja $f$ contínua num aberto que contém a imagem da curva $\vet{r}\colon[a,b]\to\R^n$, de classe $C^1$. A \emph{integral de linha escalar} de $f$ ao longo de $C=\vet{r}([a,b])$ é
+\[
+\int_C f\,\dif s
+=\int_a^b f\bigl(\vet{r}(t)\bigr)\,\norm{\vet{r}'(t)}\,\dif t.
+\]
+Se $\vet{r}$ é apenas $C^1$ por pedaços, a integral é a soma das integrais nos pedaços.
+\end{definicao}
+
+O fator $\norm{\vet{r}'(t)}$ é a velocidade escalar. O produto $\norm{\vet{r}'(t)}\,\dif t$ é o elemento de comprimento: a integral não vê o nome do parâmetro, vê o comprimento. Em particular, $f=1$ recupera o comprimento de arco.
+
+\begin{proposicao}
+A integral de linha escalar não depende da orientação. Se $C^{-}$ é a mesma curva percorrida no sentido oposto e $f$ é contínua, então $\int_{C^{-}} f\,\dif s=\int_C f\,\dif s$.
+\end{proposicao}
+
+\begin{proof}
+Seja $\vet{r}\colon[a,b]\to\R^n$ uma parametrização $C^1$ de $C$. A curva oposta admite
+\[
+\vet{r}^{-}(t)=\vet{r}(a+b-t),\qquad t\in[a,b].
+\]
+Então $(\vet{r}^{-})'(t)=-\vet{r}'(a+b-t)$ e $\norm{(\vet{r}^{-})'(t)}=\norm{\vet{r}'(a+b-t)}$. Logo
+\[
+\int_{C^{-}} f\,\dif s
+=\int_a^b f\bigl(\vet{r}(a+b-t)\bigr)\,\norm{\vet{r}'(a+b-t)}\,\dif t.
+\]
+A substituição $u=a+b-t$ troca os limites e produz $\dif t=-\dif u$, portanto
+\[
+\int_b^a f\bigl(\vet{r}(u)\bigr)\,\norm{\vet{r}'(u)}\,(-\dif u)
+=\int_a^b f\bigl(\vet{r}(u)\bigr)\,\norm{\vet{r}'(u)}\,\dif u.
+\]
+O sinal da derivada foi absorvido pela norma. A curva $C^1$ por pedaços reduz-se à soma dos pedaços.
+\end{proof}
+
+\begin{exemplo}[Massa de um fio]
+A densidade linear $\delta$, em massa por comprimento, é um campo escalar sobre o fio. A massa é $\int_C \delta\,\dif s$: cada pedaço de comprimento $\dif s$ contribui com $\delta\,\dif s$, e o sentido em que se percorre o fio não muda a massa.
+
+Tome $\delta(x,y)=2x$ ao longo de $\vet{r}(t)=(t,t^2)$, $t\in[0,1]$. Então $\vet{r}'(t)=(1,2t)$ e $\norm{\vet{r}'(t)}=\sqrt{1+4t^2}$. A massa é
+\[
+\int_0^1 2t\sqrt{1+4t^2}\,\dif t.
+\]
+Com $u=1+4t^2$, tem-se $\dif u=8t\,\dif t$, de modo que $2t\,\dif t=\dif u/4$. Os limites passam de $t=0$ a $t=1$ para $u=1$ a $u=5$:
+\[
+\int_1^5 \frac{1}{4}u^{1/2}\,\dif u
+=\frac{1}{4}\cdot\frac{2}{3}\Bigl[u^{3/2}\Bigr]_1^5
+=\frac{1}{6}\bigl(5^{3/2}-1\bigr)
+=\frac{5\sqrt{5}-1}{6}.
+\]
+Se $x$ está em metros e $\delta$ em quilograma por metro, esse número é a massa em quilogramas.
+\end{exemplo}
+
+\section{Integral de linha de um campo vetorial}
+
+\begin{definicao}
+Seja $\vet{F}$ contínuo num aberto que contém a imagem de $\vet{r}\colon[a,b]\to\R^n$, de classe $C^1$. A \emph{integral de linha} de $\vet{F}$ ao longo de $C$ é
+\[
+\int_C \vet{F}\cdot\dif\vet{r}
+=\int_a^b \vet{F}\bigl(\vet{r}(t)\bigr)\cdot\vet{r}'(t)\,\dif t.
+\]
+No plano, com $\vet{F}=(P,Q)$ e $\vet{r}=(x,y)$, isso é $\int_C P\,\dif x+Q\,\dif y$. No espaço, soma-se $R\,\dif z$.
+\end{definicao}
+
+Onde $\vet{r}'(t)\neq\vet{0}$, o vetor unitário tangente é $\vet{T}=\vet{r}'/\norm{\vet{r}'}$, e
+\[
+\vet{F}\cdot\vet{r}'\,\dif t
+=(\vet{F}\cdot\vet{T})\,\norm{\vet{r}'}\,\dif t
+=(\vet{F}\cdot\vet{T})\,\dif s.
+\]
+A integral vetorial só enxerga a componente tangencial. A componente normal à curva não trabalha e não circula.
+
+\begin{proposicao}
+A troca de orientação troca o sinal: $\int_{C^{-}}\vet{F}\cdot\dif\vet{r}=-\int_C\vet{F}\cdot\dif\vet{r}$.
+\end{proposicao}
+
+\begin{proof}
+Com $\vet{r}^{-}(t)=\vet{r}(a+b-t)$,
+\[
+\vet{F}\bigl(\vet{r}^{-}(t)\bigr)\cdot(\vet{r}^{-})'(t)
+=-\,\vet{F}\bigl(\vet{r}(a+b-t)\bigr)\cdot\vet{r}'(a+b-t).
+\]
+A mesma substituição $u=a+b-t$ carrega esse sinal negativo até o fim. Aqui não há norma para absorvê-lo: $\vet{T}$ vira $-\vet{T}$.
+\end{proof}
+
+\begin{intuicao}
+Se $\vet{F}$ é uma força, $\int_C\vet{F}\cdot\dif\vet{r}$ é o trabalho dessa força ao longo do caminho, em joule quando a força está em newton e o caminho em metro. Ir e voltar pelo mesmo traço troca o sinal do trabalho. Empurrar a favor da força dá trabalho positivo; ser arrastado contra ela dá trabalho negativo.
+\end{intuicao}
+
+\begin{exemplo}[Circunferência unitária]
+Seja $\vet{F}=(-y,x)$ e seja $C$ a circunferência $x^2+y^2=1$ orientada no sentido anti-horário,
+\[
+\vet{r}(t)=(\cos t,\sin t),\qquad t\in[0,2\pi].
+\]
+Então $\vet{r}'(t)=(-\sin t,\cos t)$ e $\vet{F}(\vet{r}(t))=(-\sin t,\cos t)$. O produto escalar é
+\[
+\vet{F}(\vet{r}(t))\cdot\vet{r}'(t)
+=\sin^2 t+\cos^2 t=1.
+\]
+Portanto
+\[
+\int_C \vet{F}\cdot\dif\vet{r}
+=\int_0^{2\pi} 1\,\dif t=2\pi.
+\]
+Geometricamente, $\vet{F}$ coincide com $\vet{r}'$ ao longo de $C$: a componente tangencial vale $1$ e a integral é o comprimento da circunferência. O sentido horário produz $-2\pi$.
+\end{exemplo}
+
+Esse valor já mostra que $\vet{F}=(-y,x)$ não pode ser um gradiente em $\R^2$. A conta geral está na seção seguinte: a integral de um gradiente numa curva fechada é zero, e $2\pi\neq 0$. O rotacional confirma o mesmo obstáculo sem integrar. Com $\vet{F}=(P,Q)=(-y,x)$,
+\[
+\partial_x Q-\partial_y P=\partial_x(x)-\partial_y(-y)=1-(-1)=2.
+\]
+O giro visto na figura é constante e igual a $2$, não uma ilusão de um caminho mal escolhido.
+
+\section{Campo conservativo}
+
+\base{Regra da cadeia: se $\phi$ é de classe $C^1$ e $\vet{r}=(x,y,z)$ é $C^1$, então $\frac{\dif}{\dif t}\phi(\vet{r}(t))=\nabla\phi(\vet{r}(t))\cdot\vet{r}'(t)$. Teorema fundamental do cálculo: se $g$ é $C^1$ em $[a,b]$, então $\int_a^b g'(t)\,\dif t=g(b)-g(a)$.}
+
+\begin{definicao}
+Seja $U\subset\R^n$ aberto e conexo, e seja $\vet{F}\colon U\to\R^n$ contínuo. Dizemos que $\vet{F}$ é \emph{conservativo} em $U$ quando existe $\phi\colon U\to\R$ de classe $C^1$ com $\vet{F}=\nabla\phi$ em $U$. A função $\phi$ é um \emph{potencial escalar} de $\vet{F}$.
+\end{definicao}
+
+A conexidade entra para que o potencial fale de qualquer par de pontos do domínio. A conta do teorema seguinte, numa curva já dada, usa só que $U$ é aberto.
+
+\begin{teorema}
+\label{thm:gradiente}
+Seja $U\subset\R^n$ aberto e seja $\phi\colon U\to\R$ de classe $C^1$. Se $C$ é uma curva $C^1$ por pedaços em $U$, com extremidade inicial $A$ e extremidade final $B$, então
+\[
+\int_C \nabla\phi\cdot\dif\vet{r}=\phi(B)-\phi(A).
+\]
+Em particular, a integral depende de $A$ e de $B$, e não do caminho. Se $C$ é fechada, a integral é zero.
+\end{teorema}
+
+\begin{proof}
+Seja primeiro $\vet{r}\colon[a,b]\to U$ de classe $C^1$, com $\vet{r}(a)=A$ e $\vet{r}(b)=B$. A composta $g(t)=\phi(\vet{r}(t))$ é de classe $C^1$ em $[a,b]$, porque $U$ é aberto e a imagem de $\vet{r}$, sendo compacta, fica a uma distância positiva do complementar de $U$. A regra da cadeia dá
+\begin{align*}
+g'(t)
+&=\partial_x\phi(\vet{r}(t))\,x'(t)
++\partial_y\phi(\vet{r}(t))\,y'(t)
++\partial_z\phi(\vet{r}(t))\,z'(t)\\
+&=\nabla\phi\bigl(\vet{r}(t)\bigr)\cdot\vet{r}'(t).
+\end{align*}
+No plano, o termo em $z$ não aparece. Pelo teorema fundamental do cálculo,
+\[
+\int_a^b \nabla\phi\bigl(\vet{r}(t)\bigr)\cdot\vet{r}'(t)\,\dif t
+=g(b)-g(a)=\phi(B)-\phi(A).
+\]
+Se a curva é $C^1$ por pedaços, soma-se o resultado em cada pedaço. Os valores de $\phi$ nos pontos de emenda se cancelam, e sobram $\phi(B)$ e $-\phi(A)$. Numa curva fechada, $A=B$ e a diferença é zero.
+\end{proof}
+
+\begin{exemplo}
+O campo $\vet{F}=(2xy,x^2)$ é o gradiente de $\phi(x,y)=x^2 y$, pois $\partial_x\phi=2xy$ e $\partial_y\phi=x^2$. Entre $A=(0,0)$ e $B=(1,3)$, qualquer caminho em $\R^2$ dá
+\[
+\int_C\vet{F}\cdot\dif\vet{r}=\phi(1,3)-\phi(0,0)=3.
+\]
+Conferência no segmento $\vet{r}(t)=(t,3t)$, $t\in[0,1]$: $\vet{F}(\vet{r}(t))=(6t^2,t^2)$, $\vet{r}'(t)=(1,3)$ e o produto escalar vale $9t^2$. Então $\int_0^1 9t^2\,\dif t=3$.
+\end{exemplo}
+
+\begin{exemplo}[Peso]
+Perto do solo, o peso de uma massa $m>0$ é $\vet{F}=(0,0,-mg)$, com $g>0$ a aceleração da gravidade. Esse campo é o gradiente de $\phi(x,y,z)=-mgz$. O trabalho do peso entre as alturas $z_A$ e $z_B$ é
+\[
+\phi(B)-\phi(A)=-mg(z_B-z_A).
+\]
+Na descida, $z_B<z_A$ e o trabalho do peso é positivo. A energia potencial usual $V=mgz$ satisfaz $\vet{F}=-\nabla V$, e o mesmo trabalho se escreve $V(A)-V(B)$. As duas funções diferem pelo sinal: $\phi$ é o potencial do teorema, $V$ é a energia potencial da física.
+\end{exemplo}
+
+\section{A recíproca}
+
+A ida está feita: gradiente implica integral dependente só dos extremos. A volta constrói o potencial a partir das integrais, desde que essas integrais não dependam do caminho.
+
+\base{Num aberto de $\R^n$, cada componente conexa é conexa por caminhos, e dois pontos dela podem ser ligados por uma poligonal contida no aberto. Se as derivadas parciais de $\phi$ existem numa vizinhança de um ponto e são contínuas aí, então $\phi$ é diferenciável nesse ponto e o gradiente é o vetor das parciais.}
+
+\begin{teorema}
+\label{thm:reciproca}
+Seja $U\subset\R^n$ aberto e conexo, e seja $\vet{F}=(P_1,\ldots,P_n)\colon U\to\R^n$ contínuo. Suponha que, para qualquer par de pontos de $U$ e quaisquer duas curvas $C^1$ por pedaços em $U$ com esses extremos, as integrais de linha de $\vet{F}$ coincidem. Então $\vet{F}$ é conservativo em $U$.
+\end{teorema}
+
+\begin{proof}
+Fixe $A\in U$. Para cada ponto $X\in U$, escolha uma curva $C^1$ por pedaços $\gamma_X$ em $U$ ligando $A$ a $X$ e defina
+\[
+\phi(X)=\int_{\gamma_X}\vet{F}\cdot\dif\vet{r}.
+\]
+A hipótese torna $\phi(X)$ independente da escolha. Se $U$ é convexo, o segmento de $A$ a $X$ está em $U$ e pode ser a curva escolhida. No caso apenas conexo, usa-se uma poligonal, ou qualquer curva $C^1$ por pedaços, de $A$ até $X$.
+
+Falta provar que $\partial_x\phi=P_1$, e o análogo para as outras variáveis. Seja $X=(x,y,z)\in U$. Como $U$ é aberto, existe $h\neq 0$ tal que o segmento $\sigma$ de $(x,y,z)$ até $(x+h,y,z)$ está em $U$. A concatenação de $\gamma_X$ com $\sigma$ liga $A$ a $(x+h,y,z)$. Pela independência de caminho,
+\[
+\phi(x+h,y,z)-\phi(x,y,z)=\int_\sigma\vet{F}\cdot\dif\vet{r}.
+\]
+Parametrize $\sigma(t)=(x+t,y,z)$ para $t$ entre $0$ e $h$. Então $\sigma'(t)=(1,0,0)$ e
+\[
+\phi(x+h,y,z)-\phi(x,y,z)
+=\int_0^h P_1(x+t,y,z)\,\dif t,
+\]
+fórmula que vale para $h>0$ e para $h<0$. O quociente de diferença é a média
+\[
+\frac{\phi(x+h,y,z)-\phi(x,y,z)}{h}
+=\frac{1}{h}\int_0^h P_1(x+t,y,z)\,\dif t.
+\]
+Seja $\eps>0$. Pela continuidade de $P_1$ em $(x,y,z)$, existe $\delta>0$ tal que $|t|<\delta$ implica $|P_1(x+t,y,z)-P_1(x,y,z)|<\eps$. Se $0<|h|<\delta$, o intervalo de extremos $0$ e $h$ tem comprimento $|h|$, e o integrando $P_1(x+t,y,z)-P_1(x,y,z)$ tem módulo menor que $\eps$. Portanto
+\[
+\Biggl|\int_0^h\bigl(P_1(x+t,y,z)-P_1(x,y,z)\bigr)\,\dif t\Biggr|
+\le\eps\,|h|,
+\]
+e o quociente por $h$ dista de $P_1(x,y,z)$ menos que $\eps$. Logo $\partial_x\phi(x,y,z)=P_1(x,y,z)$.
+
+O mesmo segmento, agora paralelo ao eixo $y$ ou ao eixo $z$, dá $\partial_y\phi=P_2$ e $\partial_z\phi=P_3$. As parciais existem numa vizinhança e coincidem com as componentes contínuas de $\vet{F}$, portanto $\phi$ é de classe $C^1$ e $\nabla\phi=\vet{F}$.
+\end{proof}
+
+A hipótese usada na construção é a continuidade de $\vet{F}$, duas vezes: para a integral de linha existir ao longo da poligonal, e para a média no segmento curto convergir ao valor no ponto. Não se usou derivada de $\vet{F}$.
+
+\begin{observacao}
+A independência de caminho equivale a dizer que $\int_C\vet{F}\cdot\dif\vet{r}=0$ para toda curva fechada $C^1$ por pedaços em $U$. Se $\gamma_1$ e $\gamma_2$ vão de $A$ a $B$, a concatenação de $\gamma_1$ com o oposto de $\gamma_2$ é fechada, e a integral dessa concatenação é a diferença das duas integrais.
+\end{observacao}
+
+\section{Conservativo implica rotacional nulo}
+
+Esta é a direção fácil do teste. O rotacional mede a circulação infinitesimal. Um gradiente não circula, porque a integral em qualquer curva fechada pequena já é zero pelo Teorema~\ref{thm:gradiente}. A prova abaixo não estima essa circulação: ela só usa que as derivadas mistas do potencial comutam.
+
+\base{Teorema de Clairaut: se as derivadas parciais de segunda ordem existem numa vizinhança e são contínuas, então $\partial_x\partial_y\phi=\partial_y\partial_x\phi$, e o mesmo para os outros pares. Se $\vet{F}=\nabla\phi$ e $\vet{F}$ é de classe $C^1$, as segundas parciais de $\phi$ são as primeiras parciais das componentes de $\vet{F}$, logo existem e são contínuas.}
+
+\begin{definicao}
+Seja $\vet{F}=(P,Q,R)$ de classe $C^1$ num aberto de $\R^3$. O \emph{rotacional} de $\vet{F}$ é
+\[
+\nabla\times\vet{F}
+=\bigl(
+\partial_y R-\partial_z Q,\;
+\partial_z P-\partial_x R,\;
+\partial_x Q-\partial_y P
+\bigr).
+\]
+Se $\vet{F}=(P,Q)$ é de classe $C^1$ num aberto do plano, o rotacional escalar é o número $\partial_x Q-\partial_y P$, que é a terceira componente de $\nabla\times(P,Q,0)$.
+\end{definicao}
+
+\begin{teorema}
+\label{thm:facil}
+Seja $U$ aberto de $\R^2$ ou de $\R^3$ e seja $\vet{F}$ de classe $C^1$ em $U$. Se $\vet{F}$ é conservativo em $U$, então $\nabla\times\vet{F}=\vet{0}$ em $U$. No plano, isso é $\partial_x Q-\partial_y P=0$.
+\end{teorema}
+
+\begin{proof}
+Seja $\phi$ um potencial de classe $C^1$ com $\vet{F}=\nabla\phi$. Como $\vet{F}$ é $C^1$, $\phi$ é $C^2$ e as segundas parciais são contínuas, de modo que Clairaut se aplica.
+
+No espaço, $P=\partial_x\phi$, $Q=\partial_y\phi$ e $R=\partial_z\phi$. As três componentes do rotacional são
+\begin{align*}
+\partial_y R-\partial_z Q
+&=\partial_y\partial_z\phi-\partial_z\partial_y\phi=0,\\
+\partial_z P-\partial_x R
+&=\partial_z\partial_x\phi-\partial_x\partial_z\phi=0,\\
+\partial_x Q-\partial_y P
+&=\partial_x\partial_y\phi-\partial_y\partial_x\phi=0.
+\end{align*}
+No plano, $P=\partial_x\phi$ e $Q=\partial_y\phi$, e a única conta é a terceira: $\partial_x Q-\partial_y P=\partial_x\partial_y\phi-\partial_y\partial_x\phi=0$.
+\end{proof}
+
+A hipótese de continuidade das segundas parciais de $\phi$ não é um enfeite. Ela é herdada de $\vet{F}$ ser $C^1$, e é exatamente a hipótese de Clairaut que autoriza trocar a ordem. Sem essa troca, a componente $\partial_x Q-\partial_y P$ não precisaria ser zero.
+
+\section{O plano menos a origem}
+
+O Teorema~\ref{thm:facil} não tem recíproca automática. O rotacional nulo em cada ponto controla a circulação em retângulos pequenos. Para passar do retângulo pequeno a um potencial no domínio inteiro, todo laço do domínio precisa poder ser contraído a um ponto sem sair do domínio. O plano sem a origem não tem essa propriedade: a circunferência unitária dá uma volta no furo e não encolhe até um ponto dentro do domínio.
+
+\begin{contraexemplo}
+\label{ex:angular}
+Seja $U=\R^2\setminus\{\vet{0}\}$ e
+\[
+\vet{F}
+=\Biggl(-\frac{y}{x^2+y^2},\;\frac{x}{x^2+y^2}\Biggr)
+=(P,Q).
+\]
+O campo é de classe $C^\infty$ em $U$, porque o denominador não se anula fora da origem. Apesar disso, $\vet{F}$ não é conservativo em $U$.
+\end{contraexemplo}
+
+Primeiro o rotacional, por derivação direta. Escreva $P=-y(x^2+y^2)^{-1}$ e $Q=x(x^2+y^2)^{-1}$. Então
+\begin{align*}
+\partial_x Q
+&=(x^2+y^2)^{-1}+x\cdot(-1)(x^2+y^2)^{-2}\cdot 2x
+=\frac{x^2+y^2-2x^2}{(x^2+y^2)^2}
+=\frac{y^2-x^2}{(x^2+y^2)^2},\\[0.4em]
+\partial_y P
+&=-(x^2+y^2)^{-1}+(-y)\cdot(-1)(x^2+y^2)^{-2}\cdot 2y
+=\frac{-(x^2+y^2)+2y^2}{(x^2+y^2)^2}
+=\frac{y^2-x^2}{(x^2+y^2)^2}.
+\end{align*}
+Logo $\partial_x Q-\partial_y P=0$ em todo ponto de $U$.
+
+Agora a circulação na circunferência $x^2+y^2=1$, orientada no sentido anti-horário por $\vet{r}(t)=(\cos t,\sin t)$, $t\in[0,2\pi]$. Sobre a curva, $x^2+y^2=1$, de modo que
+\[
+\vet{F}(\vet{r}(t))=(-\sin t,\cos t),\qquad\vet{r}'(t)=(-\sin t,\cos t).
+\]
+O produto escalar vale $1$, e
+\[
+\oint_{x^2+y^2=1}\vet{F}\cdot\dif\vet{r}
+=\int_0^{2\pi}1\,\dif t=2\pi.
+\]
+Se existisse um potencial em $U$, o Teorema~\ref{thm:gradiente} daria circulação zero. Como $2\pi\neq 0$, $\vet{F}$ não é conservativo em $\R^2\setminus\{\vet{0}\}$.
+
+\cuidado{A recíproca de ``conservativo implica rotacional nulo'' pede domínio simplesmente conexo: todo laço se contrai a um ponto dentro do domínio. No plano menos a origem, o campo acima tem $\partial_x Q-\partial_y P=0$ em cada ponto e mesmo assim $\oint_{x^2+y^2=1}\vet{F}\cdot\dif\vet{r}=2\pi\neq 0$. O furo guarda uma volta que o rotacional, calculado fora da origem, não vê. Em $\R^2$ menos um raio --- uma semi-reta fechada que parte da origem --- o domínio restante é simplesmente conexo, e a mesma fórmula é o gradiente do argumento $\theta$.}
+
+\begin{proposicao}
+\label{prop:theta}
+Seja $U=\R^2\setminus\{(x,0):x\le 0\}$, o plano menos a semi-reta dos $x$ não positivos. Seja $\theta\colon U\to(-\pi,\pi)$ o argumento, isto é, o ângulo do eixo $x$ positivo até o ponto $(x,y)$. Então $\theta$ é de classe $C^\infty$ em $U$ e $\nabla\theta=\vet{F}$ em $U$, com $\vet{F}$ o campo do Contraexemplo~\ref{ex:angular}.
+\end{proposicao}
+
+\begin{proof}
+A semi-reta removida é exatamente o corte onde o argumento saltaria de $\pi$ para $-\pi$. Em $U$, $\theta$ fica em $(-\pi,\pi)$ e não salta. Três fórmulas cobrem $U$, cada uma $C^\infty$ no seu aberto:
+\begin{align*}
+x>0&\colon & \theta&=\arctan(y/x),\\
+y>0&\colon & \theta&=\pi/2-\arctan(x/y),\\
+y<0&\colon & \theta&=-\pi/2-\arctan(x/y).
+\end{align*}
+Todo ponto de $U$ está em pelo menos um desses abertos, e as fórmulas coincidem nas interseções porque todas descrevem o mesmo ângulo em $(-\pi,\pi)$.
+
+No semiplano $x>0$,
+\begin{align*}
+\partial_x\theta
+&=\frac{1}{1+(y/x)^2}\cdot\Bigl(-\frac{y}{x^2}\Bigr)
+=\frac{x^2}{x^2+y^2}\cdot\Bigl(-\frac{y}{x^2}\Bigr)
+=-\frac{y}{x^2+y^2},\\[0.3em]
+\partial_y\theta
+&=\frac{1}{1+(y/x)^2}\cdot\frac{1}{x}
+=\frac{x^2}{x^2+y^2}\cdot\frac{1}{x}
+=\frac{x}{x^2+y^2}.
+\end{align*}
+No semiplano $y>0$,
+\begin{align*}
+\partial_x\theta
+&=-\frac{1}{1+(x/y)^2}\cdot\frac{1}{y}
+=-\frac{y^2}{x^2+y^2}\cdot\frac{1}{y}
+=-\frac{y}{x^2+y^2},\\[0.3em]
+\partial_y\theta
+&=-\frac{1}{1+(x/y)^2}\cdot\Bigl(-\frac{x}{y^2}\Bigr)
+=\frac{y^2}{x^2+y^2}\cdot\frac{x}{y^2}
+=\frac{x}{x^2+y^2}.
+\end{align*}
+No semiplano $y<0$ a fórmula difere da anterior por uma constante, $-\pi$ no lugar de $\pi/2$ diante do mesmo $\arctan(x/y)$, então as parciais são as mesmas. Portanto $\nabla\theta=\vet{F}$ em $U$.
+\end{proof}
+
+O domínio $U$ é simplesmente conexo na linguagem do curso: um laço em $U$ não consegue dar a volta na origem, porque a semi-reta removida barra esse giro, e o laço se contrai a um ponto sem sair de $U$. A circunferência unitária inteira não cabe em $U$. A circulação $2\pi$ vive no plano furado; no plano cortado, o Teorema~\ref{thm:gradiente} devolve circulação zero para toda curva fechada.
+
+\section{O teste no retângulo}
+
+O teste prático junta as duas direções. A ida é o Teorema~\ref{thm:facil} e vale em qualquer aberto. A volta pede topologia.
+
+\begin{teorema}[Teste prático]
+\label{thm:teste}
+Seja $U\subset\R^2$ aberto, e suponha que toda curva fechada em $U$ se contrai a um ponto por uma deformação contínua que permanece em $U$. Se $\vet{F}=(P,Q)$ é de classe $C^1$ em $U$ e $\partial_x Q-\partial_y P=0$ em $U$, então $\vet{F}$ é conservativo em $U$.
+
+Seja $B\subset\R^3$ uma bola aberta. Se $\vet{F}$ é de classe $C^1$ em $B$ e $\nabla\times\vet{F}=\vet{0}$ em $B$, então $\vet{F}$ é conservativo em $B$.
+\end{teorema}
+
+Uma bola, um retângulo aberto, o plano inteiro e o plano menos um raio entram na hipótese: todo laço se contrai a um ponto dentro do domínio. O plano menos a origem não entra. A prova geral, reduzindo um laço arbitrário a laços pequenos por essa contração, não cabe nesta folha. O que cabe é o retângulo, e a conta é direta: constrói-se o potencial por um caminho em ``L'' e usa-se $\partial_x Q=\partial_y P$ para identificar as parciais. Não se invoca o teorema de Green.
+
+\begin{teorema}
+\label{thm:retangulo}
+Seja $R=(\alpha,\beta)\times(\gamma,\delta)$ um retângulo aberto e seja $\vet{F}=(P,Q)$ de classe $C^1$ em $R$, com $\partial_x Q=\partial_y P$ em $R$. Então $\vet{F}$ é conservativo em $R$.
+\end{teorema}
+
+\begin{proof}
+Fixe $(x_0,y_0)\in R$. Para $(x,y)\in R$, os dois segmentos de $(x_0,y_0)$ até $(x,y_0)$ e de $(x,y_0)$ até $(x,y)$ ficam em $R$, porque $R$ é um produto. Defina
+\[
+\phi(x,y)
+=\int_{x_0}^{x} P(t,y_0)\,\dif t
++\int_{y_0}^{y} Q(x,s)\,\dif s.
+\]
+A primeira integral não depende de $y$. Pelo teorema fundamental do cálculo, $\partial_y\phi(x,y)=Q(x,y)$.
+
+Para a outra parcial, o primeiro termo contribui $P(x,y_0)$. No segundo, os limites não dependem de $x$. Afirmamos que
+\[
+\partial_x\int_{y_0}^{y} Q(x,s)\,\dif s
+=\int_{y_0}^{y}\partial_x Q(x,s)\,\dif s.
+\]
+De fato, seja $\psi(x)=\int_{y_0}^{y} Q(x,s)\,\dif s$ e seja $I$ o intervalo de extremos $y_0$ e $y$. Pelo teorema do valor médio, para cada $s\in I$ existe $\xi$ entre $x$ e $x+h$ com
+\[
+\frac{Q(x+h,s)-Q(x,s)}{h}=\partial_x Q(\xi,s).
+\]
+Como $\partial_x Q$ é contínua num compacto em volta do segmento $\{x\}\times I$, ela é uniformemente contínua nesse compacto. Dado $\eps>0$, para $|h|$ pequeno vale $|\partial_x Q(\xi,s)-\partial_x Q(x,s)|<\eps$ para todo $s\in I$, qualquer que seja o $\xi$ intermediário. Então
+\[
+\Biggl|\frac{\psi(x+h)-\psi(x)}{h}-\int_{y_0}^{y}\partial_x Q(x,s)\,\dif s\Biggr|
+\le\eps\,|y-y_0|.
+\]
+Isso prova a derivação sob o sinal de integral. Portanto
+\begin{align*}
+\partial_x\phi(x,y)
+&=P(x,y_0)+\int_{y_0}^{y}\partial_x Q(x,s)\,\dif s
+=P(x,y_0)+\int_{y_0}^{y}\partial_y P(x,s)\,\dif s\\
+&=P(x,y_0)+\bigl(P(x,y)-P(x,y_0)\bigr)
+=P(x,y),
+\end{align*}
+onde a penúltima igualdade é o teorema fundamental do cálculo na variável $s$, aplicado a $s\mapsto P(x,s)$, cuja derivada $\partial_y P(x,s)$ é contínua. As parciais de $\phi$ são $P$ e $Q$, contínuas, logo $\phi$ é $C^1$ e $\nabla\phi=\vet{F}$.
+\end{proof}
+
+A mesma construção, com uma aresta horizontal e uma vertical, é o que o plano furado não permite de modo global: o ``L'' de um ponto a outro pode ser obrigado a pular a origem, e a igualdade $\partial_x Q=\partial_y P$ fora da origem não cola esses pedaços num potencial único.
+
+\section{Exercícios}
+
+\begin{exercicio}[{[Básico --- campos e unidades]}]
+Classifique cada campo e dê a unidade.
+\begin{enumerate}
+\item $T(x,y,z)$, temperatura em kelvin.
+\item $\vet{v}(x,y,z)$, velocidade de um fluido em metro por segundo.
+\item $-\nabla T$, se $T$ é de classe $C^1$ e está em kelvin, com as coordenadas em metros.
+\end{enumerate}
+Diga, em cada caso, qual das duas integrais de linha faz sentido físico imediato: $\int f\,\dif s$ ou $\int\vet{F}\cdot\dif\vet{r}$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- massa de um fio]}]
+Um fio percorre $\vet{r}(t)=(t,t^2)$, $t\in[0,1]$, com densidade linear $\delta(x,y)=2x$. Calcule a massa $\int_C\delta\,\dif s$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- trabalho e orientação]}]
+Seja $\vet{F}=(y,x)$. Calcule $\int_C\vet{F}\cdot\dif\vet{r}$ no segmento de $(0,0)$ a $(1,1)$, parametrizado por $\vet{r}(t)=(t,t)$, $t\in[0,1]$. Calcule a integral no sentido oposto. Exiba um potencial e confira os dois valores por $\phi(B)-\phi(A)$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- integral escalar e o sentido do percurso]}]
+Seja $C$ a circunferência unitária. Calcule $\int_C 1\,\dif s$ no sentido anti-horário e no sentido horário. Calcule também $\int_C x\,\dif s$ nos dois sentidos. Escreva a parametrização do sentido horário e mostre, nessa conta, o passo em que a norma absorve o sinal.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- potencial e trabalho]}]
+Seja $\vet{F}=(2xy+1,\, x^2+\cos y)$ em $\R^2$.
+\begin{enumerate}
+\item Verifique $\partial_x Q=\partial_y P$.
+\item Determine um potencial.
+\item Calcule o trabalho de $(0,0)$ até $(1,\pi/2)$.
+\end{enumerate}
+Qual hipótese do teste prático está sendo usada ao concluir que o potencial serve em todo o plano?
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- o campo de rotação]}]
+Seja $\vet{F}=(-y,x)$ em $\R^2$.
+\begin{enumerate}
+\item Calcule $\partial_x Q-\partial_y P$.
+\item Calcule a circulação na circunferência unitária anti-horária.
+\item Conclua, de duas maneiras, que $\vet{F}$ não é conservativo em $\R^2$.
+\item A forma angular $\bigl(-y/(x^2+y^2),\, x/(x^2+y^2)\bigr)$ também não é conservativa no plano furado. O obstáculo é o mesmo deste item, ou é outro?
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- potencial pela receita do retângulo]}]
+Seja $\vet{F}=(e^x\sin y,\, e^x\cos y)$. Use a construção do Teorema~\ref{thm:retangulo} a partir de $(0,0)$:
+\[
+\phi(x,y)=\int_0^x P(t,0)\,\dif t+\int_0^y Q(x,s)\,\dif s.
+\]
+Calcule $\phi$ e verifique $\nabla\phi=\vet{F}$.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- independência de caminho]}]
+Seja $U\subset\R^n$ aberto e conexo e seja $\vet{F}\colon U\to\R^n$ contínuo. Suponha que $\int_C\vet{F}\cdot\dif\vet{r}=0$ para toda curva fechada $C^1$ por pedaços em $U$.
+\begin{enumerate}
+\item Prove que a integral entre dois pontos não depende do caminho.
+\item Fixe $A$ e defina $\phi(X)$ pela integral de $A$ até $X$. Prove que $\partial_x\phi=P_1$, escrevendo o acréscimo ao longo de um segmento horizontal pequeno e estimando a média pela continuidade de $P_1$.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- o argumento no plano cortado]}]
+Seja $U=\R^2\setminus\{(x,0):x\le 0\}$ e seja $\theta\in(-\pi,\pi)$ o argumento.
+\begin{enumerate}
+\item No semiplano $x>0$, com $\theta=\arctan(y/x)$, calcule $\partial_x\theta$ e $\partial_y\theta$.
+\item No semiplano $y>0$, com $\theta=\pi/2-\arctan(x/y)$, calcule as mesmas parciais.
+\item Conclua que a forma angular é conservativa em $U$ e não é conservativa em $\R^2\setminus\{\vet{0}\}$. Aponte, no segundo domínio, o laço que não se contrai a um ponto.
+\end{enumerate}
+\end{exercicio}
+
+\end{document}

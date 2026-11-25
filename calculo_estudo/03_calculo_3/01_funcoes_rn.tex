@@ -1,0 +1,412 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Cálculo III: funções de várias variáveis}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Funções, domínio, imagem, gráfico e níveis}
+
+\base{Em uma variável, o domínio de $f$ é o maior subconjunto de $\R$ em que a fórmula faz sentido, e a imagem é o conjunto dos valores efetivamente atingidos. A mesma distinção vale em $\R^n$. A norma euclidiana de $\vet{v}=(v_1,\ldots,v_n)$ é $\norm{\vet{v}}=\sqrt{v_1^2+\cdots+v_n^2}$.}
+
+Uma função escalar de várias variáveis é uma regra $f\colon D\subset\R^n\to\R$. Um campo vetorial é uma regra $\vet{F}\colon D\subset\R^n\to\R^m$, com $m\ge 2$. Escrever $\vet{F}=(F_1,\ldots,F_m)$ é o mesmo que dar $m$ funções escalares, as componentes, todas com o mesmo domínio.
+
+O \emph{domínio} é o conjunto dos pontos em que a expressão está definida nos reais: não se extrai raiz quadrada de número negativo, não se divide por zero, e o logaritmo só recebe argumento positivo. A \emph{imagem} é $\{f(\vet{x}):\vet{x}\in D\}$. Domínio grande não decide a imagem: a função pode deixar de fora muitos reais.
+
+\begin{exemplo}
+Seja $f(x,y)=\sqrt{4-x^2-y^2}$. A raiz está definida exatamente quando $4-x^2-y^2\ge 0$, isto é, no disco fechado $x^2+y^2\le 4$. O radicando percorre $[0,4]$: vale $4$ na origem e $0$ na circunferência $x^2+y^2=4$. Logo a imagem de $f$ é $[0,2]$.
+
+O campo $\vet{F}(x,y)=(-y,x)$ tem domínio $\R^2$. A imagem também é $\R^2$: dado $(a,b)$, o ponto $(x,y)=(b,-a)$ satisfaz $\vet{F}(b,-a)=(a,b)$.
+\end{exemplo}
+
+O \emph{gráfico} de $f\colon D\subset\R^2\to\R$ é o conjunto
+\[
+\{(x,y,z)\in\R^3:(x,y)\in D,\ z=f(x,y)\}.
+\]
+É uma superfície em $\R^3$, no sentido geométrico do conjunto de pontos. Não é o mesmo objeto que uma curva de nível.
+
+\begin{definicao}
+Seja $f\colon D\subset\R^2\to\R$ e $c\in\R$. A \emph{curva de nível} $c$ é o conjunto $\{(x,y)\in D:f(x,y)=c\}$. Se $f\colon D\subset\R^3\to\R$, o conjunto $f(x,y,z)=c$ é uma \emph{superfície de nível}.
+\end{definicao}
+
+\begin{exemplo}
+Para $f(x,y)=x^2+y^2$, a curva de nível $c$ é vazia se $c<0$, é só a origem se $c=0$, e é a circunferência de raio $\sqrt{c}$ se $c>0$.
+
+Para $g(x,y)=x^2-y^2$, a curva de nível $c>0$ é a hipérbole que abre ao longo do eixo $x$; se $c<0$, a hipérbole abre ao longo do eixo $y$; se $c=0$, são as retas $y=\pm x$.
+\end{exemplo}
+
+\figura{../figuras/curvas_nivel.png}{Curvas de nível de $x^2+y^2$ e de $x^2-y^2$.}
+
+\begin{intuicao}
+O gráfico guarda o valor de $f$ na altura $z$. A curva de nível esquece a altura e marca, no domínio, onde esse valor é constante. Um mapa topográfico é um desenho de curvas de nível da altitude. O gráfico seria a montanha inteira.
+\end{intuicao}
+
+\section{Aberto, fechado, limitado, compacto}
+
+\begin{definicao}
+A \emph{bola aberta} de centro $\vet{a}\in\R^n$ e raio $r>0$ é
+\[
+B_r(\vet{a})=\{\vet{x}\in\R^n:\norm{\vet{x}-\vet{a}}<r\}.
+\]
+A bola fechada troca $<$ por $\le$.
+\end{definicao}
+
+\begin{definicao}
+Seja $A\subset\R^n$ e $\vet{p}\in\R^n$.
+\begin{enumerate}[leftmargin=1.4em]
+\item $\vet{p}$ é \emph{ponto interior} de $A$ quando existe $r>0$ com $B_r(\vet{p})\subset A$. O \emph{interior} de $A$ é o conjunto desses pontos.
+\item $\vet{p}$ é \emph{ponto de fronteira} de $A$ quando toda bola $B_r(\vet{p})$ contém pelo menos um ponto de $A$ e pelo menos um ponto de $\R^n\setminus A$. A \emph{fronteira} é o conjunto desses pontos.
+\item $A$ é \emph{aberto} quando todo ponto de $A$ é interior.
+\item $A$ é \emph{limitado} quando existe $M>0$ tal que $\norm{\vet{x}}\le M$ para todo $\vet{x}\in A$.
+\item $A$ é \emph{compacto} quando é fechado e limitado. O significado de fechado está no teorema seguinte.
+\end{enumerate}
+\end{definicao}
+
+Todo ponto de $\R^n$ cai em exatamente uma de três classes em relação a $A$: é interior a $A$, é interior ao complementar, ou é ponto de fronteira. De fato, ou existe uma bola inteira dentro de $A$, ou existe uma bola inteira dentro do complementar, ou toda bola encontra os dois conjuntos.
+
+\begin{teorema}
+Para $A\subset\R^n$, as afirmações seguintes são equivalentes.
+\begin{enumerate}[leftmargin=1.4em]
+\item O complementar $\R^n\setminus A$ é aberto.
+\item $A$ contém todos os seus pontos de fronteira.
+\end{enumerate}
+Um conjunto que satisfaz qualquer uma das duas chama-se \emph{fechado}.
+\end{teorema}
+
+\begin{proof}
+Suponha o complementar aberto e seja $\vet{p}$ um ponto de fronteira. Se $\vet{p}$ estivesse fora de $A$, seria um ponto do complementar, e haveria uma bola em torno de $\vet{p}$ inteiramente fora de $A$. Essa bola não encontra $A$, e $\vet{p}$ não seria de fronteira. Logo $\vet{p}\in A$.
+
+Reciprocamente, suponha que $A$ contém a fronteira. Tome $\vet{p}\notin A$. Esse ponto não é interior a $A$ e não é de fronteira. Pela tricotomia, é interior ao complementar: alguma bola em torno de $\vet{p}$ fica fora de $A$. O complementar é aberto.
+\end{proof}
+
+A bola aberta é aberta: se $\norm{\vet{x}-\vet{a}}<r$ e $\rho=r-\norm{\vet{x}-\vet{a}}>0$, a bola $B_\rho(\vet{x})$ fica dentro de $B_r(\vet{a})$, porque a desigualdade triangular dá, para $\norm{\vet{y}-\vet{x}}<\rho$,
+\[
+\norm{\vet{y}-\vet{a}}\le\norm{\vet{y}-\vet{x}}+\norm{\vet{x}-\vet{a}}<\rho+\norm{\vet{x}-\vet{a}}=r.
+\]
+A bola fechada é fechada e limitada, logo compacta. Uma reta em $\R^2$ é fechada e não é limitada.
+
+\begin{teorema}[Heine--Borel]
+Seja $K\subset\R^n$. As afirmações seguintes são equivalentes.
+\begin{enumerate}[leftmargin=1.4em]
+\item $K$ é fechado e limitado.
+\item Toda cobertura de $K$ por conjuntos abertos de $\R^n$ admite uma subcobertura finita: se $K\subset\bigcup_{i\in I} U_i$ com cada $U_i$ aberto, então existem $i_1,\ldots,i_N$ tais que $K\subset U_{i_1}\cup\cdots\cup U_{i_N}$.
+\end{enumerate}
+\end{teorema}
+
+Não provamos essa equivalência. Daqui em diante, compacto quer dizer fechado e limitado, que é a forma operacional do teorema em $\R^n$. A segunda formulação é o que se usa quando se fala de cobertura; ela não será necessária nas contas deste texto. O ganho concreto do teorema, para nós, é o teorema de Weierstrass na nota de otimização: função contínua em compacto atinge máximo e mínimo.
+
+\section{Limite}
+
+\begin{definicao}
+Seja $f$ definida numa bola $B_r(a,b)$, exceto possivelmente no próprio ponto $(a,b)$. Escrevemos
+\[
+\lim_{(x,y)\to(a,b)} f(x,y)=L
+\]
+quando, para todo $\eps>0$, existe $\delta>0$ tal que
+\[
+0<\norm{(x,y)-(a,b)}<\delta\quad\Rightarrow\quad\abs{f(x,y)-L}<\eps.
+\]
+A norma é a euclidiana. O valor $f(a,b)$, mesmo que esteja definido, não entra na definição: a desigualdade pede distância estritamente positiva até $(a,b)$.
+\end{definicao}
+
+\begin{intuicao}
+O ponto $(x,y)$ pode chegar a $(a,b)$ por qualquer caminho dentro do disco. O número $L$ só é o limite se $f$ se aproximar de $L$ em todos esses modos de chegada ao mesmo tempo. Por isso uma conta ao longo de uma reta só é um teste, não uma demonstração.
+\end{intuicao}
+
+\subsection{Normas equivalentes e a norma do máximo}
+
+Em $\R^n$, duas normas $\norm{\cdot}_{\alpha}$ e $\norm{\cdot}_{\beta}$ são \emph{equivalentes} quando existem constantes $c,C>0$ tais que
+\[
+c\,\norm{\vet{v}}_{\alpha}\le\norm{\vet{v}}_{\beta}\le C\,\norm{\vet{v}}_{\alpha}
+\]
+para todo $\vet{v}$. É um teorema de álgebra linear que todas as normas em $\R^n$ são equivalentes. Não provamos o caso geral. A consequência que nos importa é imediata a partir das constantes: as bolas de uma norma contêm bolas da outra, com o raio ajustado por $c$ e $C$. Portanto a existência do limite, e o valor do limite, não dependem de qual norma equivalente se usa na definição. Em particular, tanto faz usar a norma euclidiana ou a norma do máximo
+\[
+\norm{(x,y)}_{\infty}=\max\{\abs{x},\abs{y}\}.
+\]
+O que provamos agora é a comparação explícita no caso $n=2$, que já basta para trocar uma pela outra nas contas de $\eps$ e $\delta$.
+
+\begin{teorema}
+Para todo $\vet{v}=(x,y)\in\R^2$,
+\[
+\norm{\vet{v}}_{\infty}\le\norm{\vet{v}}_{2}\le\sqrt{2}\,\norm{\vet{v}}_{\infty}.
+\]
+\end{teorema}
+
+\begin{proof}
+Seja $M=\norm{\vet{v}}_{\infty}=\max\{\abs{x},\abs{y}\}$. Então $x^2\le M^2$ e $y^2\le M^2$, logo
+\[
+\norm{\vet{v}}_{2}^{2}=x^2+y^2\le 2M^2,
+\]
+e, como os dois lados são não negativos, $\norm{\vet{v}}_{2}\le\sqrt{2}\,M$.
+
+Por outro lado, $M^2$ é $x^2$ ou $y^2$, conforme o maior módulo. Nos dois casos $M^2\le x^2+y^2$, logo $M\le\norm{\vet{v}}_{2}$.
+\end{proof}
+
+Com essa conta, os limites coincidem. Suponha $\lim f=L$ no sentido euclidiano, e seja $\eps>0$. Existe $\delta>0$ tal que $0<\norm{\vet{p}-\vet{p}_0}_2<\delta$ implica $\abs{f-L}<\eps$. Se $0<\norm{\vet{p}-\vet{p}_0}_{\infty}<\delta/\sqrt{2}$, a desigualdade da direita dá
+\[
+\norm{\vet{p}-\vet{p}_0}_{2}\le\sqrt{2}\,\norm{\vet{p}-\vet{p}_0}_{\infty}<\delta,
+\]
+e portanto $\abs{f-L}<\eps$. O limite na norma do máximo também é $L$.
+
+No outro sentido, $\norm{\cdot}_{\infty}\le\norm{\cdot}_{2}$, então uma bola euclidiana de raio $\delta$ já está dentro da bola do máximo de raio $\delta$. O mesmo $\delta$ serve, sem encolhê-lo.
+
+\subsection{Unicidade}
+
+\begin{teorema}[Unicidade do limite]
+Se $\lim_{(x,y)\to(a,b)} f(x,y)=L$ e $\lim_{(x,y)\to(a,b)} f(x,y)=M$, então $L=M$.
+\end{teorema}
+
+\begin{proof}
+Suponha $L\neq M$ e ponha $\eps=\abs{L-M}/2>0$. Existem $\delta_1,\delta_2>0$ tais que
+\[
+0<\norm{(x,y)-(a,b)}<\delta_1\Rightarrow\abs{f(x,y)-L}<\eps,
+\]
+\[
+0<\norm{(x,y)-(a,b)}<\delta_2\Rightarrow\abs{f(x,y)-M}<\eps.
+\]
+Seja $\delta=\min\{\delta_1,\delta_2,r\}$, onde $r>0$ é um raio em que $f$ está definida fora de $(a,b)$. A bola furada de raio $\delta$ não é vazia: o ponto $(a+\delta/2,\,b)$ está nela e no domínio. Para esse ponto,
+\[
+\abs{L-M}\le\abs{L-f(x,y)}+\abs{f(x,y)-M}<\eps+\eps=\abs{L-M},
+\]
+o que é impossível. Logo $L=M$.
+\end{proof}
+
+\subsection{Limite ao longo de curvas}
+
+\begin{teorema}
+Suponha $\lim_{\vet{p}\to\vet{p}_0} f(\vet{p})=L$, com $\vet{p}_0=(a,b)$. Seja $\gamma$ definida numa vizinhança de $t_0\in\R$, com valores em $\R^2$, tal que $\gamma(t)\to\vet{p}_0$ quando $t\to t_0$ e $\gamma(t)\neq\vet{p}_0$ para todo $t\neq t_0$ suficientemente próximo de $t_0$. Então
+\[
+\lim_{t\to t_0} f(\gamma(t))=L.
+\]
+Em particular, isso vale para toda curva contínua com $\gamma(t_0)=\vet{p}_0$ que não retorna a $\vet{p}_0$ noutros instantes próximos de $t_0$.
+\end{teorema}
+
+\begin{proof}
+Seja $\eps>0$. Pela definição do limite em $\R^2$, existe $\delta>0$ tal que $0<\norm{\vet{p}-\vet{p}_0}<\delta$ implica $\abs{f(\vet{p})-L}<\eps$. Como $\gamma(t)\to\vet{p}_0$, existe $\eta>0$ tal que $0<\abs{t-t_0}<\eta$ implica $\norm{\gamma(t)-\vet{p}_0}<\delta$. A hipótese sobre $\gamma$ permite escolher $\eta$ de modo que, além disso, $\gamma(t)\neq\vet{p}_0$. Para esses $t$,
+\[
+0<\norm{\gamma(t)-\vet{p}_0}<\delta,
+\]
+logo $\abs{f(\gamma(t))-L}<\eps$.
+\end{proof}
+
+A contrapositiva é a ferramenta do dia a dia. Se existirem dois caminhos, ambos chegando a $(a,b)$ sem permanecer em $(a,b)$, ao longo dos quais os limites de $f$ existem e são diferentes, então $\lim_{(x,y)\to(a,b)} f(x,y)$ não existe. Se ao longo de um único caminho o limite não existe, o limite em $\R^2$ também não existe.
+
+\cuidado{Limites iguais ao longo de todas as retas que passam por $(a,b)$ não provam que o limite existe. A reta é uma família muito estreita de caminhos. O teorema acima exige o controle de toda curva que chega ao ponto, e a definição exige o disco inteiro. As duas contas seguintes separam as duas falhas: na primeira, as próprias retas já discordam; na segunda, todas as retas concordam e mesmo assim o limite não existe.}
+
+\begin{contraexemplo}
+Seja
+\[
+f(x,y)=\frac{xy}{x^2+y^2},\qquad (x,y)\neq(0,0).
+\]
+O valor $f(0,0)$ é irrelevante para o limite. Ao longo da reta $y=mx$, com $m$ fixo e $x\neq 0$,
+\begin{align*}
+f(x,mx)
+&=\frac{x\cdot(mx)}{x^2+(mx)^2}
+=\frac{m x^2}{x^2(1+m^2)}
+=\frac{m}{1+m^2}.
+\end{align*}
+O quociente não depende de $x$. Portanto
+\[
+\lim_{x\to 0} f(x,mx)=\frac{m}{1+m^2}.
+\]
+Esse número depende de $m$. Para $m=0$, a reta é o eixo $x$ e o limite é $0$. Para $m=1$, a reta é $y=x$ e o limite é $1/2$. Como dois caminhos dão limites diferentes, $\lim_{(x,y)\to(0,0)} f(x,y)$ não existe.
+
+A função $m\mapsto m/(1+m^2)$ percorre $[-1/2,1/2]$: a derivada $(1-m^2)/(1+m^2)^2$ se anula em $m=\pm 1$, e os valores são $\pm 1/2$. Toda reta produz um limite nesse intervalo, e retas diferentes podem produzir limites diferentes.
+\end{contraexemplo}
+
+\begin{contraexemplo}
+Seja
+\[
+f(x,y)=\frac{x y^2}{x^2+y^4},\qquad (x,y)\neq(0,0).
+\]
+De novo, $f(0,0)$ não entra no limite. Ao longo de $y=mx$,
+\begin{align*}
+f(x,mx)
+&=\frac{x\cdot m^2 x^2}{x^2+m^4 x^4}
+=\frac{m^2 x^3}{x^2(1+m^4 x^2)}
+=\frac{m^2 x}{1+m^4 x^2}.
+\end{align*}
+Quando $x\to 0$, o numerador tende a $0$ e o denominador tende a $1$, logo o limite ao longo da reta é $0$. Ao longo do eixo $y$, que é a reta vertical $x=0$, o numerador é identicamente zero, então $f(0,y)=0$ e o limite também é $0$. Toda reta que passa pela origem dá limite $0$.
+
+Ao longo da parábola $x=y^2$, com $y\neq 0$,
+\[
+f(y^2,y)=\frac{y^2\cdot y^2}{(y^2)^2+y^4}=\frac{y^4}{y^4+y^4}=\frac{1}{2}.
+\]
+O limite ao longo desse caminho é $1/2$, não é $0$. Portanto o limite em $\R^2$ não existe.
+
+A mesma conta com a família $x=c y^2$, $c$ fixo e $y\neq 0$, dá
+\[
+f(c y^2,y)=\frac{c y^4}{c^2 y^4+y^4}=\frac{c}{c^2+1},
+\]
+que depende de $c$. A parábola $x=y^2$ é o caso $c=1$. Uma família de parábolas já produz limites diferentes; uma só, diferente do valor das retas, basta para concluir que o limite não existe.
+\end{contraexemplo}
+
+\section{Como provar que o limite existe}
+
+Para provar que o limite é $L$, é preciso uma estimativa que valha no disco inteiro, não só numa curva. O caminho padrão é achar uma função $\varphi(r)$, com $\varphi(r)\to 0$ quando $r\to 0$, tal que
+\[
+\abs{f(x,y)-L}\le \varphi\bigl(\norm{(x,y)-(a,b)}\bigr)
+\]
+perto do ponto, fora dele. Dado $\eps>0$, escolhe-se $\delta$ a partir de $\varphi$ apenas.
+
+\begin{exemplo}
+\[
+\lim_{(x,y)\to(0,0)}\frac{x^2 y}{x^2+y^2}=0.
+\]
+Para $(x,y)\neq(0,0)$,
+\[
+\abs{\frac{x^2 y}{x^2+y^2}}
+=\abs{y}\cdot\frac{x^2}{x^2+y^2}.
+\]
+Como $x^2\le x^2+y^2$, a fração é no máximo $1$, e
+\[
+\abs{\frac{x^2 y}{x^2+y^2}}\le\abs{y}.
+\]
+Além disso $\abs{y}\le\sqrt{x^2+y^2}$. Dado $\eps>0$, tome $\delta=\eps$. Se $0<\sqrt{x^2+y^2}<\delta$, então
+\[
+\abs{\frac{x^2 y}{x^2+y^2}}\le\abs{y}\le\sqrt{x^2+y^2}<\eps.
+\]
+A cota $\abs{y}$ já é uma função da distância, porque $\abs{y}$ é ainda menor que a distância. Não há folga escondida: quando $y=0$ e $x\neq 0$ a fração $x^2/(x^2+y^2)$ vale $1$, então $\le\abs{y}$ é afiada ao longo do eixo $x$, onde os dois lados são zero.
+\end{exemplo}
+
+\subsection{Polares}
+
+A mudança
+\[
+x=r\cos\theta,\qquad y=r\sin\theta,\qquad r=\sqrt{x^2+y^2}\ge 0,
+\]
+transforma a distância à origem na variável $r$. O limite $(x,y)\to(0,0)$ vira $r\to 0$. Ele existe e vale $L$ quando a expressão em $r$ e $\theta$ tende a $L$ com $\delta$ independente de $\theta$: para todo $\eps>0$ existe $\delta>0$ tal que $0<r<\delta$ implica $\abs{f(r\cos\theta,r\sin\theta)-L}<\eps$, qualquer que seja $\theta$.
+
+Se, depois da substituição, aparece um fator $r$ multiplicando uma função limitada em $\theta$, o limite é zero. Se o resultado ainda depende de $\theta$ no limite $r\to 0$, o limite não existe. Polares não são uma definição nova; são uma conta dentro da definição euclidiana.
+
+\begin{exemplo}
+No exemplo anterior, com $r>0$,
+\[
+\frac{x^2 y}{x^2+y^2}
+=\frac{r^2\cos^2\theta\cdot r\sin\theta}{r^2}
+=r\cos^2\theta\sin\theta.
+\]
+Logo o módulo é no máximo $r$, porque $\abs{\cos^2\theta\sin\theta}\le 1$. O majorante $r$ não depende de $\theta$ e tende a $0$. O mesmo $\delta=\eps$ funciona para todo ângulo.
+\end{exemplo}
+
+\begin{exemplo}
+Para $f(x,y)=xy/(x^2+y^2)$, a mesma substituição dá
+\[
+f(r\cos\theta,r\sin\theta)=\cos\theta\sin\theta=\frac{1}{2}\sin(2\theta),
+\]
+que não depende de $r$ e depende de $\theta$. Quando $r\to 0$ a expressão fica parada em valores diferentes para ângulos diferentes. Isso recupera, de uma vez, a família de retas: a reta de inclinação $m$ corresponde a um ângulo com $\tan\theta=m$, e $\frac{1}{2}\sin(2\theta)$ reproduz $m/(1+m^2)$.
+\end{exemplo}
+
+\section{Continuidade}
+
+\begin{definicao}
+Seja $f$ definida num conjunto $D\subset\R^2$ e $(a,b)\in D$. Dizemos que $f$ é \emph{contínua} em $(a,b)$ quando
+\[
+\lim_{(x,y)\to(a,b)} f(x,y)=f(a,b).
+\]
+A função é contínua em $D$ quando é contínua em cada ponto de $D$. Nos pontos interiores a definição é a de cima. Num ponto de fronteira de $D$, o limite é entendido com $(x,y)\in D$: a desigualdade $\abs{f-L}<\eps$ só é exigida para pontos do domínio.
+\end{definicao}
+
+O limite, quando existe, ignora o valor no ponto. A continuidade pede que esse valor coincida com o limite. No primeiro contraexemplo, qualquer escolha de $f(0,0)$ deixa a função descontínua na origem, porque o limite não existe.
+
+\begin{teorema}[Álgebra de limites]
+Se $\lim f=L$ e $\lim g=M$ no mesmo ponto $(a,b)$, então
+\[
+\lim(f+g)=L+M,\qquad \lim(fg)=LM.
+\]
+Se $M\neq 0$, então $\lim(f/g)=L/M$.
+\end{teorema}
+
+\begin{proof}
+Provamos a soma; o produto fica como exercício, e o quociente sai do produto com o inverso. Seja $\eps>0$. Existem $\delta_1$ e $\delta_2$ tais que $0<\norm{(x,y)-(a,b)}<\delta_1$ implica $\abs{f-L}<\eps/2$, e o análogo para $g$ e $M$ com $\delta_2$. Para $\delta=\min\{\delta_1,\delta_2\}$,
+\[
+\abs{(f+g)-(L+M)}\le\abs{f-L}+\abs{g-M}<\eps.
+\]
+\end{proof}
+
+\begin{corolario}
+Toda função polinomial $p\colon\R^n\to\R$ é contínua em $\R^n$. Toda função racional, quociente de polinômios, é contínua em cada ponto em que o denominador não se anula.
+\end{corolario}
+
+\begin{proof}
+As projeções $(x,y)\mapsto x$ e $(x,y)\mapsto y$ são contínuas: $\abs{x-a}\le\norm{(x,y)-(a,b)}$, então $\delta=\eps$ serve para a primeira, e o mesmo para a segunda. Constantes são contínuas. Soma e produto de funções contínuas são contínuas, pela álgebra de limites aplicada a $f-L$ no ponto. Um polinômio é obtido de projeções e constantes por um número finito de somas e produtos, logo é contínuo.
+
+Se $p$ e $q$ são polinômios e $q(a,b)\neq 0$, então $p/q$ é quociente de contínuas com denominador não nulo no ponto, e a álgebra de limites dá a continuidade em $(a,b)$. O mesmo argumento, coordenada a coordenada, vale em $\R^n$.
+\end{proof}
+
+Fora dos zeros do denominador, não há o que discutir: a expressão racional é composição algébrica de funções contínuas. O trabalho de verdade começa onde o denominador se anula e alguém redefine a função naquele ponto, ou onde aparece uma raiz, um logaritmo, ou uma fórmula por casos.
+
+\section{Exercícios}
+
+\begin{exercicio}[{[Básico --- domínio e imagem]}]
+\begin{enumerate}[label=\alph*)]
+\item Determine o domínio e a imagem de $f(x,y)=\sqrt{9-x^2-y^2}$.
+\item Determine o domínio e a imagem do campo $\vet{F}(x,y)=(x+y,\,x-y)$.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- curvas de nível]}]
+Descreva a curva de nível $c$ de $f(x,y)=x^2+y^2$ e a de $g(x,y)=x^2-y^2$, nos casos $c>0$, $c=0$ e $c<0$. Diga quais são vazias.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- aberto, fechado, compacto]}]
+Para cada conjunto, decida se é aberto, se é fechado, se é limitado e se é compacto. Justifique com a definição, não só com o nome.
+\begin{enumerate}[label=\alph*)]
+\item $A=\{(x,y):x^2+y^2<1\}$.
+\item $B=\{(x,y):x^2+y^2\le 1\}$.
+\item $C=\{(x,y):xy\ge 1\}$.
+\item $D=\{(x,y):0<x\le 1\}$.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- $\eps$ e $\delta$]}]
+Prove, pela definição, que
+\[
+\lim_{(x,y)\to(1,2)}(3x-y)=1.
+\]
+Exiba um $\delta$ em função de $\eps$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- cota pela distância]}]
+Prove que
+\[
+\lim_{(x,y)\to(0,0)}\frac{x^3+y^3}{x^2+y^2}=0.
+\]
+A cota tem de valer no disco furado inteiro. Um caminho só não serve.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- dois caminhos]}]
+Mostre que
+\[
+\lim_{(x,y)\to(0,0)}\frac{x^2-y^2}{x^2+y^2}
+\]
+não existe, calculando o limite ao longo dos dois eixos.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- polares]}]
+Use $x=r\cos\theta$, $y=r\sin\theta$ para provar que
+\[
+\lim_{(x,y)\to(0,0)}\frac{\sin(x^2+y^2)}{x^2+y^2}=1.
+\]
+O $\delta$ tem de ser independente de $\theta$.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- retas não bastam]}]
+Seja
+\[
+f(x,y)=\frac{x^2 y}{x^4+y^2},\qquad (x,y)\neq(0,0).
+\]
+\begin{enumerate}[label=\alph*)]
+\item Calcule o limite de $f$ ao longo de cada reta $y=mx$ e ao longo de $x=0$.
+\item Calcule o limite ao longo da parábola $y=x^2$.
+\item Conclua, citando o teorema que você usa, que $\lim_{(x,y)\to(0,0)} f(x,y)$ não existe.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- produto de limites]}]
+Prove que, se $\lim f=L$ e $\lim g=M$ no mesmo ponto de $\R^2$, então $\lim(fg)=LM$. Escreva os quantificadores. O passo em que $f$ fica limitada perto do ponto precisa aparecer na conta, com a constante explícita.
+\end{exercicio}
+
+\end{document}

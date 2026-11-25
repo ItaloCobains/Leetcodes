@@ -1,0 +1,462 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Curvas paramétricas e coordenadas polares}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{Usamos o Teorema do Valor Médio de Lagrange: se \(\varphi\) é contínua em \([\alpha,\beta]\) e derivável em \((\alpha,\beta)\), existe \(c\in(\alpha,\beta)\) com \(\varphi(\beta)-\varphi(\alpha)=\varphi'(c)(\beta-\alpha)\). Usamos também que uma função contínua num intervalo fechado e limitado é integrável e que suas somas de Riemann convergem para a integral. Admitimos o teorema de Heine--Cantor: função contínua num compacto \([a,b]\) é uniformemente contínua. A área do disco de raio \(R\) entra como fato geométrico \(\pi R^{2}\).}
+
+\section{Curvas paramétricas e reta tangente}
+
+\begin{definicao}
+Uma curva paramétrica plana de classe \(C^1\) é um par de funções \(x,y:[a,b]\to\R\), ambas de classe \(C^1\). O ponto do parâmetro \(t\) é \(\bigl(x(t),y(t)\bigr)\).
+\end{definicao}
+
+\begin{teorema}[Inclinação da reta tangente]
+Se \(x'(t_{0})\neq 0\), a curva admite, numa vizinhança de \(t_{0}\), uma representação \(y\) como função de \(x\) de classe \(C^1\), e
+\[
+\frac{\dif y}{\dif x}\Big|_{t_{0}}
+=\frac{y'(t_{0})}{x'(t_{0})}.
+\]
+Se \(x'(t_{0})=0\) e \(y'(t_{0})\neq 0\), a reta tangente é vertical.
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Como \(x'\) é contínua e \(x'(t_{0})\neq 0\), \(x'\) não muda de sinal numa vizinhança de \(t_{0}\), logo \(x\) é estritamente monótona aí e possui inversa local \(t=t(x)\) de classe \(C^1\), com \(t'(x)=1/x'(t)\). A regra da cadeia em \(y\bigl(t(x)\bigr)\) dá
+\[
+\frac{\dif y}{\dif x}
+=y'(t)\cdot t'(x)
+=\frac{y'(t)}{x'(t)}.
+\]
+Se \(x'(t_{0})=0\) e \(y'(t_{0})\neq 0\), o mesmo argumento com os papéis trocados escreve \(x\) como função de \(y\) e
+\[
+\frac{\dif x}{\dif y}\Big|_{t_{0}}
+=\frac{x'(t_{0})}{y'(t_{0})}=0.
+\]
+A reta tangente no plano \(xy\) é vertical.
+\hfill\(\square\)
+
+A equação da reta tangente no ponto \(\bigl(x(t_{0}),y(t_{0})\bigr)\), quando \(x'(t_{0})\neq 0\), é
+\[
+Y-y(t_{0})=\frac{y'(t_{0})}{x'(t_{0})}\bigl(X-x(t_{0})\bigr).
+\]
+Quando a tangente é vertical, a reta é \(X=x(t_{0})\).
+
+\cuidado{Se \(x'(t_{0})=y'(t_{0})=0\), o quociente \(y'/x'\) fica indeterminado. O teste não decide. A curva \((t^{3},t^{3})\) tem tangente, e a curva \((t^{2},t^{3})\) tem uma cúspide. As duas anulam as derivadas em \(t=0\).}
+
+\begin{contraexemplo}[As duas derivadas nulas]
+Seja \(\gamma_{1}(t)=(t^{3},t^{3})\). Então \(\gamma_{1}'(t)=(3t^{2},3t^{2})\) e \(\gamma_{1}'(0)=(0,0)\). A imagem é a reta \(Y=X\), cuja inclinação é \(1\). Para \(t\neq 0\),
+\[
+\frac{y'}{x'}=\frac{3t^{2}}{3t^{2}}=1,
+\]
+e o limite quando \(t\to 0\) é \(1\). Há tangente, apesar de o teste não se aplicar em \(t=0\).
+
+Seja \(\gamma_{2}(t)=(t^{2},t^{3})\). Então \(\gamma_{2}'(t)=(2t,3t^{2})\) e \(\gamma_{2}'(0)=(0,0)\). Para \(t\neq 0\),
+\[
+\frac{y'}{x'}=\frac{3t^{2}}{2t}=\frac{3t}{2}\to 0
+\]
+quando \(t\to 0\). A imagem satisfaz \(y^{2}=x^{3}\): é a parábola semicúbica, com cúspide na origem. O limite da inclinação existe, mas o vetor velocidade se anula e os dois ramos, \(t>0\) e \(t<0\), encontram a origem com velocidade indo a zero. O teste da tangente vertical ou horizontal não se aplica.
+\end{contraexemplo}
+
+\begin{exemplo}[A circunferência]
+Sejam \(x=\cos t\), \(y=\sin t\), com \(t\in[0,2\pi]\). Então \(x'=-\sin t\) e \(y'=\cos t\). Quando \(\sin t\neq 0\),
+\[
+\frac{\dif y}{\dif x}
+=\frac{\cos t}{-\sin t}=-\cot t.
+\]
+Tangente vertical: \(x'=0\) e \(y'\neq 0\). A equação \(-\sin t=0\) dá \(t=0\) e \(t=\pi\) no intervalo \([0,2\pi)\). Nesses pontos \(y'=\cos 0=1\) e \(y'=\cos\pi=-1\), ambos diferentes de zero. Os pontos são \((1,0)\) e \((-1,0)\), e as retas são \(X=1\) e \(X=-1\).
+
+Tangente horizontal: \(y'=0\) e \(x'\neq 0\). Então \(\cos t=0\), logo \(t=\pi/2\) e \(t=3\pi/2\), com \(x'=-1\) e \(x'=1\). Os pontos são \((0,1)\) e \((0,-1)\).
+\end{exemplo}
+
+\section{Comprimento de arco}
+
+\begin{definicao}
+Dada uma partição \(P=\{a=t_{0}<\cdots<t_{n}=b\}\) de \([a,b]\), a poligonal inscrita tem comprimento
+\[
+L(P)=\sum_{i=1}^{n}\sqrt{\bigl(x(t_{i})-x(t_{i-1})\bigr)^{2}+\bigl(y(t_{i})-y(t_{i-1})\bigr)^{2}}.
+\]
+A malha é \(\abs{P}=\max_{i}(t_{i}-t_{i-1})\). Se \(x\) e \(y\) são de classe \(C^1\), o caminho é retificável e o comprimento do \emph{caminho} é o limite de \(L(P)\) quando \(\abs{P}\to 0\).
+\end{definicao}
+
+\begin{teorema}[Comprimento]
+Se \(x\) e \(y\) são de classe \(C^1\) em \([a,b]\), então
+\begin{equation}
+L=\int_{a}^{b}\sqrt{x'(t)^{2}+y'(t)^{2}}\,\dif t.
+\label{eq:comprimento}
+\end{equation}
+Este número é o comprimento do percurso. Se a parametrização percorre o mesmo arco mais de uma vez, \(L\) conta cada passagem. O comprimento da imagem geométrica coincide com \(L\) quando o caminho não retraça arcos.
+\end{teorema}
+
+\begin{esqueleto}
+\item Aplicar o Teorema do Valor Médio a cada coordenada, em cada subintervalo. Os pontos intermediários não precisam coincidir.
+\item Escrever a corda como \(\sqrt{x'(c_{i})^{2}+y'(d_{i})^{2}}\,\Delta t_{i}\).
+\item Comparar essa expressão com uma soma de Riemann de \(\sqrt{x'^{2}+y'^{2}}\), usando que a norma euclidiana é lipschitziana.
+\item Passar ao limite com a continuidade uniforme de \(x'\) e com a convergência das somas de Riemann.
+\end{esqueleto}
+
+\noindent\textbf{Demonstração.}
+Seja \(P\) uma partição, e escreva \(\Delta t_{i}=t_{i}-t_{i-1}\), \(\Delta x_{i}=x(t_{i})-x(t_{i-1})\) e \(\Delta y_{i}=y(t_{i})-y(t_{i-1})\).
+
+A função \(x\) é contínua em \([t_{i-1},t_{i}]\) e derivável no aberto. Pelo Teorema do Valor Médio, existe \(c_{i}\in(t_{i-1},t_{i})\) tal que
+\[
+\Delta x_{i}=x'(c_{i})\,\Delta t_{i}.
+\]
+Aplicando o mesmo teorema a \(y\), existe \(d_{i}\in(t_{i-1},t_{i})\), possivelmente diferente de \(c_{i}\), tal que
+\[
+\Delta y_{i}=y'(d_{i})\,\Delta t_{i}.
+\]
+A corda fica
+\[
+\sqrt{\Delta x_{i}^{2}+\Delta y_{i}^{2}}
+=\sqrt{x'(c_{i})^{2}+y'(d_{i})^{2}}\;\Delta t_{i}.
+\]
+Não é lícito, neste passo, trocar \(c_{i}\) por \(d_{i}\) sem estimar o erro.
+
+Seja \(\varphi(t)=\sqrt{x'(t)^{2}+y'(t)^{2}}\). A função \(\varphi\) é contínua em \([a,b]\), logo integrável. A soma de Riemann com etiquetas \(d_{i}\) é
+\[
+S(P)=\sum_{i=1}^{n}\varphi(d_{i})\,\Delta t_{i}
+=\sum_{i=1}^{n}\sqrt{x'(d_{i})^{2}+y'(d_{i})^{2}}\;\Delta t_{i}.
+\]
+Quando \(\abs{P}\to 0\), \(S(P)\to\int_{a}^{b}\varphi\), porque as somas de Riemann de uma função contínua convergem para a integral.
+
+Falta mostrar que \(L(P)-S(P)\to 0\). A norma euclidiana satisfaz \(\abs{\norm{\vet{X}}-\norm{\vet{Y}}}\le\norm{\vet{X}-\vet{Y}}\). De fato, a desigualdade triangular dá
+\[
+\norm{\vet{X}}=\norm{\vet{Y}+(\vet{X}-\vet{Y})}\le\norm{\vet{Y}}+\norm{\vet{X}-\vet{Y}},
+\]
+logo \(\norm{\vet{X}}-\norm{\vet{Y}}\le\norm{\vet{X}-\vet{Y}}\); trocando \(\vet{X}\) e \(\vet{Y}\), sai o módulo. Aplicamos isso a
+\[
+\vet{X}=\bigl(x'(c_{i}),y'(d_{i})\bigr),
+\qquad
+\vet{Y}=\bigl(x'(d_{i}),y'(d_{i})\bigr).
+\]
+A diferença é \(\bigl(x'(c_{i})-x'(d_{i}),\,0\bigr)\), cuja norma é \(\abs{x'(c_{i})-x'(d_{i})}\). Portanto
+\[
+\Bigl\lvert\sqrt{x'(c_{i})^{2}+y'(d_{i})^{2}}-\sqrt{x'(d_{i})^{2}+y'(d_{i})^{2}}\Bigr\rvert
+\le\abs{x'(c_{i})-x'(d_{i})}.
+\]
+Somando contra \(\Delta t_{i}>0\),
+\[
+\abs{L(P)-S(P)}
+\le\sum_{i=1}^{n}\abs{x'(c_{i})-x'(d_{i})}\,\Delta t_{i}.
+\]
+A derivada \(x'\) é contínua no compacto \([a,b]\), logo uniformemente contínua pelo teorema de Heine--Cantor, que admitimos. Se \(a=b\), a integral e as poligonais são zero. Se \(a<b\) e é dado \(\eps>0\), existe \(\delta>0\) tal que \(\abs{s-u}<\delta\) implica
+\[
+\abs{x'(s)-x'(u)}<\frac{\eps}{2(b-a)}.
+\]
+Se \(\abs{P}<\delta\), então \(\abs{c_{i}-d_{i}}<\delta\) e
+\[
+\abs{L(P)-S(P)}
+<\sum_{i=1}^{n}\frac{\eps}{2(b-a)}\,\Delta t_{i}
+=\frac{\eps}{2}.
+\]
+As somas de Riemann \(S(P)\) convergem para a integral, então a malha pode ser escolhida pequena o bastante para que também \(\bigl\lvert S(P)-\int_{a}^{b}\varphi\bigr\rvert<\eps/2\). Portanto
+\[
+\Bigl\lvert L(P)-\int_{a}^{b}\varphi(t)\,\dif t\Bigr\rvert<\eps.
+\]
+O limite das poligonais é a integral \eqref{eq:comprimento}.
+\hfill\(\square\)
+
+\begin{exemplo}[A circunferência, de raio \(r>0\)]
+Sejam \(x=r\cos t\), \(y=r\sin t\), \(t\in[0,2\pi]\). Então \(x'=-r\sin t\), \(y'=r\cos t\) e
+\[
+\sqrt{x'^{2}+y'^{2}}
+=\sqrt{r^{2}\sin^{2}t+r^{2}\cos^{2}t}
+=\sqrt{r^{2}}=r,
+\]
+porque \(r>0\). O intervalo tem comprimento \(2\pi\) e a parametrização percorre a circunferência uma vez, sem retraçar. Logo
+\[
+L=\int_{0}^{2\pi} r\,\dif t=r\cdot 2\pi=2\pi r.
+\]
+Se o parâmetro fosse de \(0\) a \(4\pi\), a mesma conta daria \(4\pi r\): o caminho dá duas voltas. O comprimento da imagem continuaria \(2\pi r\). A hipótese de não retraçar é o que identifica \(L\) com o comprimento geométrico.
+\end{exemplo}
+
+\section{Área de revolução em torno do eixo \(x\)}
+
+\begin{teorema}
+Sejam \(x\) e \(y\) de classe \(C^1\) em \([a,b]\), com \(y(t)\ge 0\) para todo \(t\). A área da superfície gerada ao girar o caminho em torno do eixo \(x\), sem retraçar arcos, é
+\begin{equation}
+S=\int_{a}^{b} 2\pi\, y(t)\,\sqrt{x'(t)^{2}+y'(t)^{2}}\,\dif t.
+\label{eq:revolucao}
+\end{equation}
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Numa partição, o segmento de poligonal entre \(\bigl(x(t_{i-1}),y(t_{i-1})\bigr)\) e \(\bigl(x(t_{i}),y(t_{i})\bigr)\) gera, na revolução, um tronco de cone de raios \(y(t_{i-1})\) e \(y(t_{i})\) e de geratriz igual à corda \(\ell_{i}\). A área lateral do tronco é
+\[
+\pi\bigl(y(t_{i-1})+y(t_{i})\bigr)\ell_{i}
+=2\pi\cdot\frac{y(t_{i-1})+y(t_{i})}{2}\cdot\ell_{i}.
+\]
+A média dos valores de \(y\) nos extremos está entre eles. Como \(y\) é contínua, o teorema do valor intermediário fornece \(\xi_{i}\) no subintervalo com
+\[
+y(\xi_{i})=\frac{y(t_{i-1})+y(t_{i})}{2}.
+\]
+Pelo Teorema do Valor Médio, como na seção anterior, \(\ell_{i}=\sqrt{x'(c_{i})^{2}+y'(d_{i})^{2}}\,\Delta t_{i}\). A soma das áreas dos troncos é
+\[
+\sum_{i=1}^{n} 2\pi\, y(\xi_{i})\,\sqrt{x'(c_{i})^{2}+y'(d_{i})^{2}}\,\Delta t_{i}.
+\]
+O integrando \(2\pi y(t)\sqrt{x'(t)^{2}+y'(t)^{2}}\) é contínuo em \([a,b]\). A diferença entre \(y(\xi_{i})\sqrt{x'(c_{i})^{2}+y'(d_{i})^{2}}\) e o valor desse integrando dividido por \(2\pi\), numa etiqueta do subintervalo, tende a zero uniformemente quando a malha tende a zero: \(y\), \(x'\) e \(y'\) são uniformemente contínuas no compacto, e a norma é lipschitziana, como na prova do comprimento. As somas convergem para a integral \eqref{eq:revolucao}. A hipótese \(y\ge 0\) faz de \(y(t)\) um raio, não uma coordenada com sinal.
+\hfill\(\square\)
+
+\begin{exemplo}[A esfera de raio \(1\)]
+Giramos o semicírculo superior \(x=\cos t\), \(y=\sin t\), \(t\in[0,\pi]\), em torno do eixo \(x\). Neste intervalo, \(y=\sin t\ge 0\). Além disso \(x'=-\sin t\), \(y'=\cos t\) e
+\[
+\sqrt{x'^{2}+y'^{2}}=\sqrt{\sin^{2}t+\cos^{2}t}=1.
+\]
+A parametrização percorre a semicircunferência uma vez. Então
+\begin{align*}
+S
+&=\int_{0}^{\pi} 2\pi\sin t\cdot 1\,\dif t
+=2\pi\Bigl[-\cos t\Bigr]_{0}^{\pi}
+=2\pi\Bigl(-\cos\pi-(-\cos 0)\Bigr)
+=2\pi\bigl(1-(-1)\bigr)
+=4\pi.
+\end{align*}
+É a área da esfera de raio \(1\). O exercício~A3 mostra o que a mesma fórmula produz se o parâmetro vai de \(0\) a \(2\pi\) e \(y=\sin t\) fica negativo metade do tempo.
+\end{exemplo}
+
+\section{Coordenadas polares}
+
+\begin{definicao}
+Um ponto do plano com coordenadas polares \((r,\theta)\), sendo \(\theta\) real e \(r\) real, tem coordenadas cartesianas
+\[
+x=r\cos\theta,\qquad y=r\sin\theta.
+\]
+Se \(r>0\), então \(r=\sqrt{x^{2}+y^{2}}\) é a distância à origem e \(\theta\) é um argumento. O polo é a origem: ele corresponde a \(r=0\) com qualquer ângulo. Vale também \((r,\theta)=(-r,\theta+\pi)\): raio negativo no ângulo \(\theta\) é raio positivo no ângulo \(\theta+\pi\).
+\end{definicao}
+
+Uma curva polar \(r=r(\theta)\), com \(r\) de classe \(C^1\) em \([\alpha,\beta]\), é a curva paramétrica
+\[
+x(\theta)=r(\theta)\cos\theta,\qquad y(\theta)=r(\theta)\sin\theta.
+\]
+
+\figura{../figuras/cardioide.png}{Cardióide \(r=1+\cos\theta\) e a circunferência \(r=1\).}
+
+\section{Área e comprimento em polares}
+
+\begin{teorema}[Área]
+Seja \(r:[\alpha,\beta]\to[0,\infty)\) contínua, com \(0<\beta-\alpha\le 2\pi\). A região
+\[
+\bigl\{\,(\rho\cos\theta,\rho\sin\theta): \theta\in[\alpha,\beta],\ 0\le\rho\le r(\theta)\,\bigr\}
+\]
+tem área
+\begin{equation}
+A=\frac12\int_{\alpha}^{\beta} r(\theta)^{2}\,\dif\theta,
+\label{eq:area-polar}
+\end{equation}
+desde que cada ponto da região, exceto o polo, corresponda a um único \(\theta\) do intervalo.
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Um setor circular de raio \(R\ge 0\) e ângulo \(\Delta\theta\in(0,2\pi]\) é a fração \(\Delta\theta/(2\pi)\) do disco de área \(\pi R^{2}\), logo tem área
+\[
+\frac{\Delta\theta}{2\pi}\cdot\pi R^{2}=\frac12 R^{2}\,\Delta\theta.
+\]
+Seja \(P=\{\alpha=\theta_{0}<\cdots<\theta_{n}=\beta\}\) uma partição. No subintervalo \(i\), a continuidade de \(r\) no compacto garante mínimo \(m_{i}\) e máximo \(M_{i}\). Como os raios do intervalo de ângulo \(\Delta\theta_{i}\) não se sobrepõem aos dos outros subintervalos, salvo nas bordas de área nula, a fatia da região entre esses dois raios contém o setor de raio \(m_{i}\) e está contida no setor de raio \(M_{i}\). Portanto a área \(A_{i}\) da fatia satisfaz
+\[
+\frac12 m_{i}^{2}\,\Delta\theta_{i}
+\le A_{i}
+\le\frac12 M_{i}^{2}\,\Delta\theta_{i}.
+\]
+Somando,
+\[
+\sum_{i=1}^{n}\frac12 m_{i}^{2}\,\Delta\theta_{i}
+\le A
+\le\sum_{i=1}^{n}\frac12 M_{i}^{2}\,\Delta\theta_{i}.
+\]
+Estas são uma soma inferior e uma soma superior de Darboux da função contínua \(\frac12 r(\theta)^{2}\). A diferença entre a soma superior e a inferior é
+\[
+\sum_{i=1}^{n}\frac12\bigl(M_{i}^{2}-m_{i}^{2}\bigr)\Delta\theta_{i}.
+\]
+A função \(r^{2}\) é uniformemente contínua em \([\alpha,\beta]\). Dado \(\eps>0\), se a malha é pequena então \(M_{i}^{2}-m_{i}^{2}<\eps\) em todo subintervalo, e a diferença das somas é menor que \(\frac12\eps(\beta-\alpha)\). As duas somas tendem a \(\frac12\int_{\alpha}^{\beta} r^{2}\,\dif\theta\), e o mesmo acontece com \(A\).
+\hfill\(\square\)
+
+\begin{exemplo}[Área da cardióide \(r=1+\cos\theta\)]
+A função \(r(\theta)=1+\cos\theta\) é contínua, não negativa, e em \([0,2\pi]\) varre a região interna uma vez: o máximo é \(2\), em \(\theta=0\), e \(r(\pi)=0\). Pela fórmula,
+\begin{align*}
+r(\theta)^{2}
+&=(1+\cos\theta)^{2}
+=1+2\cos\theta+\cos^{2}\theta
+=1+2\cos\theta+\frac{1+\cos(2\theta)}{2}
+=\frac{3}{2}+2\cos\theta+\frac12\cos(2\theta).
+\end{align*}
+Então
+\begin{align*}
+A
+&=\frac12\int_{0}^{2\pi}\Biggl(\frac32+2\cos\theta+\frac12\cos(2\theta)\Biggr)\dif\theta
+=\frac12\Biggl[\frac32\theta+2\sin\theta+\frac14\sin(2\theta)\Biggr]_{0}^{2\pi}.
+\end{align*}
+Os termos com seno se anulam nos dois extremos. Sobra
+\[
+A=\frac12\cdot\frac32\cdot 2\pi=\frac{3\pi}{2}.
+\]
+\end{exemplo}
+
+\begin{teorema}[Comprimento em polares]
+Se \(r\) é de classe \(C^1\) em \([\alpha,\beta]\), o comprimento do caminho \(x=r\cos\theta\), \(y=r\sin\theta\) é
+\begin{equation}
+L=\int_{\alpha}^{\beta}\sqrt{r(\theta)^{2}+\bigl(r'(\theta)\bigr)^{2}}\,\dif\theta.
+\label{eq:comp-polar}
+\end{equation}
+\end{teorema}
+
+\noindent\textbf{Demonstração.}
+Derivamos as coordenadas:
+\begin{align*}
+\frac{\dif x}{\dif\theta}&=r'\cos\theta-r\sin\theta,\\
+\frac{\dif y}{\dif\theta}&=r'\sin\theta+r\cos\theta.
+\end{align*}
+Somamos os quadrados:
+\begin{align*}
+\Bigl(\frac{\dif x}{\dif\theta}\Bigr)^{2}
+&=r'^{2}\cos^{2}\theta-2r'r\cos\theta\sin\theta+r^{2}\sin^{2}\theta,\\
+\Bigl(\frac{\dif y}{\dif\theta}\Bigr)^{2}
+&=r'^{2}\sin^{2}\theta+2r'r\sin\theta\cos\theta+r^{2}\cos^{2}\theta.
+\end{align*}
+Os termos cruzados cancelam, e \(\cos^{2}\theta+\sin^{2}\theta=1\), logo
+\[
+\Bigl(\frac{\dif x}{\dif\theta}\Bigr)^{2}+\Bigl(\frac{\dif y}{\dif\theta}\Bigr)^{2}
+=r'^{2}+r^{2}.
+\]
+A fórmula do comprimento paramétrico, aplicada ao parâmetro \(\theta\), dá \eqref{eq:comp-polar}. A raiz quadrada está definida porque \(r^{2}+(r')^{2}\ge 0\).
+\hfill\(\square\)
+
+\begin{exemplo}[Comprimento da cardióide]
+Para \(r=1+\cos\theta\) em \([0,2\pi]\), \(r'=-\sin\theta\). Então
+\begin{align*}
+r^{2}+(r')^{2}
+&=(1+\cos\theta)^{2}+\sin^{2}\theta
+=1+2\cos\theta+\cos^{2}\theta+\sin^{2}\theta
+=2+2\cos\theta
+=2(1+\cos\theta).
+\end{align*}
+A identidade \(1+\cos\theta=2\cos^{2}(\theta/2)\) dá \(2(1+\cos\theta)=4\cos^{2}(\theta/2)\), logo
+\[
+\sqrt{r^{2}+(r')^{2}}=2\abs{\cos(\theta/2)}.
+\]
+O módulo é obrigatório: a raiz é não negativa. Para \(\theta\in[0,\pi]\), temos \(\theta/2\in[0,\pi/2]\) e \(\cos(\theta/2)\ge 0\). Para \(\theta\in[\pi,2\pi]\), temos \(\theta/2\in[\pi/2,\pi]\) e \(\cos(\theta/2)\le 0\). Portanto
+\begin{align*}
+\int_{0}^{\pi} 2\cos(\theta/2)\,\dif\theta
+&=4\Bigl[\sin(\theta/2)\Bigr]_{0}^{\pi}
+=4\bigl(\sin(\pi/2)-\sin 0\bigr)=4,\\[0.4em]
+\int_{\pi}^{2\pi} -2\cos(\theta/2)\,\dif\theta
+&=-4\Bigl[\sin(\theta/2)\Bigr]_{\pi}^{2\pi}
+=-4\bigl(\sin\pi-\sin(\pi/2)\bigr)
+=-4\bigl(0-1\bigr)=4.
+\end{align*}
+O comprimento é \(4+4=8\).
+
+No ponto \(\theta=\pi\), que é a cúspide da cardióide na origem, o integrando se anula. Ele é contínuo em \([0,2\pi]\): a integral do comprimento é ordinária, não imprópria.
+\end{exemplo}
+
+\section{Interseção de curvas polares}
+
+Dois pontos polares coincidem no plano quando representam o mesmo par cartesiano. Igualar as duas fórmulas de \(r\) no mesmo \(\theta\) acha algumas interseções, não todas. É preciso procurar ainda:
+\begin{itemize}
+\item o polo, que pertence a uma curva \(r=r_{1}(\theta)\) quando existe ângulo com \(r_{1}(\theta)=0\), qualquer que seja esse ângulo;
+\item representações com ângulos diferentes, em particular \((r,\theta)\) e \((-r,\theta+\pi)\).
+\end{itemize}
+
+\begin{exemplo}[Cardióide \(r=1+\cos\theta\) e circunferência \(r=1\)]
+Igualando os raios no mesmo ângulo, em \([0,2\pi)\),
+\[
+1+\cos\theta=1\implies\cos\theta=0\implies\theta=\frac{\pi}{2}\ \text{ou}\ \theta=\frac{3\pi}{2}.
+\]
+No primeiro, \(r=1\), e o ponto cartesiano é
+\[
+\bigl(\cos(\pi/2),\sin(\pi/2)\bigr)=(0,1).
+\]
+No segundo,
+\[
+\bigl(\cos(3\pi/2),\sin(3\pi/2)\bigr)=(0,-1).
+\]
+O polo: a cardióide tem \(r=0\) quando \(\cos\theta=-1\), isto é, \(\theta=\pi\). A circunferência \(r=1\) nunca tem raio zero. O polo está na cardióide e não está na circunferência, logo não é ponto de interseção. Como \(r=1+\cos\theta\ge 0\), não há representação de raio negativo a considerar para a cardióide. Os únicos pontos comuns são \((0,1)\) e \((0,-1)\).
+
+Descrição da região. Para \(\theta\in[0,\pi/2]\cup[3\pi/2,2\pi]\), vale \(\cos\theta\ge 0\), logo \(r=1+\cos\theta\ge 1\): a cardióide está fora do círculo unitário, ou sobre ele nos extremos \(\theta=\pi/2\) e \(\theta=3\pi/2\). Para \(\theta\in[\pi/2,3\pi/2]\), vale \(\cos\theta\le 0\), logo \(r\le 1\): esse trecho da cardióide está dentro do círculo. A região interna à cardióide e externa ao círculo é o bojo à direita do eixo \(y\), descrito por
+\[
+\theta\in\Bigl[-\frac{\pi}{2},\frac{\pi}{2}\Bigr],
+\qquad
+1\le\rho\le 1+\cos\theta.
+\]
+Fora desse intervalo de ângulos não há ponto da cardióide com distância à origem maior que \(1\).
+
+A área é a diferença de duas aplicações de \eqref{eq:area-polar}. Por simetria em relação ao eixo \(x\),
+\begin{align*}
+A
+&=2\cdot\frac12\int_{0}^{\pi/2}\Bigl((1+\cos\theta)^{2}-1^{2}\Bigr)\dif\theta
+=\int_{0}^{\pi/2}\bigl(1+2\cos\theta+\cos^{2}\theta-1\bigr)\dif\theta
+=\int_{0}^{\pi/2}\bigl(2\cos\theta+\cos^{2}\theta\bigr)\dif\theta.
+\end{align*}
+Usamos \(\cos^{2}\theta=\dfrac{1+\cos(2\theta)}{2}\):
+\begin{align*}
+A
+&=\int_{0}^{\pi/2}\Biggl(2\cos\theta+\frac12+\frac12\cos(2\theta)\Biggr)\dif\theta
+=\Biggl[2\sin\theta+\frac{\theta}{2}+\frac14\sin(2\theta)\Biggr]_{0}^{\pi/2}\\
+&=\Biggl(2\sin\frac{\pi}{2}+\frac{\pi}{4}+\frac14\sin\pi\Biggr)-\Biggl(0\Biggr)
+=2+\frac{\pi}{4}.
+\end{align*}
+O integrando é não negativo em \([0,\pi/2]\) porque \(1+\cos\theta\ge 1\), então a área é positiva, como \(2+\pi/4\) confirma.
+
+A cardióide é a união do bojo externo com a parte da cardióide que está dentro do círculo unitário. Essas duas partes só se encontram na fronteira \(r=1\), que tem área zero. A parte interna ao círculo é exatamente a região que está dentro das duas curvas. Como a área da cardióide inteira já foi calculada, \(3\pi/2\), a área da interseção é a diferença
+\[
+\frac{3\pi}{2}-\Biggl(2+\frac{\pi}{4}\Biggr)
+=\frac{6\pi}{4}-\frac{\pi}{4}-2
+=\frac{5\pi}{4}-2.
+\]
+\end{exemplo}
+
+\section{Exercícios}
+
+\begin{exercicio}[Básico --- reta tangente]
+\textbf{B1.} Para \(x=t^{2}\) e \(y=2t\), calcule \(\dif y/\dif x\) onde \(x'\neq 0\), decida se há tangente vertical, e escreva a reta tangente em \(t=1\).
+\end{exercicio}
+
+\begin{exercicio}[Básico --- comprimento]
+\textbf{B2.} Calcule o comprimento de \(x=3\cos t\), \(y=3\sin t\), \(t\in[0,\pi/2]\).
+\end{exercicio}
+
+\begin{exercicio}[Básico --- área polar]
+\textbf{B3.} Calcule a área da região \(0\le\theta\le 2\pi\), \(0\le\rho\le 2\), pela fórmula polar, e reconheça o disco.
+\end{exercicio}
+
+\begin{exercicio}[Básico --- revolução]
+\textbf{B4.} Calcule a área da superfície gerada ao girar \(x=t\), \(y=t\), \(t\in[0,2]\), em torno do eixo \(x\).
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- ciclóide]
+\textbf{I1.} Calcule o comprimento de uma arcada da ciclóide \(x=t-\sin t\), \(y=1-\cos t\), \(t\in[0,2\pi]\). Simplifique \(x'^{2}+y'^{2}\) até um quadrado perfeito e trate o módulo.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- rosa]
+\textbf{I2.} A curva \(r=\sin(2\theta)\) tem pétalas onde o seno é não negativo, em intervalos de comprimento \(\pi/2\). Calcule a área de uma pétala, para \(\theta\in[0,\pi/2]\), e a área das quatro pétalas integrando \(\frac12 r^{2}\) de \(0\) a \(2\pi\).
+\end{exercicio}
+
+\begin{exercicio}[Intermediário --- duas circunferências]
+\textbf{I3.} As curvas \(r=2\cos\theta\), com \(\theta\in[-\pi/2,\pi/2]\) para ter \(r\ge 0\), e \(r=1\).
+\begin{enumerate}
+\item Ache as interseções igualando os raios e diga se o polo é ponto comum.
+\item Calcule a área da região que está dentro das duas curvas.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- reparametrização]
+\textbf{A1.} Sejam \(x,y\) de classe \(C^1\) em \([a,b]\) e seja \(\varphi:[c,d]\to[a,b]\) de classe \(C^1\), crescente, sobrejetora, com \(\varphi'>0\). Prove que o comprimento calculado em \(t\) e o comprimento calculado em \(s\), com \(t=\varphi(s)\), coincidem.
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- a fórmula polar conta o percurso]
+\textbf{A2.} A equação \(r=\cos\theta\) descreve a circunferência de centro \((1/2,0)\) e raio \(1/2\).
+\begin{enumerate}
+\item Calcule \(\frac12\int_{-\pi/2}^{\pi/2}\cos^{2}\theta\,\dif\theta\).
+\item Calcule \(\frac12\int_{0}^{2\pi}\cos^{2}\theta\,\dif\theta\).
+\item Explique a diferença, dizendo o que a parametrização faz em \((\pi/2,3\pi/2)\), onde \(\cos\theta<0\).
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[Avançado --- sinal de \(y\) na revolução]
+\textbf{A3.} Calcule \(\int_{0}^{2\pi} 2\pi\sin t\,\dif t\), que é a fórmula de revolução aplicada a \(x=\cos t\), \(y=\sin t\) no intervalo inteiro, sem a hipótese \(y\ge 0\). Diga por que o resultado não é a área da esfera.
+\end{exercicio}
+
+\end{document}

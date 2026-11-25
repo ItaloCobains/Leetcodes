@@ -1,0 +1,732 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Sequências e séries numéricas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{O que fica de fora e o que se admite}
+
+Neste texto, \(\N=\{1,2,3,\ldots\}\). Quando uma soma começar em \(0\), o índice aparece escrito. Não tratamos técnicas de integração nem coordenadas polares: a única integral usada é a de \(x^{-p}\), cuja primitiva vem do Cálculo~I, para comparar a \(p\)-série com a área sob a curva.
+
+Admitimos duas propriedades de \(\R\): todo conjunto não vazio e limitado superiormente tem supremo; para todo real existe um natural estritamente maior do que ele. O critério de Cauchy para sequências é enunciado na seção da convergência absoluta: a direção fácil é provada ali, e a recíproca fica como a completude de \(\R\).
+
+\section{Sequências e limite}
+
+\begin{definicao}
+Uma \emph{sequência} em \(\R\) é uma função \(a\colon\N\to\R\). Escrevemos \((a_n)\) ou \((a_n)_{n\in\N}\), e chamamos \(a_n\) de termo geral.
+\end{definicao}
+
+\begin{definicao}
+Dizemos que \((a_n)\) \emph{converge} para \(L\in\R\), e escrevemos \(\lim_{n\to\infty}a_n=L\) ou \(a_n\to L\), quando
+\[
+\forall\eps>0\ \exists N\in\N\ \forall n\ge N:\quad \abs{a_n-L}<\eps.
+\]
+A sequência \emph{diverge} quando não existe tal \(L\).
+\end{definicao}
+
+\begin{intuicao}
+O número \(N\) pode depender de \(\eps\). A desigualdade não pede controle sobre os primeiros termos: a partir de uma casa, todos os termos caem na faixa \((L-\eps,L+\eps)\).
+\end{intuicao}
+
+\begin{teorema}[unicidade do limite]
+Se \(a_n\to L\) e \(a_n\to M\), então \(L=M\).
+\end{teorema}
+
+\begin{proof}
+Seja \(\eps>0\). Existem \(N_1,N_2\in\N\) tais que \(n\ge N_1\) implica \(\abs{a_n-L}<\eps/2\) e \(n\ge N_2\) implica \(\abs{a_n-M}<\eps/2\). Tome \(n\ge\max\{N_1,N_2\}\). A desigualdade triangular dá
+\[
+\abs{L-M}
+\le\abs{L-a_n}+\abs{a_n-M}
+<\frac{\eps}{2}+\frac{\eps}{2}
+=\eps.
+\]
+O número \(\abs{L-M}\) é menor do que todo \(\eps>0\), logo \(\abs{L-M}=0\) e \(L=M\).
+\end{proof}
+
+\begin{teorema}
+Toda sequência convergente é limitada: existe \(M\ge 0\) tal que \(\abs{a_n}\le M\) para todo \(n\in\N\).
+\end{teorema}
+
+\begin{proof}
+Seja \(a_n\to L\). Aplique a definição com \(\eps=1\): existe \(N\in\N\) tal que \(n\ge N\) implica \(\abs{a_n-L}<1\), e portanto
+\[
+\abs{a_n}\le\abs{a_n-L}+\abs{L}<1+\abs{L}.
+\]
+Resta a parte finita inicial. Se \(N=1\), vale \(\abs{a_n}<1+\abs{L}\) para todo \(n\), e tomamos \(M=1+\abs{L}\). Se \(N>1\), o conjunto \(\{\abs{a_1},\ldots,\abs{a_{N-1}}\}\) é finito e tem máximo. Defina
+\[
+M=\max\bigl\{\abs{a_1},\ldots,\abs{a_{N-1}},\,1+\abs{L}\bigr\}.
+\]
+Para \(n<N\) o módulo está na lista do máximo; para \(n\ge N\) vale a cota \(1+\abs{L}\). Em ambos os casos \(\abs{a_n}\le M\).
+\end{proof}
+
+\cuidado{Limitada não implica convergente. A sequência \(a_n=(-1)^n\) satisfaz \(\abs{a_n}=1\), mas não converge: as subsequências pares e ímpares vão a limites diferentes, como na seção seguinte.}
+
+\begin{teorema}[álgebra dos limites]
+Se \(a_n\to A\), \(b_n\to B\) e \(c\in\R\), então \(a_n+b_n\to A+B\), \(c\,a_n\to cA\) e \(a_nb_n\to AB\).
+\end{teorema}
+
+\begin{proof}
+Soma. Seja \(\eps>0\). Existem \(N_1\) e \(N_2\) tais que \(n\ge N_1\) implica \(\abs{a_n-A}<\eps/2\) e \(n\ge N_2\) implica \(\abs{b_n-B}<\eps/2\). Para \(n\ge\max\{N_1,N_2\}\),
+\[
+\abs{(a_n+b_n)-(A+B)}
+\le\abs{a_n-A}+\abs{b_n-B}
+<\eps.
+\]
+
+Escalar. Se \(c=0\), a sequência \(c\,a_n\) é nula e o limite é \(0\). Se \(c\neq 0\), escolha \(N\) tal que \(n\ge N\) implica \(\abs{a_n-A}<\eps/\abs{c}\). Então
+\[
+\abs{c\,a_n-cA}=\abs{c}\,\abs{a_n-A}<\eps.
+\]
+
+Produto. Escreva a identidade
+\[
+a_nb_n-AB=a_n(b_n-B)+B(a_n-A).
+\]
+Pelo teorema anterior, \((a_n)\) é limitada: existe \(M\ge 1\) com \(\abs{a_n}\le M\) para todo \(n\) (se a cota obtida for menor do que \(1\), troque-a por \(1\)). Seja \(\eps>0\). Escolha \(N_1\) tal que \(n\ge N_1\) implica
+\[
+\abs{a_n-A}<\frac{\eps}{2\bigl(\abs{B}+1\bigr)},
+\]
+e \(N_2\) tal que \(n\ge N_2\) implica \(\abs{b_n-B}<\eps/(2M)\). O denominador \(\abs{B}+1\) evita divisão por zero quando \(B=0\). Para \(n\ge\max\{N_1,N_2\}\),
+\begin{align*}
+\abs{a_nb_n-AB}
+&\le\abs{a_n}\,\abs{b_n-B}+\abs{B}\,\abs{a_n-A}\\
+&< M\cdot\frac{\eps}{2M}+\abs{B}\cdot\frac{\eps}{2\bigl(\abs{B}+1\bigr)}\\
+&=\frac{\eps}{2}+\frac{\abs{B}}{\abs{B}+1}\cdot\frac{\eps}{2}
+<\frac{\eps}{2}+\frac{\eps}{2}
+=\eps,
+\end{align*}
+porque \(\abs{B}/(\abs{B}+1)<1\).
+\end{proof}
+
+\section{Subsequências}
+
+\begin{definicao}
+Uma \emph{subsequência} de \((a_n)\) é \((a_{n_k})_{k\in\N}\), em que \((n_k)\) é uma sequência de naturais estritamente crescente: \(n_{k+1}>n_k\) para todo \(k\).
+\end{definicao}
+
+\begin{lema}
+Se \((n_k)\) é estritamente crescente em \(\N\), então \(n_k\ge k\) para todo \(k\).
+\end{lema}
+
+\begin{proof}
+Indução. \(n_1\ge 1\). Se \(n_k\ge k\), então \(n_{k+1}\ge n_k+1\ge k+1\).
+\end{proof}
+
+\begin{teorema}
+Se \(a_n\to L\), então toda subsequência também converge para \(L\).
+\end{teorema}
+
+\begin{proof}
+Seja \(\eps>0\) e seja \(N\) tal que \(n\ge N\) implica \(\abs{a_n-L}<\eps\). Se \(k\ge N\), o lema dá \(n_k\ge k\ge N\), logo \(\abs{a_{n_k}-L}<\eps\).
+\end{proof}
+
+\begin{contraexemplo}
+A sequência \(a_n=(-1)^n\) não converge. A subsequência par \(n_k=2k\) é constante igual a \(1\), logo tende a \(1\). A subsequência ímpar \(n_k=2k-1\) é constante igual a \(-1\), logo tende a \(-1\). Se \((a_n)\) convergisse para algum \(L\), as duas subsequências convergiriam para \(L\), e a unicidade daria \(1=-1\).
+\end{contraexemplo}
+
+\section{Sequências monótonas limitadas}
+
+\begin{definicao}
+A sequência \((a_n)\) é \emph{crescente} quando \(a_{n+1}\ge a_n\) para todo \(n\), e \emph{decrescente} quando \(a_{n+1}\le a_n\) para todo \(n\). É \emph{monótona} quando é crescente ou decrescente. É limitada superiormente quando existe \(B\in\R\) com \(a_n\le B\) para todo \(n\).
+\end{definicao}
+
+\begin{teorema}
+Se \((a_n)\) é crescente e limitada superiormente, então \((a_n)\) converge, e o limite é
+\[
+L=\sup\{a_n:n\in\N\}.
+\]
+\end{teorema}
+
+\begin{proof}
+O conjunto \(\{a_n:n\in\N\}\) é não vazio e limitado superiormente, logo \(L=\sup\{a_n:n\in\N\}\) existe em \(\R\). Ser supremo significa duas coisas: \(a_n\le L\) para todo \(n\), e nenhum número menor é cota superior.
+
+Seja \(\eps>0\). O número \(L-\eps\) não é cota superior, então existe um índice \(N\) com \(a_N>L-\eps\). Para todo \(n\ge N\), a monotonicidade dá \(a_N\le a_n\le L\), portanto
+\[
+L-\eps<a_n\le L.
+\]
+Daí \(0\le L-a_n<\eps\), isto é \(\abs{a_n-L}<\eps\). Assim \(a_n\to L\).
+\end{proof}
+
+\begin{corolario}
+Se \((a_n)\) é decrescente e limitada inferiormente, então \((a_n)\) converge para \(\inf\{a_n:n\in\N\}\).
+\end{corolario}
+
+\begin{proof}
+A sequência \((-a_n)\) é crescente e limitada superiormente, logo converge para \(\sup\{-a_n\}=-\inf\{a_n\}\). Multiplicando por \(-1\), \(a_n\) converge para o ínfimo.
+\end{proof}
+
+\section{Séries e somas parciais}
+
+\begin{definicao}
+Dada \((a_n)\), a \emph{soma parcial} de ordem \(N\) é \(s_N=\sum_{n=1}^N a_n\). A série \(\sum_{n=1}^\infty a_n\) \emph{converge} quando a sequência \((s_N)\) converge. Nesse caso a soma da série é \(S=\lim_{N\to\infty}s_N\), e escrevemos \(\sum_{n=1}^\infty a_n=S\). Se \((s_N)\) diverge, a série diverge. O \emph{resto} de ordem \(N\), quando a série converge, é \(R_N=S-s_N=\sum_{n=N+1}^\infty a_n\).
+\end{definicao}
+
+\begin{proposicao}
+A série \(\sum_{n=1}^\infty a_n\) converge se e somente se, para algum \(N_0\) fixo, a série \(\sum_{n=N_0}^\infty a_n\) converge. Um número finito de termos não altera a convergência, embora altere a soma.
+\end{proposicao}
+
+\begin{proof}
+Para \(N\ge N_0\), \(s_N=\sum_{n=1}^{N_0-1}a_n+\sum_{n=N_0}^N a_n\). A primeira parcela é constante. A sequência \((s_N)_{N\ge N_0}\) converge se e somente se a sequência das somas parciais da cauda converge, e a álgebra dos limites transfere a constante.
+\end{proof}
+
+\figura{../figuras/somas_parciais.png}{Somas parciais da geométrica de razão 1/2 e da harmônica.}
+
+A figura compara duas sequências de somas parciais. Na geométrica de razão \(1/2\) elas se acumulam num limite finito; na harmônica continuam a subir. As duas seções seguintes separam esses comportamentos, e a prova de que a harmônica diverge vem depois do teste da divergência.
+
+\section{A série geométrica}
+
+\begin{teorema}[soma finita]
+Se \(r\neq 1\) e \(N\in\N\), então
+\[
+\sum_{k=0}^{N-1} r^k=\frac{1-r^N}{1-r}.
+\]
+Se \(r=1\), a soma vale \(N\).
+\end{teorema}
+
+\begin{proof}
+O caso \(r=1\) é a soma de \(N\) uns. Se \(r\neq 1\),
+\begin{align*}
+(1-r)\sum_{k=0}^{N-1} r^k
+&=\sum_{k=0}^{N-1} r^k-\sum_{k=0}^{N-1} r^{k+1}
+=\sum_{k=0}^{N-1} r^k-\sum_{k=1}^{N} r^k
+=1-r^N.
+\end{align*}
+Divida por \(1-r\).
+\end{proof}
+
+\begin{lema}
+Se \(\abs{r}<1\), então \(r^N\to 0\). Se \(\abs{r}>1\), então \(\abs{r}^N\to+\infty\).
+\end{lema}
+
+\begin{proof}
+Se \(r=0\), a primeira afirmação é imediata. Suponha \(0<\rho<1\) e escreva \(\rho=1/(1+h)\) com \(h=(1-\rho)/\rho>0\). Provamos por indução a desigualdade de Bernoulli: \((1+h)^n\ge 1+nh\) para todo \(n\in\N\). Para \(n=1\) há igualdade. Se vale para \(n\), então
+\[
+(1+h)^{n+1}\ge(1+nh)(1+h)=1+(n+1)h+nh^2\ge 1+(n+1)h.
+\]
+Logo \(\rho^n=1/(1+h)^n\le 1/(nh)\). Dado \(\eps>0\), escolha um natural \(N>1/(h\eps)\). Para \(n\ge N\),
+\[
+\rho^n\le\frac{1}{nh}\le\frac{1}{Nh}<\eps.
+\]
+Assim \(\rho^n\to 0\). Para \(\abs{r}<1\), aplique isso a \(\rho=\abs{r}\): \(\abs{r^N}=\abs{r}^N\to 0\), logo \(r^N\to 0\).
+
+Se \(\rho>1\), escreva \(\rho=1+h\) com \(h>0\). Bernoulli dá \(\rho^n\ge 1+nh\to+\infty\).
+\end{proof}
+
+\begin{teorema}[série geométrica]
+A série \(\sum_{k=0}^\infty r^k\) converge se e somente se \(\abs{r}<1\). Nesse caso
+\[
+\sum_{k=0}^\infty r^k=\frac{1}{1-r}.
+\]
+Em particular, para \(\abs{r}<1\),
+\[
+\sum_{k=1}^\infty r^k=\frac{r}{1-r}.
+\]
+\end{teorema}
+
+\begin{proof}
+Seja \(s_N=\sum_{k=0}^{N-1} r^k\).
+
+Caso \(\abs{r}<1\). Pelo teorema da soma finita e pelo lema, \(r^N\to 0\), logo
+\[
+s_N=\frac{1-r^N}{1-r}\to\frac{1}{1-r}.
+\]
+A série a partir de \(k=1\) é a soma total menos o termo \(k=0\), igual a \(1\), donde \(r/(1-r)\).
+
+Caso \(r=1\). Aqui \(s_N=N\), que não converge em \(\R\).
+
+Caso \(r=-1\). Os termos são \(1,-1,1,-1,\ldots\). Se \(N=2m\) é par, os pares \((1-1)\) somam zero e \(s_{2m}=0\). Se \(N=2m+1\) é ímpar, \(s_{2m+1}=1\). As subsequências pares e ímpares das somas parciais tendem a \(0\) e a \(1\). Pela unicidade, \((s_N)\) não converge.
+
+Caso \(\abs{r}>1\). O lema dá \(\abs{r}^N\to+\infty\). Como \(r\neq 1\),
+\[
+\abs{s_N}=\frac{\abs{1-r^N}}{\abs{1-r}}\ge\frac{\abs{r}^N-1}{\abs{1-r}}\to+\infty.
+\]
+Uma sequência cujo módulo tende a infinito não converge em \(\R\).
+
+Os quatro casos esgotam \(r\in\R\). A série converge exatamente quando \(\abs{r}<1\). O caso \(\abs{r}>1\) e o caso \(r=1\) fazem o módulo da soma parcial ir para infinito; o caso \(r=-1\) é uma oscilação entre \(0\) e \(1\), e por isso foi separado, embora a conclusão seja a mesma: fora de \(\abs{r}<1\) a série diverge.
+\end{proof}
+
+\begin{exemplo}
+A geométrica de razão \(1/2\), desenhada na figura das somas parciais, é \(\sum_{k=0}^\infty (1/2)^k\). Como \(\abs{1/2}<1\),
+\[
+s_N=\frac{1-(1/2)^N}{1-1/2}=2\bigl(1-2^{-N}\bigr)\to 2.
+\]
+\end{exemplo}
+
+\section{Uma série telescópica}
+
+\begin{exemplo}
+Para todo \(n\in\N\),
+\[
+\frac{1}{n(n+1)}=\frac{1}{n}-\frac{1}{n+1}.
+\]
+De fato, o lado direito é \((n+1-n)/(n(n+1))=1/(n(n+1))\). A soma parcial é
+\begin{align*}
+s_N
+&=\sum_{n=1}^N\left(\frac{1}{n}-\frac{1}{n+1}\right)
+=\left(1-\frac{1}{2}\right)+\left(\frac{1}{2}-\frac{1}{3}\right)+\cdots+\left(\frac{1}{N}-\frac{1}{N+1}\right)\\
+&=1-\frac{1}{N+1}.
+\end{align*}
+Logo \(s_N\to 1\), e \(\sum_{n=1}^\infty 1/(n(n+1))=1\).
+\end{exemplo}
+
+O mesmo desenho serve para qualquer termo da forma \(b_n-b_{n+1}\): a soma parcial deixa \(b_1-b_{N+1}\), e a série converge quando \(b_N\) converge.
+
+\section{O teste da divergência e a série harmônica}
+
+\begin{teorema}[teste da divergência]
+Se \(\sum_{n=1}^\infty a_n\) converge, então \(a_n\to 0\).
+\end{teorema}
+
+\begin{proof}
+Seja \(s_N\to S\) e, para \(n\ge 2\), escreva \(a_n=s_n-s_{n-1}\). A sequência \((s_{n-1})_{n\ge 2}\) é a mesma sequência \((s_n)\) sem o primeiro termo, logo também tende a \(S\). A álgebra dos limites dá \(a_n\to S-S=0\).
+\end{proof}
+
+\cuidado{A recíproca é falsa. O teste só serve para provar divergência: se o termo geral não vai a zero, a série diverge. Se o termo geral vai a zero, o teste não decide. A série harmônica, provada a seguir, tem termo geral \(1/n\to 0\) e diverge.}
+
+\begin{teorema}[série harmônica]
+A série \(\sum_{n=1}^\infty 1/n\) diverge.
+\end{teorema}
+
+\begin{proof}
+Os termos são positivos, logo \((s_N)\) é crescente. Basta mostrar que ela não é limitada superiormente. Para cada inteiro \(k\ge 1\), agrupe até a potência de dois:
+\begin{align*}
+s_{2^k}
+&=1+\frac{1}{2}+\left(\frac{1}{3}+\frac{1}{4}\right)+\left(\frac{1}{5}+\cdots+\frac{1}{8}\right)+\cdots\\
+&\qquad+\left(\frac{1}{2^{k-1}+1}+\cdots+\frac{1}{2^k}\right).
+\end{align*}
+Há \(k\) grupos depois do \(1\) inicial. O grupo de índice \(m\), com \(0\le m\le k-1\), vai de \(n=2^m+1\) até \(n=2^{m+1}\) e contém \(2^{m+1}-2^m=2^m\) termos, cada um maior ou igual a \(1/2^{m+1}\). A soma do grupo é pelo menos
+\[
+2^m\cdot\frac{1}{2^{m+1}}=\frac{1}{2}.
+\]
+O grupo \(m=0\) é só o termo \(1/2\); o grupo \(m=1\) é \(1/3+1/4\ge 1/4+1/4=1/2\); o grupo que termina em \(2^k\) é o de índice \(m=k-1\). São \(k\) parcelas maiores ou iguais a \(1/2\), mais o \(1\) da frente:
+\[
+s_{2^k}\ge 1+\frac{k}{2}.
+\]
+O lado direito tende a infinito quando \(k\to\infty\). As somas parciais não são limitadas, logo não convergem.
+\end{proof}
+
+A figura das somas parciais mostra esse crescimento ao lado da geométrica de razão \(1/2\), que permanece limitada.
+
+\section{\(p\)-séries, por comparação com a integral}
+
+\begin{teorema}
+A série \(\sum_{n=1}^\infty n^{-p}\) converge se e somente se \(p>1\).
+\end{teorema}
+
+\base{Do Cálculo~I usamos: a integral preserva desigualdades entre funções contínuas; se \(p\neq 1\), uma primitiva de \(x^{-p}\) é \(x^{1-p}/(1-p)\); uma primitiva de \(1/x\) é \(\ln x\). A integral imprópria \(\int_1^\infty f\) significa \(\lim_{R\to\infty}\int_1^R f\), quando o limite existe em \(\R\).}
+
+\begin{proof}
+Se \(p\le 0\), então \(n^{-p}\ge 1\) para todo \(n\ge 1\), logo \(n^{-p}\) não tende a \(0\). O teste da divergência dá a divergência da série. No que segue, \(p>0\), e \(f(x)=x^{-p}\) é positiva, contínua e decrescente em \([1,\infty)\).
+
+Fixe um inteiro \(k\ge 1\). Para \(x\in[k,k+1]\) a monotonicidade dá \(f(k+1)\le f(x)\le f(k)\). Integrando no intervalo de comprimento \(1\),
+\[
+f(k+1)\le\int_k^{k+1} f(x)\,\dif x\le f(k).
+\]
+O desenho é este: no intervalo \([k,k+1]\), o retângulo de altura \(f(k)\) fica acima do gráfico, e o retângulo de altura \(f(k+1)\) fica abaixo. Some de \(k=1\) até \(k=N-1\), com \(N\ge 2\):
+\[
+\sum_{k=1}^{N-1} f(k+1)
+\le\int_1^N f(x)\,\dif x
+\le\sum_{k=1}^{N-1} f(k).
+\]
+O lado esquerdo é \(\sum_{m=2}^{N} f(m)\). Ficam as duas comparações, com os índices deslocados de uma unidade:
+\begin{equation}
+\label{eq:retangulos}
+\sum_{m=2}^{N} f(m)
+\le\int_1^N f(x)\,\dif x
+\le\sum_{k=1}^{N-1} f(k).
+\end{equation}
+
+Calcule a integral. Se \(p\neq 1\),
+\[
+\int_1^R x^{-p}\,\dif x=\frac{R^{1-p}-1}{1-p}.
+\]
+Se \(p>1\), então \(1-p<0\), logo \(R^{1-p}\to 0\) e a integral imprópria vale \(1/(p-1)<\infty\). Se \(0<p<1\), então \(R^{1-p}\to+\infty\) e a integral diverge. Se \(p=1\), \(\int_1^R x^{-1}\,\dif x=\ln R\to+\infty\).
+
+Suponha \(p>1\). A primeira desigualdade de \eqref{eq:retangulos} dá, para todo \(N\ge 2\),
+\[
+\sum_{m=2}^{N} m^{-p}\le\int_1^N x^{-p}\,\dif x\le\int_1^\infty x^{-p}\,\dif x=\frac{1}{p-1}.
+\]
+As somas parciais da cauda são crescentes e limitadas superiormente, logo convergem. Somar o primeiro termo \(1^{-p}\) não muda a convergência.
+
+Suponha \(0<p\le 1\). A segunda desigualdade de \eqref{eq:retangulos} dá
+\[
+\sum_{k=1}^{N-1} k^{-p}\ge\int_1^N x^{-p}\,\dif x.
+\]
+O lado direito tende a infinito, logo as somas parciais não são limitadas e a série diverge.
+
+Juntando o caso \(p\le 0\), a série converge se e somente se \(p>1\).
+\end{proof}
+
+\begin{corolario}
+\(\sum 1/n^2\) converge, e \(\sum 1/\sqrt{n}\) diverge.
+\end{corolario}
+
+\section{Comparação direta e comparação no limite}
+
+Os dois testes desta seção exigem termos não negativos a partir de algum índice. Sem esse sinal, comparar módulos é outro assunto: é a convergência absoluta, tratada mais adiante.
+
+\begin{teorema}[comparação direta]
+Sejam \(a_n\ge 0\), \(b_n\ge 0\) e suponha que exista \(N_0\) tal que \(a_n\le b_n\) para todo \(n\ge N_0\).
+\begin{enumerate}
+\item Se \(\sum b_n\) converge, então \(\sum a_n\) converge.
+\item Se \(\sum a_n\) diverge, então \(\sum b_n\) diverge.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+A segunda afirmação é a contrapositiva da primeira. Provemos a primeira. Para \(M\ge N_0\),
+\[
+\sum_{n=N_0}^{M} a_n\le\sum_{n=N_0}^{M} b_n\le\sum_{n=N_0}^{\infty} b_n.
+\]
+A série dos \(b_n\) converge, então a cauda \(\sum_{n=N_0}^\infty b_n\) é um número real finito: é o limite das somas parciais da cauda. A sequência \(M\mapsto\sum_{n=N_0}^{M} a_n\) é crescente, porque \(a_n\ge 0\), e é limitada superiormente. Pelo teorema da sequência monótona, ela converge. A proposição sobre termos finitos devolve a convergência de \(\sum_{n=1}^\infty a_n\).
+\end{proof}
+
+\begin{teorema}[comparação no limite]
+Sejam \(a_n\ge 0\), \(b_n>0\), e suponha que \(\lim_{n\to\infty} a_n/b_n=L\), com \(L\in[0,+\infty]\).
+\begin{enumerate}
+\item Se \(0<L<\infty\), então \(\sum a_n\) converge se e somente se \(\sum b_n\) converge.
+\item Se \(L=0\) e \(\sum b_n\) converge, então \(\sum a_n\) converge.
+\item Se \(L=+\infty\) e \(\sum b_n\) diverge, então \(\sum a_n\) diverge.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+Caso \(0<L<\infty\). Existe \(N\) tal que \(n\ge N\) implica \(\abs{a_n/b_n-L}<L/2\). Então
+\[
+\frac{L}{2}<\frac{a_n}{b_n}<\frac{3L}{2},
+\]
+isto é \((L/2)\,b_n<a_n<(3L/2)\,b_n\). As duas desigualdades e a comparação direta transferem a convergência nos dois sentidos. O fator positivo \(3L/2\) não muda a convergência de \(\sum b_n\), porque as somas parciais ficam multiplicadas por essa constante.
+
+Caso \(L=0\). Existe \(N\) tal que \(n\ge N\) implica \(a_n/b_n<1\), logo \(a_n<b_n\). A comparação direta dá a convergência de \(\sum a_n\) quando \(\sum b_n\) converge.
+
+Caso \(L=+\infty\). Existe \(N\) tal que \(n\ge N\) implica \(a_n/b_n>1\), logo \(a_n>b_n\). Se \(\sum b_n\) diverge, a comparação direta força a divergência de \(\sum a_n\).
+\end{proof}
+
+\begin{exemplo}
+Dois cuidados de sinal da comparação, com as contas fechadas.
+
+A série \(\sum (n+1)/(n^2+n)\) é a harmônica disfarçada: \(n^2+n=n(n+1)\), logo \((n+1)/(n^2+n)=1/n\). Ela diverge. A cota \((n+1)/(n^2+n)\le 2/n\) também é verdadeira, mas majorar por uma série divergente não decide nada. A hipótese útil é a oposta: o termo maior converge, ou o termo menor diverge.
+
+A série \(\sum n/(n^3+1)\) converge por comparação direta. Para \(n\ge 1\),
+\[
+0<\frac{n}{n^3+1}\le\frac{n}{n^3}=\frac{1}{n^2},
+\]
+e \(\sum 1/n^2\) converge.
+\end{exemplo}
+
+\section{O teste da razão}
+
+\begin{teorema}[teste da razão]
+Suponha que o limite
+\[
+L=\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}
+\]
+exista em \([0,+\infty]\). Isso pressupõe \(a_n\neq 0\) para todo \(n\) grande.
+\begin{enumerate}
+\item Se \(L<1\), a série \(\sum a_n\) converge absolutamente.
+\item Se \(L>1\), inclusive se \(L=+\infty\), a série diverge.
+\item Se \(L=1\), o teste não decide.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+Caso \(L<1\). Escolha um número \(r\) com \(L<r<1\). Pela definição de limite, existe \(N\) tal que \(n\ge N\) implica \(\abs{a_{n+1}/a_n}<r\), isto é \(\abs{a_{n+1}}\le r\abs{a_n}\). Por indução em \(k\ge 0\),
+\[
+\abs{a_{N+k}}\le\abs{a_N}\,r^k.
+\]
+O passo \(k=0\) é igualdade. Se vale para \(k\), então
+\[
+\abs{a_{N+k+1}}\le r\abs{a_{N+k}}\le\abs{a_N}\,r^{k+1}.
+\]
+A cauda dos módulos fica dominada por uma geométrica de razão \(r\in(0,1)\):
+\[
+\sum_{k=0}^{\infty}\abs{a_{N+k}}
+\le\abs{a_N}\sum_{k=0}^{\infty} r^k
+=\frac{\abs{a_N}}{1-r}<\infty.
+\]
+A comparação direta dá a convergência de \(\sum\abs{a_n}\).
+
+Caso \(1<L\le+\infty\). Se \(L\) é finito, existe \(N\) tal que \(n\ge N\) implica \(\abs{a_{n+1}/a_n}>1\), logo \(\abs{a_{n+1}}>\abs{a_n}\). Então \(\abs{a_n}\ge\abs{a_N}\) para todo \(n\ge N\). Como o limite da razão existe e é maior do que \(1\), \(a_N\neq 0\), e \(\abs{a_n}\) fica afastado de zero. O teste da divergência se aplica.
+
+Se \(L=+\infty\), existe \(N\) tal que \(n\ge N\) implica \(\abs{a_{n+1}/a_n}>2\). Indutivamente \(\abs{a_{N+k}}\ge 2^k\abs{a_N}\). O lado direito tende a infinito se \(a_N\neq 0\), o que ocorre porque as razões estão definidas. De novo \(a_n\) não tende a \(0\).
+
+Caso \(L=1\). Os dois exemplos seguintes têm o mesmo limite de razão e comportamentos opostos. Para a harmônica, \(a_n=1/n\) e
+\[
+\abs{\frac{a_{n+1}}{a_n}}=\frac{n}{n+1}\to 1,
+\]
+e a série diverge. Para \(a_n=1/n^2\),
+\[
+\abs{\frac{a_{n+1}}{a_n}}=\frac{n^2}{(n+1)^2}\to 1,
+\]
+e a série converge, porque é uma \(p\)-série com \(p=2>1\). Portanto \(L=1\) não decide.
+
+A série geométrica não serve de par inconclusivo: nela \(\abs{a_{n+1}/a_n}=\abs{r}\) para todo \(n\), então \(L=\abs{r}\). O teste conclui quando \(\abs{r}\neq 1\). Quando \(\abs{r}=1\) ele devolve \(L=1\) e cala, o que é compatível com a análise direta já feita, mas não exibe ao mesmo tempo uma série convergente e uma divergente.
+\end{proof}
+
+\section{O teste da raiz}
+
+\begin{definicao}
+Para uma sequência real \((b_n)\), o limite superior é
+\[
+\limsup_{n\to\infty} b_n=\inf_{N\in\N}\Bigl(\sup_{n\ge N} b_n\Bigr),
+\]
+tomado em \([-\infty,+\infty]\). Se \(b_n\ge 0\), o valor está em \([0,+\infty]\).
+\end{definicao}
+
+A propriedade que usamos é esta: se \(\limsup b_n<r\), então existe \(N\) tal que \(b_n<r\) para todo \(n\ge N\). De fato, o ínfimo dos supremos da cauda é menor do que \(r\), logo algum supremo de cauda é menor do que \(r\), e todos os termos dessa cauda ficam abaixo de \(r\). No outro sentido: se \(\limsup b_n>1\), então não pode ocorrer que \(b_n\le 1\) para todo \(n\) grande, pois isso obrigaria o supremo da cauda a ser no máximo \(1\) e o limite superior a ser no máximo \(1\). Assim \(b_n>1\) para infinitos índices.
+
+\begin{teorema}[teste da raiz]
+Seja \(L=\limsup_{n\to\infty}\abs{a_n}^{1/n}\in[0,+\infty]\).
+\begin{enumerate}
+\item Se \(L<1\), então \(\sum a_n\) converge absolutamente.
+\item Se \(L>1\), inclusive se \(L=+\infty\), então \(\sum a_n\) diverge.
+\item Se \(L=1\), o teste não decide.
+\end{enumerate}
+\end{teorema}
+
+\begin{proof}
+Caso \(L<1\). Escolha \(r\) com \(L<r<1\). Existe \(N\) tal que, para todo \(n\ge N\), \(\abs{a_n}^{1/n}<r\), logo \(\abs{a_n}<r^n\). A série \(\sum_{n=N}^\infty r^n\) é geométrica de razão \(r\in(0,1)\) e converge. A comparação direta dá \(\sum\abs{a_n}<\infty\).
+
+Caso \(L>1\). Se \(a_n\to 0\), existiria \(N\) tal que \(n\ge N\) implica \(\abs{a_n}<1\), e então \(\abs{a_n}^{1/n}<1\). O supremo da cauda seria no máximo \(1\) e o limite superior seria no máximo \(1\), contra \(L>1\). Logo \(a_n\) não tende a \(0\), e a série diverge pelo teste da divergência. O mesmo vale se \(L=+\infty\), porque \(+\infty>1\).
+
+Caso \(L=1\). Provamos primeiro que \(n^{1/n}\to 1\). Para \(n\ge 1\), \(n^{1/n}\ge 1\). Escreva \(n^{1/n}=1+d_n\) com \(d_n\ge 0\). Para \(d\ge 0\) e \(n\ge 1\), \((1+d)^n\ge 1+nd+n(n-1)d^2/2\). Em \(n=1\) os dois lados são \(1+d\). Se vale para \(n\), multiplique por \(1+d\ge 0\):
+\begin{align*}
+(1+d)^{n+1}
+&\ge(1+d)\Bigl(1+nd+\frac{n(n-1)}{2}d^2\Bigr)\\
+&=1+(n+1)d+\frac{n(n+1)}{2}d^2+\frac{n(n-1)}{2}d^3\\
+&\ge 1+(n+1)d+\frac{(n+1)n}{2}d^2.
+\end{align*}
+Para \(n\ge 2\), \(n=(1+d_n)^n\ge n(n-1)d_n^2/2\), logo \(d_n^2\le 2/(n-1)\). Assim \(d_n\to 0\) e \(n^{1/n}\to 1\).
+
+Para \(a_n=1/n\), \(\abs{a_n}^{1/n}=1/n^{1/n}\to 1\), e a série diverge. Para \(a_n=1/n^2\), \(\abs{a_n}^{1/n}=1/(n^{1/n})^2\to 1\), e a série converge. O valor \(L=1\) ocorre nos dois lados.
+\end{proof}
+
+\section{O teste de Leibniz}
+
+\begin{teorema}[Leibniz]
+Seja \((b_n)\) decrescente, com \(b_n\ge 0\) e \(b_n\to 0\). Então a série alternada
+\[
+\sum_{n=1}^\infty (-1)^{n+1} b_n
+\]
+converge. Se \(S\) é a soma e \(s_N\) é a soma parcial, o resto \(R_N=S-s_N\) tem o sinal do primeiro termo omitido, e
+\[
+\abs{R_N}\le b_{N+1}.
+\]
+\end{teorema}
+
+\begin{proof}
+Escreva \(s_N=\sum_{n=1}^N (-1)^{n+1} b_n\), de modo que a série começa \(b_1-b_2+b_3-b_4+\cdots\).
+
+Somas pares. Para \(m\ge 1\),
+\[
+s_{2m+2}-s_{2m}=b_{2m+1}-b_{2m+2}\ge 0,
+\]
+porque \((b_n)\) é decrescente. Logo \(s_2\le s_4\le s_6\le\cdots\). Além disso
+\begin{align*}
+s_{2m}
+&=b_1-(b_2-b_3)-(b_4-b_5)-\cdots-(b_{2m-2}-b_{2m-1})-b_{2m}.
+\end{align*}
+Cada parêntese é não negativo e \(b_{2m}\ge 0\), logo \(s_{2m}\le b_1\). A sequência das somas pares é crescente e limitada superiormente, então converge para algum \(S_{\mathrm{par}}\le b_1\). Em particular \(s_{2m}\le S_{\mathrm{par}}\).
+
+Somas ímpares. 
+\[
+s_{2m+1}-s_{2m+3}=b_{2m+2}-b_{2m+3}\ge 0,
+\]
+logo \(s_1\ge s_3\ge s_5\ge\cdots\). E \(s_{2m+1}=s_{2m}+b_{2m+1}\ge s_{2m}\ge s_2=b_1-b_2\ge 0\), então as somas ímpares são limitadas inferiormente. A sequência decrescente e limitada inferiormente converge para algum \(S_{\mathrm{impar}}\). Em particular \(s_{2m+1}\ge S_{\mathrm{impar}}\).
+
+Os dois limites coincidem: \(s_{2m+1}-s_{2m}=b_{2m+1}\to 0\), logo \(S_{\mathrm{impar}}=S_{\mathrm{par}}\). Chame esse número de \(S\). Toda soma parcial é uma soma par ou uma soma ímpar, e as duas subsequências tendem a \(S\), então \(s_N\to S\).
+
+A ordem obtida é
+\[
+s_2\le s_4\le s_6\le\cdots\le S\le\cdots\le s_7\le s_5\le s_3\le s_1.
+\]
+Cada soma par é no máximo \(S\) e cada soma ímpar é no mínimo \(S\). Em particular \(s_2\le s_4\le\cdots\le s_5\le s_3\le s_1\), no sentido de que os pares crescem até \(S\) e os ímpares decrescem até \(S\).
+
+Resto. Se \(N=2m\) é par, \(s_{2m}\le S\le s_{2m+1}=s_{2m}+b_{2m+1}\), logo
+\[
+0\le S-s_{2m}\le b_{2m+1}=b_{N+1}.
+\]
+O primeiro termo omitido é \((-1)^{(2m+1)+1}b_{2m+1}=b_{2m+1}>0\) salvo se for zero, e o resto é não negativo.
+
+Se \(N=2m-1\) é ímpar, \(s_{2m}=s_{2m-1}-b_{2m}\le S\le s_{2m-1}\), logo
+\[
+0\le s_{2m-1}-S\le b_{2m}=b_{N+1},
+\]
+isto é \(\abs{R_N}\le b_{N+1}\) e \(R_N\le 0\). O primeiro termo omitido é \((-1)^{(2m)+1}b_{2m}=-b_{2m}\le 0\).
+
+Nos dois casos o resto tem o sinal desse primeiro termo omitido, e o módulo não passa de \(b_{N+1}\).
+\end{proof}
+
+\cuidado{As duas hipóteses entram na conta. Sem \(b_n\to 0\), a série \(1-1+1-1+\cdots\) tem \(b_n=1\) decrescente e diverge, como a geométrica de razão \(-1\). Sem a monotonicidade, \(b_n\to 0\) e \(b_n\ge 0\) não bastam. Tome \(b_n=1/n^2\) se \(n\) é ímpar e \(b_n=1/n\) se \(n\) é par. Então \(b_n\to 0\), mas \(b_3=1/9<1/4=b_4\), então \((b_n)\) não é decrescente. A série \(\sum (-1)^{n+1}b_n\) emparelhada fica \(\sum_{k=1}^\infty\bigl(1/(2k-1)^2-1/(2k)\bigr)\). Para \(k\ge 2\), \(1/(2k-1)^2\le 1/(4k)\), porque \((2k-1)^2-4k=4k^2-8k+1\ge 1\). Logo cada par é menor ou igual a \(-1/(4k)\). A série dos pares diverge para \(-\infty\), e a série alternada diverge.}
+
+\section{Convergência absoluta e condicional}
+
+\begin{definicao}
+A série \(\sum a_n\) \emph{converge absolutamente} quando \(\sum\abs{a_n}\) converge. Converge \emph{condicionalmente} quando converge, mas \(\sum\abs{a_n}\) diverge.
+\end{definicao}
+
+\begin{teorema}[critério de Cauchy em \(\R\)]
+Uma sequência \((s_n)\) em \(\R\) converge se e somente se é de Cauchy: para todo \(\eps>0\) existe \(N\in\N\) tal que
+\[
+m,n\ge N\quad\Rightarrow\quad\abs{s_m-s_n}<\eps.
+\]
+\end{teorema}
+
+\begin{proof}[Direção provada aqui]
+Suponha \(s_n\to L\). Dado \(\eps>0\), existe \(N\) tal que \(n\ge N\) implica \(\abs{s_n-L}<\eps/2\). Se \(m,n\ge N\),
+\[
+\abs{s_m-s_n}\le\abs{s_m-L}+\abs{s_n-L}<\eps.
+\]
+A recíproca, ``Cauchy implica convergente'', é a completude de \(\R\) e fica admitida. É essa direção que transforma uma estimativa de Cauchy numa convergência.
+\end{proof}
+
+\begin{teorema}
+Se \(\sum a_n\) converge absolutamente, então \(\sum a_n\) converge.
+\end{teorema}
+
+\begin{proof}
+Seja \(t_N=\sum_{k=1}^N\abs{a_k}\) e \(s_N=\sum_{k=1}^N a_k\). Por hipótese \((t_N)\) converge, logo é de Cauchy. Para \(m>n\),
+\[
+\abs{s_m-s_n}
+=\abs{\sum_{k=n+1}^{m} a_k}
+\le\sum_{k=n+1}^{m}\abs{a_k}
+=t_m-t_n
+=\abs{t_m-t_n}.
+\]
+Dado \(\eps>0\), o mesmo \(N\) que torna \(\abs{t_m-t_n}<\eps\) para \(m,n\ge N\) torna \(\abs{s_m-s_n}<\eps\). A sequência \((s_N)\) é de Cauchy. Pelo critério de Cauchy, \((s_N)\) converge, que é a convergência de \(\sum a_n\).
+\end{proof}
+
+\begin{exemplo}[harmônica alternada]
+A série \(\sum_{n=1}^\infty (-1)^{n+1}/n\) converge pelo teste de Leibniz, com \(b_n=1/n\) decrescente e tendendo a zero. Não converge absolutamente, porque \(\sum 1/n\) é a harmônica. A convergência é condicional.
+\end{exemplo}
+
+\section{Rearranjo de Riemann}
+
+Um \emph{rearranjo} de \(\sum a_n\) é uma série \(\sum a_{\sigma(n)}\), em que \(\sigma\colon\N\to\N\) é bijetora. A ordem dos termos muda; o conjunto dos termos, não.
+
+\begin{teorema}[Riemann]
+Seja \(\sum a_n\) uma série de termos reais.
+\begin{enumerate}
+\item Se a convergência é absoluta e a soma é \(S\), então todo rearranjo converge, e converge para o mesmo \(S\).
+\item Se a convergência é condicional, então para todo \(L\in\R\cup\{+\infty,-\infty\}\) existe um rearranjo cuja sequência de somas parciais tende a \(L\).
+\end{enumerate}
+\end{teorema}
+
+A primeira parte é provada por completo. A segunda fica em esqueleto: a construção está em passos, com a estimativa que faz a soma parcial ir a \(L\).
+
+\begin{lema}
+\label{lem:partes}
+Escreva \(a_n^+=\max\{a_n,0\}\) e \(a_n^-=\max\{-a_n,0\}\), de modo que \(a_n=a_n^+-a_n^-\) e \(\abs{a_n}=a_n^++a_n^-\). Se \(\sum a_n\) converge condicionalmente, então \(\sum a_n^+\) e \(\sum a_n^-\) divergem.
+\end{lema}
+
+\begin{proof}
+As duas séries têm termos não negativos. Se ambas convergissem, a soma delas \(\sum\abs{a_n}\) convergiria, contra a convergência condicional.
+
+Se \(\sum a_n^+\) convergisse e \(\sum a_n^-\) divergisse, as somas parciais \(S_N^-\) iriam a \(+\infty\) e as somas \(S_N^+\) convergiriam para um número finito. Então \(s_N=S_N^+-S_N^-\to-\infty\), e \(\sum a_n\) divergiria. O caso simétrico, só a parte negativa convergindo, empurraria \(s_N\) para \(+\infty\).
+
+Como a série original converge, nenhuma dessas alternativas resta. As duas partes divergem.
+\end{proof}
+
+\begin{proof}[Convergência absoluta: a soma não muda]
+Suponha \(\sum\abs{a_n}<\infty\) e \(\sum a_n=S\). Seja \(\sigma\colon\N\to\N\) bijetora e \(t_m=\sum_{k=1}^m a_{\sigma(k)}\).
+
+Seja \(\eps>0\). A série dos módulos converge, então a cauda vai a zero: existe \(N\in\N\) tal que
+\[
+\sum_{n=N+1}^\infty\abs{a_n}<\frac{\eps}{2}.
+\]
+O conjunto \(\{1,\ldots,N\}\) é finito e \(\sigma\) é sobrejetora, logo existe
+\[
+M=\max\bigl\{\sigma^{-1}(1),\ldots,\sigma^{-1}(N)\bigr\}.
+\]
+Para todo \(m\ge M\), os termos \(a_1,\ldots,a_N\) aparecem entre \(a_{\sigma(1)},\ldots,a_{\sigma(m)}\). Portanto
+\[
+t_m-\sum_{n=1}^N a_n
+\]
+é uma soma de termos \(a_j\) com índices \(j\ge N+1\), todos distintos. O módulo dessa diferença é no máximo a cauda dos módulos:
+\[
+\abs{t_m-\sum_{n=1}^N a_n}
+\le\sum_{n=N+1}^\infty\abs{a_n}
+<\frac{\eps}{2}.
+\]
+A mesma cauda controla a série original. Para \(P>N\),
+\[
+\abs{\sum_{n=N+1}^{P} a_n}\le\sum_{n=N+1}^{P}\abs{a_n}\le\sum_{n=N+1}^\infty\abs{a_n}<\frac{\eps}{2}.
+\]
+Faça \(P\to\infty\): o limite do lado esquerdo é \(\abs{S-\sum_{n=1}^N a_n}\), logo
+\[
+\abs{S-\sum_{n=1}^N a_n}\le\sum_{n=N+1}^\infty\abs{a_n}<\frac{\eps}{2}.
+\]
+Para \(m\ge M\),
+\[
+\abs{t_m-S}
+\le\abs{t_m-\sum_{n=1}^N a_n}+\abs{\sum_{n=1}^N a_n-S}
+<\eps.
+\]
+Logo \(t_m\to S\). O rearranjo, a partir da casa \(M\), só mexe em termos da cauda, e essa cauda dos módulos foi feita menor do que \(\eps/2\).
+\end{proof}
+
+\begin{esqueleto}
+\item Separe os termos positivos \((p_j)\), na ordem em que aparecem em \((a_n)\), e os termos negativos \((q_j)\), também na ordem original. Termos nulos podem ser omitidos: não alteram soma parcial. Pelo lema, \(\sum p_j\) e \(\sum q_j\) divergem. Como a série original converge, \(a_n\to 0\), logo \(p_j\to 0\) e \(q_j\to 0\).
+\item Caso \(L\in\R\). Construa o rearranjo por etapas. Na etapa ímpar, some o menor número possível de positivos ainda não usados até que a soma parcial fique estritamente maior do que \(L\). Isso é possível porque a série dos positivos que restam ainda diverge para \(+\infty\): só se gastou uma quantidade finita de termos. Na etapa par, some o menor número possível de negativos ainda não usados até que a soma parcial fique estritamente menor do que \(L\). De novo a cauda dos negativos diverge para \(-\infty\).
+\item Seja \(\tau_\ell\) a soma parcial no fim da etapa \(\ell\). Ao terminar uma etapa positiva, \(\tau_\ell>L\), mas antes do último termo somado a soma era no máximo \(L\). A ultrapassagem é no máximo o último positivo usado: \(0<\tau_\ell-L\le p_{j(\ell)}\). Ao terminar uma etapa negativa, \(0<L-\tau_\ell\le\abs{q_{i(\ell)}}\). Cada etapa consome ao menos um termo, então o índice original do último termo da etapa \(\ell\) vai a infinito com \(\ell\). Como \(a_n\to 0\), esse último termo tende a \(0\), e portanto \(\tau_\ell\to L\).
+\item No meio de uma etapa os termos têm sinal constante, então as somas parciais intermediárias ficam entre \(\tau_\ell\) e \(\tau_{\ell+1}\). Os dois extremos tendem a \(L\), logo as somas intermediárias também tendem a \(L\). O rearranjo converge para \(L\).
+\item Caso \(L=+\infty\). Some positivos até passar de \(1\), depois um único negativo; positivos até passar de \(2\), depois um único negativo; e assim por diante, pedindo que a soma no fim do bloco positivo de índice \(k\) seja maior do que \(k\). Isso é possível pela divergência dos positivos. O negativo encaixado tende a zero, então, para \(k\) grande, depois dele a soma ainda é maior do que \(k-1\). As somas parciais vão a \(+\infty\).
+\item Caso \(L=-\infty\). Troque os papéis: blocos de negativos até descer abaixo de \(-k\), intercalados com um único positivo, que tende a zero e não impede a descida.
+\end{esqueleto}
+
+\section{Exercícios}
+
+\begin{exercicio}[Básico — definição de limite]
+Mostre, pela definição com \(\eps\) e \(N\), que
+\[
+\lim_{n\to\infty}\frac{2n+1}{n+3}=2.
+\]
+\end{exercicio}
+
+\begin{exercicio}[Básico — subsequências]
+Seja \(a_n=(-1)^n\bigl(1+1/n\bigr)\). Exiba duas subsequências com limites diferentes e conclua que \((a_n)\) não converge.
+\end{exercicio}
+
+\begin{exercicio}[Básico — soma geométrica]
+Calcule \(\sum_{n=0}^\infty (-1/3)^n\) e \(\sum_{n=1}^\infty (2/5)^n\). Justifique a convergência antes de escrever a soma.
+\end{exercicio}
+
+\begin{exercicio}[Básico — teste da divergência]
+Mostre que \(\sum_{n=1}^\infty n^2/(n^2+1)\) diverge. Em seguida use a série harmônica para explicar por que \(a_n\to 0\) não garante convergência.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — comparação]
+Decida se convergem, com uma comparação escrita:
+\[
+\text{(a)}\ \sum_{n=1}^\infty\frac{\sqrt{n}}{n^2+n},
+\qquad
+\text{(b)}\ \sum_{n=1}^\infty\frac{1}{\sqrt{n}+1}.
+\]
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — razão]
+Decida se convergem, calculando o limite da razão:
+\[
+\text{(a)}\ \sum_{n=1}^\infty\frac{n^2}{2^n},
+\qquad
+\text{(b)}\ \sum_{n=1}^\infty\frac{n!}{10^n}.
+\]
+Depois mostre que o mesmo teste devolve \(L=1\) para \(\sum 1/n^2\), e diga por que isso não contradiz a convergência dessa série.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — Leibniz]
+Considere \(\sum_{n=1}^\infty (-1)^{n+1}/\sqrt{n}\). Mostre que a série converge e que a convergência não é absoluta. Determine um natural \(N\) tal que o módulo do resto depois de \(N\) termos seja menor do que \(10^{-2}\), deduzindo a desigualdade a partir da estimativa de Leibniz.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — termo limitado]
+Prove: se \(\sum\abs{a_n}\) converge e existe \(M\ge 0\) tal que \(\abs{b_n}\le M\) para todo \(n\), então \(\sum a_nb_n\) converge absolutamente.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — \(n a_n\)]
+Prove: se \(a_n\ge 0\), \((a_n)\) é decrescente e \(\sum a_n\) converge, então \(n a_n\to 0\).
+\end{exercicio}
+
+\end{document}

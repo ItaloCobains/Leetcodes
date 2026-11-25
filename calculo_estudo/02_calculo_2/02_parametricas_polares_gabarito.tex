@@ -1,0 +1,284 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: curvas paramétricas e coordenadas polares}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+Cada solução repete o enunciado e faz a conta até o fim. A numeração é a da nota \texttt{02\_parametricas\_polares.tex}.
+
+\section{Básicos}
+
+\begin{exercicio}[Básico --- B1]
+Reta tangente de \(x=t^{2}\), \(y=2t\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+As derivadas são \(x'=2t\) e \(y'=2\), contínuas em \(\R\). Para \(t\neq 0\),
+\[
+\frac{\dif y}{\dif x}=\frac{y'}{x'}=\frac{2}{2t}=\frac{1}{t}.
+\]
+Em \(t=0\), \(x'=0\) e \(y'=2\neq 0\). A tangente é vertical, no ponto \(\bigl(x(0),y(0)\bigr)=(0,0)\). A reta é \(X=0\).
+
+Em \(t=1\), o ponto é \((1,2)\) e a inclinação é \(1/1=1\). A reta tangente é
+\[
+Y-2=1\cdot(X-1),\qquad Y=X+1.
+\]
+
+\begin{exercicio}[Básico --- B2]
+Comprimento de \(x=3\cos t\), \(y=3\sin t\), \(t\in[0,\pi/2]\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Temos \(x'=-3\sin t\), \(y'=3\cos t\) e
+\[
+\sqrt{x'^{2}+y'^{2}}
+=\sqrt{9\sin^{2}t+9\cos^{2}t}
+=\sqrt{9}=3.
+\]
+O caminho é um quarto de circunferência de raio \(3\), percorrido uma vez. O comprimento é
+\[
+L=\int_{0}^{\pi/2} 3\,\dif t=3\cdot\frac{\pi}{2}=\frac{3\pi}{2}.
+\]
+
+\begin{exercicio}[Básico --- B3]
+Área polar do disco de raio \(2\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+A região \(0\le\theta\le 2\pi\), \(0\le\rho\le 2\) é o disco de raio \(2\) centrado na origem. A função \(r(\theta)=2\) é contínua e não negativa, e o intervalo de ângulos tem comprimento \(2\pi\), varrendo o disco uma vez. A fórmula dá
+\[
+A=\frac12\int_{0}^{2\pi} 2^{2}\,\dif\theta
+=\frac12\int_{0}^{2\pi} 4\,\dif\theta
+=\frac12\cdot 4\cdot 2\pi
+=4\pi.
+\]
+A área geométrica do disco é \(\pi R^{2}=\pi\cdot 4=4\pi\). Os dois valores coincidem.
+
+\begin{exercicio}[Básico --- B4]
+Revolução de \(x=t\), \(y=t\), \(t\in[0,2]\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+No intervalo, \(y=t\ge 0\). As derivadas são \(x'=1\) e \(y'=1\), e
+\[
+\sqrt{x'^{2}+y'^{2}}=\sqrt{1+1}=\sqrt{2}.
+\]
+A área da superfície é
+\begin{align*}
+S
+&=\int_{0}^{2} 2\pi\cdot t\cdot\sqrt{2}\,\dif t
+=2\pi\sqrt{2}\int_{0}^{2} t\,\dif t
+=2\pi\sqrt{2}\Biggl[\frac{t^{2}}{2}\Biggr]_{0}^{2}
+=2\pi\sqrt{2}\cdot\frac{4}{2}
+=4\pi\sqrt{2}.
+\end{align*}
+O segmento de \((0,0)\) a \((2,2)\) gera um cone. A fórmula foi aplicada com \(y\ge 0\) e com derivadas contínuas.
+
+\section{Intermediários}
+
+\begin{exercicio}[Intermediário --- I1]
+Comprimento de uma arcada da ciclóide.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Para \(x=t-\sin t\) e \(y=1-\cos t\),
+\[
+x'=1-\cos t,\qquad y'=\sin t.
+\]
+Então
+\begin{align*}
+x'^{2}+y'^{2}
+&=(1-\cos t)^{2}+\sin^{2}t
+=1-2\cos t+\cos^{2}t+\sin^{2}t
+=2-2\cos t
+=2(1-\cos t).
+\end{align*}
+A identidade \(1-\cos t=2\sin^{2}(t/2)\) dá
+\[
+2(1-\cos t)=4\sin^{2}(t/2),
+\qquad
+\sqrt{x'^{2}+y'^{2}}=2\abs{\sin(t/2)}.
+\]
+No intervalo \([0,2\pi]\), temos \(t/2\in[0,\pi]\) e \(\sin(t/2)\ge 0\). O módulo sai, e o integrando vale \(2\sin(t/2)\). Portanto
+\begin{align*}
+L
+&=\int_{0}^{2\pi} 2\sin(t/2)\,\dif t
+=2\cdot\bigl(-2\bigr)\Bigl[\cos(t/2)\Bigr]_{0}^{2\pi}
+=-4\Bigl(\cos\pi-\cos 0\Bigr)
+=-4\bigl(-1-1\bigr)
+=8.
+\end{align*}
+A antiderivada de \(\sin(t/2)\) é \(-2\cos(t/2)\), e o fator \(2\) na frente produz o \(-4\). O comprimento de uma arcada é \(8\).
+
+\begin{exercicio}[Intermediário --- I2]
+Áreas da rosa \(r=\sin(2\theta)\).
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Uma pétala em que \(r\ge 0\) é \(\theta\in[0,\pi/2]\): aí \(\sin(2\theta)\ge 0\), e \(r\) se anula nos extremos. A área é
+\begin{align*}
+A_{1}
+&=\frac12\int_{0}^{\pi/2}\sin^{2}(2\theta)\,\dif\theta
+=\frac12\int_{0}^{\pi/2}\frac{1-\cos(4\theta)}{2}\,\dif\theta
+=\frac14\int_{0}^{\pi/2}\bigl(1-\cos(4\theta)\bigr)\dif\theta\\
+&=\frac14\Biggl[\theta-\frac{\sin(4\theta)}{4}\Biggr]_{0}^{\pi/2}
+=\frac14\Biggl(\frac{\pi}{2}-\frac{\sin(2\pi)}{4}-0\Biggr)
+=\frac14\cdot\frac{\pi}{2}
+=\frac{\pi}{8}.
+\end{align*}
+De \(0\) a \(2\pi\) a função \(\sin(2\theta)\) tem quatro trechos de comprimento \(\pi/2\) em que não é negativa, separados por zeros em \(0,\pi/2,\pi,3\pi/2,2\pi\). Integrar \(r^{2}\) não vê o sinal de \(r\):
+\begin{align*}
+A_{4}
+&=\frac12\int_{0}^{2\pi}\sin^{2}(2\theta)\,\dif\theta
+=\frac12\int_{0}^{2\pi}\frac{1-\cos(4\theta)}{2}\,\dif\theta
+=\frac14\Biggl[\theta-\frac{\sin(4\theta)}{4}\Biggr]_{0}^{2\pi}
+=\frac14\cdot 2\pi
+=\frac{\pi}{2}.
+\end{align*}
+E \(4\cdot(\pi/8)=\pi/2\). As quatro pétalas têm área total \(\pi/2\), e cada uma tem área \(\pi/8\).
+
+\begin{exercicio}[Intermediário --- I3]
+Interseção de \(r=2\cos\theta\) e \(r=1\), e a área comum.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+(i) Para \(r=2\cos\theta\ge 0\) restringimos \(\theta\in[-\pi/2,\pi/2]\). Igualando os raios,
+\[
+2\cos\theta=1\implies\cos\theta=\frac12\implies\theta=\frac{\pi}{3}\ \text{ou}\ \theta=-\frac{\pi}{3},
+\]
+ambos no intervalo. Os pontos cartesianos são
+\begin{align*}
+\theta=\frac{\pi}{3}:&\quad
+\bigl(1\cdot\cos(\pi/3),\,1\cdot\sin(\pi/3)\bigr)
+=\Bigl(\frac12,\frac{\sqrt{3}}{2}\Bigr),\\
+\theta=-\frac{\pi}{3}:&\quad
+\Bigl(\frac12,-\frac{\sqrt{3}}{2}\Bigr).
+\end{align*}
+O polo: \(2\cos\theta=0\) em \(\theta=\pm\pi/2\), então a curva \(r=2\cos\theta\) passa pela origem. A curva \(r=1\) tem raio constante \(1\) e não passa pela origem. O polo não é interseção.
+
+(ii) A região dentro das duas curvas, em coordenadas polares com origem no centro do círculo \(r=1\). Para \(\theta\in[0,\pi/3]\), \(\cos\theta\ge\cos(\pi/3)=1/2\), logo \(2\cos\theta\ge 1\): ao longo do raio, o círculo \(r=1\) é a fronteira interna da interseção. Para \(\theta\in[\pi/3,\pi/2]\), \(2\cos\theta\le 1\): a fronteira interna é \(r=2\cos\theta\). O lado \(\theta\in[-\pi/2,0]\) repete a área por simetria. Assim
+\begin{align*}
+A
+&=2\cdot\frac12\int_{0}^{\pi/3} 1^{2}\,\dif\theta
++2\cdot\frac12\int_{\pi/3}^{\pi/2}(2\cos\theta)^{2}\,\dif\theta
+=\int_{0}^{\pi/3} 1\,\dif\theta
++\int_{\pi/3}^{\pi/2} 4\cos^{2}\theta\,\dif\theta.
+\end{align*}
+A primeira integral vale \(\pi/3\). Na segunda, \(\cos^{2}\theta=(1+\cos(2\theta))/2\), logo \(4\cos^{2}\theta=2\bigl(1+\cos(2\theta)\bigr)\), e
+\begin{align*}
+\int_{\pi/3}^{\pi/2} 4\cos^{2}\theta\,\dif\theta
+&=\int_{\pi/3}^{\pi/2} 2\bigl(1+\cos(2\theta)\bigr)\dif\theta
+=\Bigl[2\theta+\sin(2\theta)\Bigr]_{\pi/3}^{\pi/2}.
+\end{align*}
+No extremo superior: \(2\cdot(\pi/2)+\sin\pi=\pi\). No extremo inferior: \(2\cdot(\pi/3)+\sin(2\pi/3)=2\pi/3+\sqrt{3}/2\). A diferença é
+\[
+\pi-\frac{2\pi}{3}-\frac{\sqrt{3}}{2}
+=\frac{\pi}{3}-\frac{\sqrt{3}}{2}.
+\]
+Somando a primeira integral,
+\[
+A=\frac{\pi}{3}+\frac{\pi}{3}-\frac{\sqrt{3}}{2}
+=\frac{2\pi}{3}-\frac{\sqrt{3}}{2}.
+\]
+Os dois círculos têm raio \(1\): um centrado na origem, o outro, porque \(r=2\cos\theta\) equivale a \((x-1)^{2}+y^{2}=1\), centrado em \((1,0)\). A distância entre centros é \(1\). A área da interseção de dois discos de raio \(1\) com centros a distância \(1\) é este valor.
+
+\section{Avançados}
+
+\begin{exercicio}[Avançado --- A1]
+Invariância do comprimento por reparametrização.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Seja \(t=\varphi(s)\), com \(\varphi:[c,d]\to[a,b]\) de classe \(C^1\), \(\varphi'>0\), \(\varphi(c)=a\) e \(\varphi(d)=b\). As funções compostas \(x(\varphi(s))\) e \(y(\varphi(s))\) são de classe \(C^1\). Pela regra da cadeia,
+\[
+\frac{\dif}{\dif s}x\bigl(\varphi(s)\bigr)=x'\bigl(\varphi(s)\bigr)\varphi'(s),
+\qquad
+\frac{\dif}{\dif s}y\bigl(\varphi(s)\bigr)=y'\bigl(\varphi(s)\bigr)\varphi'(s).
+\]
+O integrando do comprimento no parâmetro \(s\) é
+\begin{align*}
+&\sqrt{\bigl(x'(\varphi)\varphi'\bigr)^{2}+\bigl(y'(\varphi)\varphi'\bigr)^{2}}
+=\sqrt{\bigl(\varphi'\bigr)^{2}\bigl(x'(\varphi)^{2}+y'(\varphi)^{2}\bigr)}
+=\abs{\varphi'}\sqrt{x'(\varphi)^{2}+y'(\varphi)^{2}}.
+\end{align*}
+Como \(\varphi'>0\), o módulo é \(\varphi'\). Integramos:
+\begin{align*}
+\int_{c}^{d}\sqrt{x'(\varphi)^{2}+y'(\varphi)^{2}}\,\varphi'(s)\,\dif s.
+\end{align*}
+A substituição \(t=\varphi(s)\), \(\dif t=\varphi'(s)\,\dif s\), com extremos de \(a\) a \(b\), transforma a integral em
+\[
+\int_{a}^{b}\sqrt{x'(t)^{2}+y'(t)^{2}}\,\dif t.
+\]
+Os comprimentos coincidem. A hipótese \(\varphi'>0\) foi usada para tirar o módulo e para preservar a orientação dos extremos. Se \(\varphi'\) mudasse de sinal, a fórmula com \(\abs{\varphi'}\) ainda daria o comprimento do percurso, mas a substituição direta sem módulo inverteria pedaços.
+
+\begin{exercicio}[Avançado --- A2]
+A área polar de \(r=\cos\theta\) depende do intervalo.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+Primeiro a geometria, para saber o que deveria dar a área. Com \(r=\cos\theta\),
+\begin{align*}
+x&=r\cos\theta=\cos^{2}\theta=\frac{1+\cos(2\theta)}{2},\\
+y&=r\sin\theta=\cos\theta\sin\theta=\frac12\sin(2\theta).
+\end{align*}
+Então
+\[
+\Bigl(x-\frac12\Bigr)^{2}+y^{2}
+=\frac14\cos^{2}(2\theta)+\frac14\sin^{2}(2\theta)
+=\frac14.
+\]
+É a circunferência de centro \((1/2,0)\) e raio \(1/2\). A área do disco é \(\pi/4\).
+
+(i) No intervalo \([-\pi/2,\pi/2]\), \(\cos\theta\ge 0\). Calculamos
+\begin{align*}
+\frac12\int_{-\pi/2}^{\pi/2}\cos^{2}\theta\,\dif\theta
+&=\frac12\int_{-\pi/2}^{\pi/2}\frac{1+\cos(2\theta)}{2}\,\dif\theta
+=\frac14\Biggl[\theta+\frac12\sin(2\theta)\Biggr]_{-\pi/2}^{\pi/2}.
+\end{align*}
+O seno de \(\pm\pi\) é zero, e
+\[
+\frac14\Biggl(\frac{\pi}{2}-\Bigl(-\frac{\pi}{2}\Bigr)\Biggr)
+=\frac14\cdot\pi
+=\frac{\pi}{4}.
+\]
+Este valor é a área do disco. O intervalo varre a circunferência uma vez, com raio não negativo.
+
+(ii) De \(0\) a \(2\pi\),
+\begin{align*}
+\frac12\int_{0}^{2\pi}\cos^{2}\theta\,\dif\theta
+&=\frac14\Biggl[\theta+\frac12\sin(2\theta)\Biggr]_{0}^{2\pi}
+=\frac14\cdot 2\pi
+=\frac{\pi}{2}.
+\end{align*}
+É o dobro de \(\pi/4\).
+
+(iii) Para \(\theta\in(\pi/2,3\pi/2)\), \(\cos\theta<0\). O ponto de raio \(\cos\theta\) e ângulo \(\theta\) coincide com o ponto de raio \(-\cos\theta>0\) e ângulo \(\theta+\pi\). Explicitamente, o ponto de ângulo \(\theta+\pi\) e raio \(\cos(\theta+\pi)=-\cos\theta\) tem coordenadas
+\begin{align*}
+x&=(-\cos\theta)\cos(\theta+\pi)=(-\cos\theta)(-\cos\theta)=\cos^{2}\theta,\\
+y&=(-\cos\theta)\sin(\theta+\pi)=(-\cos\theta)(-\sin\theta)=\cos\theta\sin\theta,
+\end{align*}
+as mesmas do ponto \((\cos\theta,\theta)\). Enquanto \(\theta\) percorre \((\pi/2,3\pi/2)\), a curva repete a circunferência já percorrida em \((-\pi/2,\pi/2)\). A fórmula \(\frac12\int r^{2}\) integra um quadrado, sempre não negativo, e conta o disco duas vezes. A hipótese ``cada ponto, salvo o polo, corresponde a um único \(\theta\)'' falha no intervalo \([0,2\pi]\).
+
+\begin{exercicio}[Avançado --- A3]
+Revolução com \(y\) negativo.
+\end{exercicio}
+
+\noindent\textbf{Solução.}
+A integral pedida é
+\begin{align*}
+\int_{0}^{2\pi} 2\pi\sin t\,\dif t
+&=2\pi\Bigl[-\cos t\Bigr]_{0}^{2\pi}
+=2\pi\bigl(-\cos(2\pi)-(-\cos 0)\bigr)
+=2\pi\bigl(-1-(-1)\bigr)
+=0.
+\end{align*}
+Ela não é a área da esfera. Na fórmula
+\[
+S=\int_{a}^{b} 2\pi\, y(t)\,\sqrt{x'^{2}+y'^{2}}\,\dif t,
+\]
+aplicada a \(x=\cos t\), \(y=\sin t\), o fator \(\sqrt{x'^{2}+y'^{2}}\) vale \(1\), mas \(y=\sin t\) é negativo em \((\pi,2\pi)\). A hipótese \(y\ge 0\) falha. A integral trata a metade de baixo como raio negativo e subtrai a área que a metade de cima somou: \(2\pi\int_{0}^{\pi}\sin t\,\dif t=4\pi\) e \(2\pi\int_{\pi}^{2\pi}\sin t\,\dif t=-4\pi\). A área da esfera de raio \(1\) é \(4\pi\), obtida girando só o semicírculo superior, onde \(y\ge 0\).
+
+\end{document}

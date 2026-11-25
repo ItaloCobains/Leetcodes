@@ -1,0 +1,651 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Vetores, retas, planos e cônicas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\base{O produto $xy$ e o módulo $\abs{x}$ são os de $\R$. Para $a\ge 0$ existe um único $b\ge 0$ com $b^2=a$; a unicidade, se dois números não negativos têm o mesmo quadrado, segue de $b^2-c^2=(b-c)(b+c)=0$. A trigonometria usada aqui é a do capítulo anterior: $\cos\colon[0,\pi]\to[-1,1]$ é bijetora, e $\sin^2\theta+\cos^2\theta=1$. O seno e o cosseno de um ângulo de triângulo permanecem os já definidos.}
+
+\begin{intuicao}
+O produto escalar mede o quanto dois vetores apontam na mesma direção: é o produto dos comprimentos pelo cosseno do ângulo entre eles. A projeção é a sombra de um vetor sobre a reta do outro, e o resto fica perpendicular a essa reta. O produto vetorial em $\R^3$ é perpendicular ao plano dos dois vetores e tem comprimento igual à área do paralelogramo. Uma cônica é o lugar dos pontos cuja distância a focos, ou a um foco e uma reta, obedece a uma condição fixa; completar quadrados só translada esse lugar.
+\end{intuicao}
+
+\section{Vetores, produto escalar e norma}
+
+\begin{definicao}
+Seja $n\ge 1$. Um vetor de $\R^n$ é uma $n$-upla $\vet{u}=(u_1,\ldots,u_n)$ com cada $u_i\in\R$. A soma e o produto por escalar $\lambda\in\R$ são
+\[
+\vet{u}+\vet{v}=(u_1+v_1,\ldots,u_n+v_n),\qquad
+\lambda\vet{u}=(\lambda u_1,\ldots,\lambda u_n).
+\]
+O \emph{produto escalar} é $\vet{u}\cdot\vet{v}=\sum_{i=1}^n u_i v_i$. A \emph{norma euclidiana} é $\norm{\vet{u}}=\sqrt{\vet{u}\cdot\vet{u}}$. O vetor $\vet{0}$ tem todas as coordenadas nulas. Se $\vet{u}\neq\vet{0}$, o vetor unitário na direção de $\vet{u}$ é $\vet{u}/\norm{\vet{u}}$.
+\end{definicao}
+
+\begin{proposicao}[Bilinearidade e norma de um múltiplo]\label{prop:bilinear}
+Para todos $\vet{u},\vet{v},\vet{w}\in\R^n$ e $\lambda\in\R$,
+\begin{enumerate}
+\item $\vet{u}\cdot\vet{v}=\vet{v}\cdot\vet{u}$;
+\item $(\vet{u}+\vet{v})\cdot\vet{w}=\vet{u}\cdot\vet{w}+\vet{v}\cdot\vet{w}$ e $(\lambda\vet{u})\cdot\vet{v}=\lambda(\vet{u}\cdot\vet{v})$;
+\item $\vet{u}\cdot\vet{u}\ge 0$, e $\vet{u}\cdot\vet{u}=0$ se e somente se $\vet{u}=\vet{0}$;
+\item $\norm{\lambda\vet{u}}=\abs{\lambda}\,\norm{\vet{u}}$;
+\item $\norm{\vet{u}+\vet{v}}^2=\norm{\vet{u}}^2+2\,\vet{u}\cdot\vet{v}+\norm{\vet{v}}^2$.
+\end{enumerate}
+\end{proposicao}
+
+\begin{proof}
+A simetria e as duas bilinearidades são a comutatividade, a distributividade e a associatividade da multiplicação em $\R$, aplicadas coordenada a coordenada e somadas. A soma $\sum u_i^2$ é soma de quadrados, logo é não negativa, e é zero se e somente se cada $u_i=0$.
+
+Para o múltiplo,
+\[
+\norm{\lambda\vet{u}}^2=(\lambda\vet{u})\cdot(\lambda\vet{u})=\lambda^2\norm{\vet{u}}^2.
+\]
+O número $\abs{\lambda}$ é não negativo e $\abs{\lambda}^2=\lambda^2$. A unicidade da raiz não negativa dá $\norm{\lambda\vet{u}}=\abs{\lambda}\,\norm{\vet{u}}$.
+
+A expansão do item (5) é a bilinearidade:
+\begin{align*}
+(\vet{u}+\vet{v})\cdot(\vet{u}+\vet{v})
+&=\vet{u}\cdot\vet{u}+\vet{u}\cdot\vet{v}+\vet{v}\cdot\vet{u}+\vet{v}\cdot\vet{v}\\
+&=\norm{\vet{u}}^2+2\,\vet{u}\cdot\vet{v}+\norm{\vet{v}}^2.
+\end{align*}
+\end{proof}
+
+\begin{proposicao}[Raiz quadrada e quadrado preservam a ordem]\label{prop:raiz-ordem}
+Se $0\le \alpha\le \beta$, então $\sqrt{\alpha}\le\sqrt{\beta}$ e $\alpha^2\le\beta^2$. Se a desigualdade entre $\alpha$ e $\beta$ for estrita, as duas conclusões são estritas.
+\end{proposicao}
+
+\begin{proof}
+Tem-se $\beta^2-\alpha^2=(\beta-\alpha)(\beta+\alpha)$. Se $0\le\alpha\le\beta$, os dois fatores são não negativos, e o produto também é. Logo $\alpha^2\le\beta^2$. Se $\alpha<\beta$, então $\beta-\alpha>0$ e $\beta+\alpha\ge\beta>0$, logo o produto é positivo e $\alpha^2<\beta^2$.
+
+Para a raiz, suponha $\sqrt{\beta}<\sqrt{\alpha}$. Os dois lados são não negativos. O parágrafo anterior, com a desigualdade estrita, dá $\beta<\alpha$, absurdo. Logo $\sqrt{\alpha}\le\sqrt{\beta}$. O caso estrito é o mesmo argumento: $\sqrt{\beta}\le\sqrt{\alpha}$ implicaria $\beta\le\alpha$.
+\end{proof}
+
+\begin{teorema}[Cauchy--Schwarz]\label{teo:cs}
+Para todos $\vet{u},\vet{v}\in\R^n$,
+\[
+\abs{\vet{u}\cdot\vet{v}}\le\norm{\vet{u}}\,\norm{\vet{v}}.
+\]
+\end{teorema}
+
+\begin{proof}
+Se $\vet{v}=\vet{0}$, então $\vet{u}\cdot\vet{v}=0$ e $\norm{\vet{v}}=0$, e a desigualdade é $0\le\norm{\vet{u}}\cdot 0$.
+
+Suponha $\vet{v}\neq\vet{0}$. Para todo $t\in\R$, a Proposição~\ref{prop:bilinear} dá
+\begin{align*}
+0\le\norm{\vet{u}+t\vet{v}}^2
+&=\norm{\vet{u}}^2+2t\,(\vet{u}\cdot\vet{v})+t^2\norm{\vet{v}}^2.
+\end{align*}
+Sejam $A=\norm{\vet{v}}^2>0$, $B=2\,(\vet{u}\cdot\vet{v})$ e $C=\norm{\vet{u}}^2$. O polinômio $q(t)=At^2+Bt+C$ satisfaz $q(t)\ge 0$ para todo $t\in\R$.
+
+Afirmação: o discriminante $\Delta=B^2-4AC$ satisfaz $\Delta\le 0$. Suponha, por absurdo, $\Delta>0$. As raízes
+\[
+t_{\pm}=\frac{-B\pm\sqrt{\Delta}}{2A}
+\]
+são reais e $t_-<t_+$. A soma e o produto são
+\[
+t_-+t_+=-\frac{B}{A},\qquad t_-t_+=\frac{B^2-\Delta}{4A^2}=\frac{4AC}{4A^2}=\frac{C}{A}.
+\]
+Portanto
+\begin{align*}
+A(t-t_-)(t-t_+)
+&=A\Bigl(t^2-(t_-+t_+)t+t_-t_+\Bigr)
+=At^2+Bt+C=q(t).
+\end{align*}
+Escolha $t$ com $t_-<t<t_+$. Então $t-t_->0$ e $t-t_+<0$, de modo que $(t-t_-)(t-t_+)<0$. Como $A>0$, segue $q(t)<0$, contradizendo $q(t)\ge 0$. Logo $\Delta\le 0$:
+\[
+4(\vet{u}\cdot\vet{v})^2-4\norm{\vet{v}}^2\norm{\vet{u}}^2\le 0,
+\]
+isto é $(\vet{u}\cdot\vet{v})^2\le\norm{\vet{u}}^2\norm{\vet{v}}^2$.
+
+Os dois lados são não negativos. A Proposição~\ref{prop:raiz-ordem} dá
+\[
+\abs{\vet{u}\cdot\vet{v}}
+=\sqrt{(\vet{u}\cdot\vet{v})^2}
+\le\sqrt{\norm{\vet{u}}^2\norm{\vet{v}}^2}
+=\norm{\vet{u}}\,\norm{\vet{v}},
+\]
+em que $\sqrt{w^2}=\abs{w}$ porque $\abs{w}\ge 0$ e $\abs{w}^2=w^2$.
+\end{proof}
+
+\begin{teorema}[Desigualdade triangular da norma]\label{teo:triangular-norma}
+Para todos $\vet{u},\vet{v}\in\R^n$,
+\[
+\norm{\vet{u}+\vet{v}}\le\norm{\vet{u}}+\norm{\vet{v}}.
+\]
+\end{teorema}
+
+\begin{proof}
+A expansão da Proposição~\ref{prop:bilinear}(5) e a desigualdade $t\le\abs{t}$ dão o primeiro passo. Esta última vale porque, se $t\ge 0$, então $\abs{t}=t$, e se $t<0$, então $t<0=\abs{0}<\abs{t}$. Assim
+\begin{align*}
+\norm{\vet{u}+\vet{v}}^2
+&=\norm{\vet{u}}^2+2\,\vet{u}\cdot\vet{v}+\norm{\vet{v}}^2
+\le\norm{\vet{u}}^2+2\abs{\vet{u}\cdot\vet{v}}+\norm{\vet{v}}^2.
+\end{align*}
+Cauchy--Schwarz substitui o módulo do produto escalar:
+\begin{align*}
+\norm{\vet{u}+\vet{v}}^2
+&\le\norm{\vet{u}}^2+2\norm{\vet{u}}\norm{\vet{v}}+\norm{\vet{v}}^2
+=\bigl(\norm{\vet{u}}+\norm{\vet{v}}\bigr)^2.
+\end{align*}
+Os números $\norm{\vet{u}+\vet{v}}$ e $\norm{\vet{u}}+\norm{\vet{v}}$ são não negativos. A Proposição~\ref{prop:raiz-ordem}, aplicada aos quadrados já comparados, fornece a desigualdade das normas. De outro modo: a raiz quadrada dos dois lados preserva a ordem, e a raiz do quadrado de um número não negativo é o próprio número.
+\end{proof}
+
+\begin{lema}[Lei do paralelogramo]\label{lem:paralelogramo}
+Para todos $\vet{u},\vet{v}\in\R^n$,
+\[
+\norm{\vet{u}+\vet{v}}^2+\norm{\vet{u}-\vet{v}}^2=2\norm{\vet{u}}^2+2\norm{\vet{v}}^2.
+\]
+\end{lema}
+
+\begin{esqueleto}
+\item Troque $\vet{v}$ por $-\vet{v}$ na expansão da Proposição~\ref{prop:bilinear}(5). Como $(-\vet{v})\cdot(-\vet{v})=\norm{\vet{v}}^2$ e $\vet{u}\cdot(-\vet{v})=-\vet{u}\cdot\vet{v}$,
+\[
+\norm{\vet{u}-\vet{v}}^2=\norm{\vet{u}}^2-2\,\vet{u}\cdot\vet{v}+\norm{\vet{v}}^2.
+\]
+\item \textbf{Passo difícil.} Some com a expansão de $\norm{\vet{u}+\vet{v}}^2$:
+\begin{align*}
+\norm{\vet{u}+\vet{v}}^2+\norm{\vet{u}-\vet{v}}^2
+&=\bigl(\norm{\vet{u}}^2+2\,\vet{u}\cdot\vet{v}+\norm{\vet{v}}^2\bigr)
++\bigl(\norm{\vet{u}}^2-2\,\vet{u}\cdot\vet{v}+\norm{\vet{v}}^2\bigr)\\
+&=2\norm{\vet{u}}^2+2\norm{\vet{v}}^2.
+\end{align*}
+Os termos $\pm 2\,\vet{u}\cdot\vet{v}$ cancelam-se.
+\item A identidade está obtida; não há hipótese extra sobre $\vet{u}$ e $\vet{v}$.
+\end{esqueleto}
+
+\section{Ângulo e projeção}
+
+\begin{definicao}
+Se $\vet{u}\neq\vet{0}$ e $\vet{v}\neq\vet{0}$, o \emph{ângulo} entre eles é o único $\theta\in[0,\pi]$ tal que
+\[
+\cos\theta=\frac{\vet{u}\cdot\vet{v}}{\norm{\vet{u}}\norm{\vet{v}}}.
+\]
+O quociente está em $[-1,1]$ pelo Teorema~\ref{teo:cs}, e $\cos$ restrito a $[0,\pi]$ cobre $[-1,1]$ bijetivamente. Diz-se que $\vet{u}$ e $\vet{v}$ são ortogonais quando $\vet{u}\cdot\vet{v}=0$; o vetor nulo é ortogonal a todos.
+\end{definicao}
+
+\begin{definicao}
+Se $\vet{v}\neq\vet{0}$, a \emph{projeção ortogonal} de $\vet{u}$ sobre a reta de $\vet{v}$ é
+\[
+\operatorname{proj}_{\vet{v}}\vet{u}
+=\frac{\vet{u}\cdot\vet{v}}{\vet{v}\cdot\vet{v}}\,\vet{v}.
+\]
+\end{definicao}
+
+\begin{teorema}[O resto da projeção é ortogonal]\label{teo:proj}
+Se $\vet{v}\neq\vet{0}$ e $\vet{w}=\vet{u}-\operatorname{proj}_{\vet{v}}\vet{u}$, então $\vet{w}\cdot\vet{v}=0$.
+\end{teorema}
+
+\begin{proof}
+\begin{align*}
+\vet{w}\cdot\vet{v}
+&=\vet{u}\cdot\vet{v}-\frac{\vet{u}\cdot\vet{v}}{\vet{v}\cdot\vet{v}}\,(\vet{v}\cdot\vet{v})
+=\vet{u}\cdot\vet{v}-\vet{u}\cdot\vet{v}
+=0.
+\end{align*}
+A hipótese $\vet{v}\neq\vet{0}$ foi usada para dividir por $\vet{v}\cdot\vet{v}=\norm{\vet{v}}^2>0$.
+\end{proof}
+
+\begin{contraexemplo}
+A fórmula da projeção não faz sentido para $\vet{v}=\vet{0}$: o denominador $\vet{v}\cdot\vet{v}$ é zero. Não há reta gerada por $\vet{0}$ sobre a qual projetar.
+\end{contraexemplo}
+
+\cuidado{A desigualdade de Cauchy--Schwarz usa que $\vet{u}\cdot\vet{u}$ é uma soma de quadrados. Uma forma bilinear com um sinal trocado, por exemplo $(u_1,u_2)\cdot(v_1,v_2)=u_1v_1-u_2v_2$, não satisfaz a mesma conclusão: para $\vet{u}=\vet{v}=(0,1)$ o ``produto'' é $-1$ e o módulo $1$ não é limitado pelo produto das ``normas'' $\sqrt{-1}$, que nem é real.}
+
+\section{Cônicas}
+
+A distância usada nesta seção é a norma de $\R^2$.
+
+\begin{definicao}
+Sejam $C=(h,k)$ e $r>0$. A \emph{circunferência} de centro $C$ e raio $r$ é o conjunto dos pontos $P=(x,y)$ com $\norm{P-C}=r$.
+\end{definicao}
+
+\begin{proposicao}
+Esse conjunto é exatamente o das soluções de $(x-h)^2+(y-k)^2=r^2$.
+\end{proposicao}
+
+\begin{proof}
+A igualdade de normas equivale à igualdade dos quadrados, porque os dois lados são não negativos e a raiz quadrada é injetora em $[0,\infty)$ pela Proposição~\ref{prop:raiz-ordem}. Expandindo a norma, obtém-se a equação.
+\end{proof}
+
+\begin{exemplo}[Translação da circunferência]
+A equação $x^2+y^2-4x+6y-3=0$ reescreve-se completando quadrados:
+\begin{align*}
+(x^2-4x+4)+(y^2+6y+9)&=3+4+9,\\
+(x-2)^2+(y+3)^2&=16.
+\end{align*}
+É a circunferência de centro $(2,-3)$ e raio $4$.
+\end{exemplo}
+
+\begin{definicao}
+Sejam $F$ um ponto e $\ell$ uma reta que não contém $F$. A \emph{parábola} de foco $F$ e diretriz $\ell$ é o conjunto dos pontos $P$ cuja distância a $F$ é igual à distância de $P$ à reta $\ell$.
+\end{definicao}
+
+\begin{teorema}[Equação da parábola]\label{teo:parabola}
+Se $p\neq 0$, a parábola de foco $(p,0)$ e diretriz $x=-p$ é o conjunto $y^2=4px$. Se o foco é $(0,p)$ e a diretriz é $y=-p$, a equação é $x^2=4py$.
+\end{teorema}
+
+\begin{proof}
+A distância de $(x,y)$ a $(p,0)$ é $\sqrt{(x-p)^2+y^2}$. A distância à reta $x=-p$ é $\abs{x+p}$. Igualar e elevar ao quadrado, o que preserva a equivalência porque os dois lados são não negativos, dá
+\[
+(x-p)^2+y^2=(x+p)^2.
+\]
+Expanda: $x^2-2px+p^2+y^2=x^2+2px+p^2$, logo $y^2=4px$. Cada passo é reversível, então a equação descreve exatamente a parábola. A troca de $x$ com $y$ repete o mesmo cálculo para o foco $(0,p)$ e a diretriz $y=-p$, e produz $x^2=4py$.
+\end{proof}
+
+\begin{exemplo}[Translação da parábola]
+Parta de $y^2+4y-8x+12=0$. Complete o quadrado em $y$:
+\begin{align*}
+y^2+4y+4&=8x-12+4,\\
+(y+2)^2&=8(x-1).
+\end{align*}
+Aqui $4p=8$, logo $p=2>0$. O vértice é $(1,-2)$, o foco é $(1+2,-2)=(3,-2)$ e a diretriz é a reta $x=1-2=-1$.
+\end{exemplo}
+
+\begin{definicao}
+Sejam $F_1$ e $F_2$ dois pontos distintos e seja $2a$ um número real estritamente maior do que a distância entre eles. A \emph{elipse} de focos $F_1$ e $F_2$ e constante $2a$ é o conjunto dos pontos $P$ com
+\[
+\norm{P-F_1}+\norm{P-F_2}=2a.
+\]
+\end{definicao}
+
+\begin{teorema}[Equação da elipse]\label{teo:elipse}
+Sejam $a>c>0$ e $b=\sqrt{a^2-c^2}>0$. A elipse de focos $(\pm c,0)$ e soma $2a$ é o conjunto
+\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}=1.
+\]
+\end{teorema}
+
+\begin{proof}
+Sejam $\delta_1=\sqrt{(x-c)^2+y^2}$ e $\delta_2=\sqrt{(x+c)^2+y^2}$, e suponha $\delta_1+\delta_2=2a$. Então $\delta_2\le 2a$, logo $\delta_1=2a-\delta_2\ge 0$. Elevar ao quadrado é equivalência nessa situação:
+\begin{align*}
+(x-c)^2+y^2&=4a^2-4a\delta_2+(x+c)^2,\\
+x^2-2cx+c^2&=4a^2-4a\delta_2+x^2+2cx+c^2,\\
+-4cx&=4a^2-4a\delta_2,\\
+\delta_2&=a+\frac{c}{a}x.
+\end{align*}
+O número $a+(c/a)x$ é igual à distância $\delta_2$, logo é não negativo. Elevar os dois lados ao quadrado preserva a igualdade: 
+\begin{align*}
+(x+c)^2+y^2&=\Bigl(a+\frac{c}{a}x\Bigr)^2
+=a^2+2cx+\frac{c^2}{a^2}x^2,\\
+x^2+2cx+c^2+y^2&=a^2+2cx+\frac{c^2}{a^2}x^2,\\
+x^2\Bigl(1-\frac{c^2}{a^2}\Bigr)+y^2&=a^2-c^2,\\
+x^2\frac{b^2}{a^2}+y^2&=b^2.
+\end{align*}
+Dividindo por $b^2>0$, obtém-se $x^2/a^2+y^2/b^2=1$.
+
+Reciprocamente, suponha $x^2/a^2+y^2/b^2=1$. Então $\abs{x}\le a$, porque $x^2/a^2\le 1$. Defina $d_2=a+(c/a)x$ e $d_1=a-(c/a)x$. Como $\abs{(c/a)x}\le c<a$, os dois números são positivos e somam $2a$. Partindo da equação e usando $b^2=a^2-c^2$,
+\begin{align*}
+x^2\frac{a^2-c^2}{a^2}+y^2&=a^2-c^2,\\
+x^2+y^2&=a^2-c^2+\frac{c^2}{a^2}x^2,\\
+x^2+c^2+y^2&=a^2+\frac{c^2}{a^2}x^2.
+\end{align*}
+Some $2cx$ e subtraia $2cx$, respectivamente:
+\begin{align*}
+(x+c)^2+y^2&=a^2+2cx+\frac{c^2}{a^2}x^2=d_2^2,\\
+(x-c)^2+y^2&=a^2-2cx+\frac{c^2}{a^2}x^2=d_1^2.
+\end{align*}
+Como $\delta_2$, $\delta_1$, $d_2$ e $d_1$ são não negativos, $\delta_2=d_2$ e $\delta_1=d_1$. A soma é $2a$.
+\end{proof}
+
+\begin{exemplo}[Translação da elipse]
+A equação $4x^2+9y^2-8x+36y+4=0$ completa-se assim:
+\begin{align*}
+4(x^2-2x)+9(y^2+4y)&=-4,\\
+4\bigl((x-1)^2-1\bigr)+9\bigl((y+2)^2-4\bigr)&=-4,\\
+4(x-1)^2-4+9(y+2)^2-36&=-4,\\
+4(x-1)^2+9(y+2)^2&=36.
+\end{align*}
+Dividindo por $36$,
+\[
+\frac{(x-1)^2}{9}+\frac{(y+2)^2}{4}=1.
+\]
+O centro é $(1,-2)$, o semi-eixo maior é $3$, o menor é $2$ e $c=\sqrt{9-4}=\sqrt{5}$. Os focos são $(1\pm\sqrt{5},-2)$.
+\end{exemplo}
+
+\begin{definicao}
+Sejam $F_1$ e $F_2$ distintos e seja $2a$ positivo e estritamente menor do que a distância entre os focos. A \emph{hipérbole} de focos $F_1,F_2$ e constante $2a$ é o conjunto dos $P$ com
+\[
+\abs{\,\norm{P-F_1}-\norm{P-F_2}\,}=2a.
+\]
+\end{definicao}
+
+\begin{teorema}[Equação da hipérbole]\label{teo:hiperbole}
+Sejam $c>a>0$ e $b=\sqrt{c^2-a^2}>0$. A hipérbole de focos $(\pm c,0)$ e diferença $2a$ é o conjunto
+\[
+\frac{x^2}{a^2}-\frac{y^2}{b^2}=1.
+\]
+O ramo $x\ge a$ é o lugar em que a distância ao foco $(-c,0)$ supera a distância ao foco $(c,0)$ por $2a$. O ramo $x\le -a$ é o reflexo do primeiro pela troca de sinal de $x$, que permuta os focos e preserva o módulo da diferença.
+\end{teorema}
+
+\begin{proof}
+No ramo direito, $\delta_2-\delta_1=2a$, com $\delta_2=\sqrt{(x+c)^2+y^2}$ e $\delta_1=\sqrt{(x-c)^2+y^2}$. Então $\delta_2=\delta_1+2a$. Elevando ao quadrado,
+\begin{align*}
+(x+c)^2+y^2&=(x-c)^2+y^2+4a\delta_1+4a^2,\\
+4cx-4a^2&=4a\delta_1,\\
+\delta_1&=\frac{c}{a}x-a.
+\end{align*}
+Eleve ao quadrado de novo:
+\begin{align*}
+(x-c)^2+y^2&=\frac{c^2}{a^2}x^2-2cx+a^2,\\
+x^2+c^2+y^2&=\frac{c^2}{a^2}x^2+a^2,\\
+x^2\Bigl(1-\frac{c^2}{a^2}\Bigr)+y^2&=a^2-c^2=-b^2,\\
+\frac{b^2}{a^2}x^2-y^2&=b^2,
+\end{align*}
+e, dividindo por $b^2$, $x^2/a^2-y^2/b^2=1$. Como $\delta_1=(c/a)x-a$ e $\delta_1\ge 0$, tem-se $x\ge a^2/c$. Da equação, $x^2/a^2=1+y^2/b^2\ge 1$, logo $\abs{x}\ge a$. Juntando com $x\ge a^2/c>0$, obtém-se $x\ge a$. Assim, no ramo direito, $(c/a)x-a\ge c-a>0$.
+
+Reciprocamente, se $x^2/a^2-y^2/b^2=1$ e $x\ge a$, defina $d_1=(c/a)x-a$. Então $d_1\ge c-a>0$. A álgebra acima, percorrida no sentido inverso a partir da equação canônica, produz $(x-c)^2+y^2=d_1^2$ e $(x+c)^2+y^2=(d_1+2a)^2$. De fato, a equação equivale a $x^2+c^2+y^2=(c^2/a^2)x^2+a^2$; somar $-2cx$ dá o quadrado de $d_1$, e somar $2cx$ dá o quadrado de $(c/a)x+a=d_1+2a$. As raízes não negativas são as distâncias, logo $\delta_2-\delta_1=2a$.
+
+Se $(x,y)$ está no ramo esquerdo, $(-x,y)$ está no ramo direito da mesma hipérbole geométrica, porque a reflexão troca $(c,0)$ com $(-c,0)$. O ponto refletido satisfaz a equação, que só contém $x^2$ e $y^2$, logo $(x,y)$ também a satisfaz. Reciprocamente, se a equação vale e $x\le -a$, o reflexo cai no ramo direito já tratado, e o módulo da diferença volta a ser $2a$.
+\end{proof}
+
+\begin{exemplo}[Translação da hipérbole]
+A equação $x^2-y^2-4x-2y-1=0$ reescreve-se como
+\begin{align*}
+(x^2-4x+4)-(y^2+2y+1)&=1+4-1,\\
+(x-2)^2-(y+1)^2&=4,\\
+\frac{(x-2)^2}{4}-\frac{(y+1)^2}{4}&=1.
+\end{align*}
+O centro é $(2,-1)$, $a=b=2$ e $c=\sqrt{4+4}=2\sqrt{2}$. Os focos são $(2\pm 2\sqrt{2},-1)$.
+\end{exemplo}
+
+\figura{../figuras/conicas.png}{Parábola, elipse e hipérbole em posição canônica.}
+
+\begin{contraexemplo}
+A desigualdade estrita entre a soma e a distância dos focos é necessária para uma elipse não degenerada. Se os focos são $(\pm 1,0)$ e a soma pedida é $2$, igual à distância entre os focos, a desigualdade triangular da norma dá, para todo $P$,
+\[
+\norm{F_1-F_2}=\norm{(F_1-P)+(P-F_2)}\le\norm{P-F_1}+\norm{P-F_2}.
+\]
+A soma das distâncias é pelo menos $2$, e o conjunto em que ela vale $2$ não contém, por exemplo, $(0,1)$: as distâncias de $(0,1)$ aos focos são ambas $\sqrt{2}$, e a soma é $2\sqrt{2}>2$. O conjunto não é uma elipse de semi-eixo $b>0$. Se a soma pedida for menor do que $2$, o mesmo raciocínio mostra que o conjunto é vazio.
+
+Na parábola, a reta não pode conter o foco. Com foco $(0,0)$ e diretriz $x=0$, a igualdade $\sqrt{x^2+y^2}=\abs{x}$ eleva-se ao quadrado e dá $y=0$. O lugar é a reta $y=0$, não uma parábola de vértice e diretriz separados.
+\end{contraexemplo}
+
+\section{Produto vetorial}
+
+\begin{definicao}
+Para $\vet{u}=(u_1,u_2,u_3)$ e $\vet{v}=(v_1,v_2,v_3)$ em $\R^3$, o \emph{produto vetorial} é o vetor dado pelo determinante formal
+\[
+\vet{u}\times\vet{v}
+=
+\begin{vmatrix}
+\vet{e_1}&\vet{e_2}&\vet{e_3}\\
+u_1&u_2&u_3\\
+v_1&v_2&v_3
+\end{vmatrix}
+=(u_2v_3-u_3v_2,\ u_3v_1-u_1v_3,\ u_1v_2-u_2v_1),
+\]
+em que $\vet{e_1},\vet{e_2},\vet{e_3}$ são os vetores da base canônica. A área do paralelogramo gerado por $\vet{u}$ e $\vet{v}$ é $\norm{\vet{u}\times\vet{v}}$.
+\end{definicao}
+
+\begin{proposicao}[Antissimetria e ortogonalidade]\label{prop:vetorial}
+Para todos $\vet{u},\vet{v}\in\R^3$, $\vet{u}\times\vet{v}=-(\vet{v}\times\vet{u})$, e
+\[
+(\vet{u}\times\vet{v})\cdot\vet{u}=0,\qquad (\vet{u}\times\vet{v})\cdot\vet{v}=0.
+\]
+\end{proposicao}
+
+\begin{proof}
+A primeira coordenada de $\vet{v}\times\vet{u}$ é $v_2u_3-v_3u_2=-(u_2v_3-u_3v_2)$. A segunda é $v_3u_1-v_1u_3=-(u_3v_1-u_1v_3)$. A terceira é $v_1u_2-v_2u_1=-(u_1v_2-u_2v_1)$. Logo $\vet{v}\times\vet{u}=-(\vet{u}\times\vet{v})$.
+
+O produto escalar com $\vet{u}$ é
+\begin{align*}
+&(u_2v_3-u_3v_2)u_1+(u_3v_1-u_1v_3)u_2+(u_1v_2-u_2v_1)u_3\\
+&\quad=u_1u_2v_3-u_1u_3v_2+u_2u_3v_1-u_1u_2v_3+u_1u_3v_2-u_2u_3v_1
+=0.
+\end{align*}
+Os seis termos cancelam-se dois a dois. O produto com $\vet{v}$ é
+\begin{align*}
+&(u_2v_3-u_3v_2)v_1+(u_3v_1-u_1v_3)v_2+(u_1v_2-u_2v_1)v_3\\
+&\quad=u_2v_1v_3-u_3v_1v_2+u_3v_1v_2-u_1v_2v_3+u_1v_2v_3-u_2v_1v_3
+=0.
+\end{align*}
+\end{proof}
+
+\begin{teorema}[Norma do produto vetorial]\label{teo:lagrange}
+Para todos $\vet{u},\vet{v}\in\R^3$,
+\[
+\norm{\vet{u}\times\vet{v}}^2=\norm{\vet{u}}^2\norm{\vet{v}}^2-(\vet{u}\cdot\vet{v})^2.
+\]
+Se $\vet{u}$ e $\vet{v}$ não são nulos e $\theta\in[0,\pi]$ é o ângulo entre eles, então $\norm{\vet{u}\times\vet{v}}=\norm{\vet{u}}\norm{\vet{v}}\sin\theta$.
+\end{teorema}
+
+\begin{proof}
+Seja $\vet{w}=\vet{u}\times\vet{v}$. Então
+\begin{align*}
+\norm{\vet{w}}^2
+&=(u_2v_3-u_3v_2)^2+(u_3v_1-u_1v_3)^2+(u_1v_2-u_2v_1)^2.
+\end{align*}
+Por outro lado,
+\begin{align*}
+\norm{\vet{u}}^2\norm{\vet{v}}^2-(\vet{u}\cdot\vet{v})^2
+&=(u_1^2+u_2^2+u_3^2)(v_1^2+v_2^2+v_3^2)-(u_1v_1+u_2v_2+u_3v_3)^2.
+\end{align*}
+Expanda o produto e o quadrado:
+\begin{align*}
+\norm{\vet{u}}^2\norm{\vet{v}}^2
+&=u_1^2v_1^2+u_1^2v_2^2+u_1^2v_3^2
++u_2^2v_1^2+u_2^2v_2^2+u_2^2v_3^2
++u_3^2v_1^2+u_3^2v_2^2+u_3^2v_3^2,\\
+(\vet{u}\cdot\vet{v})^2
+&=u_1^2v_1^2+u_2^2v_2^2+u_3^2v_3^2
++2u_1u_2v_1v_2+2u_1u_3v_1v_3+2u_2u_3v_2v_3.
+\end{align*}
+A diferença conserva só os termos mistos:
+\begin{align*}
+&u_1^2v_2^2+u_2^2v_1^2-2u_1u_2v_1v_2
++u_1^2v_3^2+u_3^2v_1^2-2u_1u_3v_1v_3
++u_2^2v_3^2+u_3^2v_2^2-2u_2u_3v_2v_3\\
+&\quad=(u_1v_2-u_2v_1)^2+(u_1v_3-u_3v_1)^2+(u_2v_3-u_3v_2)^2.
+\end{align*}
+Isso coincide com $\norm{\vet{w}}^2$, porque $(u_3v_1-u_1v_3)^2=(u_1v_3-u_3v_1)^2$ e $(u_2v_3-u_3v_2)^2=(u_3v_2-u_2v_3)^2$. 
+
+Se os vetores não são nulos, $\vet{u}\cdot\vet{v}=\norm{\vet{u}}\norm{\vet{v}}\cos\theta$, logo
+\[
+\norm{\vet{w}}^2=\norm{\vet{u}}^2\norm{\vet{v}}^2(1-\cos^2\theta)
+=\norm{\vet{u}}^2\norm{\vet{v}}^2\sin^2\theta.
+\]
+Como $\theta\in[0,\pi]$, tem-se $\sin\theta\ge 0$, e a raiz quadrada dá $\norm{\vet{w}}=\norm{\vet{u}}\norm{\vet{v}}\sin\theta$.
+\end{proof}
+
+\figura{../figuras/produto_escalar_vetorial.png}{Projeção do produto escalar e área do produto vetorial.}
+
+\section{Retas e planos}
+
+\begin{definicao}
+Sejam $\vet{r_0}\in\R^n$ e $\vet{d}\neq\vet{0}$. A reta que passa por $\vet{r_0}$ com direção $\vet{d}$ é
+\[
+\{\vet{r_0}+t\vet{d}:t\in\R\}.
+\]
+Em $\R^2$, com $\vet{r_0}=(x_0,y_0)$ e $\vet{d}=(a,b)$, as equações simétricas são $(x-x_0)/a=(y-y_0)/b$ quando $a\neq 0$ e $b\neq 0$. Se $a=0$, a reta é $x=x_0$; se $b=0$, é $y=y_0$. Em $\R^3$, com $\vet{d}=(d_1,d_2,d_3)$ e todas as componentes não nulas,
+\[
+\frac{x-x_0}{d_1}=\frac{y-y_0}{d_2}=\frac{z-z_0}{d_3}.
+\]
+Se alguma componente de $\vet{d}$ é zero, a coordenada correspondente é constante e não aparece no denominador.
+\end{definicao}
+
+\begin{definicao}
+Sejam $\vet{n}\neq\vet{0}$ e $\vet{r_0}\in\R^3$. O \emph{plano} que passa por $\vet{r_0}$ e é ortogonal a $\vet{n}$ é
+\[
+\Pi=\{\vet{r}\in\R^3:\vet{n}\cdot(\vet{r}-\vet{r_0})=0\}.
+\]
+Escrevendo $\vet{n}=(A,B,C)$ e $\vet{r}=(x,y,z)$, a equação é $Ax+By+Cz=D$, com $D=\vet{n}\cdot\vet{r_0}$.
+\end{definicao}
+
+\begin{teorema}[Distância de um ponto a um plano]\label{teo:distancia}
+Sejam $\Pi$ o plano $\vet{n}\cdot(\vet{r}-\vet{r_0})=0$, com $\vet{n}\neq\vet{0}$, e $\vet{p}\in\R^3$. Existe um único $\vet{q}\in\Pi$ tal que $\vet{p}-\vet{q}$ é paralelo a $\vet{n}$, e
+\[
+\norm{\vet{p}-\vet{q}}
+=\frac{\abs{\vet{n}\cdot(\vet{p}-\vet{r_0})}}{\norm{\vet{n}}}.
+\]
+Esse número é a distância de $\vet{p}$ a $\Pi$: para todo $\vet{r}\in\Pi$, $\norm{\vet{p}-\vet{r}}\ge\norm{\vet{p}-\vet{q}}$.
+\end{teorema}
+
+\begin{proof}
+Procuramos $\lambda\in\R$ e $\vet{q}=\vet{p}-\lambda\vet{n}$ tais que $\vet{q}\in\Pi$. A condição de plano é
+\begin{align*}
+\vet{n}\cdot(\vet{p}-\lambda\vet{n}-\vet{r_0})&=0,\\
+\vet{n}\cdot(\vet{p}-\vet{r_0})-\lambda\norm{\vet{n}}^2&=0.
+\end{align*}
+Como $\norm{\vet{n}}^2>0$, existe um único
+\[
+\lambda=\frac{\vet{n}\cdot(\vet{p}-\vet{r_0})}{\norm{\vet{n}}^2}.
+\]
+Para esse $\lambda$, $\vet{q}$ está em $\Pi$ e $\vet{p}-\vet{q}=\lambda\vet{n}$ é paralelo a $\vet{n}$. A norma do segmento é
+\[
+\norm{\vet{p}-\vet{q}}=\abs{\lambda}\,\norm{\vet{n}}
+=\frac{\abs{\vet{n}\cdot(\vet{p}-\vet{r_0})}}{\norm{\vet{n}}}.
+\]
+
+Seja agora $\vet{r}\in\Pi$ arbitrário. Então
+\[
+\vet{p}-\vet{r}=(\vet{p}-\vet{q})+(\vet{q}-\vet{r}),
+\]
+e a expansão da norma dá
+\[
+\norm{\vet{p}-\vet{r}}^2
+=\norm{\vet{p}-\vet{q}}^2+\norm{\vet{q}-\vet{r}}^2
++2(\vet{p}-\vet{q})\cdot(\vet{q}-\vet{r}).
+\]
+O termo cruzado é $\lambda\,\vet{n}\cdot(\vet{q}-\vet{r})$. Como $\vet{q}$ e $\vet{r}$ estão no plano,
+\[
+\vet{n}\cdot(\vet{q}-\vet{r})
+=\vet{n}\cdot(\vet{q}-\vet{r_0})-\vet{n}\cdot(\vet{r}-\vet{r_0})=0.
+\]
+Logo
+\[
+\norm{\vet{p}-\vet{r}}^2
+=\norm{\vet{p}-\vet{q}}^2+\norm{\vet{q}-\vet{r}}^2
+\ge\norm{\vet{p}-\vet{q}}^2.
+\]
+Se fosse $\norm{\vet{p}-\vet{r}}<\norm{\vet{p}-\vet{q}}$, a Proposição~\ref{prop:raiz-ordem} aplicaria aos quadrados e contradiria a desigualdade anterior. Portanto $\norm{\vet{p}-\vet{r}}\ge\norm{\vet{p}-\vet{q}}$.
+\end{proof}
+
+Na forma $Ax+By+Cz+D=0$, com $\vet{n}=(A,B,C)\neq\vet{0}$, um ponto $\vet{r_0}$ do plano satisfaz $\vet{n}\cdot\vet{r_0}=-D$. Para $\vet{p}=(x_0,y_0,z_0)$,
+\[
+\vet{n}\cdot(\vet{p}-\vet{r_0})=Ax_0+By_0+Cz_0+D,
+\]
+e a distância é $\abs{Ax_0+By_0+Cz_0+D}/\sqrt{A^2+B^2+C^2}$.
+
+\begin{teorema}[Interseção de dois planos]\label{teo:intersecao}
+Sejam $\Pi_1$ e $\Pi_2$ planos de normais $\vet{n_1}$ e $\vet{n_2}$. Se $\vet{n_1}\times\vet{n_2}\neq\vet{0}$, a interseção é uma reta cuja direção é $\vet{n_1}\times\vet{n_2}$.
+\end{teorema}
+
+\begin{proof}
+Seja $\vet{d}=\vet{n_1}\times\vet{n_2}\neq\vet{0}$. Pela Proposição~\ref{prop:vetorial}, $\vet{n_1}\cdot\vet{d}=0$ e $\vet{n_2}\cdot\vet{d}=0$. Escreva $\vet{n_1}=(a_1,b_1,c_1)$, $\vet{n_2}=(a_2,b_2,c_2)$ e
+\[
+\vet{d}=(b_1c_2-c_1b_2,\ c_1a_2-a_1c_2,\ a_1b_2-b_1a_2)=(d_1,d_2,d_3).
+\]
+As equações dos planos são $\vet{n_1}\cdot\vet{r}=p_1$ e $\vet{n_2}\cdot\vet{r}=p_2$.
+
+Suponha $d_3\neq 0$. O sistema com $z=0$,
+\[
+a_1x+b_1y=p_1,\qquad a_2x+b_2y=p_2,
+\]
+tem determinante $a_1b_2-b_1a_2=d_3\neq 0$, logo tem solução única $(x,y)$. O ponto $\vet{r_*}=(x,y,0)$ está nos dois planos. Se $\vet{r}$ é outro ponto da interseção e $\vet{w}=\vet{r}-\vet{r_*}=(w_1,w_2,w_3)$, então $\vet{n_1}\cdot\vet{w}=\vet{n_2}\cdot\vet{w}=0$, isto é
+\[
+a_1w_1+b_1w_2=-c_1w_3,\qquad a_2w_1+b_2w_2=-c_2w_3.
+\]
+O mesmo determinante dá
+\begin{align*}
+w_1
+&=\frac{(-c_1w_3)b_2-b_1(-c_2w_3)}{d_3}
+=\frac{w_3(b_1c_2-b_2c_1)}{d_3}
+=\frac{w_3\,d_1}{d_3},\\
+w_2
+&=\frac{a_1(-c_2w_3)-(-c_1w_3)a_2}{d_3}
+=\frac{w_3(a_2c_1-a_1c_2)}{d_3}
+=\frac{w_3\,d_2}{d_3}.
+\end{align*}
+Logo $\vet{w}=(w_3/d_3)\vet{d}$. Todo ponto $\vet{r_*}+t\vet{d}$ está nos dois planos, porque $\vet{n_j}\cdot\vet{d}=0$. A interseção é essa reta.
+
+Se $d_3=0$ e $d_2\neq 0$, imponha $y=0$. O sistema em $x$ e $z$ tem determinante $a_1c_2-c_1a_2=-d_2\neq 0$, e produz um ponto $\vet{r_*}$. Para $\vet{w}=\vet{r}-\vet{r_*}$,
+\[
+a_1w_1+c_1w_3=-b_1w_2,\qquad a_2w_1+c_2w_3=-b_2w_2.
+\]
+A regra de Cramer com esse determinante dá
+\begin{align*}
+w_1
+&=\frac{(-b_1w_2)c_2-c_1(-b_2w_2)}{-d_2}
+=\frac{w_2(-b_1c_2+b_2c_1)}{-d_2}.
+\end{align*}
+Como $-b_1c_2+b_2c_1=-(b_1c_2-c_1b_2)=-d_1$, segue $w_1=w_2 d_1/d_2$. Do mesmo sistema,
+\begin{align*}
+w_3
+&=\frac{a_1(-b_2w_2)-(-b_1w_2)a_2}{-d_2}
+=\frac{w_2(-a_1b_2+a_2b_1)}{-d_2}
+=\frac{w_2\,d_3}{d_2},
+\end{align*}
+em que $-a_1b_2+a_2b_1=-(a_1b_2-b_1a_2)=-d_3$, logo o quociente de $w_3$ é $w_2 d_3/d_2$. Assim $\vet{w}=(w_2/d_2)\vet{d}$.
+
+Se $d_2=d_3=0$, então $d_1\neq 0$. Imponha $x=0$: o sistema em $y$ e $z$ tem determinante $b_1c_2-c_1b_2=d_1\neq 0$. Para o vetor diferença,
+\[
+b_1w_2+c_1w_3=-a_1w_1,\qquad b_2w_2+c_2w_3=-a_2w_1.
+\]
+Cramer dá
+\[
+w_2=\frac{w_1(-a_1c_2+c_1a_2)}{d_1}=\frac{w_1 d_2}{d_1},
+\]
+porque $-a_1c_2+c_1a_2=d_2$, e
+\[
+w_3=\frac{w_1(-b_1a_2+a_1b_2)}{d_1}=\frac{w_1 d_3}{d_1},
+\]
+porque $-b_1a_2+a_1b_2=a_1b_2-b_1a_2=d_3$. Logo $\vet{w}=(w_1/d_1)\vet{d}$. Em todos os casos a interseção é a reta $\vet{r_*}+t\vet{d}$.
+\end{proof}
+
+\begin{exemplo}
+Os planos $x+y+z=4$ e $x-y+z=2$ têm normais $\vet{n_1}=(1,1,1)$ e $\vet{n_2}=(1,-1,1)$. O produto vetorial é
+\begin{align*}
+\vet{n_1}\times\vet{n_2}
+&=(1\cdot 1-1\cdot(-1),\ -(1\cdot 1-1\cdot 1),\ 1\cdot(-1)-1\cdot 1)\\
+&=(2,0,-2).
+\end{align*}
+A direção $(1,0,-1)$ gera a mesma reta. Para achar um ponto, imponha $z=0$: o sistema $x+y=4$, $x-y=2$ soma-se em $2x=6$, logo $x=3$ e $y=1$. O ponto $(3,1,0)$ está nos dois planos: $3+1+0=4$ e $3-1+0=2$. A reta é
+\[
+(x,y,z)=(3,1,0)+t(1,0,-1),\qquad t\in\R.
+\]
+Como a segunda componente da direção é zero, a forma simétrica é $(x-3)/1=(z-0)/(-1)$ e $y=1$. O ponto de parâmetro $t=1$ é $(4,1,-1)$, e $4+1-1=4$, $4-1-1=2$.
+\end{exemplo}
+
+\section{Exercícios}
+
+As soluções comentadas estão em \texttt{04\_vetores\_conicas\_gabarito.tex}.
+
+\begin{exercicio}[Básico — operações com vetores]
+Sejam $\vet{u}=(1,-2,2)$ e $\vet{v}=(2,0,1)$. Calcule $\vet{u}+\vet{v}$, $3\vet{u}$, $\norm{\vet{u}}$ e o vetor unitário na direção de $\vet{u}$.
+\end{exercicio}
+
+\begin{exercicio}[Básico — circunferência]
+Identifique centro e raio de $x^2+y^2+2x-6y-6=0$.
+\end{exercicio}
+
+\begin{exercicio}[Básico — ângulo]
+Calcule o cosseno do ângulo entre $\vet{u}=(1,2)$ e $\vet{v}=(3,1)$, e determine o ângulo em $[0,\pi]$.
+\end{exercicio}
+
+\begin{exercicio}[Básico — produto vetorial]
+Calcule $\vet{u}\times\vet{v}$ para $\vet{u}=(1,0,2)$ e $\vet{v}=(2,-1,1)$. Verifique a ortogonalidade aos dois vetores e calcule a área do paralelogramo.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — projeção]
+Calcule a projeção ortogonal de $\vet{u}=(2,-1,3)$ sobre $\vet{v}=(1,1,1)$ e verifique, pelo produto escalar, que o resto é ortogonal a $\vet{v}$.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — distância ao plano]
+Calcule a distância do ponto $(1,2,-1)$ ao plano $2x-y+2z+3=0$ e determine o pé da perpendicular.
+\end{exercicio}
+
+\begin{exercicio}[Intermediário — identificar cônica]
+Reduza $4x^2+9y^2-8x+18y-23=0$ à forma canônica transladada e identifique a cônica, o centro e os semi-eixos.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — igualdade em Cauchy--Schwarz]
+Prove que $\abs{\vet{u}\cdot\vet{v}}=\norm{\vet{u}}\norm{\vet{v}}$ se e somente se $\vet{u}$ e $\vet{v}$ são linearmente dependentes, isto é, um deles é múltiplo escalar do outro.
+\end{exercicio}
+
+\begin{exercicio}[Avançado — interseção de planos]
+Determine equações paramétricas da reta interseção dos planos $x-y+z=1$ e $x+y-z=3$.
+\end{exercicio}
+
+\end{document}

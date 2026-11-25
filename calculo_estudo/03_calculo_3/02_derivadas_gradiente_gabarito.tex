@@ -1,0 +1,214 @@
+\documentclass[11pt,a4paper]{article}
+\input{../preambulo.tex}
+\title{Gabarito: derivadas parciais, diferenciabilidade e gradiente}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Exercícios}
+
+\begin{exercicio}[{[Básico --- parciais de um polinômio]}]
+Parciais de $x^3 y+e^{xy}$.
+
+\textbf{Solução.}
+O domínio é $\R^2$: polinômio e exponencial estão definidos em todo ponto, e $xy$ também. Derivando em $x$, com $y$ constante, a regra do produto e a cadeia na exponencial dão
+\[
+f_x(x,y)=3x^2 y+y\,e^{xy}.
+\]
+Derivando em $y$,
+\[
+f_y(x,y)=x^3+x\,e^{xy}.
+\]
+As duas expressões são contínuas em $\R^2$, logo as parciais existem em todo ponto. O critério suficiente diz ainda que $f$ é diferenciável em todo ponto; o exercício pedia só as parciais.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- parciais e domínio]}]
+Parciais de $\ln(x^2+y^2)$.
+
+\textbf{Solução.}
+O logaritmo pede argumento positivo. Como $x^2+y^2\ge 0$ e só se anula na origem, o domínio é $\R^2\setminus\{(0,0)\}$. Para $(x,y)\neq(0,0)$,
+\[
+f_x=\frac{1}{x^2+y^2}\cdot 2x=\frac{2x}{x^2+y^2},\qquad
+f_y=\frac{2y}{x^2+y^2}.
+\]
+Na origem a fórmula original não está definida, então não há parcial nesse ponto dentro deste domínio.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- plano tangente]}]
+Plano tangente a $e^x\cos y$ em $(0,0)$.
+
+\textbf{Solução.}
+$f(0,0)=e^0\cos 0=1$. As parciais
+\[
+f_x=e^x\cos y,\qquad f_y=-e^x\sin y
+\]
+são contínuas em $\R^2$, então $f$ é diferenciável em $(0,0)$ e o plano tangente está definido. No ponto, $f_x(0,0)=1$ e $f_y(0,0)=0$. A equação é
+\[
+z=1+1\cdot(x-0)+0\cdot(y-0),
+\]
+isto é, $z=1+x$.
+\end{exercicio}
+
+\begin{exercicio}[{[Básico --- direcional]}]
+Direcional de $x^2-3xy+y^2$ em $(1,2)$, direção $(3/5,4/5)$.
+
+\textbf{Solução.}
+As parciais $f_x=2x-3y$ e $f_y=-3x+2y$ são contínuas, logo $f$ é diferenciável em $(1,2)$ e a direcional é o produto escalar. O vetor dado tem norma
+\[
+\sqrt{(3/5)^2+(4/5)^2}=\sqrt{9/25+16/25}=1,
+\]
+então é unitário e a definição do texto se aplica. No ponto,
+\[
+\nabla f(1,2)=(2-6,\,-3+4)=(-4,\,1).
+\]
+Portanto
+\[
+D_{\vet{u}} f(1,2)=-4\cdot\frac{3}{5}+1\cdot\frac{4}{5}=-\frac{12}{5}+\frac{4}{5}=-\frac{8}{5}.
+\]
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- definição de diferenciabilidade]}]
+Diferenciabilidade de $xy$ na origem.
+
+\textbf{Solução.}
+As parciais na origem são zero:
+\[
+f_x(0,0)=\lim_{h\to 0}\frac{(h)(0)-0}{h}=0,
+\]
+e $f_y(0,0)=0$ pelo mesmo motivo. O candidato é $A=0$, $B=0$, e o resto é o próprio valor da função:
+\[
+R(h,k)=hk.
+\]
+Para $(h,k)\neq(0,0)$, a desigualdade $2\abs{hk}\le h^2+k^2$ rearruma para $\abs{hk}\le\rho^2/2$, com $\rho=\sqrt{h^2+k^2}$. Logo
+\[
+\abs{\frac{R(h,k)}{\rho}}=\frac{\abs{hk}}{\rho}\le\frac{\rho}{2}.
+\]
+O majorante tende a zero quando $\rho\to 0$, independentemente da direção. Portanto $R/\rho\to 0$ e $f$ é diferenciável em $(0,0)$, com derivada $(0,0)$.
+
+A mesma cota mostra que o plano tangente na origem é $z=0$.
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- contínua, com parciais, sem ser diferenciável]}]
+A função $xy/\sqrt{x^2+y^2}$.
+
+\textbf{Solução.}
+\begin{enumerate}[label=\alph*)]
+\item Seja $\rho=\sqrt{x^2+y^2}$. Para $(x,y)\neq(0,0)$,
+\[
+\abs{f(x,y)}=\frac{\abs{xy}}{\rho}\le\frac{\rho^2/2}{\rho}=\frac{\rho}{2},
+\]
+de novo por $2\abs{xy}\le x^2+y^2$. Dado $\eps>0$, tome $\delta=2\eps$. Se $0<\rho<\delta$, então $\abs{f}<\eps$. O limite na origem é $0$, que é o valor definido de $f(0,0)$. A função é contínua na origem. Fora da origem ela é quociente de contínuas com denominador positivo, logo contínua em todo o plano.
+
+\item Pela definição,
+\[
+f_x(0,0)=\lim_{h\to 0}\frac{f(h,0)}{h}=\lim_{h\to 0}\frac{0}{h}=0,
+\]
+e $f_y(0,0)=0$ porque $f(0,k)=0$.
+
+\item Se $f$ fosse diferenciável na origem, o teorema correspondente forçaria $A=f_x(0,0)=0$ e $B=f_y(0,0)=0$. O resto seria $R=f$, e seria preciso $f/\rho\to 0$. Mas
+\[
+\frac{\abs{f(x,y)}}{\rho}=\frac{\abs{xy}}{\rho^2}.
+\]
+Ao longo de $y=x$, com $x\neq 0$, tem-se $\rho=\abs{x}\sqrt{2}$ e
+\[
+\frac{\abs{x\cdot x}}{2x^2}=\frac{1}{2}.
+\]
+O quociente não tende a zero: fica parado em $1/2$. Logo $f$ não é diferenciável na origem.
+
+Nenhuma outra escolha de $(A,B)$ salvaria a definição. Se $(A,B)\neq(0,0)$, já as parciais calculadas em (b) contradizem o teorema que identifica $A$ e $B$.
+\end{enumerate}
+\end{exercicio}
+
+\begin{exercicio}[{[Intermediário --- cadeia]}]
+$w=x^2 y$, $x=u+v$, $y=uv$, parcial em $(1,1)$.
+
+\textbf{Solução.}
+$f(x,y)=x^2 y$ é polinômio, diferenciável em todo ponto. As internas são polinômios. A regra da cadeia se aplica:
+\[
+w_x=2xy,\qquad w_y=x^2,\qquad x_u=1,\qquad y_u=v.
+\]
+\[
+\partial_u w=2xy\cdot 1+x^2\cdot v.
+\]
+Em $(u,v)=(1,1)$ tem-se $x=2$ e $y=1$, logo
+\[
+\partial_u w=2\cdot 2\cdot 1+4\cdot 1=8.
+\]
+Conferência direta. Substituindo,
+\[
+w=(u+v)^2(uv)=u^3 v+2u^2 v^2+uv^3.
+\]
+Derivando em $u$,
+\[
+\partial_u w=3u^2 v+4uv^2+v^3.
+\]
+Em $(1,1)$ isso vale $3+4+1=8$. As duas contas concordam.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- parciais nulas]}]
+Parciais identicamente nulas numa bola implicam função constante.
+
+\textbf{Solução.}
+Seja $R=(a_1,a_2)\times(b_1,b_2)$ um retângulo aberto contido em $B$. Tome $(a,b)$ e $(a+h,b+k)$ em $R$. O ponto intermediário $(a,b+k)$ ainda está em $R$, porque cada coordenada fica entre as do retângulo. Os segmentos de $(a,b)$ até $(a,b+k)$ e de $(a,b+k)$ até $(a+h,b+k)$ ficam em $R$, logo em $B$, onde as parciais existem e valem zero.
+
+Se $k\neq 0$, o teorema do valor médio na variável $y$ dá $\theta_2\in(0,1)$ com
+\[
+f(a,b+k)-f(a,b)=f_y(a,\,b+\theta_2 k)\,k=0.
+\]
+Se $h\neq 0$, o teorema do valor médio na variável $x$ dá $\theta_1\in(0,1)$ com
+\[
+f(a+h,b+k)-f(a,b+k)=f_x(a+\theta_1 h,\,b+k)\,h=0.
+\]
+Somando, $f(a+h,b+k)=f(a,b)$. Se $h=0$ ou $k=0$, a diferença correspondente já é zero. Assim $f$ é constante em $R$.
+
+A bola é aberta, então cada ponto de $B$ é centro de algum retângulo aberto ainda contido em $B$. Se a bola euclidiana de raio $r$ em torno de $\vet{p}$ está em $B$, o quadrado
+\[
+\{\vet{x}:\norm{\vet{x}-\vet{p}}_{\infty}<r/\sqrt{2}\}
+\]
+também está: a comparação provada na nota de funções dá $\norm{\vet{v}}_2\le\sqrt{2}\,\norm{\vet{v}}_{\infty}$, então norma do máximo menor que $r/\sqrt{2}$ implica norma euclidiana menor que $r$. Em cada um desses quadrados $f$ é constante.
+
+Fixe $\vet{p}_0\in B$ e seja $S=\{\vet{p}\in B:f(\vet{p})=f(\vet{p}_0)\}$. O conjunto $S$ é aberto em $B$, porque em torno de cada ponto de $S$ há um retângulo em que $f$ vale a constante daquele ponto, que coincide com $f(\vet{p}_0)$. O complementar $B\setminus S$ é aberto pelo mesmo motivo: em torno de um ponto onde $f$ vale outra constante, um retângulo inteiro fica fora de $S$. Como $B$ é conexo e $S$ não é vazio, $S=B$. A função é constante na bola.
+
+O atalho errado é desenhar o caminho horizontal-vertical entre dois pontos arbitrários da bola. O canto pode sair dela: $(4,0)$ e $(0,4)$ estão na bola aberta de raio $5$ centrada na origem, e o canto $(4,4)$ tem norma $4\sqrt{2}>5$. Por isso a redução ao retângulo é parte da prova, não um capricho.
+\end{exercicio}
+
+\begin{exercicio}[{[Avançado --- direcionais sem diferenciabilidade]}]
+Direcionais de $x^2 y/(x^4+y^2)$ na origem.
+
+\textbf{Solução.}
+\begin{enumerate}[label=\alph*)]
+\item Seja $\vet{u}=(a,b)$ com $a^2+b^2=1$, e $t\neq 0$. Então
+\begin{align*}
+f(ta,tb)
+&=\frac{(t^2 a^2)(tb)}{t^4 a^4+t^2 b^2}
+=\frac{t^3 a^2 b}{t^2(t^2 a^4+b^2)}
+=\frac{t\, a^2 b}{t^2 a^4+b^2},
+\end{align*}
+desde que o denominador original não se anule. Se $b=0$, então $f(ta,0)=0$ para todo $t$, porque o numerador tem o fator $y$. O quociente incremental é zero e $D_{\vet{u}} f(0,0)=0$. Se $b\neq 0$, o ponto $(ta,tb)$ só cai na origem em $t=0$, e
+\[
+\frac{f(ta,tb)}{t}=\frac{a^2 b}{t^2 a^4+b^2}.
+\]
+Quando $t\to 0$ isso tende a $a^2 b/b^2=a^2/b$. Resumo: para $\norm{\vet{u}}=1$,
+\[
+D_{\vet{u}} f(0,0)=\begin{cases}
+0, & b=0,\\
+a^2/b, & b\neq 0.
+\end{cases}
+\]
+Todas as direcionais existem. Por exemplo, na direção $(1/\sqrt{2},\,1/\sqrt{2})$ a direcional vale $(1/2)/(1/\sqrt{2})=\sqrt{2}/2$.
+
+\item Pela definição, $f(h,0)=0$ e $f(0,k)=0$, logo $f_x(0,0)=0$ e $f_y(0,0)=0$. O produto $\nabla f(0,0)\cdot\vet{u}$ é zero para todo $\vet{u}$. Ele não coincide com a direcional da direção $(1/\sqrt{2},\,1/\sqrt{2})$. A fórmula $D_{\vet{u}} f=\nabla f\cdot\vet{u}$ é falsa neste ponto.
+
+\item Ao longo de $y=x^2$, com $x\neq 0$,
+\[
+f(x,x^2)=\frac{x^2\cdot x^2}{x^4+(x^2)^2}=\frac{x^4}{2x^4}=\frac{1}{2}.
+\]
+O limite ao longo da parábola é $1/2$, não é $f(0,0)=0$. A função não é contínua na origem. Diferenciabilidade implicaria continuidade, logo $f$ não é diferenciável na origem.
+
+Há duas razões independentes para a mesma conclusão. A descontinuidade já basta. A falha da fórmula do produto escalar também basta, pela contrapositiva do teorema que exige diferenciabilidade para concluir $D_{\vet{u}} f=\nabla f\cdot\vet{u}$. O exemplo mostra ainda um fenômeno mais fino: todas as derivadas direcionais podem existir num ponto em que $f$ nem é contínua.
+\end{enumerate}
+\end{exercicio}
+
+\end{document}
